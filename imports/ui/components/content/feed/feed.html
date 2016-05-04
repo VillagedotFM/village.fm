@@ -1,0 +1,606 @@
+<template name='feed'>
+  <div class="posts-wrapper">
+      <article class="post">
+          <div class="post__inner">
+              <div class="post__rating bg-color-content">
+                  <i class="fa fa-caret-up"></i>
+                  <span>102</span>
+              </div>
+              <div class="post__left-block color-secondary-text">
+                  2nd <br>
+                  place
+              </div>
+              <div class="post__top clearfix">
+                  <div class="post__top-upvote upvote-block visible-mobile">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">102</span>
+                  </div>
+                  <a href="#" class="post__top-left">
+                      <img src="images/post-author-1.png" alt="" class="post__author-img">
+                  </a>
+                  <div class="post__top-right">
+                      <span class="post__share color-secondary-text">
+                          <span class="post__share-text">Share</span>
+                          <div class="share-dropdown">
+                              <ul class="share-dropdown__list">
+                                  <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                  <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                              </ul>
+                          </div>
+                      </span>
+                  </div>
+                  <div class="post__top-middle">
+                      <h1 class="post__title">Adele - Hello</h1>
+                      <div class="post__posted-by">
+                          <div class="post__author color-main user-dropdown-handle">
+                              <span>Rebecca Moore</span>
+                              <div class="user-dropdown">
+                                  <div class="user-dropdown__inner">
+                                      <a href="my-profile.html">
+                                          <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                      </a>
+                                      <div class="user-dropdown__name-wrap">
+                                          <span class="user-dropdown__name">Jason Smith</span>
+                                          <a href="other-profile.html" class="user-dropdown__link color-main">
+                                              View Profile
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <span class="post__date color-secondary-text">posted 2 days ago</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="post__video-wrapper">
+                  <div class="post__video post__video--1">
+                      <button class="post__video-play"></button>
+                  </div>
+                  <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+              </div>
+              <div class="post__upvoted clearfix">
+                  <div class="post__upvoted-left">
+                      <span class="color-secondary-text">Upvoted by:</span>
+                      <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                  </div>
+                  <div class="post__upvoted-right align-right">
+                      <span class="color-secondary-text">1,042 listens</span>
+                  </div>
+              </div>
+              <div class="post__comments-send clearfix">
+                  <span class="post__comments color-secondary-text active" data-id="1">
+                      <span class="hidden-mobile-inline">Comments (16)</span>
+                      <span class="visible-mobile-inline">16</span>
+                  </span>
+                  <span class="post__send color-secondary-text" data-id="1">Send to Friend</span>
+              </div>
+              <!--comments-block-->
+              <div class="comments-block" data-id="1">
+                  <div class="comments-block__posted">
+
+                      <!--posted-comment-->
+                      <div class="posted-comment">
+                          <div class="posted-comment__inner">
+                              <div class="posted-comment__upvote-cell">
+                                  <div class="upvote-block upvote-block--active">
+                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                      <span class="upvote-block__number">3</span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__comment-cell clearfix">
+                                  <div class="posted-comment__img-wrap">
+                                      <a href="#"><img src="images/villagers/posted-comment-1.png" alt=""></a>
+                                  </div>
+                                  <div class="posted-comment__text-wrap">
+                                      <span class="posted-comment__author-wrap">
+                                          <a href="#" class="posted-comment__author color-main">David Fisher</a>
+                                          <span class="posted-comment__date color-secondary-text">at 1:39</span>
+                                      </span>
+                                      <span class="posted-comment__comment">
+                                          Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                          lectus rutrum quam.Isse donec lectus velit maevcenas, ut.
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__date-cell">
+                                  <span class="posted-comment__time-ago color-secondary-text">8h ago</span>
+                                  <span class="posted-comment__reply color-main">Reply</span>
+                              </div>
+                          </div>
+                          <div class="user-comment user-comment--reply">
+                              <div class="user-comment__inner">
+                                  <div class="user-comment__img-cell">
+                                      <img src="images/header-profile-img.png" alt="">
+                                  </div>
+                                  <div class="user-comment__comment-cell">
+                                      <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a reply...">
+                                  </div>
+                                  <div class="user-comment__submit-cell">
+                                      <button class="user-comment__reply"></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!--/posted-comment-->
+
+                      <!--posted-comment-->
+                      <div class="posted-comment">
+                          <div class="posted-comment__inner">
+                              <div class="posted-comment__upvote-cell">
+                                  <div class="upvote-block">
+                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                      <span class="upvote-block__number">2</span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__comment-cell clearfix">
+                                  <div class="posted-comment__img-wrap">
+                                      <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
+                                  </div>
+                                  <div class="posted-comment__text-wrap">
+                                      <span class="posted-comment__author-wrap">
+                                          <a href="#" class="posted-comment__author color-main">Erica Clark</a>
+                                          <span class="posted-comment__date color-secondary-text">at 0:32</span>
+                                      </span>
+                                      <span class="posted-comment__comment">
+                                          Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__date-cell">
+                                  <span class="posted-comment__time-ago color-secondary-text">12h ago</span>
+                                  <span class="posted-comment__reply color-main">Reply</span>
+                              </div>
+                          </div>
+                          <div class="posted-comment posted-comment--reply">
+                              <div class="posted-comment__inner">
+                                  <div class="posted-comment__upvote-cell">
+                                      <div class="upvote-block">
+                                          <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                          <span class="upvote-block__number">0</span>
+                                      </div>
+                                  </div>
+                                  <div class="posted-comment__comment-cell clearfix">
+                                      <div class="posted-comment__img-wrap">
+                                          <a href="#"><img src="images/villagers/posted-comment-3.png" alt=""></a>
+                                      </div>
+                                      <div class="posted-comment__text-wrap">
+                                          <span class="posted-comment__author-wrap">
+                                              <a href="#" class="posted-comment__author color-main">Jason Smith</a>
+                                              <span class="posted-comment__date color-secondary-text">at 1:25</span>
+                                          </span>
+                                          <span class="posted-comment__comment">
+                                              Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                          </span>
+                                      </div>
+                                  </div>
+                                  <div class="posted-comment__date-cell">
+                                      <span class="posted-comment__time-ago color-secondary-text">11h ago</span>
+                                      <span class="posted-comment__reply color-main">Reply</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!--/posted-comment-->
+
+                      <!--posted-comment-->
+                      <div class="posted-comment">
+                          <div class="posted-comment__inner">
+                              <div class="posted-comment__upvote-cell">
+                                  <div class="upvote-block">
+                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                      <span class="upvote-block__number">1</span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__comment-cell clearfix">
+                                  <div class="posted-comment__img-wrap">
+                                      <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
+                                  </div>
+                                  <div class="posted-comment__text-wrap">
+                                      <span class="posted-comment__author-wrap">
+                                          <a href="#" class="posted-comment__author color-main">Erica Clark</a>
+                                          <span class="posted-comment__date color-secondary-text">at 0:32</span>
+                                      </span>
+                                      <span class="posted-comment__comment">
+                                          Lorem ipsum dolor sit amet, semper at suspend isse donec donec lectus rutrum quam.
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__date-cell">
+                                  <span class="posted-comment__time-ago color-secondary-text">1d ago</span>
+                                  <span class="posted-comment__reply color-main">Reply</span>
+                              </div>
+                          </div>
+                      </div>
+                      <!--/posted-comment-->
+
+                      <div class="comments-block__more-link-wrap">
+                          <a href="#" class="comments-block__more-link color-secondary-text">
+                              More (12)
+                          </a>
+                      </div>
+                  </div>
+                  <div class="user-comment">
+                      <div class="user-comment__inner">
+                          <div class="user-comment__img-cell">
+                              <img src="images/header-profile-img.png" alt="">
+                          </div>
+                          <div class="user-comment__comment-cell">
+                              <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a comment...">
+                          </div>
+                          <div class="user-comment__submit-cell">
+                              <button class="user-comment__submit"></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--/comments-block-->
+
+              <div class="send-to-friend" data-id="1" style="display: none;">
+                  <div class="send-to-friend__inner">
+                      <div class="send-to-friend__name-wrap">
+                          <input type="text" class="send-to-friend__input" data-id="1" placeholder="click here to type a friend’s name...">
+                      </div>
+                      <div class="send-to-friend__send-wrap">
+                          <button class="send-to-friend__send-btn"></button>
+                      </div>
+                  </div>
+                  <ul class="send-to-friend__list" data-id="1" style="display: none;">
+                      <li>
+                          <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">David Fisher</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="1" class="send-to-friend__checkbox">
+                              <label for="1"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Erica Davidson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="2" class="send-to-friend__checkbox">
+                              <label for="2"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="3" class="send-to-friend__checkbox">
+                              <label for="3"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Dave Willson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="4" class="send-to-friend__checkbox">
+                              <label for="4"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Ann Davson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="5" class="send-to-friend__checkbox">
+                              <label for="5"></label>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </article>
+      <article class="post">
+          <div class="post__inner">
+              <div class="post__rating post__rating--active bg-color-content">
+                  <i class="fa fa-caret-up"></i>
+                  <span>102</span>
+              </div>
+              <div class="post__left-block post__left-block--from color-secondary-text">
+                  From <br>
+                  <span class="color-main">
+                     Jason <br>
+                     Chernofsky
+                  </span>
+              </div>
+              <div class="post__top clearfix">
+                  <div class="post__top-upvote upvote-block upvote-block--active visible-mobile">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">102</span>
+                  </div>
+                  <a href="#" class="post__top-left">
+                      <img src="images/post-author-1.png" alt="" class="post__author-img">
+                  </a>
+                  <div class="post__top-right">
+                      <span class="post__share color-secondary-text">
+                          <span class="post__share-text">Share</span>
+                          <div class="share-dropdown">
+                              <ul class="share-dropdown__list">
+                                  <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                  <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                              </ul>
+                          </div>
+                      </span>
+                  </div>
+                  <div class="post__top-middle">
+                      <h1 class="post__title">Alt-J - Intro</h1>
+                      <div class="post__posted-by">
+                          <div class="post__author color-main user-dropdown-handle">
+                              <span>Rebecca Moore</span>
+                              <div class="user-dropdown">
+                                  <div class="user-dropdown__inner">
+                                      <a href="my-profile.html">
+                                          <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                      </a>
+                                      <div class="user-dropdown__name-wrap">
+                                          <span class="user-dropdown__name">Jason Smith</span>
+                                          <a href="other-profile.html" class="user-dropdown__link color-main">
+                                              View Profile
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <span class="post__date color-secondary-text">posted 2 days ago</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="post__video-wrapper">
+                  <div class="post__video post__video--2">
+                      <button class="post__video-play"></button>
+                  </div>
+                  <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+              </div>
+              <div class="post__upvoted clearfix">
+                  <div class="post__upvoted-left">
+                      <span class="color-secondary-text">Upvoted by:</span>
+                      <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                  </div>
+                  <div class="post__upvoted-right align-right">
+                      <span class="color-secondary-text">1,042 listens</span>
+                  </div>
+              </div>
+              <div class="post__comments-send clearfix">
+                  <span class="post__comments color-secondary-text" data-id="2">
+                      <span class="hidden-mobile-inline">Comments (0)</span>
+                      <span class="visible-mobile-inline">0</span>
+                  </span>
+                  <span class="post__send color-secondary-text active" data-id="2">Send to Friend</span>
+              </div>
+              <div class="post-comments hidden">
+                  <div class="user-comment">
+                      <div class="user-comment__inner">
+                          <div class="user-comment__img-cell">
+                              <img src="images/header-profile-img.png" alt="">
+                          </div>
+                          <div class="user-comment__comment-cell">
+                              <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                          </div>
+                          <div class="user-comment__submit-cell">
+                              <button class="user-comment__submit"></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="comments-block" data-id="2" style="display: none;">
+                  <div class="user-comment">
+                      <div class="user-comment__inner">
+                          <div class="user-comment__img-cell">
+                              <img src="images/header-profile-img.png" alt="">
+                          </div>
+                          <div class="user-comment__comment-cell">
+                              <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                          </div>
+                          <div class="user-comment__submit-cell">
+                              <button class="user-comment__submit"></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="send-to-friend" data-id="2">
+                  <div class="send-to-friend__inner">
+                      <div class="send-to-friend__name-wrap">
+                          <input type="text" class="send-to-friend__input" data-id="2" placeholder="click here to type a friend’s name...">
+                      </div>
+                      <div class="send-to-friend__send-wrap">
+                          <button class="send-to-friend__send-btn"></button>
+                      </div>
+                  </div>
+                  <ul class="send-to-friend__list" data-id="2">
+                      <li>
+                          <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">David Fisher</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="6" class="send-to-friend__checkbox">
+                              <label for="6"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Erica Davidson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="7" class="send-to-friend__checkbox">
+                              <label for="7"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="8" class="send-to-friend__checkbox">
+                              <label for="8"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Dave Willson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="9" class="send-to-friend__checkbox">
+                              <label for="9"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Ann Davson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="10" class="send-to-friend__checkbox">
+                              <label for="10"></label>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </article>
+      <article class="post post--last">
+          <div class="post__inner">
+              <div class="post__rating post__rating--active bg-color-content">
+                  <i class="fa fa-caret-up"></i>
+                  <span>102</span>
+              </div>
+              <div class="post__left-block post__left-block--from color-secondary-text">
+                  From <br>
+                  <span class="color-main">
+                     Jason <br>
+                     Chernofsky
+                  </span>
+              </div>
+              <div class="post__top clearfix">
+                  <div class="post__top-upvote upvote-block upvote-block--active visible-mobile">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">102</span>
+                  </div>
+                  <a href="#" class="post__top-left">
+                      <img src="images/post-author-2.png" alt="" class="post__author-img">
+                  </a>
+                  <div class="post__top-right">
+                      <span class="post__share color-secondary-text">
+                          <span class="post__share-text">Share</span>
+                          <div class="share-dropdown">
+                              <ul class="share-dropdown__list">
+                                  <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                  <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                              </ul>
+                          </div>
+                      </span>
+                  </div>
+                  <div class="post__top-middle">
+                      <h1 class="post__title">Bastille - Of The Night</h1>
+                      <div class="post__posted-by">
+                          <div class="post__author color-main user-dropdown-handle">
+                              <span>Antony Davidson</span>
+                              <div class="user-dropdown">
+                                  <div class="user-dropdown__inner">
+                                      <a href="my-profile.html">
+                                          <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                      </a>
+                                      <div class="user-dropdown__name-wrap">
+                                          <span class="user-dropdown__name">Jason Smith</span>
+                                          <a href="other-profile.html" class="user-dropdown__link color-main">
+                                              View Profile
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <span class="post__date color-secondary-text">posted 12 hours ago</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="post__video-wrapper">
+                  <div class="post__video post__video--3">
+                      <button class="post__video-play"></button>
+                  </div>
+                  <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+              </div>
+              <div class="post__upvoted clearfix">
+                  <div class="post__upvoted-left">
+                      <span class="color-secondary-text">Upvoted by:</span>
+                      <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                  </div>
+                  <div class="post__upvoted-right align-right">
+                      <span class="color-secondary-text">1,042 listens</span>
+                  </div>
+              </div>
+              <div class="post__comments-send clearfix">
+                  <span class="post__comments color-secondary-text" data-id="3">
+                      <span class="hidden-mobile-inline">Comments (0)</span>
+                      <span class="visible-mobile-inline">0</span>
+                  </span>
+                  <span class="post__send color-secondary-text" data-id="3">Send to Friend</span>
+              </div>
+              <div class="comments-block" data-id="3" >
+                  <div class="user-comment">
+                      <div class="user-comment__inner">
+                          <div class="user-comment__img-cell">
+                              <img src="images/header-profile-img.png" alt="">
+                          </div>
+                          <div class="user-comment__comment-cell">
+                              <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                          </div>
+                          <div class="user-comment__submit-cell">
+                              <button class="user-comment__submit"></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="send-to-friend" data-id="3" style="display: none;">
+                  <div class="send-to-friend__inner">
+                      <div class="send-to-friend__name-wrap">
+                          <input type="text" class="send-to-friend__input" data-id="3" placeholder="click here to type a friend’s name...">
+                      </div>
+                      <div class="send-to-friend__send-wrap">
+                          <button class="send-to-friend__send-btn"></button>
+                      </div>
+                  </div>
+                  <ul class="send-to-friend__list" data-id="3" style="display: none;">
+                      <li>
+                          <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">David Fisher</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="11" class="send-to-friend__checkbox">
+                              <label for="11"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Erica Davidson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="12" class="send-to-friend__checkbox">
+                              <label for="12"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="13" class="send-to-friend__checkbox">
+                              <label for="13"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Dave Willson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="14" class="send-to-friend__checkbox">
+                              <label for="14"></label>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                          <span class="send-to-friend__friend">Ann Davson</span>
+                          <div class="send-to-friend__checkbox-wrap visible-mobile">
+                              <input type="checkbox" id="15" class="send-to-friend__checkbox">
+                              <label for="15"></label>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </article>
+  </div>
+</template>

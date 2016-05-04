@@ -6,3 +6,4 @@ import '../components/bottom-player/bottom-player.js';
 import '../components/now-playing-popup/now-playing-popup.js';
 import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
+import '../components/content/content.js';
