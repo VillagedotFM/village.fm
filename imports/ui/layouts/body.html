@@ -1,24 +1,6 @@
 <template name="app-body">
   <div class="wrapper">
-      <div class="mobile-menu visible-mobile">
-          <div class="mobile-menu__top">
-              <a href="index.html" class="mobile-menu__logo"></a>
-          </div>
-          <ul class="mobile-menu__list">
-              <li class="mobile-menu__item mobile-menu__item--playlist mobile-menu__item--active">
-                  <a>Playlist</a>
-              </li>
-              <li class="mobile-menu__item mobile-menu__item--post">
-                  <a>Post</a>
-              </li>
-              <li class="mobile-menu__item mobile-menu__item--profile">
-                  <a href="my-profile.html">Profile</a>
-              </li>
-              <li class="mobile-menu__item mobile-menu__item--log-out">
-                  <a>Log Out</a>
-              </li>
-          </ul>
-      </div>
+      {{> mobile_menu}}
       <header class="header">
           <div class="header__inner">
               <div class="header__hum visible-mobile"></div>
