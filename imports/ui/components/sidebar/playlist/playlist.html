@@ -1,0 +1,465 @@
+<template name='playlist'>
+  <div class="sr-playlist">
+      <ul class="sr-playlist__list bg-color-playlist">
+        <!-- {{#each posts}}
+          {{> post}}
+        {{/each}} -->
+          <li class="sr-playlist__item sr-playlist__item--inbox">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">21</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <button class="sr-playlist__remove"></button>
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">4:35</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Kodaline</span>
+                      - Latch</span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                      <span class="sr-playlist__date">1 day ago</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item sr-playlist__item--inbox">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">18</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <button class="sr-playlist__remove"></button>
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">4:35</span>
+                  <span class="sr-playlist__play sr-playlist__play--paused"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Alt-J</span>
+                      - Intro
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                      <span class="sr-playlist__date">1 day ago</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item sr-playlist__item--inbox">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">12</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <button class="sr-playlist__remove"></button>
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">4:35</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Imagine Dragons</span>
+                      - Warriors
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                      <span class="sr-playlist__date">1 day ago</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">102</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:47</span>
+                  <span class="sr-playlist__play paused"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Adele</span>
+                      - Hello
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Rebeca Moore</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item sr-playlist__item--active">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">90</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">4:11</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">The Neighborhood</span>
+                      - Sweater Weather
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">82</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner display"></span>
+                  <span class="sr-playlist__time hidden">4:35</span>
+                  <span class="sr-playlist__play sr-playlist__play--paused hidden"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Bastille</span>
+                      - Of The Night
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:12</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">The Weekends</span>
+                      - The Hills
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__equalizer"></span>
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time hidden">3:12</span>
+                  <span class="sr-playlist__play hidden"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Sebastian Lind</span>
+                      - Waiting for Something
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">2:49</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Bear’s Den</span>
+                      - Bad Blood
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:32</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Imagine Dragons</span>
+                      - Smoke and Mirrors
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                      <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+          <li class="sr-playlist__item">
+              <div class="sr-playlist__left">
+                  <div class="upvote-block upvote-block--active">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">226</span>
+                  </div>
+              </div>
+              <div class="sr-playlist__right-btn"></div>
+              <div class="sr-playlist__right">
+                  <span class="sr-playlist__spinner hidden"></span>
+                  <span class="sr-playlist__time">3:21</span>
+                  <span class="sr-playlist__play"></span>
+              </div>
+              <div class="sr-playlist__middle">
+                  <span class="sr-playlist__title">
+                      <span class="sr-playlist__artist">Stephan</span>
+                      - Crossfire
+                  </span>
+                  <br>
+                  <span class="sr-playlist__posted-by">
+                      posted by
+                      <span class="sr-playlist__author">Jason Chernofsky</span>
+                  </span>
+              </div>
+          </li>
+      </ul>
+  </div>
+</template>
