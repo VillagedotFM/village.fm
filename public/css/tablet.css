@@ -1,0 +1,61 @@
+@media (max-width: 1024px){
+    .header__inner,
+    .main,
+    .bottom-player__inner {
+        width: 768px;
+    }
+    .ntf-dropdown {
+        left: -152px;
+    }
+    .sidebar {
+        width: 300px;
+    }
+    .sr-playlist {
+        width: 345px;
+    }
+    .sr-playlist__item--active {
+        padding-left: 11px;
+        position: relative;
+        background: #ffffff !important;
+        border-left: 4px solid #59d6d2;
+        width: 305px;
+    }
+    .container {
+        padding-left: 310px;
+    }
+    .post {
+        padding-left: 40px;
+    }
+    .post__inner {
+        padding-left: 40px;
+    }
+    .post__video {
+        height: 195px;
+    }
+    .bottom-player__left {
+        width: 300px;
+    }
+    .bottom-player__right {
+        margin: 0 20px 0 330px;
+    }
+    .villagers__quantity {
+        display: block;
+        margin-bottom: 15px;
+    }
+    .villagers__wrapper {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .villagers__invite {
+        text-align: left;
+        padding-left: 0;
+        border-left: none;
+    }
+    .sr-playlist__item--active .sr-playlist__right {
+        margin-right: 6px;
+    }
+    .invite-dropdown {
+        width: 400px;
+        right: -20px;
+    }
+}

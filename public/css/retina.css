@@ -1,0 +1,100 @@
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (   -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (           min-resolution: 192dpi),
+only screen and (            min-resolution: 2dppx) {
+    .header__logo,
+    .header__notifications,
+    .sr-controls__prev,
+    .sr-controls__next,
+    .sr-controls__play,
+    .sr-inbox__title:before,
+    .sr-playlist__play,
+    .sr-playlist__remove,
+    .villagers__dots,
+    .villagers__invite span:before,
+    .post__share:before,
+    .post__comments:before,
+    .post__send:before,
+    .user-comment__submit,
+    .user-comment__reply,
+    .send-to-friend__send-btn,
+    .bottom-player__song-more {
+        background-image: url(../images/icons-sprite-2x.png);
+        -webkit-background-size: 300px 900px;
+        background-size: 300px 900px;
+    }
+
+    .ntf-dropdown__place-icon__inner,
+    .sr-playlist__spinner,
+    .upload-section__button span:before,
+    .post__video-play,
+    .cup,
+    .header__hum,
+    .sr-playlist__right-btn:before,
+    .mobile-menu__logo,
+    .mobile-menu__item a:before,
+    .now-playing__arrow-down,
+    .us-mobile__mobile-btn,
+    .share-dropdown__list>li>a:before,
+    .header__logo-mobile,
+    .uploaded-item-mobile__spinner {
+        background-image: url(../images/other-icons-sprite-2x.png);
+        -webkit-background-size: 300px 1100px;
+        background-size: 300px 1100px;
+    }
+
+}
+
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 3),
+only screen and (   min--moz-device-pixel-ratio: 3),
+only screen and (    -o-min-device-pixel-ratio: 3/1),
+only screen and (         min-device-pixel-ratio: 3),
+only screen and (            min-resolution: 350dpi),
+only screen and (             min-resolution: 3dppx) {
+    .header__logo,
+    .header__notifications,
+    .sr-controls__prev,
+    .sr-controls__next,
+    .sr-controls__play,
+    .sr-inbox__title:before,
+    .sr-playlist__play,
+    .sr-playlist__remove,
+    .villagers__dots,
+    .villagers__invite span:before,
+    .post__share:before,
+    .post__comments:before,
+    .post__send:before,
+    .user-comment__submit,
+    .user-comment__reply,
+    .send-to-friend__send-btn,
+    .bottom-player__song-more {
+        background-image: url(../images/icons-sprite-3x.png);
+        -webkit-background-size: 300px 900px;
+        background-size: 300px 900px;
+    }
+
+    .ntf-dropdown__place-icon__inner,
+    .sr-playlist__spinner,
+    .upload-section__button span:before,
+    .post__video-play,
+    .cup,
+    .header__hum,
+    .sr-playlist__right-btn:before,
+    .mobile-menu__logo,
+    .mobile-menu__item a:before,
+    .now-playing__arrow-down,
+    .us-mobile__mobile-btn,
+    .share-dropdown__list>li>a:before,
+    .header__logo-mobile,
+    .uploaded-item-mobile__spinner {
+        background-image: url(../images/other-icons-sprite-3x.png);
+        -webkit-background-size: 300px 1100px;
+        background-size: 300px 1100px;
+    }
+
+}
