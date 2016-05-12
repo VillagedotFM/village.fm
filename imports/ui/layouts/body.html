@@ -1,19 +1,25 @@
-<template name="app-body">
+<template name="app_body">
+
   <div class="wrapper">
+
       {{> mobile_menu}}
+
       {{> header}}
+
       <div class="main">
           {{> sidebar}}
           <div class="container hidden-mobile">
               {{> content}}
           </div>
       </div>
+
       {{> mobile_content}}
       {{> bottom_player}}
       {{> now_playing_popup}}
       {{> sign_up}}
+
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
   <script src="lib/perfect-scrollbar.jquery.min.js"></script>
   <script src="js/sr-playlist.js"></script>
   <script src="js/main.js"></script>
