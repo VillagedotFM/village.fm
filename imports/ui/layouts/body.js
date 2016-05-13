@@ -12,7 +12,6 @@ import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
 
 
-
 Template.app_body.helpers({
 
 });
