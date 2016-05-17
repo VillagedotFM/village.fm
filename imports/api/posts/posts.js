@@ -28,7 +28,8 @@ Posts.schema = new SimpleSchema({
   {
     type: String,
     label: "Link",            //User Entered
-    max: 100
+    max: 100                  //"https://www.youtube.com/watch?v=xUq1rZ7mmns"     "xUq1rZ7mmns"
+                              //"http://img.youtube.com/vi/xUq1rZ7mmns/hqdefault.jpg"
   },
 
   type:
@@ -75,6 +76,13 @@ Posts.schema = new SimpleSchema({
     optional: true
   },
 
+  duration:
+  {
+    type: String,
+    label: "Duration",        //https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=id&key=key
+    max: 10                   //data.items[0].contentDetails.duration
+  },
+
   taggedUsers:
   {
     type: [String],
@@ -98,9 +106,9 @@ Posts.schema = new SimpleSchema({
 
   genre:                     //SC only (can always fill in manually or scrape youtube)
   {
-    type: String,
+    type: [String],
     label: "Genre",
-    defaultValue: ''
+    defaultValue: []
   },
 
 
