@@ -1,25 +1,25 @@
 <template name='header_profile'>
   <div class="header-profile">
     <span class="header-profile__thumb">
-      <img src="images/header-profile-img.png" class="header-profile__img" />
+      <img src="{{getUserImage currentUser._id}}" class="header-profile__img" />
     </span>
     <span class="header-profile__name">
-      Jason Smith
+      {{getUserName currentUser._id}}
       <i class="fa fa-caret-down arrow"></i>
     </span>
     <div class="profile-dropdown">
       <div class="profile-dropdown__top">
-        <a href="my-profile.html"><img src="images/header-profile-img.png" class="profile-dropdown__img" /></a>
+        <a href="my-profile.html"><img src="{{getUserImage currentUser._id}}" class="header-profile__img" /></a>
         <div class="profile-dropdown__name-wrap">
-          <a href="my-profile.html" class="profile-dropdown__name">Jason Smith</a>
+          <a href="my-profile.html" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
           <span class="profile-dropdown__caption">
-            <span class="color-main">912</span>
-            upvotes collected
+            Villager #
+            <span class="color-main">3</span>
           </span>
         </div>
         <div class="profile-dropdown__descr">
           <p><a href="#" class="color-secondary-text">86</a> songs posted</p>
-          <p><a href="#" class="color-secondary-text">912</a> upvotes collected</p>
+          <p><a href="#" class="color-secondary-text">912</a> upvotes collected <span class="color-main">(5th)</span></p>
         </div>
       </div>
       <div class="profile-dropdown__bottom">
