@@ -89,7 +89,7 @@
           {{#each posts}}
             <li class="sr-playlist__item">
                 <div class="sr-playlist__left">
-                    <div class="upvote-block">
+                    <div class="upvote-block {{isUpvoted}}">
                         <i class="fa fa-caret-up upvote-block__arrow"></i>
                         <span class="upvote-block__number">{{upvotedBy.length}}</span>
                     </div>
