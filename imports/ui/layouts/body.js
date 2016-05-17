@@ -1,6 +1,9 @@
 import { Posts } from '../../api/posts/posts.js';
 import { Villages } from '../../api/villages/villages.js';
+
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
@@ -11,8 +14,11 @@ import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
 
-Template.app_body.onCreated(function(){
-  window.Villages = Villages; 
+Template.app_body.onCreated(function appBodyOnCreated() {
+  this.subscribe('villages.all');
+  this.subscribe('posts.all');
+  window.Villages = Villages;
+  window.Posts = Posts;
 });
 
 

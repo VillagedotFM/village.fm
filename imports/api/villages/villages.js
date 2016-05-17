@@ -10,6 +10,11 @@ export const Villages = new Mongo.Collection('villages');
 //   update() { return true; },
 //   remove() { return true; },
 // });
+Villages.allow({
+  insert() { return true; },
+  update() { return true; },
+  remove() { return true; },
+});
 
 
 Villages.schema = new SimpleSchema({
@@ -93,7 +98,7 @@ Villages.schema = new SimpleSchema({
     type: String,
     autoValue: function() {
       if( this.isInsert ) {
-        return "The Village";           //this.userId;
+        return this.userId;
       }
     }
   }

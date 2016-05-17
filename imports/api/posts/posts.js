@@ -3,7 +3,12 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Posts = new Mongo.Collection('posts');
 
-Posts.deny({
+// Posts.deny({
+//   insert() { return true; },
+//   update() { return true; },
+//   remove() { return true; },
+// });
+Posts.allow({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
