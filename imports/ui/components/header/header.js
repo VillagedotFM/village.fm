@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
 
 import './header.html';
 import './notifications/notifications.js';

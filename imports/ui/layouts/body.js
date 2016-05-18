@@ -3,6 +3,8 @@ import { Villages } from '../../api/villages/villages.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
