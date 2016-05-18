@@ -1,18 +1,20 @@
 <template name='upload'>
   <div class="upload-section hidden-mobile">
+    <form class="linkUpload">
       <div class="upload-section__upload clearfix">
-          <button type="submit" name="post-upload" class="btn pull-right hidden-mobile upload-section__button">
+          <button type="submit" name="post-upload" disabled class="btn pull-right hidden-mobile upload-section__button postLinkBtn">
               <span>Post a Song</span>
           </button>
           <div class="upload-section__input-wrapper">
-              <input type="text" name="post-link" class="upload-section__input" placeholder="enter any Soundcloud or YouTube link here...">
+              <input type="text" name="post-link" class="upload-section__input" placeholder="Enter any Soundcloud or YouTube link here...">
           </div>
       </div>
+    </form>
       <div class="uploaded-item clearfix">
-          <form action="">
+          <form class="postUpload">
               <div class="uploaded-item__img-wrap">
                   <div class="uploaded-item__img-background">
-                      <img src="images/uploaded-img.png" alt="">
+                      <img src="images/uploaded-img.png" class="uploadedThumbnail" alt="">
                   </div>
               </div>
               <div class="uploaded-item__descr clearfix">
@@ -29,7 +31,7 @@
               </div>
               <div class="uploaded-item__btns">
                   <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
-                  <button type="submit" name="post" class="btn">Post</button>
+                  <button type="submit" name="post" class="btn postUploadBtn">Post</button>
               </div>
           </form>
       </div>

@@ -154,6 +154,14 @@ input, textarea {
     font-family: 'Signika', sans-serif;
     font-size: 14px;
 }
+.btn:disabled {
+  background: bisque;
+  border-color: bisque;
+  cursor: not-allowed;
+}
+.formError {
+  border-color: crimson !important;
+}
 .btn--inverse {
     background: #ffffff;
     color: #ff7260;
