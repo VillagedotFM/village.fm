@@ -1,11 +1,11 @@
 UI.registerHelper("getUserImage", function (userId) {
-    var user = Meteor.users.findOne({_id: userId});
+    let user = Meteor.users.findOne({_id: userId});
     if(userId)
       return user.profile.picture;
 });
 
 UI.registerHelper("getUserName", function (userId, length) {
-    var user = Meteor.users.findOne(userId);
+    let user = Meteor.users.findOne(userId);
     if(user) {
       if(length === 'first') {
         if (user.services.facebook.first_name)

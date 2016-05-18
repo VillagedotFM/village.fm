@@ -6,7 +6,7 @@ import { Posts } from './posts.js';
 Meteor.methods({
   upvotePost:function(postId){
 
-    var affected = Posts.update({
+    let affected = Posts.update({
         _id: postId,
         upvotedBy: {$ne: this.userId},
     },{

@@ -21,6 +21,12 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   window.Posts = Posts;
 });
 
+Template.app_body.onRendered(function() {
+  $('.uploaded-item').hide();
+  $('.sr-playlist__item--inbox').hide();
+  $('.sr-inbox__arrow').removeClass('fa-caret-up');
+});
+
 
 Template.app_body.helpers({
 
