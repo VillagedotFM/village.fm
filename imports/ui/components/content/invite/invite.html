@@ -1,148 +1,30 @@
 <template name='invite'>
   <div class="villagers hidden-mobile">
+    {{#with village}}
   <span class="villagers__quantity">
-      159 Villagers:
+      {{users.length}} Villagers:
   </span>
       <div class="villagers__wrapper">
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-1.png" alt="">
+        {{#each firstUsers}}
+          <a href="/{{this}}" class="villagers__img">
+              <img src="{{getUserImage this}}" style="width: 30px; height: 30px; border-radius: 50%;">
           </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-2.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-3.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-4.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-5.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-6.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-7.png" alt="">
-          </a>
-          <a href="#" class="villagers__img">
-              <img src="images/villagers/villager-8.png" alt="">
-          </a>
+        {{/each}}
           <span class="villagers__img villagers__img--last">
               <div class="villagers__dots">
                   <div class="more-users-dropdown">
                       <div class="more-users-dropdown__wrap">
                           <ul class="more-users-dropdown__inner">
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name1</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name2</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name3</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name4</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name5</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name6</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name7</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name8</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name9</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
-                              <li class="more-users-dropdown__user">
-                                  <a href="my-profile.html">
-                                      <img src="images/profile-40x40.png" class="more-users-dropdown__img">
-                                  </a>
-                                  <div class="more-users-dropdown__name-wrap">
-                                      <span class="more-users-dropdown__name">Full Name10</span>
-                                      <a href="other-profile.html" class="more-users-dropdown__link color-main">
-                                          View Profile
-                                      </a>
-                                  </div>
-                              </li>
+                            {{#each dottedUsers}}
+                                <li class="more-users-dropdown__user">
+                                    <a href="/{{this}}">
+                                        <img src="{{getUserImage this}}" class="more-users-dropdown__img">
+                                    </a>
+                                    <div class="more-users-dropdown__name-wrap">
+                                        <span class="more-users-dropdown__name">{{getUserName this}}</span>
+                                    </div>
+                                </li>
+                              {{/each}}
                           </ul>
                       </div>
                   </div>
@@ -211,5 +93,6 @@
               </div>
           </div>
       </div>
+      {{/with}}
   </div>
 </template>
