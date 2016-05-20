@@ -1,9 +1,9 @@
 <template name='sidebar'>
-  <aside class="sidebar">
+  <aside class="sidebar sidebar{{profilePadding}}">
       <div class="sidebar__inner">
           {{> controls}}
-          {{> tabs}}
-          {{> inbox}}
+          {{> Template.dynamic template=tabs}}
+          {{> Template.dynamic template=inbox}}
           {{> playlist}}
       </div>
   </aside>

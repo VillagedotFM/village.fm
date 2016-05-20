@@ -1,0 +1,22 @@
+<template name="profile_tabs">
+  <div class="sr-top clearfix">
+    {{#if ownProfile}}
+      <div data-tab='upvotes' class="sr-top__item sr-top__item--half-width profileTab {{activeProfileTab 'upvotes'}}">
+          <h4 data-tab='upvotes' class="sr-top__item-title">{{upvoteCount}} Upvotes</h4>
+      </div>
+      <div data-tab='posts' class="sr-top__item sr-top__item--half-width profileTab {{activeProfileTab 'posts'}}">
+          <h4 data-tab='posts' class="sr-top__item-title">{{postCount}} Posts</h4>
+      </div>
+    {{else}}
+      <div data-tab='mutual' class="sr-top__item profileTab {{activeProfileTab 'mutual'}}">
+          <h4 data-tab='mutual' class="sr-top__item-title">{{mutualCount}} Mutual</h4>
+      </div>
+      <div data-tab='upvotes' class="sr-top__item profileTab {{activeProfileTab 'upvotes'}}">
+          <h4 data-tab='upvotes' class="sr-top__item-title">{{upvoteCount}} Upvotes</h4>
+      </div>
+      <div data-tab='posts' class="sr-top__item profileTab {{activeProfileTab 'posts'}}">
+          <h4 data-tab='posts' class="sr-top__item-title">{{postCount}} Posts</h4>
+      </div>
+    {{/if}}
+  </div>
+</template>
