@@ -90,5 +90,9 @@ Template.feed.events({
     } else {
       alert('Please login to upvote posts!');
     }
+  },
+  "click .post__video-play": function(event, template){
+    //PlayerPlay
+    appBodyRef.nowPlaying.set(this);
   }
 });

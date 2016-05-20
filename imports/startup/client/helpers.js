@@ -1,5 +1,10 @@
 Meteor.subscribe("users.allData");
 
+UI.registerHelper("getNowPlaying", function (userId) {
+  console.log(appBodyRef.nowPlaying.get());
+  return appBodyRef.nowPlaying.get();
+});
+
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
     if(userId)

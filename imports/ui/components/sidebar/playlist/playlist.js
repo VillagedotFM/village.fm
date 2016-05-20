@@ -61,5 +61,9 @@ Template.playlist.events({
     } else {
       alert('Please login to upvote posts!');
     }
+  },
+  "click .sr-playlist__play": function(event, template){
+    //PlayerPlay
+    appBodyRef.nowPlaying.set(this);
   }
 });

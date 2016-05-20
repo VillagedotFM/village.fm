@@ -1,5 +1,4 @@
 <!-- scroll arrow <li class="sr-playlist__item sr-playlist__item--active"> -->
-<!-- upvoted <div class="upvote-block upvote-block--active"> -->
 <!-- loading spinner <span class="sr-playlist__spinner display"></span> -->
 <!-- now playing equalizer <span class="sr-playlist__equalizer"></span> -->
 <template name='playlist'>
@@ -108,7 +107,7 @@
                         <br>
                     <span class="sr-playlist__posted-by">
                         posted by
-                        <span class="sr-playlist__author">{{getUserName createdBy}}</span>
+                        <span class="sr-playlist__author">{{getUserName createdBy}}</span>{{getNowPlaying}}
                     </span>
                 </div>
             </li>

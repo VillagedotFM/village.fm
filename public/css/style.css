@@ -1235,6 +1235,36 @@ input, textarea {
 }
 
 
+.upvoterOthers {
+    position: relative;
+    cursor: pointer;
+}
+.upvoterOthers:hover .tooltiptext {
+  opacity: 1;
+  width: 185px;
+  height: auto;
+  padding: 20px 5px 20px 20px;
+  overflow: visible;
+}
+
+.more-users-dropdown__user:nth-child(-n+3) {
+  display: none;
+}
+
+
+.upvoter:nth-child(1):after {
+  content: ', ';
+}
+.upvoter:nth-child(2):after {
+  content: ', ';
+}
+.upvoter:nth-child(n+4) {
+  display: none;
+}
+.upvoter:nth-last-child(2):after{
+  content: '';
+}
+
 .user-dropdown {
     position: absolute;
     top: 100%;

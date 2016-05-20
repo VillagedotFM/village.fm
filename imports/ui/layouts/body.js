@@ -22,6 +22,9 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   this.subscribe('posts.all');
   window.Villages = Villages;
   window.Posts = Posts;
+
+  appBodyRef = this;
+  appBodyRef.nowPlaying = new ReactiveVar(null);
 });
 
 Template.app_body.onRendered(function() {
