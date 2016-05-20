@@ -1,22 +1,25 @@
 <template name='feed'>
   <div class="posts-wrapper">
+
+    {{#each posts}}
+
       <article class="post">
           <div class="post__inner">
-              <div class="post__rating bg-color-content">
+              <div class="post__rating {{isUpvoted}} bg-color-content">
                   <i class="fa fa-caret-up"></i>
-                  <span>102</span>
+                  <span>{{upvotedBy.length}}</span>
               </div>
               <div class="post__left-block color-secondary-text">
                   2nd <br>
                   place
               </div>
               <div class="post__top clearfix">
-                  <div class="post__top-upvote upvote-block visible-mobile">
+                  <div class="post__top-upvote upvote-block {{mobileUpvoted}} visible-mobile">
                       <i class="fa fa-caret-up upvote-block__arrow"></i>
-                      <span class="upvote-block__number">102</span>
+                      <span class="upvote-block__number">{{upvotedBy.length}}</span>
                   </div>
-                  <a href="#" class="post__top-left">
-                      <img src="images/post-author-1.png" alt="" class="post__author-img">
+                  <a href="/{{createdBy}}" class="post__top-left">
+                      <img src="{{getUserImage createdBy}}" alt="" class="post__author-img">
                   </a>
                   <div class="post__top-right">
                       <span class="post__share color-secondary-text">
@@ -32,18 +35,18 @@
                       </span>
                   </div>
                   <div class="post__top-middle">
-                      <h1 class="post__title">Adele - Hello</h1>
+                      <h1 class="post__title">{{artist}} - {{title}}</h1>
                       <div class="post__posted-by">
                           <div class="post__author color-main user-dropdown-handle">
-                              <span>Rebecca Moore</span>
+                              <span>{{getUserName createdBy}}</span>
                               <div class="user-dropdown">
                                   <div class="user-dropdown__inner">
-                                      <a href="my-profile.html">
-                                          <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                      <a href="/{{createdBy}}">
+                                          <img src="{{getUserImage createdBy}}" class="user-dropdown__img">
                                       </a>
                                       <div class="user-dropdown__name-wrap">
-                                          <span class="user-dropdown__name">Jason Smith</span>
-                                          <a href="other-profile.html" class="user-dropdown__link color-main">
+                                          <span class="user-dropdown__name">{{getUserName createdBy}}</span>
+                                          <a href="/{{createdBy}}" class="user-dropdown__link color-main">
                                               View Profile
                                           </a>
                                       </div>
@@ -55,18 +58,49 @@
                   </div>
               </div>
               <div class="post__video-wrapper">
-                  <div class="post__video post__video--1">
+                  <div class="post__video" style="background-image: url({{thumbnail}})">
                       <button class="post__video-play"></button>
                   </div>
-                  <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+                  <h3 class="post__video-title">
+                    {{#if description}}
+                      {{description}}
+                    {{else}}
+                      {{getUserName createdBy 'first'}} had nothing to say about the song :(
+                    {{/if}}
+                  </h3>
               </div>
               <div class="post__upvoted clearfix">
                   <div class="post__upvoted-left">
+                    <div>
                       <span class="color-secondary-text">Upvoted by:</span>
-                      <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                        <span>
+                          {{#each upvotedBy}}
+                            <a href="/{{this}}" class="color-main upvoter">{{this}}</a>
+                          {{/each}}
+                        <a href="" class="color-main upvoterOthers">{{upvoterOthers}}
+                            <div class="tooltiptext more-users-dropdown">
+                                <div class="more-users-dropdown__wrap">
+                                    <ul class="more-users-dropdown__inner">
+                                      {{#each upvotedBy}}
+                                          <li class="more-users-dropdown__user">
+                                              <a href="/{{this}}">
+                                                  <!-- <img src="{{getUserImage this}}" class="more-users-dropdown__img"> -->
+                                                  <img src="" class="more-users-dropdown__img">
+                                              </a>
+                                              <div class="more-users-dropdown__name-wrap">
+                                                  <span class="more-users-dropdown__name">{{this}}</span>
+                                              </div>
+                                          </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </a>
+                        </span>
+                      </div>
                   </div>
                   <div class="post__upvoted-right align-right">
-                      <span class="color-secondary-text">1,042 listens</span>
+                      <span class="color-secondary-text">{{listenedBy.length}} listens</span>
                   </div>
               </div>
               <div class="post__comments-send clearfix">
@@ -291,6 +325,10 @@
               </div>
           </div>
       </article>
+    {{/each}}
+
+
+
       <article class="post">
           <div class="post__inner">
               <div class="post__rating post__rating--active bg-color-content">

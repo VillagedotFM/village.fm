@@ -1,3 +1,5 @@
+Meteor.subscribe("users.allData");
+
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
     if(userId)
