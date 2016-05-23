@@ -2003,6 +2003,11 @@ input, textarea {
     float: left;
     position: relative;
 }
+
+#ytplayer {
+  height: 100%;
+  width: 100%;
+}
 .bottom-player__rating {
     float: left;
     margin-top: 3px;

@@ -1,7 +1,11 @@
-import { Template } from 'meteor/templating';
+import { YTPlayer } from 'meteor/hpx7:youtube-iframe-player';
 
 import './feed.html';
 
+yt = new YTPlayer('ytplayer', {
+  height: '270px',
+  width: '479px'
+});
 
 Template.feed.helpers({
   posts() {
@@ -92,7 +96,14 @@ Template.feed.events({
     }
   },
   "click .post__video-play": function(event, template){
-    //PlayerPlay
-    appBodyRef.nowPlaying.set(this);
+    if (appBodyRef.nowPlaying.get()) {
+      if (this !== appBodyRef.nowPlaying.get()) {
+        appBodyRef.nowPlaying.set(this);
+      } else {
+        //Play
+      }
+    } else {
+      appBodyRef.nowPlaying.set(this);
+    }
   }
 });

@@ -10,7 +10,9 @@ Template.bottom_player.helpers({
   },
   nowPlaying: function() {
     let nowPlayingPost = appBodyRef.nowPlaying.get();
-    return Posts.findOne({_id:nowPlayingPost._id});
+    if (nowPlayingPost) {
+      return Posts.findOne({_id:nowPlayingPost._id});
+    }
   }
 });
 
