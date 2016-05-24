@@ -57,9 +57,7 @@
               <div class="post__video-wrapper">
                   <div class="post__video" style="background-image: url({{thumbnail}})">
                     {{> YTPlayer name='ytplayer'}}
-                    {{#spinner type='wave' visible=true class='post__video-play'}}
-                      <button class="post__video-play"></button>
-                    {{/spinner}}
+                    <button class="post__video-play"></button>
                   </div>
                   <h3 class="post__video-title">
                     {{#if description}}
