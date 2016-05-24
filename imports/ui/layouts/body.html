@@ -8,43 +8,7 @@
               {{> content}}
           </div>
       </div>
-      <div class="us-mobile visible-mobile hidden">
-          <div class="us-mobile__upload clearfix">
-              <button type="submit" name="post-upload" class="us-mobile__mobile-btn pull-right hidden">
-              </button>
-              <div class="us-mobile__input-wrapper us-mobile__input-wrapper--uploaded">
-                  <input type="text" name="post-link" class="us-mobile__input" placeholder="enter any Soundcloud or YouTube link here...">
-              </div>
-          </div>
-          <div class="uploaded-item-mobile clearfix">
-              <form action="">
-                  <div class="uploaded-item-mobile__img-wrap">
-                      <div class="uploaded-item-mobile__img">
-                          <div class="uploaded-item-mobile__bg uploaded-item-mobile__bg--loading">
-                              <div class="uploaded-item-mobile__spinner"></div>
-                              <!--<img src="images/uploaded-img.png" alt="">-->
-                          </div>
-                      </div>
-                  </div>
-                  <div class="uploaded-item-mobile__descr clearfix">
-                      <div class="uploaded-item-mobile__input-wrap">
-                          <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
-                      </div>
-                      <div class="uploaded-item-mobile__input-wrap">
-                          <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
-                      </div>
-                      <div class="uploaded-item-mobile__textarea-wrap">
-                          <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
-                          <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
-                      </div>
-                  </div>
-                  <div class="uploaded-item-mobile__btns">
-                      <button class="btn btn--inverse uploaded-item-mobile__cancel">Cancel</button>
-                      <button type="submit" name="post" class="btn">Post</button>
-                  </div>
-              </form>
-          </div>
-      </div>
+      {{> mobile_content}}
       {{> bottom_player}}
       {{> now_playing_popup}}
       {{> sign_up}}
