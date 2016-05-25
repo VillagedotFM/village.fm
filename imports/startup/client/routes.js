@@ -16,14 +16,14 @@ FlowRouter.route('/post/:_id', {
 FlowRouter.route('/', {
   name: 'Home',
   action() {
-    BlazeLayout.render('app-body', { content: 'hello' });
+    BlazeLayout.render('app_body', { content: 'hello' });
   },
 });
 
 FlowRouter.route('/:_id', {
   name: 'Profile',
   action() {
-    BlazeLayout.render('app-body', { content: 'info' });
+    BlazeLayout.render('app_body', { content: 'info' });
   },
 });
 
