@@ -34,6 +34,8 @@ ejson@1.0.11
 es5-shim@4.5.10
 facebook@1.2.6
 fastclick@1.0.11
+frozeman:animation-helper@0.2.6
+frozeman:global-notifications@0.2.1
 geojson-utils@1.0.8
 hot-code-push@1.0.4
 html-tools@1.0.9
@@ -44,6 +46,7 @@ jquery@1.11.8
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.11.0
 launch-screen@1.0.11
+less@2.6.0
 livedata@1.0.18
 localstorage@1.0.9
 logging@1.0.12
