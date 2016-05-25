@@ -36,7 +36,7 @@ Template.playlist.helpers({
     else if (time === 'year')
       time_filter.setDate(date.getDate()-365);
 
-    return Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:1}});
+    return Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -60,6 +60,17 @@ Template.playlist.events({
       });
     } else {
       alert('Please login to upvote posts!');
+    }
+  },
+  "click .sr-playlist__play": function(event, template){
+    if (appBodyRef.nowPlaying.get()) {
+      if (this !== appBodyRef.nowPlaying.get()) {
+        appBodyRef.nowPlaying.set(this);
+      } else {
+        //Play
+      }
+    } else {
+      appBodyRef.nowPlaying.set(this);
     }
   }
 });
