@@ -3,6 +3,9 @@ import './header-profile.html';
 
 
 Template.header_profile.helpers({
+  postCount: function() {
+    return Posts.find({"createdBy": Meteor.userId()}).count();
+  }
 });
 
 Template.header_profile.events({

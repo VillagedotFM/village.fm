@@ -1,0 +1,69 @@
+<template name="profile">
+  <div class="profile">
+      <div class="profile__inner">
+        {{#with user}}
+          <img class="profile__img" src="{{getUserImage _id}}">
+          <div class="profile__block">
+              <h2 class="profile__name">{{getUserName _id}}  <span class="color-main"># {{getUserVillagerNum _id}}</span></h2>
+              <div class="profile__total-upvotes">
+                  <i class="cup profile__cup"></i>
+                  <span class="color-main profile__upvotes-place">{{getUserUpvoteRank _id}}{{getNumberEnd (getUserUpvoteRank _id)}}</span>
+                  <span class="color-secondary-text profile__upvotes">- {{getUpvotesNum _id}} upvotes</span>
+              </div>
+              <div class="last-listens">
+                  <span class="last-listens__title">Last Listens:</span>
+                  <div class="last-listens__wrap">
+                      <div class="last-listens__inner">
+                          <a href="#" class="last-listens__item">
+                              <div class="last-listens__img-wrap">
+                                  <img src="images/last-listen-item-1.png" alt="">
+                              </div>
+                              <div class="last-listens__descr">
+                                  <span class="last-listens__track-name">Imagine Dragons</span>
+                                  <span>Smoke and Mirrors</span>
+                              </div>
+                          </a>
+                          <a href="#" class="last-listens__item">
+                              <div class="last-listens__img-wrap">
+                                  <img src="images/last-listen-item-2.png" alt="">
+                              </div>
+                              <div class="last-listens__descr">
+                                  <span class="last-listens__track-name">Bastille</span>
+                                  <span>Of The Night</span>
+                              </div>
+                          </a>
+                          <a href="#" class="last-listens__item">
+                              <div class="last-listens__img-wrap">
+                                  <img src="images/last-listen-item-3.png" alt="">
+                              </div>
+                              <div class="last-listens__descr">
+                                  <span class="last-listens__track-name">The Neighborhood</span>
+                                  <span>Sweater Weather</span>
+                              </div>
+                          </a>
+                          <a href="#" class="last-listens__item">
+                              <div class="last-listens__img-wrap">
+                                  <img src="images/last-listen-item-4.png" alt="">
+                              </div>
+                              <div class="last-listens__descr">
+                                  <span class="last-listens__track-name">Sebastian Lind</span>
+                                  <span>Waiting for Someone</span>
+                              </div>
+                          </a>
+                          <a href="" class="last-listens__item">
+                              <div class="last-listens__img-wrap">
+                                  <img src="images/last-listen-item-5.png" alt="">
+                              </div>
+                              <div class="last-listens__descr">
+                                  <span class="last-listens__track-name">Adele</span>
+                                  <span>don't you remember</span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {{/with}}
+      </div>
+  </div>
+</template>

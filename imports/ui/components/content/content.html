@@ -1,5 +1,8 @@
 <template name='content'>
-  {{> upload}}
+  {{#if ownProfile}}
+  {{else}}
+    {{> upload}}
+  {{/if}}
   <div class="content">
       {{> invite}}
       {{> feed}}

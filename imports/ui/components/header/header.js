@@ -18,5 +18,10 @@ Template.header.events({
         // $('.sign-up').hide();
       }
     });
+  },
+  "click .header__logo, click header__logo-mobile"(event, instance) {
+    $('.uploaded-item').hide();
+    $('.sr-playlist__item--inbox').hide();
+    $('.sr-inbox__arrow').removeClass('fa-caret-up');
   }
 });

@@ -3,8 +3,9 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 
 import '../../ui/layouts/body.js';
-import '../../ui/pages/hello/hello.js';
-import '../../ui/pages/info/info.js';
+import '../../ui/components/profile/profile.js';
+
+// profile, tabs (tabs/profile_tabs), inbox
 
 FlowRouter.route('/post/:_id', {
   name: 'Post',
@@ -16,14 +17,14 @@ FlowRouter.route('/post/:_id', {
 FlowRouter.route('/', {
   name: 'Home',
   action() {
-    BlazeLayout.render('app_body', { content: 'hello' });
+    BlazeLayout.render('app_body', { tabs: 'tabs', inbox: 'inbox' });
   },
 });
 
 FlowRouter.route('/:_id', {
   name: 'Profile',
   action() {
-    BlazeLayout.render('app_body', { content: 'info' });
+    BlazeLayout.render('app_body', { profile: 'profile', tabs: 'profile_tabs' });
   },
 });
 

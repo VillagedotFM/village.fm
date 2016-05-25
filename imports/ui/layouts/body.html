@@ -7,8 +7,9 @@
       {{> header}}
 
       <div class="main">
+        {{> Template.dynamic template=profile}}
         {{> sidebar}}
-        <div class="container hidden-mobile">
+        <div class="container hidden-mobile container{{profilePadding}}">
             {{> content}}
         </div>
       </div>
