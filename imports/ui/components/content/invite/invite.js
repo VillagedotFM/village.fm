@@ -10,8 +10,8 @@ Template.invite.helpers({
 Template.invite.events({
   "click .send-to-friend__input": function(event, template){
     event.stopPropagation();
-    var id = $('.send-to-friend__input').data('id');
-    var list = $('.send-to-friend__list[data-id="' + id +'"]');
+    let id = $('.send-to-friend__input').data('id');
+    let list = $('.send-to-friend__list[data-id="' + id +'"]');
     list.show();
   },
   "click .send-to-friend__list": function(event, template){
