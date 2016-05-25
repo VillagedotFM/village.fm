@@ -1,0 +1,20 @@
+{
+  "public": {
+    "facebook": {
+      "appId": "539273626227993",
+      "secret": "036d9d5fb731c9c2b399cf62c24e1d0e"
+    },
+    "ga": {
+      "account" : "UA-75366500-1",
+      "cookieName": "ga_cookie",
+      "cookieDomain": "auto",
+      "cookieExpires": 63072000
+    },
+    "youtube": {
+      "key": "AIzaSyCCuSn70iUMGZGtZ4NfRQeon_M4-QofFzA"
+    },
+    "analyticsSettings": {
+      "Mixpanel": { "token": "19e98e02856c3c5a6dee92088fdcd7f3", "people": true }
+    }
+  }
+}
