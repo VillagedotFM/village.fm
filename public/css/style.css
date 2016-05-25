@@ -2350,6 +2350,11 @@ input, textarea {
 /***** /now-playing *****/
 
 /***** sign-up *****/
+a.signUpBtn {
+  font-size: 12px;
+  padding: 10px 20px;
+  padding-bottom: 5px;
+}
 .sign-up {
     width: 420px;
     max-width: 90%;
@@ -2386,6 +2391,10 @@ input, textarea {
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
+    cursor: pointer;
+}
+.profile-dropdown__logout {
+  cursor: pointer;
 }
 .sign-up__button i {
     font-size: 20px;
@@ -2393,4 +2402,3 @@ input, textarea {
     float: left;
 }
 /***** /sign-up *****/
-

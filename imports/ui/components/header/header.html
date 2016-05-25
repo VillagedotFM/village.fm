@@ -5,8 +5,15 @@
           <a href="index.html" class="header__logo hidden-mobile"></a>
           <a href="index.html" class="header__logo-mobile"></a>
           <div class="header__right-block">
+            {{#if currentUser}}
               {{> notifications}}
               {{> header_profile}}
+            {{else}}
+              <a class="sign-up__button signUpBtn">
+                  <i class="fa fa-facebook"></i>
+                  <span>Sign up with facebook</span>
+              </a>
+            {{/if}}
           </div>
       </div>
   </header>
