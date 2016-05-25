@@ -1,13 +1,13 @@
 <template name='tabs'>
   <div class="sr-top clearfix">
-      <div class="sr-top__item">
-          <h4 class="sr-top__item-title">Week</h4>
+      <div data-time='day' class="sr-top__item timeFilter {{activeTime 'day'}}">
+          <h4 data-time='day' class="sr-top__item-title">Day</h4>
       </div>
-      <div class="sr-top__item active">
-          <h4 class="sr-top__item-title">Month</h4>
+      <div data-time='week' class="sr-top__item timeFilter {{activeTime 'week'}}">
+          <h4 data-time='week' class="sr-top__item-title">Week</h4>
       </div>
-      <div class="sr-top__item">
-          <h4 class="sr-top__item-title">Year</h4>
+      <div data-time='year' class="sr-top__item timeFilter {{activeTime 'year'}}">
+          <h4 data-time='year' class="sr-top__item-title">Year</h4>
       </div>
   </div>
 </template>
