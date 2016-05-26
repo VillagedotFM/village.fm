@@ -25,6 +25,13 @@ Template.bottom_player.helpers({
     minutes = moment.duration(completed, 'seconds')._data.minutes;
 
     return (minutes + ':' + seconds);
+  },
+  completedPercentage: function() {
+    let completed = appBodyRef.completed.get();
+    let duration = '00:' + this.duration;
+    let completedPercentage = ''+(moment.duration(completed, 'seconds').asSeconds())/(moment.duration(duration, "mm:ss").asSeconds());
+    console.log((completedPercentage.substring(0,5) * 100)+'%');
+    return (completedPercentage.substring(0,5) * 100)+'%';
   }
 });
 

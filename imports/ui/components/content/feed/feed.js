@@ -42,7 +42,7 @@ Template.feed.onRendered(function feedOnRendered() {
             setInterval(function(){ //Track video progress for scrubber
               var completed = yt.player.getCurrentTime();
               appBodyRef.completed.set(completed)
-            }, 1000);
+            }, 100);
           });
         }
       }
