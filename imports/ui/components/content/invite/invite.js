@@ -11,11 +11,12 @@ Template.invite.helpers({
     return Villages.findOne({}, {fields: {users: 1}, limit: 8}).users;
   },
   dottedUsers() {
-    return Villages.findOne({}, {fields: {users: 1}, skip: 8}).users;
+    return Villages.findOne({}, {fields: {users: 1}, skip: 8}).users; //Dropdown on hover of circle with ellipsis
   }
 });
 
 Template.invite.events({
+  //TODO: instead of show, use a reactive-var to render
   "click .send-to-friend__input": function(event, template){
     event.stopPropagation();
     let id = $('.send-to-friend__input').data('id');

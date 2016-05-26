@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Posts } from './posts.js';
 
-
+//TODO: this stops video
 Meteor.methods({
   upvotePost:function(postId){
 

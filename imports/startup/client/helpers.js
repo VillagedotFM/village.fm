@@ -1,15 +1,19 @@
 Meteor.subscribe("users.allData");
 
-UI.registerHelper("getNowPlaying", function (userId) {
+UI.registerHelper("getNowPlaying", function () {
   if (appBodyRef.nowPlaying.get()) {
     return appBodyRef.nowPlaying.get();
   }
 });
 
-UI.registerHelper("videoPlaying", function (userId) {
+UI.registerHelper("videoPlaying", function () {
   if (appBodyRef.nowPlaying.get()) {
-    return appBodyRef.state.get() === 1 ? true : false;
+    return appBodyRef.state.get() === 1 ? true : false;   //1 is 'Playing'
   }
+});
+
+UI.registerHelper("videoReady", function () {
+  return appBodyRef.videoReady.get();
 });
 
 UI.registerHelper("getUserImage", function (userId) {

@@ -29,6 +29,8 @@ let getTypeAndId = (link) => {
   } else {
     console.log('on to test for soundcloud');
     //TODO: Add a check for soundcloud links
+
+    //Disable for now (because not yt)
     $('.linkUpload').submit(false);
     $('.postLinkBtn').prop('disabled', true);
     return null;
@@ -36,6 +38,7 @@ let getTypeAndId = (link) => {
 };
 
 let resetForm = () => {
+  //TODO: use reactive-var instead to hide uploaded-item
   $('.uploaded-item').hide();
   $("input[name=post-link]").val('');
   $('input[name=post-link]').prop('disabled', false);
@@ -44,9 +47,12 @@ let resetForm = () => {
 
 
 Template.upload.onCreated(function uploadOnCreated() {
-  this.notFound = new ReactiveVar(false);
-  this.duplicate = new ReactiveVar(null);
-  this.postSuccess = new ReactiveVar(null);
+  uploadRef = this;
+
+  //TODO: use these
+  uploadRef.notFound = new ReactiveVar(false);
+  uploadRef.duplicate = new ReactiveVar(null);
+  uploadRef.postSuccess = new ReactiveVar(null);
 });
 
 Template.upload.helpers({
@@ -69,6 +75,7 @@ Template.upload.events({
   "submit .linkUpload"(event, instance) {
     event.preventDefault();
 
+    //Don't allow user to change link after submitted
     $('input[name=post-link]').prop('disabled', true);
     let link = $("input[name=post-link]").val();
     $('.postLinkBtn').prop('disabled', true);
@@ -85,7 +92,7 @@ Template.upload.events({
       if (error) {
         console.log(error);
       } else {
-        if(data.data.items[0]) {
+        if(data.data.items[0]) {  //Grab entire title Artist - Title and remove extra shit
           var ytArtistTitle = data.data.items[0].snippet.title
           .replace(/\s*\[[^\]]+\]$/, '') // [whatever] at the end
           .replace(/^\s*\[[^\]]+\]\s*/, '') // [whatever] at the start
@@ -158,13 +165,17 @@ Template.upload.events({
         resetForm();
         return;
       } else {
+        //Set auto values in form
         $('.uploadedThumbnail').prop("src", thumbnail);
         $('input[name=post-author]').val(artist);
         $('input[name=post-name]').val(title);
 
+        //TODO: reactive-var
         $('.uploaded-item').show();
+
         $('input[name=post-author]').focus();
 
+        //Allow submit if artist and title have vaules, else disable submit
         if ($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
           $('.postUploadBtn').prop('disabled', false);
         } else {
@@ -175,6 +186,7 @@ Template.upload.events({
     });
   },
   'keyup input[name=post-author], keyup input[name=post-name]'(event, instance) {
+    //Check is artist and title have vaule, if not -> disable submit and display red error
     if($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
       $('.postUploadBtn').prop('disabled', false);
       $(event.target).removeClass('formError');
@@ -191,6 +203,8 @@ Template.upload.events({
   'submit .postUpload'(event, instance) {
     event.preventDefault();
     let id = $("input[name=post-link]").data('vidId');
+
+    //Grab duration, insert post
     HTTP.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id="+id+"&key="+ytApiKey, function(error, data) {
       if (error) {
         console.log(error);
@@ -214,6 +228,7 @@ Template.upload.events({
             duration: duration
           }
 
+          //TODO: make method
           Posts.insert(post, function(error, result){
             if(!error)
               resetForm();

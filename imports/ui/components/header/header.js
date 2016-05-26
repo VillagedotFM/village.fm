@@ -9,6 +9,7 @@ Template.header.helpers({
 });
 
 Template.header.events({
+  //TODO: instead of hide, use reactive-var
   "click .signUpBtn": function(event, template){
     Meteor.loginWithFacebook({}, function(err){
       if (err) {

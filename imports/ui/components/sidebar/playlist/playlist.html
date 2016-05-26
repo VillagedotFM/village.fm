@@ -97,7 +97,11 @@
                 <div class="sr-playlist__right">
                     <span class="sr-playlist__spinner hidden"></span>
                     <span class="sr-playlist__time">{{duration}}</span>
-                    <span class="sr-playlist__play {{playOrPause}}"></span>
+                    {{#if videoReady}}
+                      <span class="sr-playlist__play {{playOrPause}}"></span>
+                    {{else}}
+                      <span class="sr-playlist__spinner display"></span>
+                    {{/if}}
                 </div>
                 <div class="sr-playlist__middle">
                     <span class="sr-playlist__title">

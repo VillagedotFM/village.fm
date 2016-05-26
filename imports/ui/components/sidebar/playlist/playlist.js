@@ -7,13 +7,14 @@ import './playlist.html';
 Template.playlist.helpers({
   posts: function(){
 
+    //TODO: set order
     //Check if profile
     let id = FlowRouter.getParam('_id');
     var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
 
     if (user) {
       var posts;
-      let profileTab = Session.get('profileTab');
+      let profileTab = appBodyRef.profileTab.get();
       if (profileTab === 'mutual')
         posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}});
       else if (profileTab === 'upvotes')
@@ -24,7 +25,8 @@ Template.playlist.helpers({
       return posts;
     }
 
-    let time = Session.get('timeFilter');
+    //Time filters
+    let time = appBodyRef.timeFilter.get();
 
     let date = new Date();
     let time_filter = new Date();
