@@ -1,6 +1,3 @@
-<!-- scroll arrow <li class="sr-playlist__item sr-playlist__item--active"> -->
-<!-- loading spinner <span class="sr-playlist__spinner display"></span> -->
-<!-- now playing equalizer <span class="sr-playlist__equalizer"></span> -->
 <template name='playlist'>
   <div class="sr-playlist sr-playlist{{profilePadding}}">
       <ul class="sr-playlist__list bg-color-playlist">
@@ -86,7 +83,7 @@
               </div>
           </li>
           {{#each posts}}
-            <li class="sr-playlist__item">
+            <li class="sr-playlist__item {{showArrow}}">
                 <div class="sr-playlist__left">
                     <div class="upvote-block {{isUpvoted}}">
                         <i class="fa fa-caret-up upvote-block__arrow"></i>
@@ -96,7 +93,11 @@
                 <div class="sr-playlist__right-btn"></div>
                 <div class="sr-playlist__right">
                     <span class="sr-playlist__spinner hidden"></span>
-                    <span class="sr-playlist__time">{{duration}}</span>
+                    {{#if showEqualizer}}
+                      <span class="sr-playlist__equalizer"></span>
+                    {{else}}
+                      <span class="sr-playlist__time">{{duration}}</span>
+                    {{/if}}
                     {{#if videoReady}}
                       <span class="sr-playlist__play {{playOrPause}}"></span>
                     {{else}}

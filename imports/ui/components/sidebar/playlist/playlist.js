@@ -49,6 +49,22 @@ Template.playlist.helpers({
   playOrPause() {
     let state = appBodyRef.state.get();
     return state === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+  },
+  showEqualizer: function() {
+    //if this song is the current post AND it's playing, show equalizer and hide duration
+    if (appBodyRef.nowPlaying.get()) {
+      return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
+    } else {
+      return false;
+    }
+  },
+  showArrow: function() {
+    //TODO: show arrow on scrolled post not now playing
+    if (appBodyRef.nowPlaying.get()) {
+      return this._id === appBodyRef.nowPlaying.get()._id ? 'sr-playlist__item--active' : '';
+    } else {
+      return '';
+    }
   }
 });
 
