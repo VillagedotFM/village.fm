@@ -7,14 +7,58 @@ yt = new YTPlayer('ytplayer', {
   width: '479px'
 });
 
+Template.feed.onCreated(function feedOnCreated() {
+  this.videoReady = new ReactiveVar(false);
+});
+
+Template.feed.onRendered(function feedOnRendered() {
+  const feedRef = this;
+
+  feedRef.autorun(function () {
+    if (appBodyRef.postOrder.get().length > 0) {
+      let orderedPosts = appBodyRef.postOrder.get();
+
+      //TODO: refactor after soundcloud
+      if (orderedPosts[0].type === 'youtube') { //if first post is youtube video
+        let yt_id = orderedPosts[0].vidId;
+        if (yt.ready()) {
+          feedRef.videoReady.set(true);
+          yt.player.cueVideoById(yt_id);
+
+          yt.player.addEventListener('onStateChange', function (event) {
+            if(event.data === 0){
+              console.log('ENDED');
+            } else if(event.data === 1){
+              console.log('PLAYING');
+              appBodyRef.nowPlaying.set(orderedPosts[0]);
+            } else if(event.data === 2){
+              console.log('PAUSED');
+            }
+
+            let state = event.data;
+            appBodyRef.state.set(state);
+
+            //TODO: move getCurrentTime to helper?
+            setInterval(function(){ //Track video progress for scrubber
+              var completed = yt.player.getCurrentTime();
+              appBodyRef.completed.set(completed)
+            }, 1000);
+          });
+        }
+      }
+    }
+  });
+});
+
+
 Template.feed.helpers({
   posts() {
     //Check if profile
     let id = FlowRouter.getParam('_id');
     var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
+    var posts;
 
     if (user) {
-      var posts;
       let profileTab = Session.get('profileTab');
       if (profileTab === 'mutual')
         posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}});
@@ -22,23 +66,27 @@ Template.feed.helpers({
         posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}});
       else if (profileTab === 'posts')
         posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}});
+    } else {  //Time Filters
+      let time = Session.get('timeFilter');
 
-      return posts;
-    }
+      let date = new Date();
+      let time_filter = new Date();
 
-    let time = Session.get('timeFilter');
-
-    let date = new Date();
-    let time_filter = new Date();
-
-    if (time === 'day')
+      if (time === 'day')
       time_filter.setDate(date.getDate()-1);
-    else if (time === 'week')
+      else if (time === 'week')
       time_filter.setDate(date.getDate()-7);
-    else if (time === 'year')
+      else if (time === 'year')
       time_filter.setDate(date.getDate()-365);
 
-    return Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
+      posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
+    }
+
+    //TODO: Refactor when playlist order is fixed
+    if (posts) {
+      appBodyRef.postOrder.set(posts.fetch());
+      return posts;
+    }
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -56,13 +104,15 @@ Template.feed.helpers({
     if (this.upvotedBy.length > 3) {
       return ' and ' + (this.upvotedBy.length - 3) + ' others';
     }
-  }
+  },
+  videoReady: function() {
+    return Template.instance().videoReady.get();
+  },
 });
 
 Template.feed.events({
   "click .post__comments": function(event, template){
     let id = $('.post__comments').data('id');
-    console.log(id);
     let comment = $('.comments-block[data-id="' + id +'"]');
     let send = $('.send-to-friend[data-id="' + id +'"]');
 
@@ -96,14 +146,7 @@ Template.feed.events({
     }
   },
   "click .post__video-play": function(event, template){
-    if (appBodyRef.nowPlaying.get()) {
-      if (this !== appBodyRef.nowPlaying.get()) {
-        appBodyRef.nowPlaying.set(this);
-      } else {
-        //Play
-      }
-    } else {
-      appBodyRef.nowPlaying.set(this);
-    }
+    //TODO: find which video to play
+    yt.player.playVideo();
   }
 });

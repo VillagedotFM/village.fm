@@ -44,6 +44,10 @@ Template.playlist.helpers({
     else
       return '';
   },
+  playOrPause() {
+    let state = appBodyRef.state.get();
+    return state === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+  }
 });
 
 
@@ -62,15 +66,12 @@ Template.playlist.events({
       alert('Please login to upvote posts!');
     }
   },
-  "click .sr-playlist__play": function(event, template){
-    if (appBodyRef.nowPlaying.get()) {
-      if (this !== appBodyRef.nowPlaying.get()) {
-        appBodyRef.nowPlaying.set(this);
-      } else {
-        //Play
-      }
-    } else {
-      appBodyRef.nowPlaying.set(this);
-    }
+  "click .sr-playlist__play--play": function(event, template){
+    //TODO: find which video to play
+    yt.player.playVideo();
+  },
+  "click .sr-playlist__play--paused": function(event, template){
+    //TODO: find which video to pause
+    yt.player.pauseVideo();
   }
 });

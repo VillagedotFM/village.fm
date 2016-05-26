@@ -13,6 +13,18 @@ Template.bottom_player.helpers({
     if (nowPlayingPost) {
       return Posts.findOne({_id:nowPlayingPost._id});
     }
+  },
+  completed: function() {
+    let completed = appBodyRef.completed.get();
+    var minutes, seconds;
+    if (('' + moment.duration(completed, 'seconds')._data.seconds).length === 1) {
+      seconds = '0' + moment.duration(completed, 'seconds')._data.seconds;
+    } else {
+      seconds = moment.duration(completed, 'seconds')._data.seconds;
+    }
+    minutes = moment.duration(completed, 'seconds')._data.minutes;
+
+    return (minutes + ':' + seconds);
   }
 });
 

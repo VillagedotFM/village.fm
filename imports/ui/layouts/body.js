@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
+import  moment  from 'moment';
 
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
@@ -25,6 +26,9 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef = this;
   appBodyRef.nowPlaying = new ReactiveVar(null);
+  appBodyRef.postOrder = new ReactiveVar(false);
+  appBodyRef.state = new ReactiveVar(-1);
+  appBodyRef.completed = new ReactiveVar("0:00");
 });
 
 Template.app_body.onRendered(function() {

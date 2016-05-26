@@ -57,7 +57,14 @@
               <div class="post__video-wrapper">
                   <div class="post__video" style="background-image: url({{thumbnail}})">
                     {{> YTPlayer name='ytplayer'}}
-                    <button class="post__video-play"></button>
+
+                    {{#if videoReady}}
+                      {{#unless videoPlaying}}
+                        <button class="post__video-play"></button>
+                      {{/unless}}
+                    {{else}}
+                      {{> spinner}}
+                    {{/if}}
                   </div>
                   <h3 class="post__video-title">
                     {{#if description}}
