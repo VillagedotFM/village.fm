@@ -8,7 +8,8 @@ UI.registerHelper("getNowPlaying", function () {
 
 UI.registerHelper("videoPlaying", function () {
   if (appBodyRef.nowPlaying.get()) {
-    return appBodyRef.state.get() === 1 ? true : false;   //1 is 'Playing'
+    let playing = (appBodyRef.state.get() === 1); //1 is Playing
+    return playing ? true : false;
   }
 });
 
