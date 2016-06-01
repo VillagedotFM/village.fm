@@ -1,8 +1,20 @@
 Meteor.subscribe("users.allData");
 
-UI.registerHelper("getNowPlaying", function (userId) {
-  console.log(appBodyRef.nowPlaying.get());
-  return appBodyRef.nowPlaying.get();
+UI.registerHelper("getNowPlaying", function () {
+  if (appBodyRef.nowPlaying.get()) {
+    return appBodyRef.nowPlaying.get();
+  }
+});
+
+UI.registerHelper("videoPlaying", function () {
+  if (appBodyRef.nowPlaying.get()) {
+    let playing = (appBodyRef.state.get() === 1); //1 is Playing
+    return playing ? true : false;
+  }
+});
+
+UI.registerHelper("videoReady", function () {
+  return appBodyRef.videoReady.get();
 });
 
 UI.registerHelper("getUserImage", function (userId) {
@@ -77,29 +89,29 @@ UI.registerHelper("getUserUpvoteRank", function (userId) {
   }
 });
 
-UI.registerHelper("getNumberEnd", function (num) {
-  let numString = num.toString();
-  let last = numString[(numString.length - 1)];
-  switch (last) {
-    case '1':
-      return 'st'
-      break;
-    case '2':
-      return 'nd'
-      break;
-    case '3':
-      return 'rd'
-      break;
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-    case '0':
-      return 'th'
-      break;
-    default:
-      return ''
-  }
-});
+// UI.registerHelper("getNumberEnd", function (num) {
+//   let numString = num.toString();
+//   let last = numString[(numString.length - 1)];
+//   switch (last) {
+//     case '1':
+//       return 'st'
+//       break;
+//     case '2':
+//       return 'nd'
+//       break;
+//     case '3':
+//       return 'rd'
+//       break;
+//     case '4':
+//     case '5':
+//     case '6':
+//     case '7':
+//     case '8':
+//     case '9':
+//     case '0':
+//       return 'th'
+//       break;
+//     default:
+//       return ''
+//   }
+// });

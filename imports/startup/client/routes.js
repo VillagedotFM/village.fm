@@ -5,12 +5,12 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/body.js';
 import '../../ui/components/profile/profile.js';
 
-// profile, tabs (tabs/profile_tabs), inbox
+// options: profile, tabs (tabs/profile_tabs), inbox
 
-FlowRouter.route('/post/:_id', {
+FlowRouter.route('/post/:_id', {  //Permalink
   name: 'Post',
   action() {
-    // BlazeLayout.render('App_body', { main: 'Lists_show_page' });
+    //TODO: render single post (in what village?)
   },
 });
 
@@ -30,6 +30,6 @@ FlowRouter.route('/:_id', {
 
 FlowRouter.notFound = {
   action() {
-    // BlazeLayout.render('App_body', { main: 'App_notFound' });
+    //TODO: add template for not found
   },
 };

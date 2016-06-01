@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Posts = new Mongo.Collection('posts');
 
+//TODO: Remove Allow's and uncomment Deny's + add methods for post insert
 // Posts.deny({
 //   insert() { return true; },
 //   update() { return true; },

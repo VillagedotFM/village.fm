@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Villages = new Mongo.Collection('villages');
 
-
+//TODO: Remove Allow's and uncomment Deny's + add methods for village insert (for v0.3?)
 // Villages.deny({
 //   insert() { return true; },
 //   update() { return true; },

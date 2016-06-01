@@ -2,7 +2,11 @@
   <div class="sr-controls hidden-mobile">
       <div class="sr-controls__inner">
           <span class="sr-controls__prev"></span>
-          <span class="sr-controls__play sr-controls__play--play"></span>
+          {{#if videoReady}}
+            <span class="sr-controls__play {{playOrPause}}"></span>
+          {{else}}
+            <span class="sr-controls__play sr-playlist__spinner display"></span>
+          {{/if}}
           <span class="sr-controls__next"></span>
       </div>
   </div>
