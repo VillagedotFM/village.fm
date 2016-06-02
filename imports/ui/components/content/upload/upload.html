@@ -10,30 +10,30 @@
           </div>
       </div>
     </form>
-      <div class="uploaded-item hidden clearfix">
-          <form class="postUpload">
-              <div class="uploaded-item__img-wrap">
-                  <div class="uploaded-item__img-background">
-                      <img src="images/uploaded-img.png" class="uploadedThumbnail" alt="">
-                  </div>
-              </div>
-              <div class="uploaded-item__descr clearfix">
-                  <div class="uploaded-item__input-wrap">
-                      <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
-                  </div>
-                  <div class="uploaded-item__input-wrap">
-                      <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
-                  </div>
-                  <div class="uploaded-item__textarea-wrap">
-                      <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
-                      <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
-                  </div>
-              </div>
-              <div class="uploaded-item__btns">
-                  <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
-                  <button type="submit" name="post" class="btn postUploadBtn">Post</button>
-              </div>
-          </form>
-      </div>
+    <div class="uploaded-item {{showUploadForm}} clearfix">
+        <form class="postUpload">
+            <div class="uploaded-item__img-wrap">
+                <div class="uploaded-item__img-background">
+                    <img src="images/uploaded-img.png" class="uploadedThumbnail" alt="">
+                </div>
+            </div>
+            <div class="uploaded-item__descr clearfix">
+                <div class="uploaded-item__input-wrap">
+                    <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
+                </div>
+                <div class="uploaded-item__input-wrap">
+                    <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
+                </div>
+                <div class="uploaded-item__textarea-wrap">
+                    <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
+                    <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
+                </div>
+            </div>
+            <div class="uploaded-item__btns">
+                <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
+                <button type="submit" name="post" class="btn postUploadBtn">Post</button>
+            </div>
+        </form>
+    </div>
   </div>
 </template>

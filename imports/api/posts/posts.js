@@ -59,14 +59,14 @@ Posts.schema = new SimpleSchema({
   {
     type: String,
     label: "Artist",         //User Entered or Autotitle parser
-    max: 50
+    max: 100
   },
 
   title:
   {
     type: String,
     label: "Title",          //User Entered or Autotitle parser
-    max: 50
+    max: 100
   },
 
   description:
