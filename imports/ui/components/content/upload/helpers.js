@@ -11,6 +11,9 @@ Template.upload.helpers({
   postError() {
     return Template.instance().postError.get();
   },
+  showForm() {
+    return Template.instance().showForm.get();
+  },
   uploadedThumbnail() {
     return Template.instance().uploadedThumbnail.get();
   },

@@ -16,6 +16,7 @@ Template.upload.onCreated(function uploadOnCreated() {
   uploadRef.postError = new ReactiveVar(false);
 
   uploadRef.missingData = new ReactiveVar(false);
+  uploadRef.showForm = new ReactiveVar(false);
 
   //Reactive elements to display in form after link is submitted
   uploadRef.uploadedThumbnail = new ReactiveVar(null);

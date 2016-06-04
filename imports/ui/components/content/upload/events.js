@@ -1,10 +1,9 @@
 let resetForm = () => {
-  //TODO: use reactive-var instead to hide uploaded-item 1
-  $('.uploaded-item').hide();
-
   $("input[name=post-link]").val('');
   $('input[name=post-link]').prop('disabled', false);
   $('.postLinkBtn').prop('disabled', true);
+
+  uploadRef.showForm.set(false);
 };
 
 
@@ -35,7 +34,7 @@ Template.upload.events({
 
     if (uploadRef.missingData.get()) //Don't allow submit
       return;
-      
+
     //Don't allow user to change link after submitted
     $('input[name=post-link]').prop('disabled', true);
     let link = $("input[name=post-link]").val();
@@ -76,8 +75,7 @@ Template.upload.events({
           uploadRef.uploadedArtist.set(data.artist);
           uploadRef.uploadedTitle.set(data.title);
 
-          //TODO: reactive-var 1
-          $('.uploaded-item').show();
+          uploadRef.showForm.set(true);
 
           $('input[name=post-author]').focus();
         }
@@ -99,7 +97,7 @@ Template.upload.events({
   "click .uploaded-item__cancel"(event, instance) {
     resetForm();
   },
-  //TODO: Tagged users, tags, related, genre (SC only) 4
+  //TODO: Tagged users, tags, related, genre (SC only)
   'submit .postUpload'(event, instance) {
     event.preventDefault();
 
