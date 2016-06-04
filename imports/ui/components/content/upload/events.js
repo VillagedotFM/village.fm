@@ -17,7 +17,7 @@ Template.upload.events({
         console.log(error);
       } else if(data) {
         //Allow link to be submitted
-        $('.linkUpload').submit(true);
+        uploadRef.missingData.set(false);
         $('.postLinkBtn').prop('disabled', false);
 
         //Add attributes to input
@@ -25,7 +25,7 @@ Template.upload.events({
         $("input[name=post-link]").data('vidId', data.vidId);
       } else {
         //Don't allow link to be submitted
-        $('.linkUpload').submit(false);
+        uploadRef.missingData.set(true);
         $('.postLinkBtn').prop('disabled', true);
       }
     });
@@ -33,6 +33,9 @@ Template.upload.events({
   "submit .linkUpload"(event, instance) {
     event.preventDefault();
 
+    if (uploadRef.missingData.get()) //Don't allow submit
+      return;
+      
     //Don't allow user to change link after submitted
     $('input[name=post-link]').prop('disabled', true);
     let link = $("input[name=post-link]").val();
@@ -68,24 +71,15 @@ Template.upload.events({
           resetForm();
           return;
         } else {
-          //TODO: make reactive-var helpers 2
           //Set auto values in form
-          $('.uploadedThumbnail').prop("src", thumbnail);
-          $('input[name=post-author]').val(data.artist);
-          $('input[name=post-name]').val(data.title);
+          uploadRef.uploadedThumbnail.set(thumbnail);
+          uploadRef.uploadedArtist.set(data.artist);
+          uploadRef.uploadedTitle.set(data.title);
 
           //TODO: reactive-var 1
           $('.uploaded-item').show();
 
           $('input[name=post-author]').focus();
-
-          //Allow submit if artist and title have vaules, else disable submit
-          if ($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
-            $('.postUploadBtn').prop('disabled', false);
-          } else {
-            $('.postUploadBtn').prop('disabled', true);
-            $('.postUpload').submit(false);
-          }
         }
       }
     });
@@ -93,11 +87,12 @@ Template.upload.events({
   'keyup input[name=post-author], keyup input[name=post-name]'(event, instance) {
     //Check is artist and title have vaule, if not -> disable submit and display red error
     if($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
+      uploadRef.missingData.set(false);
       $('.postUploadBtn').prop('disabled', false);
       $(event.target).removeClass('formError');
     } else {
+      uploadRef.missingData.set(true);
       $('.postUploadBtn').prop('disabled', true);
-      $('.postUpload').submit(false);
       $(event.target).addClass('formError');
     }
   },
@@ -107,6 +102,9 @@ Template.upload.events({
   //TODO: Tagged users, tags, related, genre (SC only) 4
   'submit .postUpload'(event, instance) {
     event.preventDefault();
+
+    if (uploadRef.missingData.get()) //Don't allow submit
+      return;
 
     //Prepare data for insert
     let vidId = $("input[name=post-link]").data('vidId');

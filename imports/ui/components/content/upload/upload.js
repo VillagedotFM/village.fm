@@ -14,4 +14,11 @@ Template.upload.onCreated(function uploadOnCreated() {
   uploadRef.duplicate = new ReactiveVar(null);
   uploadRef.postSuccess = new ReactiveVar(null);
   uploadRef.postError = new ReactiveVar(false);
+
+  uploadRef.missingData = new ReactiveVar(false);
+
+  //Reactive elements to display in form after link is submitted
+  uploadRef.uploadedThumbnail = new ReactiveVar(null);
+  uploadRef.uploadedArtist = new ReactiveVar(null);
+  uploadRef.uploadedTitle = new ReactiveVar(null);
 });

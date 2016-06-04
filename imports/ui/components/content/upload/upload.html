@@ -14,15 +14,15 @@
         <form class="postUpload">
             <div class="uploaded-item__img-wrap">
                 <div class="uploaded-item__img-background">
-                    <img src="images/uploaded-img.png" class="uploadedThumbnail" alt="">
+                    <img src="{{uploadedThumbnail}}" class="uploadedThumbnail" alt="">
                 </div>
             </div>
             <div class="uploaded-item__descr clearfix">
                 <div class="uploaded-item__input-wrap">
-                    <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
+                    <input type="text" name="post-author" value="{{uploadedArtist}}" placeholder="enter Artist Name here...">
                 </div>
                 <div class="uploaded-item__input-wrap">
-                    <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
+                    <input type="text" name="post-name" value="{{uploadedTitle}}" placeholder="enter Song Name here...">
                 </div>
                 <div class="uploaded-item__textarea-wrap">
                     <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>

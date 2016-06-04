@@ -10,5 +10,14 @@ Template.upload.helpers({
   },
   postError() {
     return Template.instance().postError.get();
+  },
+  uploadedThumbnail() {
+    return Template.instance().uploadedThumbnail.get();
+  },
+  uploadedArtist() {
+    return Template.instance().uploadedArtist.get();
+  },
+  uploadedTitle() {
+    return Template.instance().uploadedTitle.get();
   }
 });
