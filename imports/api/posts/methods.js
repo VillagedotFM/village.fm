@@ -45,7 +45,7 @@ Meteor.methods({
         return null;
       }
     } else { //Not Youtube link
-      //TODO: Add a check for soundcloud links
+      //TODO: Add SC 3
       return null;
     }
   },
@@ -111,12 +111,36 @@ Meteor.methods({
         };
 
       } else {
-        //TODO: Handle reporting link not working
         return 'Song not found';
       }
 
     } else if (type === 'soundcloud') {
-      //TODO: add SC
+      //TODO: add SC 3
+    }
+  },
+  insertPostWithDuration:function(post){
+    //Grab duration, insert post
+    if (post.type === 'youtube') {
+      let result = HTTP.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id="+ post.vidId +"&key="+ Meteor.settings.public.youtube.key);
+      if(result.data.items[0]) {
+        //Take ISO duration and format to X:XX
+        let durationISO = result.data.items[0].contentDetails.duration;
+        let durationArray = durationISO.match(/(\d+)(?=[MHS])/ig)||[];
+        var durationFormatted = durationArray.map(function(item){
+            if(item.length<2) return '0'+item;
+            return item;
+        }).join(':');
+        let duration = durationFormatted[0] == '0' ? durationFormatted.substring(1,5) : durationFormatted;
+
+        post.duration = duration;
+
+        return Posts.insert(post);
+
+      } else {
+        return 'Couldn\'t insert post';
+      }
+    } else if (type === 'soundcloud') {
+      //TODO: add SC 3
     }
   }
 });

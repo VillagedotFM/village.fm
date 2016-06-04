@@ -97,8 +97,10 @@ Villages.schema = new SimpleSchema({
   createdBy: {
     type: String,
     autoValue: function() {
-      if( this.isInsert ) {
+      if( this.isInsert && this.userId) {
         return this.userId;
+      } else {
+        return '';
       }
     }
   }

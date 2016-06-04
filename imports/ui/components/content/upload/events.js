@@ -1,6 +1,7 @@
 let resetForm = () => {
-  //TODO: use reactive-var instead to hide uploaded-item
+  //TODO: use reactive-var instead to hide uploaded-item 1
   $('.uploaded-item').hide();
+
   $("input[name=post-link]").val('');
   $('input[name=post-link]').prop('disabled', false);
   $('.postLinkBtn').prop('disabled', true);
@@ -23,6 +24,7 @@ Template.upload.events({
         $("input[name=post-link]").data('type', data.type);
         $("input[name=post-link]").data('vidId', data.vidId);
       } else {
+        //Don't allow link to be submitted
         $('.linkUpload').submit(false);
         $('.postLinkBtn').prop('disabled', true);
       }
@@ -36,45 +38,55 @@ Template.upload.events({
     let link = $("input[name=post-link]").val();
     $('.postLinkBtn').prop('disabled', true);
 
+    //Grab attributes from input data
     let vidId = $("input[name=post-link]").data('vidId');
     let type = $("input[name=post-link]").data('type');
 
+    //Check for duplicates
+    var ids = Posts.find().fetch();
+    var duplicate = _.findWhere(ids, {vidId: vidId});
+    if(duplicate) {
+      //TODO: Handle displaying other post (NEED DESIGN)
+      alert('Someone already posted that song');
+      uploadRef.duplicate.set(duplicate);
+      resetForm();
+      return;
+    }
+
     let thumbnail = "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
 
+    //Grab formatted auto and title
     Meteor.call('getArtistAndTitle', vidId, type, function(error, data){
       if (error) {
         console.log(error);
       } else if (data) {
-        console.log(data);
 
-        //Check for duplicates
-        // var ids = Posts.find().fetch();
-        // var duplicate = _.findWhere(ids, {vidId: vidId});
-        // if(duplicate) {
-        //   //TODO: Handle displaying other post
-        //   alert('Someone already posted that song');
-        //   instance.duplicate.set(duplicate);
-        //   resetForm();
-        //   return;
-        // } else {
-        //   //Set auto values in form
-        //   $('.uploadedThumbnail').prop("src", thumbnail);
-        //   $('input[name=post-author]').val(artist);
-        //   $('input[name=post-name]').val(title);
-        //
-        //   //TODO: reactive-var
-        //   $('.uploaded-item').show();
-        //
-        //   $('input[name=post-author]').focus();
-        //
-        //   //Allow submit if artist and title have vaules, else disable submit
-        //   if ($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
-        //     $('.postUploadBtn').prop('disabled', false);
-        //   } else {
-        //     $('.postUploadBtn').prop('disabled', true);
-        //     $('.postUpload').submit(false);
-        //   }
-        // }
+        //TODO: Handle reporting link not working (NEED DESIGN)
+        if (data === 'Song not found') {
+          alert('Couldn\'t find that song, try another link');
+          uploadRef.notFound.set(true);
+          resetForm();
+          return;
+        } else {
+          //TODO: make reactive-var helpers 2
+          //Set auto values in form
+          $('.uploadedThumbnail').prop("src", thumbnail);
+          $('input[name=post-author]').val(data.artist);
+          $('input[name=post-name]').val(data.title);
+
+          //TODO: reactive-var 1
+          $('.uploaded-item').show();
+
+          $('input[name=post-author]').focus();
+
+          //Allow submit if artist and title have vaules, else disable submit
+          if ($('input[name=post-author]').val() !== '' && $('input[name=post-name]').val() !== '') {
+            $('.postUploadBtn').prop('disabled', false);
+          } else {
+            $('.postUploadBtn').prop('disabled', true);
+            $('.postUpload').submit(false);
+          }
+        }
       }
     });
   },
@@ -92,44 +104,45 @@ Template.upload.events({
   "click .uploaded-item__cancel"(event, instance) {
     resetForm();
   },
-  //TODO: Tagged users, tags, related, genre (SC only)
+  //TODO: Tagged users, tags, related, genre (SC only) 4
   'submit .postUpload'(event, instance) {
     event.preventDefault();
-    let id = $("input[name=post-link]").data('vidId');
-    console.log(id);
 
-    //Grab duration, insert post
-    HTTP.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id="+id+"&key="+ytApiKey, function(error, data) {
+    //Prepare data for insert
+    let vidId = $("input[name=post-link]").data('vidId');
+    let type = $("input[name=post-link]").data('type');
+
+    var villageId = Villages.findOne({})._id;
+
+    let post = {
+      villages: [villageId],
+      link: $("input[name=post-link]").val(),
+      vidId: vidId,
+      type: type,
+      thumbnail: "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg",
+      artist: $('input[name=post-author]').val(),
+      title: $('input[name=post-name]').val(),
+      description: $('textarea[name=post-caption]').val()
+    }
+
+
+    //Grab duration and insert post
+    Meteor.call('insertPostWithDuration', post, function(error, data){
       if (error) {
         console.log(error);
-      } else {
-        if(data.data.items[0]) {
-          let durationISO = data.data.items[0].contentDetails.duration;
-          let durationArray = durationISO.match(/(\d+)(?=[MHS])/ig)||[];
-          var durationFormatted = durationArray.map(function(item){
-              if(item.length<2) return '0'+item;
-              return item;
-          }).join(':');
-          let duration = durationFormatted[0] == '0' ? durationFormatted.substring(1,5) : durationFormatted;
-          let post = {
-            villages: ["M2Tgh3JRiu9p8FYb8"], //Hardcoded for testing, should default to main village for v0.2
-            link: $("input[name=post-link]").val(),
-            vidId: id,
-            thumbnail: "http://img.youtube.com/vi/" + id + "/hqdefault.jpg",
-            artist: $('input[name=post-author]').val(),
-            title: $('input[name=post-name]').val(),
-            description: $('textarea[name=post-caption]').val(),
-            duration: duration
-          }
+      } else if (data) {
 
-          //TODO: make method
-          Posts.insert(post, function(error, result){
-            if(error)
-              console.log(error);
-            else {
-              resetForm();
-            }
-          });
+        //TODO: Handle insert error (NEED DESIGN)
+        if (data === 'Couldn\'t insert post') {
+          alert('Couldn\'t post song, try again later');
+          uploadRef.postError.set(true);
+          resetForm();
+          return;
+        } else {
+          //TODO: Handle posting success (NEED DESIGN)
+          alert('Your post is in the Village!');
+          uploadRef.postSuccess.set(data); //_id of newly inserted song
+          resetForm();
         }
       }
     });

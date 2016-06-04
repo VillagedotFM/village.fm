@@ -8,4 +8,7 @@ Template.upload.helpers({
   postSuccess() {
     return Template.instance().postSuccess.get();
   },
+  postError() {
+    return Template.instance().postError.get();
+  }
 });
