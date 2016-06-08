@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
+import  moment  from 'moment';
 
 import { Posts } from './posts.js';
 
@@ -142,13 +143,14 @@ Meteor.methods({
 
         post.duration = duration;
 
-        return Posts.insert(post);
 
       } else {
         return 'Couldn\'t insert post';
       }
-    } else if (type === 'soundcloud') {
-      //TODO: add SC 3
+    } else if (post.type === 'soundcloud') {
+      let tempDuration = moment.duration(post.duration);  //Convert milliseconds to X:XX
+      post.duration = tempDuration.minutes() + ":" + tempDuration.seconds();
     }
+    return Posts.insert(post);
   }
 });
