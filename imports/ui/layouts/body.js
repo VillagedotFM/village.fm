@@ -6,6 +6,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import  moment  from 'moment';
+import SC from 'soundcloud';
 
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
@@ -17,6 +18,7 @@ import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
+
 
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
@@ -37,6 +39,10 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
+  SC.initialize({
+    client_id: Meteor.settings.public.soundcloud.client_id
+  });
+
   //TODO: use reactive-var instead of show/hide
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();

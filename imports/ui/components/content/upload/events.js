@@ -14,7 +14,18 @@ Template.upload.events({
     Meteor.call('getTypeAndId', potentialLink, function(error, data){
       if (error) {
         console.log(error);
-      } else if(data) {
+      } else if(data === 'soundcloud') {
+        //Soundcloud can only be used on client so grab the id here
+        SC.resolve(potentialLink).then(function(track){
+          //Allow link to be submitted
+          uploadRef.missingData.set(false);
+          $('.postLinkBtn').prop('disabled', false);
+
+          //Add attributes to input
+          $("input[name=post-link]").data('type', data);
+          $("input[name=post-link]").data('vidId', track.id);
+        });
+      }else if (data) {
         //Allow link to be submitted
         uploadRef.missingData.set(false);
         $('.postLinkBtn').prop('disabled', false);
@@ -43,7 +54,7 @@ Template.upload.events({
     //Grab attributes from input data
     let vidId = $("input[name=post-link]").data('vidId');
     let type = $("input[name=post-link]").data('type');
-
+    console.log(vidId + '  ' + type);
     //Check for duplicates
     var ids = Posts.find().fetch();
     var duplicate = _.findWhere(ids, {vidId: vidId});
@@ -55,10 +66,20 @@ Template.upload.events({
       return;
     }
 
-    let thumbnail = "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
+    var thumbnail;
+    var title = '';
+    if (type === 'youtube') {
+      thumbnail = "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
+    } else {
+      SC.resolve(link).then(function(track) {
+        thumbnail = track.artwork_url;
+        title = track.title;
+      });
+    }
 
     //Grab formatted auto and title
-    Meteor.call('getArtistAndTitle', vidId, type, function(error, data){
+    //Only pass in title if Soundcloud
+    Meteor.call('getArtistAndTitle', vidId, title, function(error, data){
       if (error) {
         console.log(error);
       } else if (data) {
@@ -115,7 +136,7 @@ Template.upload.events({
       link: $("input[name=post-link]").val(),
       vidId: vidId,
       type: type,
-      thumbnail: "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg",
+      thumbnail: $('.uploadedThumbnail').prop("src"),
       artist: $('input[name=post-author]').val(),
       title: $('input[name=post-name]').val(),
       description: $('textarea[name=post-caption]').val()
