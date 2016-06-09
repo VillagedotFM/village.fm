@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
+import  moment  from 'moment';
 
 import { Posts } from './posts.js';
 
@@ -45,78 +46,86 @@ Meteor.methods({
         return null;
       }
     } else { //Not Youtube link
-      //TODO: Add SC 3
-      return null;
+      //Check if Soundcloud link
+      const scRegex = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
+      let scMatch = link.match(scRegex);
+
+      if (scMatch) {
+        let type = 'soundcloud';
+        return type;
+      } else {
+        return null;
+      }
     }
   },
-  getArtistAndTitle:function(vidId, type){
+  getArtistAndTitle:function(vidId, title){
 
     //Grab entire video title and parse it into Artist and Song Title
-    if (type === 'youtube') {
+    if (title === '') { //Youtube video
       let result = HTTP.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + vidId + "&key=" + Meteor.settings.public.youtube.key);
 
       if(result.data.items[0]) {  //Grab entire title Artist - Title and remove extra shit
-        var ytArtistTitle = result.data.items[0].snippet.title
-        .replace(/\s*\[[^\]]+\]$/, '') // [whatever] at the end
-        .replace(/^\s*\[[^\]]+\]\s*/, '') // [whatever] at the start
-        .replace(/\s*\[\s*(M\/?V)\s*\]/, '') // [MV] or [M/V]
-        .replace(/\s*\(\s*(M\/?V)\s*\)/, '') // (MV) or (M/V)
-        .replace(/[\s\-–_]+(M\/?V)\s*/, '') // MV or M/V at the end
-        .replace(/(M\/?V)[\s\-–_]+/, '') // MV or M/V at the start
-        .replace(/\s*\([^\)]*\bver(\.|sion)?\s*\)$/i, '') // (whatever version)
-        .replace(/\s*[a-z]*\s*\bver(\.|sion)?$/i, '') // ver. and 1 word before (no parens)
-        .replace(/\s*(of+icial\s*)?(music\s*)?video/i, '') // (official)? (music)? video
-        .replace(/\s*(ALBUM TRACK\s*)?(album track\s*)/i, '') // (ALBUM TRACK)
-        .replace(/\s*\(\s*of+icial\s*\)/i, '') // (official)
-        .replace(/\s*\(\s*explicit\s*\)/i, '') // (explicit)
-        .replace(/\s*\(\s*[0-9]{4}\s*\)/i, '') // (1999)
-        .replace(/\s+\(\s*(HD|HQ)\s*\)$/, '') // HD (HQ)
-        .replace(/[\s\-–_]+(HD|HQ)\s*$/, ''); // HD (HQ)
-
-        var ytSplit = ytArtistTitle.split('-');
-        var autoArtist, autoTitle;
-
-        if (ytSplit[1]) { //If there is a dash in the title
-          if (ytSplit.length > 2) { //If there are multiple dashes, take everything left of 2nd as Artist
-            autoArtist = ytSplit[0].trim() + '-' + ytSplit[1].trim();
-            autoTitle = (ytSplit[2].trim())
-            .replace(/\s*\*+\s?\S+\s?\*+$/, '') // **NEW**
-            .replace(/\s*video\s*clip/i, '') // video clip
-            .replace(/\s+\(?live\)?$/i, '') // live
-            .replace(/\(\s*\)/, '') // Leftovers after e.g. (official video)
-            .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
-            .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
-          } else {  //If there is one dash, take every left as Artist
-            autoArtist = ytSplit[0].trim();
-            autoTitle = (ytSplit[1].trim())
-            .replace(/\s*\*+\s?\S+\s?\*+$/, '') // **NEW**
-            .replace(/\s*video\s*clip/i, '') // video clip
-            .replace(/\s+\(?live\)?$/i, '') // live
-            .replace(/\(\s*\)/, '') // Leftovers after e.g. (official video)
-            .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
-            .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
-          }
-        } else {  //No dashes, look for quotes
-          autoArtist = ytArtistTitle
-          .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$1') // Artist - The new "Track title" featuring someone
-          .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$1').trim(); // 'Track title'
-          autoTitle = ytArtistTitle
-          .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
-          .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
-        }
-
-        return {
-          artist : autoArtist,
-          title : autoTitle
-        };
-
+        title = result.data.items[0].snippet.title;
       } else {
         return 'Song not found';
       }
 
-    } else if (type === 'soundcloud') {
-      //TODO: add SC 3
     }
+
+    var artistAndTitle = title
+    .replace(/\s*\[[^\]]+\]$/, '') // [whatever] at the end
+    .replace(/^\s*\[[^\]]+\]\s*/, '') // [whatever] at the start
+    .replace(/\s*\[\s*(M\/?V)\s*\]/, '') // [MV] or [M/V]
+    .replace(/\s*\(\s*(M\/?V)\s*\)/, '') // (MV) or (M/V)
+    .replace(/[\s\-–_]+(M\/?V)\s*/, '') // MV or M/V at the end
+    .replace(/(M\/?V)[\s\-–_]+/, '') // MV or M/V at the start
+    .replace(/\s*\([^\)]*\bver(\.|sion)?\s*\)$/i, '') // (whatever version)
+    .replace(/\s*[a-z]*\s*\bver(\.|sion)?$/i, '') // ver. and 1 word before (no parens)
+    .replace(/\s*(of+icial\s*)?(music\s*)?video/i, '') // (official)? (music)? video
+    .replace(/\s*(ALBUM TRACK\s*)?(album track\s*)/i, '') // (ALBUM TRACK)
+    .replace(/\s*\(\s*of+icial\s*\)/i, '') // (official)
+    .replace(/\s*\(\s*explicit\s*\)/i, '') // (explicit)
+    .replace(/\s*\(\s*[0-9]{4}\s*\)/i, '') // (1999)
+    .replace(/\s+\(\s*(HD|HQ)\s*\)$/, '') // HD (HQ)
+    .replace(/[\s\-–_]+(HD|HQ)\s*$/, ''); // HD (HQ)
+
+    var split = artistAndTitle.split('-');
+    var autoArtist, autoTitle;
+
+    if (split[1]) { //If there is a dash in the title
+      if (split.length > 2) { //If there are multiple dashes, take everything left of 2nd as Artist
+        autoArtist = split[0].trim() + '-' + split[1].trim();
+        autoTitle = (split[2].trim())
+        .replace(/\s*\*+\s?\S+\s?\*+$/, '') // **NEW**
+        .replace(/\s*video\s*clip/i, '') // video clip
+        .replace(/\s+\(?live\)?$/i, '') // live
+        .replace(/\(\s*\)/, '') // Leftovers after e.g. (official video)
+        .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
+        .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
+      } else {  //If there is one dash, take every left as Artist
+        autoArtist = split[0].trim();
+        autoTitle = (split[1].trim())
+        .replace(/\s*\*+\s?\S+\s?\*+$/, '') // **NEW**
+        .replace(/\s*video\s*clip/i, '') // video clip
+        .replace(/\s+\(?live\)?$/i, '') // live
+        .replace(/\(\s*\)/, '') // Leftovers after e.g. (official video)
+        .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
+        .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
+      }
+    } else {  //No dashes, look for quotes
+      autoArtist = artistAndTitle
+      .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$1') // Artist - The new "Track title" featuring someone
+      .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$1').trim(); // 'Track title'
+      autoTitle = artistAndTitle
+      .replace(/^(|.*\s)"(.*)"(\s.*|)$/, '$2') // Artist - The new "Track title" featuring someone
+      .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
+    }
+
+    return {
+      artist : autoArtist,
+      title : autoTitle
+    };
+
   },
   insertPostWithDuration:function(post){
     //Grab duration, insert post
@@ -134,13 +143,14 @@ Meteor.methods({
 
         post.duration = duration;
 
-        return Posts.insert(post);
 
       } else {
         return 'Couldn\'t insert post';
       }
-    } else if (type === 'soundcloud') {
-      //TODO: add SC 3
+    } else if (post.type === 'soundcloud') {
+      let tempDuration = moment.duration(post.duration);  //Convert milliseconds to X:XX
+      post.duration = tempDuration.minutes() + ":" + tempDuration.seconds();
     }
+    return Posts.insert(post);
   }
 });
