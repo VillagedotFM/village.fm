@@ -1047,6 +1047,7 @@ input, textarea {
 }
 .uploaded-item__img-background img{
     width: 100%;
+    height: 100%;
 }
 .uploaded-item__descr {
     margin: 0 -3px 15px 130px;
