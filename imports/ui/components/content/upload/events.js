@@ -56,8 +56,13 @@ Template.upload.events({
     let type = $("input[name=post-link]").data('type');
 
     //Check for duplicates
-    var ids = Posts.find().fetch();
-    var duplicate = _.findWhere(ids, {vidId: vidId});
+    var posts = Posts.find().fetch();
+    _.each(posts, function(post) {
+      console.log(post.vidId)
+    });
+    var duplicate = _.find(posts, function(post) {
+      return post.vidId == vidId;
+    });
     if(duplicate) {
       //TODO: Handle displaying other post (NEED DESIGN)
       alert('Someone already posted that song');
