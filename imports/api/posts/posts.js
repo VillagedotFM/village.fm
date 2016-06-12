@@ -112,6 +112,17 @@ Posts.schema = new SimpleSchema({
     defaultValue: []
   },
 
+  ytplayer:                     //initialize ytplayer on insert
+  {
+    type: Object,
+    label: "YTPlayer",
+    autoValue: function() {
+      if( this.isInsert ) {
+        return new YTPlayer(this._id, {});
+      }
+    }
+  },
+
 
 
   upvotedBy:                //# of upvotes = upvotedBy.length

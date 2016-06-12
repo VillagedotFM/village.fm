@@ -1,25 +1,14 @@
 Meteor.subscribe("users.allData");
 
-UI.registerHelper("getNowPlaying", function () {
-  if (appBodyRef.nowPlaying.get()) {
-    return appBodyRef.nowPlaying.get();
-  }
-});
+window.yt;
 
-UI.registerHelper("videoPlaying", function () {
-  if (appBodyRef.nowPlaying.get()) {
-    let playing = (appBodyRef.state.get() === 1); //1 is Playing
-    return playing ? true : false;
-  }
-});
-
-UI.registerHelper("videoReady", function () {
-  return appBodyRef.videoReady.get();
+UI.registerHelper("videoReady", function (index) {
+  return (_.contains(appBodyRef.videosReady.list(), index));
 });
 
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
-    if(userId)
+    if(user)
       return user.profile.picture;
 });
 
@@ -55,7 +44,7 @@ UI.registerHelper("getUserVillagerNum", function (userId) {
     if (user) {
       return user.profile.villagerNum;
     } else {
-      return '';
+      return '100';
     }
 });
 
@@ -89,29 +78,29 @@ UI.registerHelper("getUserUpvoteRank", function (userId) {
   }
 });
 
-// UI.registerHelper("getNumberEnd", function (num) {
-//   let numString = num.toString();
-//   let last = numString[(numString.length - 1)];
-//   switch (last) {
-//     case '1':
-//       return 'st'
-//       break;
-//     case '2':
-//       return 'nd'
-//       break;
-//     case '3':
-//       return 'rd'
-//       break;
-//     case '4':
-//     case '5':
-//     case '6':
-//     case '7':
-//     case '8':
-//     case '9':
-//     case '0':
-//       return 'th'
-//       break;
-//     default:
-//       return ''
-//   }
-// });
+UI.registerHelper("getNumberEnd", function (num) {
+  let numString = num.toString();
+  let last = numString[(numString.length - 1)];
+  switch (last) {
+    case '1':
+      return 'st'
+      break;
+    case '2':
+      return 'nd'
+      break;
+    case '3':
+      return 'rd'
+      break;
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+    case '0':
+      return 'th'
+      break;
+    default:
+      return ''
+  }
+});

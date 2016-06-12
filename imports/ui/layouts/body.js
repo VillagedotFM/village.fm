@@ -29,15 +29,22 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Set up reactive-vars
   appBodyRef = this;
-  appBodyRef.nowPlaying = new ReactiveVar(null);
-  appBodyRef.videoReady = new ReactiveVar(false);
-  appBodyRef.postOrder = new ReactiveVar(false);
+  appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
+  appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
+  appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
+  appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)
+
+  appBodyRef.bottomHits = new ReactiveVar(0);       //Keep track of how many times a user scrolls to the bottom
+
+  //Tab states
   appBodyRef.timeFilter = new ReactiveVar('week');
   appBodyRef.profileTab = new ReactiveVar('upvotes');
-  appBodyRef.state = new ReactiveVar(-1);
-  appBodyRef.completed = new ReactiveVar("0:00");
+
+  appBodyRef.state = new ReactiveVar(-1);           //Current post state
+  appBodyRef.completed = new ReactiveVar("0:00");   //Duration completed for current song
+
+  //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
-  appBodyRef.bottomHits = new ReactiveVar(0); //Keep track of how many times a user scrolls to the bottom
 });
 
 Template.app_body.onRendered(function() {
@@ -51,10 +58,6 @@ Template.app_body.onRendered(function() {
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
 });
 
-
-Template.app_body.helpers({
-
-});
 
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide

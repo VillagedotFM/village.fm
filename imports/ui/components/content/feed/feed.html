@@ -10,7 +10,7 @@
                   <span>{{upvotedBy.length}}</span>
               </div>
               <div class="post__left-block color-secondary-text">
-                  2nd <br>
+                  {{rank @index}}{{getNumberEnd (rank @index)}} <br>
                   place
               </div>
               <div class="post__top clearfix">
@@ -56,17 +56,16 @@
               </div>
               <div class="post__video-wrapper">
                   <div class="post__video" style="background-image: url({{thumbnail}})">
-                    {{#if isYoutube type}}
-                      {{> YTPlayer name='ytplayer'}}
+                    {{#if isYoutube}}
+                      {{> YTPlayer name=getNextYTPlayer}}
                     {{else}}
-                      <iframe id="scplayer" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F1848538&show_artwork=true"
+                      <iframe id="scplayer-{{_id}}" src="https://w.soundcloud.com/player/?url={{link}}"
                       width="100%" height="270px" scrolling="no" frameborder="no"></iframe>
-                      <!-- <div id="scplayer"></div> -->
                     {{/if}}
 
-                    {{#if currentVideoReady}}
-                      {{#unless videoPlaying}}
-                        {{#if isYoutube type}}   <!-- Don't need to display button with SC widget -->
+                    {{#if videoReady @index}}
+                      {{#unless isPlaying}}
+                        {{#if isYoutube}}   <!-- Don't need to display button with SC widget -->
                           <button class="post__video-play"></button>
                         {{/if}}
                       {{/unless}}

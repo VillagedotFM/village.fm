@@ -52,12 +52,10 @@ Template.playlist.helpers({
       return false;
     }
   },
-  showArrow: function() {
-    //TODO: show arrow on scrolled post not now playing
-    if (appBodyRef.nowPlaying.get()) {
-      return this._id === appBodyRef.nowPlaying.get()._id ? 'sr-playlist__item--active' : '';
-    } else {
-      return '';
-    }
+  showSpinner: function() {
+    if(_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))
+      return 'display';
+    else
+      return 'hidden';
   }
 });

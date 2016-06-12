@@ -4,94 +4,134 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-//initialize youtube iframe with correct size
-yt = new YTPlayer('ytplayer', {
-  height: '270px',
-  width: '479px'
-});
+//initialize 50 youtube iframes here because I can't set them programmatically anywhere so fuck it
+for(var i = 0; i < 50; i++) {
+  let name = 'yt'+i;  //yt0 - yt49
+  window[name] = new YTPlayer(name, {});
+}
+
+//Grab the next open iframe (initialized on line 8)
+//If all 50 are populated, grab the smallest one that isn't playing
+window.getNextYTPlayer = function() {
+  for(var i = 0; i < 50; i++) {
+    let name = 'yt'+i;  //yt0 - yt49
+    //Make sure the iframe is empty
+    if (window[name].player) {
+      if (i === 49) {
+        return 'full'; //findNonPlayingYTPlayer()
+      }
+      continue;
+    } else {
+      return {
+        ytplayer: window[name],
+        id: name
+      }
+    }
+  }
+}
 
 
 Template.feed.onRendered(function feedOnRendered() {
   const feedRef = this;
 
+  //Set Pagination (sort of):
+  //Start by displaying 5 posts, then add 5 everytime the user scrolls to the bottom
+  //of the page until there are none left
   feedRef.autorun(function () {
-    if (appBodyRef.postOrder.get().fetch().length > 0) {  //if playlist has posts
-      let orderedPosts = appBodyRef.postOrder.get().fetch();
-      // console.log(orderedPosts);
+    let posts = appBodyRef.postOrder.get().fetch();
 
-      //TODO: load up multiple instances
-      if (orderedPosts[0].type === 'youtube') { //if first post is youtube video
-        let yt_id = orderedPosts[0].vidId;
-        if (yt.ready()) {
-          appBodyRef.videoReady.set(true);
-          yt.player.cueVideoById(yt_id);        //Cue up video in iframe
+    //Number of posts to display after a user scrolls to the bottom.
+    //Their first visit = 5, scroll to the bottom once = 10, twice = 15...
+    let lastIndex = (appBodyRef.bottomHits.get() * 5) + 5;
 
-          yt.player.addEventListener('onStateChange', function (event) {
-            if(event.data === 0){
+    if (lastIndex < posts.length) { //make sure there are enough posts
+      appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
+    } else {
+      appBodyRef.displayPosts.set(posts.slice(0, posts.length));
+    }
+  });
+
+  //Populate iframes
+  feedRef.autorun(function () {
+    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+      let orderedPosts = appBodyRef.displayPosts.get();
+
+      _.each(orderedPosts, function(post, index) {
+        if (post.type === 'youtube') {
+          let yt_id = post.vidId;
+          let yt = getNextYTPlayer().ytplayer; //Grab open iframe
+
+          if (yt.ready()) {
+            //Add index to array of videos that are ready
+            appBodyRef.videosReady.push(index);
+
+            yt.player.cueVideoById(yt_id);        //Cue up video in iframe
+
+            yt.player.setSize(479, 270);
+
+            yt.player.addEventListener('onStateChange', function (event) {
+              if(event.data === 0){           //ENDED
+                //TODO: start next song if there is one
+              } else if(event.data === 1){    //PLAYING
+                appBodyRef.nowPlaying.set(post);
+              }
+
+              let state = event.data;
+              appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+
+              //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
+              setInterval(function(){ //Track video progress for scrubber
+                var completed = yt.player.getCurrentTime();
+                appBodyRef.completed.set(completed)
+              }, 100);
+            });
+          }
+        } else {    //Soundcloud
+
+          let uniqId = 'scplayer-' + post._id;
+
+          setInterval(function(){ 
+            window[uniqId] = SC.Widget(uniqId);   //initialize sc widget with unique id of iframe
+          }, 100);
+
+          //load new widget with no extra branding
+          window[uniqId].load(post.link, {
+            buying: false,
+            liking: false,
+            download: false,
+            sharing: false,
+            show_comments: false,
+            show_playcount: false,
+            show_user: false
+          });
+
+          window[uniqId].bind(SC.Widget.Events.READY, function() {
+            appBodyRef.videosReady.push(index);
+
+            // appBodyRef.scplayer.set(widget);  //set reactive-var for use else where
+
+            //conform state to Youtube codes (line 29)
+            window[uniqId].bind(SC.Widget.Events.FINISH, function() {
               //TODO: start next song if there is one
-              //ENDED
-            } else if(event.data === 1){
-              //PLAYING
-              appBodyRef.nowPlaying.set(orderedPosts[0]);
-            } else if(event.data === 2){
-              //PAUSED
-            }
+              appBodyRef.state.set(0);
+            });
 
-            let state = event.data;
-            appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+            window[uniqId].bind(SC.Widget.Events.PLAY, function() {
+              appBodyRef.nowPlaying.set(post);
+              appBodyRef.state.set(1);
+            });
 
-            //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-            setInterval(function(){ //Track video progress for scrubber
-              var completed = yt.player.getCurrentTime();
-              appBodyRef.completed.set(completed)
-            }, 100);
+            window[uniqId].bind(SC.Widget.Events.PAUSE, function() {
+              appBodyRef.state.set(2);
+            });
+
+            //Soundcloud returns milliseconds, so convert to seconds to reuse formatting (bottom-player/helpers.js)
+            window[uniqId].bind(SC.Widget.Events.PLAY_PROGRESS, function(progress) {
+              appBodyRef.completed.set( progress.currentPosition / 1000 );
+            });
           });
         }
-      } else if (orderedPosts[0].type === 'soundcloud') {
-        // SC.stream('/tracks/' + orderedPosts[0].vidId).then(function(player){
-        //   console.log(player);
-        //   player.play();
-        // });
-
-        let widget = SC.Widget('scplayer');   //initialize sc widget with id of iframe
-
-        //load new widget with no extra branding
-        widget.load(orderedPosts[0].link, {
-          buying: false,
-          liking: false,
-          download: false,
-          sharing: false,
-          show_comments: false,
-          show_playcount: false,
-          show_user: false
-        });
-
-        widget.bind(SC.Widget.Events.READY, function() {
-          appBodyRef.videoReady.set(true);
-
-          appBodyRef.scplayer.set(widget);  //set reactive-var for use else where
-
-          //conform state to Youtube codes (line 29)
-          widget.bind(SC.Widget.Events.FINISH, function() {
-            //TODO: start next song if there is one
-            appBodyRef.state.set(0);
-          });
-
-          widget.bind(SC.Widget.Events.PLAY, function() {
-            appBodyRef.nowPlaying.set(orderedPosts[0]);
-            appBodyRef.state.set(1);
-          });
-
-          widget.bind(SC.Widget.Events.PAUSE, function() {
-            appBodyRef.state.set(2);
-          });
-
-          //Soundcloud returns milliseconds, so convert to seconds to reuse formatting (bottom-player/helpers.js)
-          widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(progress) {
-            appBodyRef.completed.set( progress.currentPosition / 1000 );
-          });
-        });
-      }
+      });
     }
   });
 });

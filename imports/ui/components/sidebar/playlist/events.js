@@ -17,18 +17,18 @@ Template.playlist.events({
     //TODO: find which video to play
     let selectedPost = this;
     if (selectedPost.type === 'youtube') {
-      yt.player.playVideo();
+      yt0.player.playVideo();
     } else {
-      appBodyRef.scplayer.get().play();
+      window['scplayer-' + this._id].play();
     }
   },
   "click .sr-playlist__play--paused": function(event, template){
     //TODO: find which video to pause
     let selectedPost = this;
     if (selectedPost.type === 'youtube') {
-      yt.player.pauseVideo();
+      yt0.player.pauseVideo();
     } else {
-      appBodyRef.scplayer.get().pause();
+      window['scplayer-' + this._id].pause();
     }
   }
 });

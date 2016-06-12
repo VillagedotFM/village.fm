@@ -1,15 +1,12 @@
 Template.feed.helpers({
   posts() {
-    let posts = appBodyRef.postOrder.get().fetch();
-    //Number of posts to display after a user scrolls to the bottom.
-    //Their first visit = 5, scroll to the bottom once = 10, twice = 15...
-    let lastIndex = (appBodyRef.bottomHits.get() * 5) + 5;
-
-    if (lastIndex < posts.length) { //make sure there are enough posts
-      return posts.slice(0, lastIndex);
-    } else {
-      return posts.slice(0, posts.length);
+    return appBodyRef.displayPosts.get();
+  },
+  isPlaying: function() {
+    if (appBodyRef.nowPlaying.get()) {
+      return (this._id === appBodyRef.nowPlaying.get()._id);
     }
+    return false;
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -28,14 +25,20 @@ Template.feed.helpers({
       return ' and ' + (this.upvotedBy.length - 3) + ' others';
     }
   },
-  currentVideoReady: function() { //Redundant of General helper but necessary because of weirdness
-    return appBodyRef.videoReady.get();
+  getNextYTPlayer: function() {
+    return window.getNextYTPlayer().id;  //grab the id of the next available yt player
   },
-  isYoutube(type) {
-    if (type === 'youtube') {
+  videoReady: function(index) {          //Redundant of General helper but necessary because of weirdness
+    return (_.contains(appBodyRef.videosReady.list(), index));
+  },
+  isYoutube() {
+    if (this.type === 'youtube') {
       return true;
     } else {
       return false;
     }
+  },
+  rank(index) {
+    return index + 1;
   }
 });

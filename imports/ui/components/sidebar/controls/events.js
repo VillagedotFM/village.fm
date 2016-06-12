@@ -5,21 +5,21 @@ Template.controls.events({
     if (appBodyRef.nowPlaying.get()) {
       currentPost = appBodyRef.nowPlaying.get();
     } else {
-      currentPost = appBodyRef.postOrder.get().fetch()[0];
+      currentPost = appBodyRef.displayPosts.get()[0];
     }
 
     if (currentPost.type === 'youtube') {
-      yt.player.playVideo();
+      yt0.player.playVideo();
     } else {
-      appBodyRef.scplayer.get().play();
+      window['scplayer-' + currentPost._id].play();
     }
   },
   "click .sr-controls__play--paused": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
     if (currentPost.type === 'youtube') {
-      yt.player.pauseVideo();
+      yt0.player.pauseVideo();
     } else {
-      appBodyRef.scplayer.get().pause();
+      window['scplayer-' + currentPost._id].pause();
     }
   }
 });
