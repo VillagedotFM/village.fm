@@ -53,85 +53,87 @@ Template.feed.onRendered(function feedOnRendered() {
 
   //Populate iframes
   feedRef.autorun(function () {
-    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let orderedPosts = appBodyRef.displayPosts.get();
+    $( window ).load(function() {
 
-      _.each(orderedPosts, function(post, index) {
-        if (post.type === 'youtube') {
-          let yt_id = post.vidId;
-          let yt = getNextYTPlayer().ytplayer; //Grab open iframe
+      if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+        let orderedPosts = appBodyRef.displayPosts.get();
 
-          if (yt.ready()) {
-            //Add index to array of videos that are ready
-            appBodyRef.videosReady.push(index);
+        _.each(orderedPosts, function(post, index) {
+          if (post.type === 'youtube') {
+            let yt_id = post.vidId;
+            let yt = getNextYTPlayer().ytplayer; //Grab open iframe
 
-            yt.player.cueVideoById(yt_id);        //Cue up video in iframe
+            if (yt.ready()) {
+              //Add index to array of videos that are ready
+              appBodyRef.videosReady.push(index);
 
-            yt.player.setSize(479, 270);
+              yt.player.cueVideoById(yt_id);        //Cue up video in iframe
 
-            yt.player.addEventListener('onStateChange', function (event) {
-              if(event.data === 0){           //ENDED
+              yt.player.setSize(479, 270);
+
+              yt.player.addEventListener('onStateChange', function (event) {
+                if(event.data === 0){           //ENDED
+                  //TODO: start next song if there is one
+                } else if(event.data === 1){    //PLAYING
+                  appBodyRef.nowPlaying.set(post);
+                }
+
+                let state = event.data;
+                appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+
+                //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
+                setInterval(function(){ //Track video progress for scrubber
+                  var completed = yt.player.getCurrentTime();
+                  appBodyRef.completed.set(completed)
+                }, 100);
+              });
+            }
+          } else {    //Soundcloud
+
+            let uniqId = 'scplayer-' + post._id;
+            console.log(post);
+
+            window[uniqId] = SC.Widget(uniqId);   //initialize sc widget with unique id of iframe
+
+            //load new widget with no extra branding
+            window[uniqId].load(post.link, {
+              buying: false,
+              liking: false,
+              download: false,
+              sharing: false,
+              show_comments: false,
+              show_playcount: false,
+              show_user: false
+            });
+
+            window[uniqId].bind(SC.Widget.Events.READY, function() {
+              appBodyRef.videosReady.push(index);
+
+              // appBodyRef.scplayer.set(widget);  //set reactive-var for use else where
+
+              //conform state to Youtube codes (line 29)
+              window[uniqId].bind(SC.Widget.Events.FINISH, function() {
                 //TODO: start next song if there is one
-              } else if(event.data === 1){    //PLAYING
+                appBodyRef.state.set(0);
+              });
+
+              window[uniqId].bind(SC.Widget.Events.PLAY, function() {
                 appBodyRef.nowPlaying.set(post);
-              }
+                appBodyRef.state.set(1);
+              });
 
-              let state = event.data;
-              appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+              window[uniqId].bind(SC.Widget.Events.PAUSE, function() {
+                appBodyRef.state.set(2);
+              });
 
-              //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-              setInterval(function(){ //Track video progress for scrubber
-                var completed = yt.player.getCurrentTime();
-                appBodyRef.completed.set(completed)
-              }, 100);
+              //Soundcloud returns milliseconds, so convert to seconds to reuse formatting (bottom-player/helpers.js)
+              window[uniqId].bind(SC.Widget.Events.PLAY_PROGRESS, function(progress) {
+                appBodyRef.completed.set( progress.currentPosition / 1000 );
+              });
             });
           }
-        } else {    //Soundcloud
-
-          let uniqId = 'scplayer-' + post._id;
-
-          setInterval(function(){ 
-            window[uniqId] = SC.Widget(uniqId);   //initialize sc widget with unique id of iframe
-          }, 100);
-
-          //load new widget with no extra branding
-          window[uniqId].load(post.link, {
-            buying: false,
-            liking: false,
-            download: false,
-            sharing: false,
-            show_comments: false,
-            show_playcount: false,
-            show_user: false
-          });
-
-          window[uniqId].bind(SC.Widget.Events.READY, function() {
-            appBodyRef.videosReady.push(index);
-
-            // appBodyRef.scplayer.set(widget);  //set reactive-var for use else where
-
-            //conform state to Youtube codes (line 29)
-            window[uniqId].bind(SC.Widget.Events.FINISH, function() {
-              //TODO: start next song if there is one
-              appBodyRef.state.set(0);
-            });
-
-            window[uniqId].bind(SC.Widget.Events.PLAY, function() {
-              appBodyRef.nowPlaying.set(post);
-              appBodyRef.state.set(1);
-            });
-
-            window[uniqId].bind(SC.Widget.Events.PAUSE, function() {
-              appBodyRef.state.set(2);
-            });
-
-            //Soundcloud returns milliseconds, so convert to seconds to reuse formatting (bottom-player/helpers.js)
-            window[uniqId].bind(SC.Widget.Events.PLAY_PROGRESS, function(progress) {
-              appBodyRef.completed.set( progress.currentPosition / 1000 );
-            });
-          });
-        }
-      });
-    }
+        });
+      }
+    });
   });
 });

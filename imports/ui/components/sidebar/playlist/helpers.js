@@ -40,9 +40,14 @@ Template.playlist.helpers({
     else
       return '';
   },
-  playOrPause() {
-    let state = appBodyRef.state.get();
-    return state === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+  playOrPause: function() {
+    if (appBodyRef.nowPlaying.get()) {
+      if (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1) {
+        return 'sr-playlist__play--paused';
+      }
+    } else {
+      return 'sr-playlist__play--play';
+    }
   },
   showEqualizer: function() {
     //if this song is the current post AND it's playing, show equalizer and hide duration
