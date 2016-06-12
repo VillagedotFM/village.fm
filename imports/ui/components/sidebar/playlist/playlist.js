@@ -21,7 +21,7 @@ Template.playlist.onRendered(function playlistOnRendered(){
 
       //Find how many times the user has scrolled to the bottom
       let oldBottomHits = appBodyRef.bottomHits.get();
-      let bottomHits = parseInt(scrollTop / 3900);  //3900 is bottom of page
+      let bottomHits = parseInt(scrollTop / 4000);  //4000 is bottom of page
 
       if (bottomHits > oldBottomHits) { //Only set new value if it's greater than the last
         appBodyRef.bottomHits.set(bottomHits);

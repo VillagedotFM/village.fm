@@ -179,6 +179,9 @@ input, textarea {
     -ms-filter: blur(3px);
     filter: blur(3px);
 }
+.posts-wrapper{
+  padding-bottom: 100px;
+}
 .arrow-back {
     display: block;
     width: 12px;
