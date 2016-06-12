@@ -6,6 +6,10 @@ let resetForm = () => {
   uploadRef.showForm.set(false);
 };
 
+//TODO: make attributes (link, type, vidId) reactive vars instead of data on the DOM
+//and make sure to clear them on insert!
+
+//TODO: scope jquery elements to template
 
 Template.upload.events({
   'keyup input[name=post-link]'(event, instance) {

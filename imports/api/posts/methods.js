@@ -30,6 +30,8 @@ Meteor.methods({
       });
     }
   },
+
+  //TODO: Break out these 3 functions
   getTypeAndId:function(link){
     //Matches links that are in a valid youtube format and grabs the video id. Does NOT check to see if video exists (line 95)
     const ytRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
