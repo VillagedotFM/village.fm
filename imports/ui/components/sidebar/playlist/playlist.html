@@ -92,16 +92,15 @@
                 </div>
                 <div class="sr-playlist__right-btn"></div>
                 <div class="sr-playlist__right">
-                    <span class="sr-playlist__spinner hidden"></span>
-                    {{#if showEqualizer}}
-                      <span class="sr-playlist__equalizer"></span>
-                    {{else}}
-                      <span class="sr-playlist__time">{{duration}}</span>
-                    {{/if}}
                     {{#if videoReady}}
                       <span class="sr-playlist__play {{playOrPause}}"></span>
                     {{else}}
                       <span class="sr-playlist__spinner display"></span>
+                    {{/if}}
+                    {{#if showEqualizer}}
+                      <span class="sr-playlist__equalizer"></span>
+                    {{else}}
+                      <span class="sr-playlist__time">{{duration}}</span>
                     {{/if}}
                 </div>
                 <div class="sr-playlist__middle">

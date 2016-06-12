@@ -90,6 +90,8 @@ Template.feed.onRendered(function feedOnRendered() {
         widget.bind(SC.Widget.Events.READY, function() {
           appBodyRef.videoReady.set(true);
 
+          appBodyRef.scplayer.set(widget);
+
           widget.bind(SC.Widget.Events.FINISH, function() {
             //TODO: start next song if there is one
             appBodyRef.state.set(0);

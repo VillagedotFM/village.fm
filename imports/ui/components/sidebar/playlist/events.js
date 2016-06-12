@@ -1,7 +1,6 @@
 Template.playlist.events({
   "click .upvote-block": function(event, template){
     if(Meteor.userId()) {
-      let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
         if (err) {
           console.log(err);
@@ -15,11 +14,20 @@ Template.playlist.events({
   },
   "click .sr-playlist__play--play": function(event, template){
     //TODO: find which video to play
-    // yt.player.playVideo();
-    console.log(appBodyRef.scplayer.get());
+    let selectedPost = this;
+    if (selectedPost.type === 'youtube') {
+      yt.player.playVideo();
+    } else {
+      appBodyRef.scplayer.get().play();
+    }
   },
   "click .sr-playlist__play--paused": function(event, template){
     //TODO: find which video to pause
-    yt.player.pauseVideo();
+    let selectedPost = this;
+    if (selectedPost.type === 'youtube') {
+      yt.player.pauseVideo();
+    } else {
+      appBodyRef.scplayer.get().pause();
+    }
   }
 });
