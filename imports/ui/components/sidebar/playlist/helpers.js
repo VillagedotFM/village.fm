@@ -31,10 +31,8 @@ Template.playlist.helpers({
     }
 
     //Set post order
-    if (posts) {
-      appBodyRef.postOrder.set(posts);
-      return posts;
-    }
+    appBodyRef.postOrder.set(posts);
+    return posts;
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))

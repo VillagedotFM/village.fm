@@ -37,6 +37,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.state = new ReactiveVar(-1);
   appBodyRef.completed = new ReactiveVar("0:00");
   appBodyRef.scplayer = new ReactiveVar(null);
+  appBodyRef.bottomHits = new ReactiveVar(0); //Keep track of how many times a user scrolls to the bottom
 });
 
 Template.app_body.onRendered(function() {

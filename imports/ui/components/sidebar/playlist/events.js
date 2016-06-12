@@ -1,6 +1,7 @@
 Template.playlist.events({
   "click .upvote-block": function(event, template){
     if(Meteor.userId()) {
+      let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
         if (err) {
           console.log(err);

@@ -18,6 +18,14 @@ Template.playlist.onRendered(function playlistOnRendered(){
 
       //Scroll playlist to the current post
       $('.sr-playlist').scrollTop(index * 50);
+
+      //Find how many times the user has scrolled to the bottom
+      let oldBottomHits = appBodyRef.bottomHits.get();
+      let bottomHits = parseInt(scrollTop / 3900);  //3900 is bottom of page
+
+      if (bottomHits > oldBottomHits) { //Only set new value if it's greater than the last
+        appBodyRef.bottomHits.set(bottomHits);
+      }
     });
   });
 });
