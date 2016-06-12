@@ -1,8 +1,6 @@
 Template.feed.helpers({
   posts() {
 
-    //TODO: set order
-
     //Check if profile
     let id = FlowRouter.getParam('_id');
     var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
@@ -32,7 +30,6 @@ Template.feed.helpers({
       posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
     }
 
-    //TODO: Refactor when order is fixed
     if (posts) {
       appBodyRef.postOrder.set(posts.fetch());
       return posts;
@@ -58,4 +55,11 @@ Template.feed.helpers({
   currentVideoReady: function() { //Redundant of General helper but necessary because of weirdness
     return appBodyRef.videoReady.get();
   },
+  isYoutube(type) {
+    if (type === 'youtube') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 });

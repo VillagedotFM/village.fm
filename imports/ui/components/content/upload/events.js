@@ -57,9 +57,6 @@ Template.upload.events({
 
     //Check for duplicates
     var posts = Posts.find().fetch();
-    _.each(posts, function(post) {
-      console.log(post.vidId)
-    });
     var duplicate = _.find(posts, function(post) {
       return post.vidId == vidId;
     });
@@ -103,8 +100,10 @@ Template.upload.events({
       });
     } else {
       SC.resolve(link).then(function(track) {
+        //Handle not streamable (NEED DESIGN)
         thumbnail = track.artwork_url;
         title = track.title;
+        console.log(track);
 
         //Grab formatted auto and title
         //Only pass in title if Soundcloud

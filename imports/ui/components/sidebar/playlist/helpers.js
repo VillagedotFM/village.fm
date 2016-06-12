@@ -1,7 +1,6 @@
 Template.playlist.helpers({
   posts: function(){
 
-    //TODO: set order
     //Check if profile
     let id = FlowRouter.getParam('_id');
     var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});

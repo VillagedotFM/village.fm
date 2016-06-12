@@ -15,7 +15,8 @@ Template.playlist.events({
   },
   "click .sr-playlist__play--play": function(event, template){
     //TODO: find which video to play
-    yt.player.playVideo();
+    // yt.player.playVideo();
+    console.log(appBodyRef.scplayer.get());
   },
   "click .sr-playlist__play--paused": function(event, template){
     //TODO: find which video to pause

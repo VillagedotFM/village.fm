@@ -36,6 +36,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.profileTab = new ReactiveVar('upvotes');
   appBodyRef.state = new ReactiveVar(-1);
   appBodyRef.completed = new ReactiveVar("0:00");
+  appBodyRef.scplayer = new ReactiveVar(null);
 });
 
 Template.app_body.onRendered(function() {
