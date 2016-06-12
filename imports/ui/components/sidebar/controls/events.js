@@ -5,9 +5,9 @@ Template.controls.events({
     if (appBodyRef.nowPlaying.get()) {
       currentPost = appBodyRef.nowPlaying.get();
     } else {
-      currentPost = appBodyRef.postOrder.get()[0];
+      currentPost = appBodyRef.postOrder.get().fetch()[0];
     }
-    
+
     if (currentPost.type === 'youtube') {
       yt.player.playVideo();
     } else {

@@ -15,8 +15,8 @@ Template.feed.onRendered(function feedOnRendered() {
   const feedRef = this;
 
   feedRef.autorun(function () {
-    if (appBodyRef.postOrder.get().length > 0) {  //if playlist has posts
-      let orderedPosts = appBodyRef.postOrder.get();
+    if (appBodyRef.postOrder.get().fetch().length > 0) {  //if playlist has posts
+      let orderedPosts = appBodyRef.postOrder.get().fetch();
       // console.log(orderedPosts);
 
       //TODO: load up multiple instances
