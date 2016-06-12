@@ -1,7 +1,7 @@
 Template.feed.helpers({
   posts() {
 
-    //Check if profile
+    //Check if profile page
     let id = FlowRouter.getParam('_id');
     var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
     var posts;
@@ -30,6 +30,7 @@ Template.feed.helpers({
       posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
     }
 
+    //Set post order
     if (posts) {
       appBodyRef.postOrder.set(posts.fetch());
       return posts;

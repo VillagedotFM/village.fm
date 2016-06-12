@@ -1,6 +1,13 @@
 Template.controls.events({
   "click .sr-controls__play--play": function(event, template){
-    let currentPost = appBodyRef.nowPlaying.get();
+    var currentPost;
+    //If no post is current selected, play the first
+    if (appBodyRef.nowPlaying.get()) {
+      currentPost = appBodyRef.nowPlaying.get();
+    } else {
+      currentPost = appBodyRef.postOrder.get()[0];
+    }
+    
     if (currentPost.type === 'youtube') {
       yt.player.playVideo();
     } else {

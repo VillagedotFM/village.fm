@@ -66,7 +66,7 @@
 
                     {{#if currentVideoReady}}
                       {{#unless videoPlaying}}
-                        {{#if isYoutube type}}
+                        {{#if isYoutube type}}   <!-- Don't need to display button with SC widget -->
                           <button class="post__video-play"></button>
                         {{/if}}
                       {{/unless}}
