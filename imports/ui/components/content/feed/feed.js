@@ -107,6 +107,23 @@ Template.feed.onRendered(function feedOnRendered() {
         if (post.type === 'soundcloud') {
           SC.stream('/tracks/'+post.vidId).then(function(player){
             window['scplayer-'+post._id] = player;
+
+            appBodyRef.videosReady.push(index);
+
+            window['scplayer-'+post._id].on('play', function(event){
+              appBodyRef.nowPlaying.set(post);
+              appBodyRef.state.set(1);
+            });
+
+            window['scplayer-'+post._id].on('pause', function(event){
+              appBodyRef.state.set(2);
+            });
+
+            window['scplayer-'+post._id].on('finish', function(event){
+              appBodyRef.state.set(0);
+              window['scplayer-'+post._id].seek(0);
+              //TODO: go to next song if there is one
+            });
           });
         }
       });

@@ -4,7 +4,7 @@ Template.feed.helpers({
   },
   isPlaying: function() {
     if (appBodyRef.nowPlaying.get()) {
-      return (this._id === appBodyRef.nowPlaying.get()._id);
+      return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
     }
     return false;
   },

@@ -1627,6 +1627,22 @@ input, textarea {
 .post__video-play:hover {
     background-position: -150px -100px;
 }
+.post__video-pause {
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: url(../images/icons-sprite.png) 0 -350px no-repeat;
+  cursor: pointer;
+}
+.post__video-pause:hover {
+background-position: -150px -350px;
+}
 .post__upvoted {
     font-size: 12px;
     margin-bottom: 20px;

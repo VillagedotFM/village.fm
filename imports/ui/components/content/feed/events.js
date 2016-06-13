@@ -36,7 +36,24 @@ Template.feed.events({
     }
   },
   "click .post__video-play": function(event, template){
-    //TODO: find which video to play
-    console.log(this.index);
+    let selectedId = event.currentTarget.id;
+    let selectedPost = Posts.findOne(selectedId);
+
+    if (selectedPost.type === 'youtube') {
+      yt0.player.playVideo();
+    } else {
+      pauseEverythingElse(selectedId);
+      window['scplayer-' + selectedId].play();
+    }
+  },
+  "click .post__video-pause": function(event, template){
+    let selectedId = event.currentTarget.id;
+    let selectedPost = Posts.findOne(selectedId);
+
+    if (selectedPost.type === 'youtube') {
+      yt0.player.pauseVideo();
+    } else {
+      window['scplayer-' + selectedId].pause();
+    }
   }
 });

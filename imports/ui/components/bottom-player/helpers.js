@@ -12,6 +12,17 @@ Template.bottom_player.helpers({
     }
   },
   completed: function() {
+
+    setInterval(function(){ //Track video progress for scrubber, convert to seconds if SC
+      let post = appBodyRef.nowPlaying.get();
+      if (post.type === 'youtube') {
+
+      } else {
+        let completed = window['scplayer-'+post._id].currentTime();
+        appBodyRef.completed.set(completed / 1000)
+      }
+    }, 500);
+
     let completed = appBodyRef.completed.get();   //Get current time of video
     var minutes, seconds;
 

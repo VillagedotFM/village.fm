@@ -1,4 +1,4 @@
-function pauseEverythingElse(id) {
+pauseEverythingElse = function(id) {
   let posts = appBodyRef.displayPosts.get();
   _.each(posts, function(post){ //TODO: add yt pauses
     if (post.type === 'soundcloud' && post._id !== id) {
@@ -26,15 +26,16 @@ Template.playlist.events({
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
 
-    // SC.stream('/tracks/'+selectedPost.vidId).then(function(player){
-    //   player.play();
-    // });
-
     if (selectedPost.type === 'youtube') {
       //TODO: check if iframe is playing
       yt0.player.playVideo();
     } else {
-      window['scplayer-' + selectedId].play();
+      if (window['scplayer-' + selectedId]._isPlaying) {
+        window['scplayer-' + selectedId].pause();
+      } else {
+        pauseEverythingElse(selectedId);
+        window['scplayer-' + selectedId].play();
+      }
     }
   }
 });
