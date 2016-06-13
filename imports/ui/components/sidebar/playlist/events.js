@@ -26,11 +26,15 @@ Template.playlist.events({
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
 
+    // SC.stream('/tracks/'+selectedPost.vidId).then(function(player){
+    //   player.play();
+    // });
+
     if (selectedPost.type === 'youtube') {
       //TODO: check if iframe is playing
       yt0.player.playVideo();
     } else {
-      window['scplayer-' + selectedId].toggle();
+      window['scplayer-' + selectedId].play();
     }
   }
 });

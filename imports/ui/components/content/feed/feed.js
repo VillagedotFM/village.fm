@@ -38,6 +38,10 @@ Template.feed.onRendered(function feedOnRendered() {
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
   //of the page until there are none left
   feedRef.autorun(function () {
+    SC.initialize({
+      client_id: 'aee8647bad94cb6e201efcf6bee4224d'
+    });
+
     let posts = appBodyRef.postOrder.get().fetch();
 
     //Number of posts to display after a user scrolls to the bottom.
@@ -95,55 +99,14 @@ Template.feed.onRendered(function feedOnRendered() {
 
   //Populate SC iframes
   feedRef.autorun(function () {
+    console.log('run');
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
 
       _.each(orderedPosts, function(post, index) {
         if (post.type === 'soundcloud') {
-          $( window ).load(function() {
-            let uniqId = 'scplayer-' + post._id;
-            console.log(post);
-
-            window[uniqId] = SC.Widget(uniqId);   //initialize sc widget with unique id of iframe
-
-            //load new widget with no extra branding
-            window[uniqId].load(post.link, {
-              buying: false,
-              liking: false,
-              download: false,
-              sharing: false,
-              show_comments: false,
-              show_playcount: false,
-              show_user: false
-            });
-
-            window[uniqId].bind(SC.Widget.Events.ERROR, function(error) {
-              console.log(error);
-            });
-
-            window[uniqId].bind(SC.Widget.Events.READY, function() {
-              appBodyRef.videosReady.push(index);
-
-              //conform state to Youtube codes (line 29)
-              window[uniqId].bind(SC.Widget.Events.FINISH, function() {
-                //TODO: start next song if there is one
-                appBodyRef.state.set(0);
-              });
-
-              window[uniqId].bind(SC.Widget.Events.PLAY, function() {
-                appBodyRef.nowPlaying.set(post);
-                appBodyRef.state.set(1);
-              });
-
-              window[uniqId].bind(SC.Widget.Events.PAUSE, function() {
-                appBodyRef.state.set(2);
-              });
-
-              //Soundcloud returns milliseconds, so convert to seconds to reuse formatting (bottom-player/helpers.js)
-              window[uniqId].bind(SC.Widget.Events.PLAY_PROGRESS, function(progress) {
-                appBodyRef.completed.set( progress.currentPosition / 1000 );
-              });
-            });
+          SC.stream('/tracks/'+post.vidId).then(function(player){
+            window['scplayer-'+post._id] = player;
           });
         }
       });

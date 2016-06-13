@@ -92,11 +92,12 @@
                 </div>
                 <div class="sr-playlist__right-btn"></div>
                 <div class="sr-playlist__right">
-                    {{#if videoReady @index}}
+                  <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
+                    <!-- {{#if videoReady @index}}
                       <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
                     {{else}}
                       <span class="sr-playlist__spinner {{showSpinner}}"></span>
-                    {{/if}}
+                    {{/if}} -->
                     {{#if showEqualizer}}
                       <span class="sr-playlist__equalizer"></span>
                     {{else}}

@@ -6,7 +6,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import  moment  from 'moment';
-import SC from 'soundcloud';
+import SC from '../../../public/js/sc3.js';
 
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
@@ -48,10 +48,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
-  SC.initialize({
-    client_id: Meteor.settings.public.soundcloud.client_id
-  });
-
   //TODO: use reactive-var instead of show/hide
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
