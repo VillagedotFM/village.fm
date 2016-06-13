@@ -1,3 +1,12 @@
+function pauseEverythingElse(id) {
+  let posts = appBodyRef.displayPosts.get();
+  _.each(posts, function(post){ //TODO: add yt pauses
+    if (post.type === 'soundcloud' && post._id !== id) {
+      window['scplayer-' + post._id].pause();
+    }
+  });
+}
+
 Template.playlist.events({
   "click .upvote-block": function(event, template){
     if(Meteor.userId()) {
@@ -13,22 +22,15 @@ Template.playlist.events({
       alert('Please login to upvote posts!');
     }
   },
-  "click .sr-playlist__play--play": function(event, template){
-    //TODO: find which video to play
-    let selectedPost = this;
+  "click .sr-playlist__play": function(event, template){
+    let selectedId = event.currentTarget.id;
+    let selectedPost = Posts.findOne(selectedId);
+
     if (selectedPost.type === 'youtube') {
+      //TODO: check if iframe is playing
       yt0.player.playVideo();
     } else {
-      window['scplayer-' + this._id].play();
-    }
-  },
-  "click .sr-playlist__play--paused": function(event, template){
-    //TODO: find which video to pause
-    let selectedPost = this;
-    if (selectedPost.type === 'youtube') {
-      yt0.player.pauseVideo();
-    } else {
-      window['scplayer-' + this._id].pause();
+      window['scplayer-' + selectedId].toggle();
     }
   }
 });

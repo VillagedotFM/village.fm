@@ -35,14 +35,14 @@ Template.feed.onRendered(function feedOnRendered() {
   const feedRef = this;
 
   //Set Pagination (sort of):
-  //Start by displaying 5 posts, then add 5 everytime the user scrolls to the bottom
+  //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
   //of the page until there are none left
   feedRef.autorun(function () {
     let posts = appBodyRef.postOrder.get().fetch();
 
     //Number of posts to display after a user scrolls to the bottom.
-    //Their first visit = 5, scroll to the bottom once = 10, twice = 15...
-    let lastIndex = (appBodyRef.bottomHits.get() * 5) + 5;
+    //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
+    let lastIndex = (appBodyRef.bottomHits.get() * 3) + 3;
 
     if (lastIndex < posts.length) { //make sure there are enough posts
       appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
@@ -51,45 +51,56 @@ Template.feed.onRendered(function feedOnRendered() {
     }
   });
 
+
   //Populate iframes
   feedRef.autorun(function () {
-    $( window ).load(function() {
+    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+      let orderedPosts = appBodyRef.displayPosts.get();
 
-      if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-        let orderedPosts = appBodyRef.displayPosts.get();
+      _.each(orderedPosts, function(post, index) {
+        if (post.type === 'youtube') {
+          let yt_id = post.vidId;
+          let yt = getNextYTPlayer().ytplayer; //Grab open iframe
 
-        _.each(orderedPosts, function(post, index) {
-          if (post.type === 'youtube') {
-            let yt_id = post.vidId;
-            let yt = getNextYTPlayer().ytplayer; //Grab open iframe
+          if (yt.ready()) {
+            //Add index to array of videos that are ready
+            appBodyRef.videosReady.push(index);
 
-            if (yt.ready()) {
-              //Add index to array of videos that are ready
-              appBodyRef.videosReady.push(index);
+            yt.player.cueVideoById(yt_id);        //Cue up video in iframe
 
-              yt.player.cueVideoById(yt_id);        //Cue up video in iframe
+            yt.player.setSize(479, 270);
 
-              yt.player.setSize(479, 270);
+            yt.player.addEventListener('onStateChange', function (event) {
+              if(event.data === 0){           //ENDED
+                //TODO: start next song if there is one
+              } else if(event.data === 1){    //PLAYING
+                appBodyRef.nowPlaying.set(post);
+              }
 
-              yt.player.addEventListener('onStateChange', function (event) {
-                if(event.data === 0){           //ENDED
-                  //TODO: start next song if there is one
-                } else if(event.data === 1){    //PLAYING
-                  appBodyRef.nowPlaying.set(post);
-                }
+              let state = event.data;
+              appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
 
-                let state = event.data;
-                appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+              //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
+              setInterval(function(){ //Track video progress for scrubber
+                var completed = yt.player.getCurrentTime();
+                appBodyRef.completed.set(completed)
+              }, 100);
+            });
+          }
+        }
+      });
+    }
+  });
 
-                //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-                setInterval(function(){ //Track video progress for scrubber
-                  var completed = yt.player.getCurrentTime();
-                  appBodyRef.completed.set(completed)
-                }, 100);
-              });
-            }
-          } else {    //Soundcloud
 
+  //Populate SC iframes
+  feedRef.autorun(function () {
+    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+      let orderedPosts = appBodyRef.displayPosts.get();
+
+      _.each(orderedPosts, function(post, index) {
+        if (post.type === 'soundcloud') {
+          $( window ).load(function() {
             let uniqId = 'scplayer-' + post._id;
             console.log(post);
 
@@ -106,10 +117,12 @@ Template.feed.onRendered(function feedOnRendered() {
               show_user: false
             });
 
+            window[uniqId].bind(SC.Widget.Events.ERROR, function(error) {
+              console.log(error);
+            });
+
             window[uniqId].bind(SC.Widget.Events.READY, function() {
               appBodyRef.videosReady.push(index);
-
-              // appBodyRef.scplayer.set(widget);  //set reactive-var for use else where
 
               //conform state to Youtube codes (line 29)
               window[uniqId].bind(SC.Widget.Events.FINISH, function() {
@@ -131,9 +144,9 @@ Template.feed.onRendered(function feedOnRendered() {
                 appBodyRef.completed.set( progress.currentPosition / 1000 );
               });
             });
-          }
-        });
-      }
-    });
+          });
+        }
+      });
+    }
   });
 });

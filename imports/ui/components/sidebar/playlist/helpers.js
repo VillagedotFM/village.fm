@@ -44,6 +44,8 @@ Template.playlist.helpers({
     if (appBodyRef.nowPlaying.get()) {
       if (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1) {
         return 'sr-playlist__play--paused';
+      } else {
+        return 'sr-playlist__play--play';
       }
     } else {
       return 'sr-playlist__play--play';
