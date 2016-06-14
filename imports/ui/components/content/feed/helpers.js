@@ -43,5 +43,19 @@ Template.feed.helpers({
   },
   postedAgo: function() {
     return moment(this.createdAt).fromNow();
+  },
+  settings() {
+    return {
+      position: "below",
+      limit: 5,
+      rules: [
+        {
+          token: '',
+          collection: Meteor.users,
+          field: "profile.name",
+          template: Template.userPill
+        }
+      ]
+    };
   }
 });

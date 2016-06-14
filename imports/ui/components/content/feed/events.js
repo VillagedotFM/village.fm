@@ -1,25 +1,37 @@
 Template.feed.events({
   "click .post__comments": function(event, template){
-    //TODO: refactor with reactive-var
     let id = $('.post__comments').data('id');
     let comment = $('.comments-block[data-id="' + id +'"]');
     let send = $('.send-to-friend[data-id="' + id +'"]');
 
-    $('.post__send').removeClass('active');
-    $('.post__comments').addClass('active');
+    $('.post__send[data-id="' + id +'"]').removeClass('active');
+    $('.post__comments[data-id="' + id +'"]').addClass('active');
     send.hide();
     comment.show();
   },
   "click .post__send": function(event, template){
-    //TODO: refactor with reactive-var
     let id = $('.post__send').data('id');
     let comment = $('.comments-block[data-id="' + id +'"]');
     let send = $('.send-to-friend[data-id="' + id +'"]');
 
-    $('.post__comments').removeClass('active');
-    $('.post__send').addClass('active');
+    $('.post__comments[data-id="' + id +'"]').removeClass('active');
+    $('.post__send[data-id="' + id +'"]').addClass('active');
     comment.hide();
     send.show();
+  },
+  "click .send-to-friend__send-btn": function(event, template){
+    let id = $('.post__send').data('id');
+    let post = Posts.findOne(id);
+    let taggedUsers = [];
+    _.each(Tags.get('taggedUsers'), function(user) {
+      taggedUsers.push(user._id);
+    });
+    if (!taggedUsers)
+      return;
+
+    Meteor.call('tagUsers', post, taggedUsers, function(error, data) {
+      console.log(data);
+    });
   },
   "click .upvote-block, click .post__rating": function(event, template){
     if(Meteor.userId()) {

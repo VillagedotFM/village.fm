@@ -35,7 +35,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)
 
   appBodyRef.prevPost = new ReactiveVar(null);
-  appBodyRef.nextPost = new ReactiveVar(null);    
+  appBodyRef.nextPost = new ReactiveVar(null);
 
   appBodyRef.bottomHits = new ReactiveVar(0);       //Keep track of how many times a user scrolls to the bottom
 
@@ -48,10 +48,12 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
+
 });
 
 Template.app_body.onRendered(function() {
   //TODO: use reactive-var instead of show/hide
+  Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');

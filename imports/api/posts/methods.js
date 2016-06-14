@@ -188,5 +188,16 @@ Meteor.methods({
     post.taggedUsers = tempTaggedUsers;
     console.log(tempTaggedUsers);
     return Posts.insert(post);
+  },
+  tagUsers:function(post, taggedUsers) {
+    _.each(taggedUsers, function(user) {
+      let affected = Posts.update({
+        _id: post._id
+      },{
+        $addToSet: {
+          taggedUsers: user
+        }
+      });
+    });
   }
 });
