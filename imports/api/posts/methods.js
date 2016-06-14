@@ -181,6 +181,12 @@ Meteor.methods({
       let tempDuration = moment.duration(post.duration);  //Convert milliseconds to X:XX
       post.duration = tempDuration.minutes() + ":" + tempDuration.seconds();
     }
+    let tempTaggedUsers = [];
+    _.each(post.taggedUsers, function(user) {
+      tempTaggedUsers.push(user._id);
+    });
+    post.taggedUsers = tempTaggedUsers;
+    console.log(tempTaggedUsers);
     return Posts.insert(post);
   }
 });

@@ -1,6 +1,7 @@
 accounts-base@1.2.7
 accounts-facebook@1.0.9
 accounts-oauth@1.1.12
+aldeed:autoform@5.5.1
 aldeed:collection2@2.9.1
 aldeed:collection2-core@1.1.1
 aldeed:schema-deny@1.0.1
@@ -21,6 +22,7 @@ caching-html-compiler@1.0.6
 callback-hook@1.0.8
 check@1.2.1
 coffeescript@1.0.17
+dandv:caret-position@2.1.1
 dburles:collection-helpers@1.0.4
 ddp@1.2.5
 ddp-client@1.2.6
@@ -42,6 +44,7 @@ html-tools@1.0.9
 htmljs@1.0.9
 http@1.1.5
 id-map@1.0.7
+jchristman:tagsinput-autocomplete-edited@1.1.0
 jquery@1.11.8
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.11.0
@@ -56,6 +59,7 @@ meteor-base@1.0.4
 minifier-css@1.1.11
 minifier-js@1.1.11
 minimongo@1.0.15
+mizzao:autocomplete@0.5.1
 mobile-experience@1.0.4
 mobile-status-bar@1.0.12
 modules@0.6.1
@@ -88,6 +92,7 @@ standard-minifier-js@1.0.6
 templating@1.1.9
 templating-tools@1.0.4
 tracker@1.0.13
+twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.8
 url@1.0.9

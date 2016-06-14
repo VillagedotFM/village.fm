@@ -2,6 +2,7 @@ let resetForm = () => {
   $("input[name=post-link]").val('');
   $('input[name=post-link]').prop('disabled', false);
   $('.postLinkBtn').prop('disabled', true);
+  Tags.set('taggedUsers', []);
 
   uploadRef.showForm.set(false);
 };
@@ -165,7 +166,8 @@ Template.upload.events({
       thumbnail: $('.uploadedThumbnail').prop("src"),
       artist: $('input[name=post-author]').val(),
       title: $('input[name=post-name]').val(),
-      description: $('textarea[name=post-caption]').val()
+      description: $('textarea[name=post-caption]').val(),
+      taggedUsers: Tags.get('taggedUsers')
     }
 
     if (type === 'youtube') {

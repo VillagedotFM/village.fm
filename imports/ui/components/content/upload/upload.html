@@ -26,8 +26,8 @@
                       <input type="text" name="post-name" value="{{uploadedTitle}}" placeholder="enter Song Name here...">
                   </div>
                   <div class="uploaded-item__textarea-wrap">
-                      <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
-                      <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
+                      <textarea name="post-caption" maxlength="140" placeholder="What do you love about this post?"></textarea>
+                      {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
                   </div>
               </div>
               <div class="uploaded-item__btns">
@@ -38,4 +38,8 @@
       </div>
     {{/if}}
   </div>
+</template>
+
+<template name="userPill">
+  <span><img src="{{getUserImage _id}}" class="tagging-dropdown__img"/> &nbsp;</span><span class="tagging-dropdown__name">{{profile.name}}</span>
 </template>

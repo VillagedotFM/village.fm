@@ -112,7 +112,7 @@ Posts.schema = new SimpleSchema({
     defaultValue: []
   },
 
-  
+
   upvotedBy:                //# of upvotes = upvotedBy.length
   {
     type: [String],

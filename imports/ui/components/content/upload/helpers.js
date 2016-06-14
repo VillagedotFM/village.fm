@@ -22,5 +22,19 @@ Template.upload.helpers({
   },
   uploadedTitle() {
     return Template.instance().uploadedTitle.get();
+  },
+  settings() {
+    return {
+      position: "below",
+      limit: 5,
+      rules: [
+        {
+          token: '',
+          collection: Meteor.users,
+          field: "profile.name",
+          template: Template.userPill
+        }
+      ]
+    };
   }
 });

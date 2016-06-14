@@ -1088,6 +1088,14 @@ input, textarea {
     resize: none;
     line-height: 1.2;
 }
+#taggedUsers {
+    width: 100%;
+    border: 1px solid #f4f6f8;
+    border-radius: 4px;
+    padding: 12px 14px;
+    resize: none;
+    line-height: 1.2;
+}
 .uploaded-item__max-chars {
     position: absolute;
     bottom: 10px;
@@ -1226,6 +1234,16 @@ input, textarea {
     border-radius: 50%;
     margin-right: 8px;
     float: left;
+}
+.tagging-dropdown__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.tagging-dropdown__name {
+  position: absolute;
+  padding-top: 10px;
 }
 .more-users-dropdown__name-wrap {
     padding-top: 4px;
