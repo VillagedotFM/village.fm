@@ -34,6 +34,9 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)
 
+  appBodyRef.prevPost = new ReactiveVar(null);
+  appBodyRef.nextPost = new ReactiveVar(null);    
+
   appBodyRef.bottomHits = new ReactiveVar(0);       //Keep track of how many times a user scrolls to the bottom
 
   //Tab states

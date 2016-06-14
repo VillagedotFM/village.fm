@@ -1,7 +1,8 @@
+//To eliminate some weirdness with SC.stream, make sure everything else is paused
 pauseEverythingElse = function(id) {
-  let posts = appBodyRef.displayPosts.get();
+  let posts = appBodyRef.postOrder.get();
   _.each(posts, function(post){ //TODO: add yt pauses
-    if (post.type === 'soundcloud' && post._id !== id) {
+    if (post && post.type === 'soundcloud' && post._id !== id) {
       window['scplayer-' + post._id].pause();
     }
   });
@@ -33,7 +34,6 @@ Template.playlist.events({
       if (window['scplayer-' + selectedId]._isPlaying) {
         window['scplayer-' + selectedId].pause();
       } else {
-        pauseEverythingElse(selectedId);
         window['scplayer-' + selectedId].play();
       }
     }

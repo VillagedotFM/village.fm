@@ -1,9 +1,13 @@
 <template name='controls'>
   <div class="sr-controls hidden-mobile">
       <div class="sr-controls__inner">
-          <span class="sr-controls__prev"></span>
+          {{#if hasPrev}}
+            <span class="sr-controls__prev"></span>
+          {{/if}}
           <span class="sr-controls__play {{playOrPause}}"></span>
-          <span class="sr-controls__next"></span>
+          {{#if hasNext}}
+            <span class="sr-controls__next"></span>
+          {{/if}}
       </div>
   </div>
 </template>

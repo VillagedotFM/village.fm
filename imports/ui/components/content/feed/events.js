@@ -42,7 +42,6 @@ Template.feed.events({
     if (selectedPost.type === 'youtube') {
       yt0.player.playVideo();
     } else {
-      pauseEverythingElse(selectedId);
       window['scplayer-' + selectedId].play();
     }
   },

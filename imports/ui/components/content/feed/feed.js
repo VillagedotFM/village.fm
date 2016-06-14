@@ -30,6 +30,45 @@ window.getNextYTPlayer = function() {
   }
 }
 
+createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
+  SC.stream('/tracks/'+post.vidId).then(function(player){
+    window['scplayer-'+post._id] = player;
+
+    appBodyRef.videosReady.push(index);
+
+    let allPosts = appBodyRef.postOrder.get().fetch();
+
+    //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
+    window['scplayer-'+post._id].on('play', function(event){
+      pauseEverythingElse(post._id);
+      appBodyRef.nowPlaying.set(post);
+      appBodyRef.state.set(1);
+      appBodyRef.prevPost.set(allPosts[index - 1]);
+      appBodyRef.nextPost.set(allPosts[index + 1]);
+    });
+
+    window['scplayer-'+post._id].on('pause', function(event){
+      appBodyRef.state.set(2);
+    });
+
+    window['scplayer-'+post._id].on('finish', function(event){
+      appBodyRef.state.set(0);
+      window['scplayer-'+post._id].seek(0);     //Reset to 0 incase user wants to replay
+
+      let nextPost = appBodyRef.nextPost.get();
+
+      if (nextPost) { //Play next post if it exists
+        if (nextPost.type === 'youtube') {
+          yt0.player.pauseVideo();
+        } else {
+          window['scplayer-' + nextPost._id].play();
+        }
+        appBodyRef.nowPlaying.set(nextPost);
+      }
+    });
+  });
+}
+
 
 Template.feed.onRendered(function feedOnRendered() {
   const feedRef = this;
@@ -60,6 +99,7 @@ Template.feed.onRendered(function feedOnRendered() {
   feedRef.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
+      let allPosts = appBodyRef.postOrder.get().fetch();
 
       _.each(orderedPosts, function(post, index) {
         if (post.type === 'youtube') {
@@ -99,32 +139,14 @@ Template.feed.onRendered(function feedOnRendered() {
 
   //Populate SC iframes
   feedRef.autorun(function () {
-    console.log('run');
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let orderedPosts = appBodyRef.displayPosts.get();
+      let allPosts = appBodyRef.postOrder.get().fetch();
 
-      _.each(orderedPosts, function(post, index) {
+      _.each(allPosts, function(post, index) {
         if (post.type === 'soundcloud') {
-          SC.stream('/tracks/'+post.vidId).then(function(player){
-            window['scplayer-'+post._id] = player;
-
-            appBodyRef.videosReady.push(index);
-
-            window['scplayer-'+post._id].on('play', function(event){
-              appBodyRef.nowPlaying.set(post);
-              appBodyRef.state.set(1);
-            });
-
-            window['scplayer-'+post._id].on('pause', function(event){
-              appBodyRef.state.set(2);
-            });
-
-            window['scplayer-'+post._id].on('finish', function(event){
-              appBodyRef.state.set(0);
-              window['scplayer-'+post._id].seek(0);
-              //TODO: go to next song if there is one
-            });
-          });
+          if (!window['scplayer-'+post._id]) {
+            createSCPlayer(post, index);
+          }
         }
       });
     }
