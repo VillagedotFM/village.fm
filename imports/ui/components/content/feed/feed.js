@@ -69,12 +69,9 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   });
 }
 
-Template.feed.onCreated(function feedOnCreated() {
-  feedRef = this;
-
-});
 
 Template.feed.onRendered(function feedOnRendered() {
+  const feedRef = this;
 
   //Set Pagination (sort of):
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
