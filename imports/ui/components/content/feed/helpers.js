@@ -40,5 +40,8 @@ Template.feed.helpers({
   },
   rank(index) {
     return index + 1;
+  },
+  postedAgo: function() {
+    return moment(this.createdAt).fromNow();
   }
 });
