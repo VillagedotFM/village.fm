@@ -1,5 +1,7 @@
 import { Posts } from '../../api/posts/posts.js';
 import { Villages } from '../../api/villages/villages.js';
+import { Notifications } from '../../api/notifications/notifications.js';
+import { Comments } from '../../api/comments/comments.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -24,8 +26,10 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
   this.subscribe('villages.all');
   this.subscribe('posts.all');
+  this.subscribe('comments.all');
   window.Villages = Villages;
   window.Posts = Posts;
+  window.Comments = Comments;
 
   //Set up reactive-vars
   appBodyRef = this;
