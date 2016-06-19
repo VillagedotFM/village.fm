@@ -1,4 +1,4 @@
-mport { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 
 import { Comments } from '../comments.js';
 
