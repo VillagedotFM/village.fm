@@ -1854,10 +1854,15 @@ background-position: -150px -350px;
 }
 .posted-comment__img-wrap {
     width: 40px;
+    height: 40px;
     float: left;
     margin-right: 9px;
     border-radius: 4px;
     overflow: hidden;
+}
+.posted-comment__img-wrap img {
+  height: 40px;
+  width: 40px;
 }
 .posted-comment__text-wrap {
     padding-right: 20px;

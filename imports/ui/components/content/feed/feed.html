@@ -123,28 +123,25 @@
               <!--comments-block-->
               <div class="comments-block" data-id={{_id}}>
                   <div class="comments-block__posted">
-
-                      <!--posted-comment-->
+                    {{#each comments}}
                       <div class="posted-comment">
                           <div class="posted-comment__inner">
                               <div class="posted-comment__upvote-cell">
                                   <div class="upvote-block upvote-block--active">
                                       <i class="fa fa-caret-up upvote-block__arrow"></i>
-                                      <span class="upvote-block__number">3</span>
+                                      <span class="upvote-block__number">{{likes.length}}</span>
                                   </div>
                               </div>
                               <div class="posted-comment__comment-cell clearfix">
                                   <div class="posted-comment__img-wrap">
-                                      <a href="#"><img src="images/villagers/posted-comment-1.png" alt=""></a>
+                                      <a href=""><img src="{{getUserImage createdBy}}" alt=""></a>
                                   </div>
                                   <div class="posted-comment__text-wrap">
                                       <span class="posted-comment__author-wrap">
-                                          <a href="#" class="posted-comment__author color-main">David Fisher</a>
-                                          <span class="posted-comment__date color-secondary-text">at 1:39</span>
+                                          <a href="#" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
                                       </span>
                                       <span class="posted-comment__comment">
-                                          Lorem ipsum dolor sit amet, semper at suspend isse donec
-                                          lectus rutrum quam.Isse donec lectus velit maevcenas, ut.
+                                          {{content}}
                                       </span>
                                   </div>
                               </div>
@@ -167,8 +164,7 @@
                               </div>
                           </div>
                       </div>
-                      <!--/posted-comment-->
-
+                    {{/each}}
                       <!--posted-comment-->
                       <div class="posted-comment">
                           <div class="posted-comment__inner">

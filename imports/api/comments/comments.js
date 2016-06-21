@@ -25,6 +25,11 @@ Comments.schema = new SimpleSchema({
     min: 1,
     max: 1000
   },
+  postId:
+  {
+    type: String,
+    label: "Post",
+  },
 
   replies: {
     type: [Object],
@@ -39,7 +44,7 @@ Comments.schema = new SimpleSchema({
     type: [String],
     autoValue: function() {
       if (this.isInsert) {
-        return [this.userId()];
+        return [this.userId];
       }
     },
     optional: true

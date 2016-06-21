@@ -2,6 +2,9 @@ Template.feed.helpers({
   posts() {
     return appBodyRef.displayPosts.get();
   },
+  comments: function() {
+    return Comments.find({postId: this._id});
+  },
   isPlaying: function() {
     if (appBodyRef.nowPlaying.get()) {
       return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
