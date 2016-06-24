@@ -115,12 +115,11 @@
               </div>
               <div class="post__comments-send clearfix">
                   <span class="post__comments color-secondary-text active" data-id={{_id}}>
-                      <span class="hidden-mobile-inline">Comments (16)</span>
-                      <span class="visible-mobile-inline">16</span>
+                      <span class="hidden-mobile-inline">Comments ({{comments.length}})</span>
+                      <span class="visible-mobile-inline">{{comments.length}}</span>
                   </span>
                   <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
               </div>
-              <!--comments-block-->
               <div class="comments-block" data-id={{_id}}>
                   <div class="comments-block__posted">
                     {{#each comments}}
@@ -150,124 +149,66 @@
                                   <span class="posted-comment__reply color-main">Reply</span>
                               </div>
                           </div>
-                          <div class="user-comment user-comment--reply">
-                              <div class="user-comment__inner">
-                                  <div class="user-comment__img-cell">
-                                      <img src="images/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="user-comment__comment-cell">
-                                      <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a reply...">
-                                  </div>
-                                  <div class="user-comment__submit-cell">
-                                      <button class="user-comment__reply"></button>
-                                  </div>
-                              </div>
-                          </div>
+                          {{#if replyTo _id}}
+                            <div class="user-comment user-comment--reply">
+                                <div class="user-comment__inner">
+                                    <div class="user-comment__img-cell">
+                                        <img src="{{getUserImage currentUser._id}}" alt="">
+                                    </div>
+                                    <div class="user-comment__comment-cell">
+                                        <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a reply...">
+                                    </div>
+                                    <div class="user-reply__submit-cell">
+                                        <button class="user-comment__reply"></button>
+                                    </div>
+                                </div>
+                            </div>
+                          {{/if}}
+                          {{#each replies}}
+                            <div class="posted-comment posted-comment--reply">
+                                <div class="posted-comment__inner">
+                                    <div class="posted-comment__upvote-cell">
+                                        <div class="upvote-block">
+                                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                            <span class="upvote-block__number">{{likes.length}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="posted-comment__comment-cell clearfix">
+                                        <div class="posted-comment__img-wrap">
+                                            <a href="#"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                        </div>
+                                        <div class="posted-comment__text-wrap">
+                                            <span class="posted-comment__author-wrap">
+                                                <a href="#" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
+                                            </span>
+                                            <span class="posted-comment__comment">
+                                                {{content}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="posted-comment__date-cell">
+                                        <span class="posted-comment__time-ago color-secondary-text">11h ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                          {{/each}}
                       </div>
                     {{/each}}
-                      <!--posted-comment-->
-                      <div class="posted-comment">
-                          <div class="posted-comment__inner">
-                              <div class="posted-comment__upvote-cell">
-                                  <div class="upvote-block">
-                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
-                                      <span class="upvote-block__number">2</span>
-                                  </div>
-                              </div>
-                              <div class="posted-comment__comment-cell clearfix">
-                                  <div class="posted-comment__img-wrap">
-                                      <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
-                                  </div>
-                                  <div class="posted-comment__text-wrap">
-                                      <span class="posted-comment__author-wrap">
-                                          <a href="#" class="posted-comment__author color-main">Erica Clark</a>
-                                          <span class="posted-comment__date color-secondary-text">at 0:32</span>
-                                      </span>
-                                      <span class="posted-comment__comment">
-                                          Lorem ipsum dolor sit amet, semper at suspend isse donec
-                                      </span>
-                                  </div>
-                              </div>
-                              <div class="posted-comment__date-cell">
-                                  <span class="posted-comment__time-ago color-secondary-text">12h ago</span>
-                                  <span class="posted-comment__reply color-main">Reply</span>
-                              </div>
-                          </div>
-                          <div class="posted-comment posted-comment--reply">
-                              <div class="posted-comment__inner">
-                                  <div class="posted-comment__upvote-cell">
-                                      <div class="upvote-block">
-                                          <i class="fa fa-caret-up upvote-block__arrow"></i>
-                                          <span class="upvote-block__number">0</span>
-                                      </div>
-                                  </div>
-                                  <div class="posted-comment__comment-cell clearfix">
-                                      <div class="posted-comment__img-wrap">
-                                          <a href="#"><img src="images/villagers/posted-comment-3.png" alt=""></a>
-                                      </div>
-                                      <div class="posted-comment__text-wrap">
-                                          <span class="posted-comment__author-wrap">
-                                              <a href="#" class="posted-comment__author color-main">Jason Smith</a>
-                                              <span class="posted-comment__date color-secondary-text">at 1:25</span>
-                                          </span>
-                                          <span class="posted-comment__comment">
-                                              Lorem ipsum dolor sit amet, semper at suspend isse donec
-                                          </span>
-                                      </div>
-                                  </div>
-                                  <div class="posted-comment__date-cell">
-                                      <span class="posted-comment__time-ago color-secondary-text">11h ago</span>
-                                      <span class="posted-comment__reply color-main">Reply</span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!--/posted-comment-->
-
-                      <!--posted-comment-->
-                      <div class="posted-comment">
-                          <div class="posted-comment__inner">
-                              <div class="posted-comment__upvote-cell">
-                                  <div class="upvote-block">
-                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
-                                      <span class="upvote-block__number">1</span>
-                                  </div>
-                              </div>
-                              <div class="posted-comment__comment-cell clearfix">
-                                  <div class="posted-comment__img-wrap">
-                                      <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
-                                  </div>
-                                  <div class="posted-comment__text-wrap">
-                                      <span class="posted-comment__author-wrap">
-                                          <a href="#" class="posted-comment__author color-main">Erica Clark</a>
-                                          <span class="posted-comment__date color-secondary-text">at 0:32</span>
-                                      </span>
-                                      <span class="posted-comment__comment">
-                                          Lorem ipsum dolor sit amet, semper at suspend isse donec donec lectus rutrum quam.
-                                      </span>
-                                  </div>
-                              </div>
-                              <div class="posted-comment__date-cell">
-                                  <span class="posted-comment__time-ago color-secondary-text">1d ago</span>
-                                  <span class="posted-comment__reply color-main">Reply</span>
-                              </div>
-                          </div>
-                      </div>
-                      <!--/posted-comment-->
-
-                      <div class="comments-block__more-link-wrap">
-                          <a href="#" class="comments-block__more-link color-secondary-text">
-                              More (12)
-                          </a>
-                      </div>
+                      {{#if moreComments}}
+                        <div class="comments-block__more-link-wrap">
+                            <a href="#" class="comments-block__more-link color-secondary-text">
+                                More ({{moreComments}})
+                            </a>
+                        </div>
+                      {{/if}}
                   </div>
                   <div class="user-comment">
                       <div class="user-comment__inner">
                           <div class="user-comment__img-cell">
-                              <img src="images/header-profile-img.png" alt="">
+                              <img src="{{getUserImage currentUser._id}}" alt="">
                           </div>
                           <div class="user-comment__comment-cell">
-                              <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a comment...">
+                              <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
                           </div>
                           <div class="user-comment__submit-cell">
                               <button class="user-comment__submit"></button>
@@ -275,7 +216,6 @@
                       </div>
                   </div>
               </div>
-              <!--/comments-block-->
 
               <div class="send-to-friend" data-id='{{_id}}' style="display: none;">
                   <div class="send-to-friend__inner">

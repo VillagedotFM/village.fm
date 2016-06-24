@@ -55,6 +55,43 @@ Template.feed.events({
       alert('Please login to upvote posts!');
     }
   },
+  "click .user-comment__submit-cell": function(event, template){
+    let postId = this._id;
+    let name = 'post-comment-' + postId;
+    let content = $('input[name='+name+']').val();
+
+    if (content) {
+      Comments.insert({
+        postId: postId,
+        content: content
+      });
+    }
+
+    $('input[name='+name+']').val('');
+  },
+  "click .user-reply__submit-cell": function(event, template){
+    let commentId = this._id;
+    let content = $('input[name=post-comment]').val();
+
+    if (content) {
+      Comments.update({_id:commentId}, {$push:{
+        replies: {
+          content: content,
+          likes: [Meteor.userId()],
+          createdAt: new Date(),
+          createdBy: Meteor.userId()
+        }
+      }});
+    }
+
+    $('input[name=post-comment]').val('');
+  },
+  "click .posted-comment__reply": function(event, template){
+    let commentId = this._id;
+
+    $('input[name=post-comment]').val('');
+    appBodyRef.replyTo.set(commentId);
+  },
   "click .post__video-play": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);

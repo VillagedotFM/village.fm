@@ -3,7 +3,7 @@ Template.feed.helpers({
     return appBodyRef.displayPosts.get();
   },
   comments: function() {
-    return Comments.find({postId: this._id});
+    return Comments.find({postId: this._id}).fetch();
   },
   isPlaying: function() {
     if (appBodyRef.nowPlaying.get()) {
@@ -46,6 +46,9 @@ Template.feed.helpers({
   },
   postedAgo: function() {
     return moment(this.createdAt).fromNow();
+  },
+  replyTo: function(id) {
+    return (id === appBodyRef.replyTo.get());
   },
   settings() {
     return {

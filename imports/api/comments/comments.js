@@ -40,6 +40,38 @@ Comments.schema = new SimpleSchema({
     },
     optional: true
   },
+
+  "replies.$.content": {
+    type: String,
+    label: "Content",
+    min: 1,
+    max: 1000
+  },
+  "replies.$.likes": {
+    type: [String],
+    autoValue: function() {
+      if (this.isInsert) {
+        return [this.userId];
+      }
+    }
+  },
+  "replies.$.createdAt": {
+    type: Date,
+    autoValue: function() {
+      if( this.isInsert ) {
+          return new Date();
+      }
+    }
+  },
+  "replies.$.createdBy": {
+    type: String,
+    autoValue: function() {
+      if( this.isInsert ) {
+        return this.userId;
+      }
+    }
+  },
+
   likes: {
     type: [String],
     autoValue: function() {
