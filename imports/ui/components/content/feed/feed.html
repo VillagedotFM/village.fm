@@ -126,7 +126,7 @@
                       <div class="posted-comment">
                           <div class="posted-comment__inner">
                               <div class="posted-comment__upvote-cell">
-                                  <div class="upvote-block upvote-block--active">
+                                  <div class="upvote-block {{commentUpvoted}}">
                                       <i class="fa fa-caret-up upvote-block__arrow"></i>
                                       <span class="upvote-block__number">{{likes.length}}</span>
                                   </div>
@@ -145,7 +145,7 @@
                                   </div>
                               </div>
                               <div class="posted-comment__date-cell">
-                                  <span class="posted-comment__time-ago color-secondary-text">8h ago</span>
+                                  <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
                                   <span class="posted-comment__reply color-main">Reply</span>
                               </div>
                           </div>
@@ -167,8 +167,8 @@
                           {{#each replies}}
                             <div class="posted-comment posted-comment--reply">
                                 <div class="posted-comment__inner">
-                                    <div class="posted-comment__upvote-cell">
-                                        <div class="upvote-block">
+                                    <div class="posted-comment-reply__upvote-cell" data-value="{{@index}}" data-parent="{{../_id}}">
+                                        <div class="upvote-block {{commentUpvoted}}">
                                             <i class="fa fa-caret-up upvote-block__arrow"></i>
                                             <span class="upvote-block__number">{{likes.length}}</span>
                                         </div>
@@ -187,7 +187,7 @@
                                         </div>
                                     </div>
                                     <div class="posted-comment__date-cell">
-                                        <span class="posted-comment__time-ago color-secondary-text">11h ago</span>
+                                        <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
                                     </div>
                                 </div>
                             </div>

@@ -1857,6 +1857,12 @@ background-position: -150px -350px;
     display: table-cell;
     vertical-align: top;
 }
+.posted-comment-reply__upvote-cell {
+    width: 40px;
+    padding-top: 6px;
+    display: table-cell;
+    vertical-align: top;
+}
 .posted-comment__comment-cell {
     display: table-cell;
     vertical-align: top;
@@ -1886,7 +1892,7 @@ background-position: -150px -350px;
     display: table-cell;
     vertical-align: top;
     text-align: right;
-    width: 45px;
+    width: 100px;
     font-size: 12px;
     position: relative;
 }

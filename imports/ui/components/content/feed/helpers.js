@@ -50,6 +50,12 @@ Template.feed.helpers({
   replyTo: function(id) {
     return (id === appBodyRef.replyTo.get());
   },
+  commentUpvoted: function(){
+    if(_.contains(this.likes, Meteor.userId()))
+      return 'upvote-block--active';
+    else
+      return '';
+  },
   settings() {
     return {
       position: "below",

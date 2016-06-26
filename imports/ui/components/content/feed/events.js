@@ -41,7 +41,7 @@ Template.feed.events({
     comment.show();
 
   },
-  "click .upvote-block, click .post__rating": function(event, template){
+  "click .post__rating": function(event, template){
     if(Meteor.userId()) {
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
@@ -53,6 +53,35 @@ Template.feed.events({
       });
     } else {
       alert('Please login to upvote posts!');
+    }
+  },
+  "click .posted-comment__upvote-cell": function(event, template){
+    if(Meteor.userId()) {
+      let upvotedComment = this;
+      Meteor.call('upvoteComment', upvotedComment._id, function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Upvoted comment");
+        }
+      });
+    } else {
+      alert('Please login to upvote comments!');
+    }
+  },
+  "click .posted-comment-reply__upvote-cell": function(event, template){
+    if(Meteor.userId()) {
+      let parentComment = $(event.currentTarget).data('parent');
+      let index = $(event.currentTarget).data('value');
+      Meteor.call('upvoteReply', parentComment, index, function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Upvoted reply");
+        }
+      });
+    } else {
+      alert('Please login to upvote comments!');
     }
   },
   "click .user-comment__submit-cell": function(event, template){

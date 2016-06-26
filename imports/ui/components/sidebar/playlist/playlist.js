@@ -10,7 +10,7 @@ Template.playlist.onRendered(function playlistOnRendered(){
       let scrollTop = $('.wrapper').scrollTop();
 
       //Find the post (in view) that matches in the playlist
-      let index = parseInt(scrollTop / 850);  //850 is semi arbitrary
+      let index = parseInt(scrollTop / 500);  //850 is semi arbitrary
 
       //Remove arrow on everything else and add it to correct playlist item
       $('.sr-playlist__item').removeClass('sr-playlist__item--active');
@@ -18,10 +18,11 @@ Template.playlist.onRendered(function playlistOnRendered(){
 
       //Scroll playlist to the current post
       $('.sr-playlist').scrollTop(index * 50);
+      // console.log(scrollTop);
 
       //Find how many times the user has scrolled to the bottom
       let oldBottomHits = appBodyRef.bottomHits.get();
-      let bottomHits = parseInt(scrollTop / 2250);  //2250 is bottom of page
+      let bottomHits = parseInt(scrollTop / 1300);  //2250 is bottom of page
 
       if (bottomHits > oldBottomHits) { //Only set new value if it's greater than the last
         appBodyRef.bottomHits.set(bottomHits);
