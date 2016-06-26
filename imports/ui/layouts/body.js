@@ -2,6 +2,7 @@ import { Posts } from '../../api/posts/posts.js';
 import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
+import { Inbox } from '../../api/inbox/inbox.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -27,9 +28,11 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   this.subscribe('villages.all');
   this.subscribe('posts.all');
   this.subscribe('comments.all');
+  this.subscribe('inbox.all');
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
+  window.Inbox = Inbox;
 
   //Set up reactive-vars
   appBodyRef = this;

@@ -180,7 +180,7 @@ Meteor.methods({
     } else if (post.type === 'soundcloud') {
       let tempDuration = moment.duration(post.duration);  //Convert milliseconds to X:XX
       var seconds = tempDuration.seconds();
-      if (seconds.toString.length < 2) {
+      if (seconds.toString().length < 2) {
         seconds = '0'+seconds;
       }
       post.duration = tempDuration.minutes() + ":" + seconds;
@@ -190,7 +190,6 @@ Meteor.methods({
       tempTaggedUsers.push(user._id);
     });
     post.taggedUsers = tempTaggedUsers;
-    console.log(tempTaggedUsers);
     return Posts.insert(post);
   },
   tagUsers:function(post, taggedUsers) {

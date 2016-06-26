@@ -1,24 +1,5 @@
 import { Template } from 'meteor/templating';
 
 import './inbox.html';
-
-
-Template.inbox.helpers({
-  create: function(){
-
-  },
-  rendered: function(){
-
-  },
-  destroyed: function(){
-
-  },
-});
-
-Template.inbox.events({
-  //TODO: reactive-var to hide/show inbox
-  "click .sr-inbox__arrow": function(event, template){
-    $('.sr-playlist__item--inbox').toggle();
-    $('.sr-inbox__arrow').toggleClass('fa-caret-up');
-  }
-});
+import './helpers.js';
+import './events.js';

@@ -37,5 +37,11 @@ Template.playlist.events({
         window['scplayer-' + selectedId].play();
       }
     }
+  },
+  "click .sr-playlist__remove": function(event, template) {
+    let postId = this._id;
+    let inboxId = Inbox.findOne({postId:postId, to: Meteor.userId()})._id;
+    Inbox.remove({_id:inboxId});
+
   }
 });

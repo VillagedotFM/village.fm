@@ -34,6 +34,15 @@ Template.playlist.helpers({
     appBodyRef.postOrder.set(posts);
     return posts;
   },
+  inboxItems() {
+    return Inbox.find({to: Meteor.userId()});
+  },
+  inboxPost: function() {
+    return Posts.findOne(this.postId);
+  },
+  sentAgo: function(createdAt) {
+    return moment(createdAt).fromNow();
+  },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
       return 'upvote-block--active';
