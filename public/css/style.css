@@ -182,6 +182,9 @@ input, textarea {
 .posts-wrapper{
   padding-bottom: 100px;
 }
+.inbox-post {
+  background-color: #fff3f3 !important;
+}
 .arrow-back {
     display: block;
     width: 12px;

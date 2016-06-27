@@ -1,6 +1,23 @@
 Template.feed.helpers({
   posts() {
-    return appBodyRef.displayPosts.get();
+    if (appBodyRef.inboxOpen.get()) {
+      let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
+      let displayPosts = appBodyRef.displayPosts.get();
+      displayPosts.splice(0, inboxCount);
+      return displayPosts;
+    } else {
+      return appBodyRef.displayPosts.get();
+    }
+  },
+  showInbox() {
+    return appBodyRef.inboxOpen.get();
+  },
+  inboxItems() {
+    var inboxItems = [];
+    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+      inboxItems.push(Posts.findOne(inboxItem.postId));
+    });
+    return inboxItems;
   },
   comments: function() {
     return Comments.find({postId: this._id}).fetch();

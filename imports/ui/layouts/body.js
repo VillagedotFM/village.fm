@@ -48,6 +48,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.replyTo = new ReactiveVar(null);       //Comment to reply to
 
+  appBodyRef.inboxOpen = new ReactiveVar(false);      
+
   //Tab states
   appBodyRef.timeFilter = new ReactiveVar('week');
   appBodyRef.profileTab = new ReactiveVar('upvotes');

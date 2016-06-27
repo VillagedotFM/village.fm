@@ -30,9 +30,31 @@ Template.playlist.helpers({
       posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotedBy:-1, lastUpvote:-1}});
     }
 
-    //Set post order
-    appBodyRef.postOrder.set(posts);
-    return posts;
+    //Inbox
+    if (appBodyRef.inboxOpen.get()) {
+      posts = posts.fetch();
+      var inboxItems = [];
+      _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+        inboxItems.push(Posts.findOne(inboxItem.postId));
+      });
+      _.each(inboxItems, function(inboxItem, index) {
+        posts.splice(index, 0, inboxItem);
+      });
+      appBodyRef.postOrder.set(posts);
+
+      let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
+      let displayPosts = posts;
+      displayPosts.splice(0, inboxCount);
+      return displayPosts;
+    } else {
+      //Set post order
+      appBodyRef.postOrder.set(posts.fetch());
+      return posts;
+    }
+
+  },
+  showInbox() {
+    return appBodyRef.inboxOpen.get();
   },
   inboxItems() {
     return Inbox.find({to: Meteor.userId()});

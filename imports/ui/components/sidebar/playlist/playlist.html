@@ -1,44 +1,45 @@
 <template name='playlist'>
   <div class="sr-playlist sr-playlist{{profilePadding}}">
       <ul class="sr-playlist__list bg-color-playlist">
-
-        {{#each inboxItems}}
-          <li class="sr-playlist__item sr-playlist__item--inbox">
-            {{#with inboxPost}}
-              <div class="sr-playlist__left">
-                  <div class="upvote-block {{isUpvoted}}">
-                      <i class="fa fa-caret-up upvote-block__arrow"></i>
-                      <span class="upvote-block__number">{{upvotedBy.length}}</span>
-                  </div>
-              </div>
-              <div class="sr-playlist__right-btn"></div>
-              <div class="sr-playlist__right">
-                <button class="sr-playlist__remove"></button>
-                  {{#if videoReady @index}}
-                    <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
-                  {{else}}
-                    <span class="sr-playlist__spinner {{showSpinner}}"></span>
-                  {{/if}}
-                  {{#if showEqualizer}}
-                    <span class="sr-playlist__equalizer"></span>
-                  {{else}}
-                    <span class="sr-playlist__time">{{duration}}</span>
-                  {{/if}}
-              </div>
-              <div class="sr-playlist__middle">
-                  <span class="sr-playlist__title">
-                      <span class="sr-playlist__artist">{{artist}}</span>
-                      - {{title}}</span>
-                  <br>
-                  <span class="sr-playlist__posted-by">
-                      sent by
-                      <span class="sr-playlist__author">{{getUserName ../from}}</span>
-                      <span class="sr-playlist__date">{{sentAgo ../createdAt}}</span>
-                  </span>
-              </div>
-              {{/with}}
-          </li>
-        {{/each}}
+        {{#if showInbox}}
+          {{#each inboxItems}}
+            <li class="sr-playlist__item sr-playlist__item--inbox">
+              {{#with inboxPost}}
+                <div class="sr-playlist__left">
+                    <div class="upvote-block {{isUpvoted}}">
+                        <i class="fa fa-caret-up upvote-block__arrow"></i>
+                        <span class="upvote-block__number">{{upvotedBy.length}}</span>
+                    </div>
+                </div>
+                <div class="sr-playlist__right-btn"></div>
+                <div class="sr-playlist__right">
+                  <button class="sr-playlist__remove"></button>
+                    {{#if videoReady @index}}
+                      <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
+                    {{else}}
+                      <span class="sr-playlist__spinner {{showSpinner}}"></span>
+                    {{/if}}
+                    {{#if showEqualizer}}
+                      <span class="sr-playlist__equalizer"></span>
+                    {{else}}
+                      <span class="sr-playlist__time">{{duration}}</span>
+                    {{/if}}
+                </div>
+                <div class="sr-playlist__middle">
+                    <span class="sr-playlist__title">
+                        <span class="sr-playlist__artist">{{artist}}</span>
+                        - {{title}}</span>
+                    <br>
+                    <span class="sr-playlist__posted-by">
+                        sent by
+                        <span class="sr-playlist__author">{{getUserName ../from}}</span>
+                        <span class="sr-playlist__date">{{sentAgo ../createdAt}}</span>
+                    </span>
+                </div>
+                {{/with}}
+            </li>
+          {{/each}}
+        {{/if}}
           {{#each posts}}
             <li class="sr-playlist__item" id="playlist-{{@index}}">
                 <div class="sr-playlist__left">

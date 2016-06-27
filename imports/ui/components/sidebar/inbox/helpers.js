@@ -5,5 +5,8 @@ Template.inbox.helpers({
     } else {
       return Inbox.find({to: Meteor.userId()}).fetch().length;
     }
+  },
+  arrowUp() {
+    return appBodyRef.inboxOpen.get() ? 'fa-caret-up' : '';
   }
 });

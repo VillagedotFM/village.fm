@@ -36,7 +36,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
     appBodyRef.videosReady.push(index);
 
-    let allPosts = appBodyRef.postOrder.get().fetch();
+    let allPosts = appBodyRef.postOrder.get();
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
@@ -81,7 +81,7 @@ Template.feed.onRendered(function feedOnRendered() {
       client_id: 'aee8647bad94cb6e201efcf6bee4224d'
     });
 
-    let posts = appBodyRef.postOrder.get().fetch();
+    let posts = appBodyRef.postOrder.get();
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
@@ -99,7 +99,7 @@ Template.feed.onRendered(function feedOnRendered() {
   feedRef.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
-      let allPosts = appBodyRef.postOrder.get().fetch();
+      let allPosts = appBodyRef.postOrder.get();
 
       _.each(orderedPosts, function(post, index) {
         if (post.type === 'youtube') {
@@ -140,7 +140,7 @@ Template.feed.onRendered(function feedOnRendered() {
   //Populate SC iframes
   feedRef.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let allPosts = appBodyRef.postOrder.get().fetch();
+      let allPosts = appBodyRef.postOrder.get();
 
       _.each(allPosts, function(post, index) {
         if (post.type === 'soundcloud') {
