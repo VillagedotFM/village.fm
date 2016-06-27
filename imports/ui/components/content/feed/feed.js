@@ -70,7 +70,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 }
 
 
-Template.feed.onRendered(function feedOnRendered() {
+Template.feed.onCreated(function feedOnRendered() {
   const feedRef = this;
 
   //Set Pagination (sort of):

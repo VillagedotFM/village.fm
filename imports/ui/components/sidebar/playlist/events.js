@@ -3,7 +3,9 @@ pauseEverythingElse = function(id) {
   let posts = appBodyRef.postOrder.get();
   _.each(posts, function(post){ //TODO: add yt pauses
     if (post && post.type === 'soundcloud' && post._id !== id) {
-      window['scplayer-' + post._id].pause();
+      if (window['scplayer-' + post._id]) {
+        window['scplayer-' + post._id].pause();
+      }
     }
   });
 }

@@ -11,54 +11,20 @@
                   <span class="color-secondary-text profile__upvotes">- {{getUpvotesNum _id}} upvotes</span>
               </div>
               <div class="last-listens">
-                  <span class="last-listens__title">Last Listens:</span>
+                  <span class="last-listens__title">Last Upvotes:</span>
                   <div class="last-listens__wrap">
                       <div class="last-listens__inner">
-                          <a href="#" class="last-listens__item">
-                              <div class="last-listens__img-wrap">
-                                  <img src="images/last-listen-item-1.png" alt="">
-                              </div>
-                              <div class="last-listens__descr">
-                                  <span class="last-listens__track-name">Imagine Dragons</span>
-                                  <span>Smoke and Mirrors</span>
-                              </div>
-                          </a>
-                          <a href="#" class="last-listens__item">
-                              <div class="last-listens__img-wrap">
-                                  <img src="images/last-listen-item-2.png" alt="">
-                              </div>
-                              <div class="last-listens__descr">
-                                  <span class="last-listens__track-name">Bastille</span>
-                                  <span>Of The Night</span>
-                              </div>
-                          </a>
-                          <a href="#" class="last-listens__item">
-                              <div class="last-listens__img-wrap">
-                                  <img src="images/last-listen-item-3.png" alt="">
-                              </div>
-                              <div class="last-listens__descr">
-                                  <span class="last-listens__track-name">The Neighborhood</span>
-                                  <span>Sweater Weather</span>
-                              </div>
-                          </a>
-                          <a href="#" class="last-listens__item">
-                              <div class="last-listens__img-wrap">
-                                  <img src="images/last-listen-item-4.png" alt="">
-                              </div>
-                              <div class="last-listens__descr">
-                                  <span class="last-listens__track-name">Sebastian Lind</span>
-                                  <span>Waiting for Someone</span>
-                              </div>
-                          </a>
+                        {{#each lastUpvotes}}
                           <a href="" class="last-listens__item">
                               <div class="last-listens__img-wrap">
-                                  <img src="images/last-listen-item-5.png" alt="">
+                                  <img src="{{thumbnail}}" alt="">
                               </div>
                               <div class="last-listens__descr">
-                                  <span class="last-listens__track-name">Adele</span>
-                                  <span>don't you remember</span>
+                                  <span class="last-listens__track-name">{{artist}}</span>
+                                  <span>{{title}}</span>
                               </div>
                           </a>
+                        {{/each}}
                       </div>
                   </div>
               </div>
