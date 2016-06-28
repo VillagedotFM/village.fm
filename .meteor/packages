@@ -25,9 +25,9 @@ dburles:collection-helpers
 accounts-facebook
 http
 session
-hpx7:youtube-iframe-player
 sacha:spin
 momentjs:moment
 manuel:reactivearray
 jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
+keepnox:perfect-scrollbar

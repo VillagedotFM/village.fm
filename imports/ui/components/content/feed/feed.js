@@ -1,34 +1,7 @@
-import { YTPlayer } from 'meteor/hpx7:youtube-iframe-player';
-
 import './feed.html';
 import './helpers.js';
 import './events.js';
 
-//initialize 50 youtube iframes here because I can't set them programmatically anywhere so fuck it
-for(var i = 0; i < 50; i++) {
-  let name = 'yt'+i;  //yt0 - yt49
-  window[name] = new YTPlayer(name, {});
-}
-
-//Grab the next open iframe (initialized on line 8)
-//If all 50 are populated, grab the smallest one that isn't playing
-window.getNextYTPlayer = function() {
-  for(var i = 0; i < 50; i++) {
-    let name = 'yt'+i;  //yt0 - yt49
-    //Make sure the iframe is empty
-    if (window[name].player) {
-      if (i === 49) {
-        return 'full'; //findNonPlayingYTPlayer()
-      }
-      continue;
-    } else {
-      return {
-        ytplayer: window[name],
-        id: name
-      }
-    }
-  }
-}
 
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   SC.stream('/tracks/'+post.vidId).then(function(player){
@@ -59,7 +32,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
       if (nextPost) { //Play next post if it exists
         if (nextPost.type === 'youtube') {
-          yt0.player.pauseVideo();
+          //TODO: yt: play yt video
         } else {
           window['scplayer-' + nextPost._id].play();
         }
@@ -144,9 +117,7 @@ Template.feed.onCreated(function feedOnRendered() {
 
       _.each(allPosts, function(post, index) {
         if (post.type === 'soundcloud') {
-          if (!window['scplayer-'+post._id]) {
             createSCPlayer(post, index);
-          }
         }
       });
     }

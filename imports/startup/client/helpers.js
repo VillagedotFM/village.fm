@@ -1,6 +1,5 @@
 Meteor.subscribe("users.allData");
 
-window.yt;
 
 UI.registerHelper("videoReady", function (index) {
   return (_.contains(appBodyRef.videosReady.list(), index));

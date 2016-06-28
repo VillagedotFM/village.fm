@@ -9,7 +9,7 @@ Template.controls.events({
     }
 
     if (currentPost.type === 'youtube') {
-      yt0.player.playVideo();
+      //TODO: yt: play yt video
     } else {
       window['scplayer-' + currentPost._id].play();
     }
@@ -17,7 +17,7 @@ Template.controls.events({
   "click .sr-controls__play--paused": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
     if (currentPost.type === 'youtube') {
-      yt0.player.pauseVideo();
+      //TODO: yt: pause yt video
     } else {
       window['scplayer-' + currentPost._id].pause();
     }
@@ -38,7 +38,7 @@ Template.controls.events({
       //go back a post if there is a prevPost
       if (prevPost) {
         if (prevPost.type === 'youtube') {
-          yt0.player.pauseVideo();
+          //TODO: yt: play yt video
         } else {
           window['scplayer-' + prevPost._id].play();
         }
@@ -52,7 +52,7 @@ Template.controls.events({
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        yt0.player.pauseVideo();
+        //TODO: yt: play yt video
       } else {
         window['scplayer-' + nextPost._id].play();
       }

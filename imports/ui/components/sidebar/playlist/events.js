@@ -31,7 +31,7 @@ Template.playlist.events({
 
     if (selectedPost.type === 'youtube') {
       //TODO: check if iframe is playing
-      yt0.player.playVideo();
+      //TODO: yt: play yt video
     } else {
       if (window['scplayer-' + selectedId]._isPlaying) {
         window['scplayer-' + selectedId].pause();

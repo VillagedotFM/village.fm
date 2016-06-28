@@ -1,16 +1,16 @@
 $(document).ready(function(){
     (function () {
-      var lastListensBlock = $('.last-listens__inner');
-
-      if(lastListensBlock.length !== 0){
-          var lastListensWidth, lastListensItem;
-
-          lastListensItem = $('.last-listens__item');
-          lastListensWidth = lastListensItem.length * lastListensItem.outerWidth();
-          lastListensBlock.css('width', lastListensWidth + "px");
-
-          $('.last-listens__wrap').perfectScrollbar();
-      }
+      // var lastListensBlock = $('.last-listens__inner');
+      //
+      // if(lastListensBlock.length !== 0){
+      //     var lastListensWidth, lastListensItem;
+      //
+      //     lastListensItem = $('.last-listens__item');
+      //     lastListensWidth = lastListensItem.length * lastListensItem.outerWidth();
+      //     lastListensBlock.css('width', lastListensWidth + "px");
+      //
+      //     $('.last-listens__wrap').perfectScrollbar();
+      // }
 
       $('.more-users-dropdown__wrap').perfectScrollbar();
 

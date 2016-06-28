@@ -126,7 +126,7 @@ Template.feed.events({
     let selectedPost = Posts.findOne(selectedId);
 
     if (selectedPost.type === 'youtube') {
-      yt0.player.playVideo();
+      //TODO: yt: play yt video
     } else {
       window['scplayer-' + selectedId].play();
     }
@@ -136,7 +136,7 @@ Template.feed.events({
     let selectedPost = Posts.findOne(selectedId);
 
     if (selectedPost.type === 'youtube') {
-      yt0.player.pauseVideo();
+      //TODO: yt: pause yt video
     } else {
       window['scplayer-' + selectedId].pause();
     }

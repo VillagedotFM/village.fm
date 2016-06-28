@@ -10,6 +10,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import  moment  from 'moment';
 import SC from '../../../public/js/sc3.js';
+import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 
 import './body.html';
 import '../components/mobile-menu/mobile-menu.js';
@@ -48,7 +49,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.replyTo = new ReactiveVar(null);       //Comment to reply to
 
-  appBodyRef.inboxOpen = new ReactiveVar(false);      
+  appBodyRef.inboxOpen = new ReactiveVar(false);
 
   //Tab states
   appBodyRef.timeFilter = new ReactiveVar('week');
@@ -59,7 +60,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
-
 });
 
 Template.app_body.onRendered(function() {

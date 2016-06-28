@@ -45,9 +45,6 @@ Template.feed.helpers({
       return ' and ' + (this.upvotedBy.length - 3) + ' others';
     }
   },
-  getNextYTPlayer: function() {
-    return window.getNextYTPlayer().id;  //grab the id of the next available yt player
-  },
   videoReady: function(index) {          //Redundant of General helper but necessary because of weirdness
     return (_.contains(appBodyRef.videosReady.list(), index));
   },
