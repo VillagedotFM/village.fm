@@ -78,8 +78,9 @@ UI.registerHelper("getUserUpvoteRank", function (userId) {
 });
 
 UI.registerHelper("getNumberEnd", function (num) {
+  let numString = '0';
   if (num) {
-    let numString = num.toString();
+    numString = num.toString();
   }
   let last = numString[(numString.length - 1)];
   switch (last) {
