@@ -32,7 +32,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
       if (nextPost) { //Play next post if it exists
         if (nextPost.type === 'youtube') {
-          //TODO: yt: play yt video
+          window['ytplayer-' + nextPost._id].playVideo();
         } else {
           window['scplayer-' + nextPost._id].play();
         }
@@ -42,8 +42,67 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   });
 }
 
+export const createYTPlayer = function(post, index) {
+  let allPosts = appBodyRef.postOrder.get();
+  let yt_id = post.vidId;
+  let name = 'ytplayer-'+ post._id;
+
+  if (index == 'last') {
+    index = appBodyRef.displayPosts.get().length;
+  }
+
+  onPlayerReady = function(event) {
+    console.log('ready');
+    appBodyRef.videosReady.push(index);
+  }
+
+  onPlayerStateChange = function(event) {
+    if(event.data === 0){           //ENDED
+      let nextPost = appBodyRef.nextPost.get();
+
+      if (nextPost) { //Play next post if it exists
+        if (nextPost.type === 'youtube') {
+          window['ytplayer-' + nextPost._id].playVideo();
+        } else {
+          window['scplayer-' + nextPost._id].play();
+        }
+        appBodyRef.nowPlaying.set(nextPost);
+      }
+    } else if(event.data === 1){    //PLAYING
+      pauseEverythingElse(post._id);
+      appBodyRef.prevPost.set(allPosts[index - 1]);
+      appBodyRef.nextPost.set(allPosts[index + 1]);
+      appBodyRef.nowPlaying.set(post);
+    }
+
+    let state = event.data;
+    console.log(state);
+    appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
+
+    //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
+    setInterval(function(){ //Track video progress for scrubber
+      var completed = window[name].getCurrentTime();
+      appBodyRef.completed.set(completed)
+    }, 100);
+  }
+
+  window[name] = new YT.Player(name, {
+    events: {
+      videoId: yt_id,
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
 
 Template.feed.onCreated(function feedOnRendered() {
+  //Load youtube iframe api async
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
   const feedRef = this;
 
   //Set Pagination (sort of):
@@ -72,40 +131,14 @@ Template.feed.onCreated(function feedOnRendered() {
   feedRef.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
-      let allPosts = appBodyRef.postOrder.get();
 
-      _.each(orderedPosts, function(post, index) {
-        if (post.type === 'youtube') {
-          let yt_id = post.vidId;
-          let yt = getNextYTPlayer().ytplayer; //Grab open iframe
-
-          if (yt.ready()) {
-            //Add index to array of videos that are ready
-            appBodyRef.videosReady.push(index);
-
-            yt.player.cueVideoById(yt_id);        //Cue up video in iframe
-
-            yt.player.setSize(479, 270);
-
-            yt.player.addEventListener('onStateChange', function (event) {
-              if(event.data === 0){           //ENDED
-                //TODO: start next song if there is one
-              } else if(event.data === 1){    //PLAYING
-                appBodyRef.nowPlaying.set(post);
-              }
-
-              let state = event.data;
-              appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
-
-              //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-              setInterval(function(){ //Track video progress for scrubber
-                var completed = yt.player.getCurrentTime();
-                appBodyRef.completed.set(completed)
-              }, 100);
-            });
+      onYouTubeIframeAPIReady = function() {
+        _.each(orderedPosts, function(post, index) {
+          if (post.type === 'youtube') {
+            createYTPlayer(post, index);
           }
-        }
-      });
+        });
+      }
     }
   });
 

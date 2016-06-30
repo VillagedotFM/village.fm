@@ -4,7 +4,7 @@ import './helpers.js';
 
 
 Template.playlist.onRendered(function playlistOnRendered(){
-  this.autorun(function(){
+    this.autorun(function(){
     //On scroll of window
     $('.wrapper').on('scroll', function(){
       let scrollTop = $('.wrapper').scrollTop();

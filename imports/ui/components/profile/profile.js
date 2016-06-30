@@ -12,7 +12,6 @@ Template.profile.onRendered(function() {
   this.autorun(function(){
     Meteor.setTimeout(function() {
       var lastListensBlock = $('.last-listens__inner');
-      console.log(lastListensBlock);
 
       if(lastListensBlock.length !== 0){
         var lastListensWidth, lastListensItem;

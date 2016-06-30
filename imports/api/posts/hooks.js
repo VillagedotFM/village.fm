@@ -3,8 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import { Posts } from './posts.js';
 import { Inbox } from '../inbox/inbox.js';
 
+
 if(Meteor.isServer){
   Posts.after.insert(function (userId, post) {
+    //Create YTPlayer
+    // createYTPlayer(post, "last");
+
+    //Insert post into taggedUsers inbox
     var tags = post.taggedUsers;
     var tagged = _.uniq(tags, function(tag) { return tag; });
 

@@ -53,7 +53,7 @@
                 <div class="post__video-wrapper">
                     <div class="post__video" style="background-image: url({{thumbnail}})">
                       {{#if isYoutube}}
-                        <!-- youtube iframe -->
+
                       {{/if}}
 
                       {{#if videoReady @index}}
@@ -284,7 +284,9 @@
               <div class="post__video-wrapper">
                   <div class="post__video" style="background-image: url({{thumbnail}})">
                     {{#if isYoutube}}
-                      <!-- youtube iframe -->
+                    <iframe id="ytplayer-{{_id}}" type="text/html" width="464" height="270"
+                      src="http://www.youtube.com/embed/{{vidId}}?enablejsapi=1&origin=http://localhost:3000"
+                      frameborder="0"></iframe>
                     {{/if}}
 
                     {{#if videoReady @index}}
