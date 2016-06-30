@@ -78,12 +78,6 @@ export const createYTPlayer = function(post, index) {
     let state = event.data;
     console.log(state);
     appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
-
-    //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-    setInterval(function(){ //Track video progress for scrubber
-      var completed = window[name].getCurrentTime();
-      appBodyRef.completed.set(completed)
-    }, 100);
   }
 
   window[name] = new YT.Player(name, {
