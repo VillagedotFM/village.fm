@@ -76,7 +76,7 @@ Template.upload.events({
     var thumbnail;
     var title = '';
     if (type === 'youtube') {
-      thumbnail = "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
+      thumbnail = "https://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
 
       //Grab formatted auto and title
       //Only pass in title if Soundcloud
