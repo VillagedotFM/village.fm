@@ -9,7 +9,7 @@ Template.controls.events({
     }
 
     if (currentPost.type === 'youtube') {
-      //TODO: yt: play yt video
+      window['ytplayer-' + currentPost._id].playVideo();
     } else {
       window['scplayer-' + currentPost._id].play();
     }
@@ -17,7 +17,7 @@ Template.controls.events({
   "click .sr-controls__play--paused": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
     if (currentPost.type === 'youtube') {
-      //TODO: yt: pause yt video
+      window['ytplayer-' + currentPost._id].pauseVideo();
     } else {
       window['scplayer-' + currentPost._id].pause();
     }
@@ -30,7 +30,7 @@ Template.controls.events({
     if (completed > 5) {
       //seek to 0 if more than 5 seconds have passed
       if (currentPost.type === 'youtube') {
-
+        window['ytplayer-' + currentPost._id].seekTo(0);
       } else {
         window['scplayer-'+currentPost._id].seek(0);
       }
@@ -38,7 +38,7 @@ Template.controls.events({
       //go back a post if there is a prevPost
       if (prevPost) {
         if (prevPost.type === 'youtube') {
-          //TODO: yt: play yt video
+          window['ytplayer-' + prevPost._id].playVideo();
         } else {
           window['scplayer-' + prevPost._id].play();
         }
@@ -52,7 +52,7 @@ Template.controls.events({
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        //TODO: yt: play yt video
+        window['ytplayer-' + nextPost._id].playVideo();
       } else {
         window['scplayer-' + nextPost._id].play();
       }

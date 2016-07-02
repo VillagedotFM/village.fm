@@ -42,14 +42,10 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   });
 }
 
-export const createYTPlayer = function(post, index) {
+createYTPlayer = function(post, index) {
   let allPosts = appBodyRef.postOrder.get();
   let yt_id = post.vidId;
   let name = 'ytplayer-'+ post._id;
-
-  if (index == 'last') {
-    index = appBodyRef.displayPosts.get().length;
-  }
 
   onPlayerReady = function(event) {
     console.log('ready');
@@ -58,6 +54,9 @@ export const createYTPlayer = function(post, index) {
 
   onPlayerStateChange = function(event) {
     if(event.data === 0){           //ENDED
+      appBodyRef.state.set(0);      //Keep track of video state (playing/paused)
+      window['ytplayer-' + post._id].seekTo(0);
+      window['ytplayer-' + post._id].pauseVideo();
       let nextPost = appBodyRef.nextPost.get();
 
       if (nextPost) { //Play next post if it exists
@@ -69,15 +68,15 @@ export const createYTPlayer = function(post, index) {
         appBodyRef.nowPlaying.set(nextPost);
       }
     } else if(event.data === 1){    //PLAYING
+      appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
       pauseEverythingElse(post._id);
       appBodyRef.prevPost.set(allPosts[index - 1]);
       appBodyRef.nextPost.set(allPosts[index + 1]);
       appBodyRef.nowPlaying.set(post);
+    } else if (event.data === 2) {  //PAUSED
+      appBodyRef.state.set(2);      //Keep track of video state (playing/paused)
     }
 
-    let state = event.data;
-    console.log(state);
-    appBodyRef.state.set(state);  //Keep track of video state (playing/paused)
   }
 
   window[name] = new YT.Player(name, {

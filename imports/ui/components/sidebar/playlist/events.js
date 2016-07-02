@@ -1,10 +1,12 @@
 //To eliminate some weirdness with SC.stream, make sure everything else is paused
 pauseEverythingElse = function(id) {
   let posts = appBodyRef.postOrder.get();
-  _.each(posts, function(post){ //TODO: add yt pauses
-    if (post && post.type === 'soundcloud' && post._id !== id) {
+  _.each(posts, function(post){
+    if (post && post._id !== id) {
       if (window['scplayer-' + post._id]) {
         window['scplayer-' + post._id].pause();
+      } else if (window['ytplayer-' + post._id]) {
+        window['ytplayer-' + post._id].pauseVideo();
       }
     }
   });
@@ -25,19 +27,24 @@ Template.playlist.events({
       alert('Please login to upvote posts!');
     }
   },
-  "click .sr-playlist__play": function(event, template){
+  "click .sr-playlist__play--play": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
 
     if (selectedPost.type === 'youtube') {
-      //TODO: check if iframe is playing
-      //TODO: yt: play yt video
+      window['ytplayer-' + selectedId].playVideo();
     } else {
-      if (window['scplayer-' + selectedId]._isPlaying) {
-        window['scplayer-' + selectedId].pause();
-      } else {
-        window['scplayer-' + selectedId].play();
-      }
+      window['scplayer-' + selectedId].play();
+    }
+  },
+  "click .sr-playlist__play--paused": function(event, template){
+    let selectedId = event.currentTarget.id;
+    let selectedPost = Posts.findOne(selectedId);
+
+    if (selectedPost.type === 'youtube') {
+      window['ytplayer-' + selectedId].pauseVideo();
+    } else {
+      window['scplayer-' + selectedId].pause();
     }
   },
   "click .sr-playlist__remove": function(event, template) {

@@ -16,11 +16,8 @@ Template.bottom_player.helpers({
     setInterval(function(){ //Track video progress for scrubber, convert to seconds if SC
       let post = appBodyRef.nowPlaying.get();
       if (post.type === 'youtube') {
-        //Youtube doesn't have dynamic value so ping it multiple times per second to get updated value
-        setInterval(function(){ //Track video progress for scrubber
-          var completed = window['ytplayer-'+post._id].getCurrentTime();
-          appBodyRef.completed.set(completed)
-        }, 100);
+        var completed = window['ytplayer-'+post._id].getCurrentTime();
+        appBodyRef.completed.set(completed)
       } else {
         let completed = window['scplayer-'+post._id].currentTime();
         appBodyRef.completed.set(completed / 1000)
