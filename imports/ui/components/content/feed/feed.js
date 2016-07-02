@@ -126,6 +126,7 @@ Template.feed.onCreated(function feedOnRendered() {
       let orderedPosts = appBodyRef.displayPosts.get();
 
       onYouTubeIframeAPIReady = function() {
+        console.log("onYouTubeIframeAPIReady called");
         _.each(orderedPosts, function(post, index) {
           if (post.type === 'youtube') {
             createYTPlayer(post, index);
