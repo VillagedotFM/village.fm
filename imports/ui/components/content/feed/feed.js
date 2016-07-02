@@ -89,7 +89,7 @@ createYTPlayer = function(post, index) {
 }
 
 
-Template.feed.onCreated(function feedOnRendered() {
+Template.feed.onCreated(function feedOnCreated() {
   //Load youtube iframe api async
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -120,8 +120,23 @@ Template.feed.onCreated(function feedOnRendered() {
   });
 
 
-  //Populate iframes
+  //Populate SC iframes
   feedRef.autorun(function () {
+    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+      let allPosts = appBodyRef.postOrder.get();
+
+      _.each(allPosts, function(post, index) {
+        if (post.type === 'soundcloud') {
+            createSCPlayer(post, index);
+        }
+      });
+    }
+  });
+});
+
+Template.feed.onRendered(function feedOnRendered() {
+  //Populate iframes
+  this.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
 
@@ -133,20 +148,6 @@ Template.feed.onCreated(function feedOnRendered() {
           }
         });
       }
-    }
-  });
-
-
-  //Populate SC iframes
-  feedRef.autorun(function () {
-    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let allPosts = appBodyRef.postOrder.get();
-
-      _.each(allPosts, function(post, index) {
-        if (post.type === 'soundcloud') {
-            createSCPlayer(post, index);
-        }
-      });
     }
   });
 });
