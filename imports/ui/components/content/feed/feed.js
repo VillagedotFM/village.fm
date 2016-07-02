@@ -139,6 +139,7 @@ Template.feed.onRendered(function feedOnRendered() {
   this.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
+      console.log("onYouTubeIframeAPIReady next up");
 
       onYouTubeIframeAPIReady = function() {
         console.log("onYouTubeIframeAPIReady called");
