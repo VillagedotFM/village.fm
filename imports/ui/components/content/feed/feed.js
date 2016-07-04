@@ -90,13 +90,28 @@ createYTPlayer = function(post, index) {
 
 
 Template.feed.onCreated(function feedOnRendered() {
+  const feedRef = this;
+
+  //Populate iframes
+  feedRef.autorun(function () {
+      let orderedPosts = appBodyRef.displayPosts.get();
+
+      window.onYouTubeIframeAPIReady = function() {
+        console.log("onYouTubeIframeAPIReady");
+        _.each(orderedPosts, function(post, index) {
+          if (post.type === 'youtube') {
+            createYTPlayer(post, index);
+          }
+        });
+      }
+  });
+
   //Load youtube iframe api async
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  const feedRef = this;
 
   //Set Pagination (sort of):
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
@@ -116,23 +131,6 @@ Template.feed.onCreated(function feedOnRendered() {
       appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
     } else {
       appBodyRef.displayPosts.set(posts.slice(0, posts.length));
-    }
-  });
-
-
-  //Populate iframes
-  feedRef.autorun(function () {
-    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let orderedPosts = appBodyRef.displayPosts.get();
-
-      window.onYouTubeIframeAPIReady = function() {
-        console.log("onYouTubeIframeAPIReady");
-        _.each(orderedPosts, function(post, index) {
-          if (post.type === 'youtube') {
-            createYTPlayer(post, index);
-          }
-        });
-      }
     }
   });
 
