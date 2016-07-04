@@ -116,7 +116,11 @@ Template.feed.onCreated(function feedOnRendered() {
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  if(playerReady) { onYouTubeIframeAPIReady(); console.log("force to call again") }
+  feedRef.autorun(function () {
+      let orderedPosts = appBodyRef.displayPosts.get();
+
+      if(playerReady) { onYouTubeIframeAPIReady(); console.log("force to call again") }
+  });
 
   //Set Pagination (sort of):
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
