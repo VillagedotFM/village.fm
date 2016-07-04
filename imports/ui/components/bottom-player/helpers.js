@@ -8,7 +8,9 @@ Template.bottom_player.helpers({
   nowPlaying: function() {
     let nowPlayingPost = appBodyRef.nowPlaying.get();
     if (nowPlayingPost) {
-      return Posts.findOne({_id:nowPlayingPost._id});
+      return nowPlayingPost;
+    } else {
+      return appBodyRef.displayPosts.get()[0]
     }
   },
   completed: function() {

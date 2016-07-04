@@ -125,7 +125,7 @@ Template.feed.onCreated(function feedOnRendered() {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
       let orderedPosts = appBodyRef.displayPosts.get();
 
-      onYouTubeIframeAPIReady = function() {
+      window.onYouTubeIframeAPIReady = function() {
         console.log("onYouTubeIframeAPIReady");
         _.each(orderedPosts, function(post, index) {
           if (post.type === 'youtube') {
