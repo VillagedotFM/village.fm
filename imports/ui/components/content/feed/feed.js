@@ -89,7 +89,7 @@ createYTPlayer = function(post, index) {
 }
 
 
-Template.feed.onCreated(function feedOnCreated() {
+Template.feed.onCreated(function feedOnRendered() {
   //Load youtube iframe api async
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -120,6 +120,23 @@ Template.feed.onCreated(function feedOnCreated() {
   });
 
 
+  //Populate iframes
+  feedRef.autorun(function () {
+    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
+      let orderedPosts = appBodyRef.displayPosts.get();
+
+      onYouTubeIframeAPIReady = function() {
+        console.log("onYouTubeIframeAPIReady");
+        _.each(orderedPosts, function(post, index) {
+          if (post.type === 'youtube') {
+            createYTPlayer(post, index);
+          }
+        });
+      }
+    }
+  });
+
+
   //Populate SC iframes
   feedRef.autorun(function () {
     if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
@@ -130,25 +147,6 @@ Template.feed.onCreated(function feedOnCreated() {
             createSCPlayer(post, index);
         }
       });
-    }
-  });
-});
-
-Template.feed.onRendered(function feedOnRendered() {
-  //Populate iframes
-  this.autorun(function () {
-    if (appBodyRef.displayPosts.get().length > 0) {  //if feed has posts
-      let orderedPosts = appBodyRef.displayPosts.get();
-      console.log("onYouTubeIframeAPIReady next up");
-
-      onYouTubeIframeAPIReady = function() {
-        console.log("onYouTubeIframeAPIReady called");
-        _.each(orderedPosts, function(post, index) {
-          if (post.type === 'youtube') {
-            createYTPlayer(post, index);
-          }
-        });
-      }
     }
   });
 });

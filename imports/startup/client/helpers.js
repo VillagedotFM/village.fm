@@ -51,7 +51,7 @@ UI.registerHelper("getUpvotesNum", function (userId) {
   let posts = Posts.find({"createdBy": userId}).fetch();
   let upvotesCollected = 0;
   posts.forEach(function(post) {
-    upvotesCollected += post.upvotedBy.length;
+    upvotesCollected += post.upvotes;
   });
 
   return upvotesCollected;

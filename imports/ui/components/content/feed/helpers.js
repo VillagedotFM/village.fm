@@ -41,8 +41,8 @@ Template.feed.helpers({
       return '';
   },
   upvoterOthers: function() {
-    if (this.upvotedBy.length > 3) {
-      return ' and ' + (this.upvotedBy.length - 3) + ' others';
+    if (this.upvotes > 3) {
+      return ' and ' + (this.upvotes - 3) + ' others';
     }
   },
   videoReady: function(index) {          //Redundant of General helper but necessary because of weirdness

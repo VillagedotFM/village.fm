@@ -15,6 +15,9 @@ Meteor.methods({
         $addToSet: {
             upvotedBy: this.userId
         },
+        $inc: {
+            upvotes: 1
+        },
         $set: {
           lastUpvote: new Date()
         }
@@ -26,6 +29,9 @@ Meteor.methods({
       ,{
         $pull: {
             upvotedBy: this.userId
+        },
+        $inc: {
+            upvotes: -1
         }
       });
     }
