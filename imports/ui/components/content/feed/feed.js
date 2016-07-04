@@ -2,6 +2,10 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
+var playerReady = false
+window.onYouTubeIframeAPIReady = function() { //simple implementation
+    playerReady = true;
+}
 
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   SC.stream('/tracks/'+post.vidId).then(function(player){
@@ -112,6 +116,7 @@ Template.feed.onCreated(function feedOnRendered() {
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+  if(playerReady) { onYouTubeIframeAPIReady(); console.log("force to call again") }
 
   //Set Pagination (sort of):
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
