@@ -2,9 +2,10 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-var playerReady = false
-window.onYouTubeIframeAPIReady = function() { //simple implementation
+playerReady = false
+onYouTubeIframeAPIReady = function() { //simple implementation
     playerReady = true;
+    window.onYouTubeIframeAPIReady();
 }
 
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
@@ -93,12 +94,25 @@ createYTPlayer = function(post, index) {
 }
 
 
-Template.feed.onCreated(function feedOnRendered() {
+Template.feed.onCreated(function feedOnCreated() {
   const feedRef = this;
 
   //Populate iframes
   feedRef.autorun(function () {
       let orderedPosts = appBodyRef.displayPosts.get();
+
+      var checkYT = setInterval(function () {
+          if(YT.loaded){
+              //...setup video here using YT.Player()
+              _.each(orderedPosts, function(post, index) {
+                if (post.type === 'youtube') {
+                  createYTPlayer(post, index);
+                }
+              });
+
+              clearInterval(checkYT);
+          }
+      }, 100);
 
       window.onYouTubeIframeAPIReady = function() {
         console.log("onYouTubeIframeAPIReady");
@@ -108,7 +122,9 @@ Template.feed.onCreated(function feedOnRendered() {
           }
         });
       }
+
   });
+
 
   //Load youtube iframe api async
   var tag = document.createElement('script');
@@ -116,7 +132,7 @@ Template.feed.onCreated(function feedOnRendered() {
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  if(playerReady) { onYouTubeIframeAPIReady(); console.log("force to call again") }
+
 
   //Set Pagination (sort of):
   //Start by displaying 3 posts, then add 3 everytime the user scrolls to the bottom
@@ -150,6 +166,15 @@ Template.feed.onCreated(function feedOnRendered() {
             createSCPlayer(post, index);
         }
       });
+    }
+  });
+});
+
+Template.feed.onRendered(function feedOnRendered() {
+  this.autorun(function(){
+    let posts = appBodyRef.displayPosts.get();
+    if (playerReady) {
+      window.onYouTubeIframeAPIReady();
     }
   });
 });
