@@ -2,11 +2,6 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-playerReady = false
-onYouTubeIframeAPIReady = function() { //simple implementation
-    playerReady = true;
-    window.onYouTubeIframeAPIReady();
-}
 
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   SC.stream('/tracks/'+post.vidId).then(function(player){
@@ -84,13 +79,17 @@ createYTPlayer = function(post, index) {
 
   }
 
-  window[name] = new YT.Player(name, {
-    events: {
-      videoId: yt_id,
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
+  if (window[name].l) {
+    console.log(window[name].l);
+  } else {
+    window[name] = new YT.Player(name, {
+      events: {
+        videoId: yt_id,
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
 }
 
 
@@ -102,27 +101,16 @@ Template.feed.onCreated(function feedOnCreated() {
       let orderedPosts = appBodyRef.displayPosts.get();
 
       var checkYT = setInterval(function () {
-          if(YT.loaded){
-              //...setup video here using YT.Player()
-              _.each(orderedPosts, function(post, index) {
-                if (post.type === 'youtube') {
-                  createYTPlayer(post, index);
-                }
-              });
+        if(YT.loaded){
+          _.each(orderedPosts, function(post, index) {
+            if (post.type === 'youtube') {
+              createYTPlayer(post, index);
+            }
+          });
 
-              clearInterval(checkYT);
-          }
+          clearInterval(checkYT);
+        }
       }, 100);
-
-      window.onYouTubeIframeAPIReady = function() {
-        console.log("onYouTubeIframeAPIReady");
-        _.each(orderedPosts, function(post, index) {
-          if (post.type === 'youtube') {
-            createYTPlayer(post, index);
-          }
-        });
-      }
-
   });
 
 
@@ -166,15 +154,6 @@ Template.feed.onCreated(function feedOnCreated() {
             createSCPlayer(post, index);
         }
       });
-    }
-  });
-});
-
-Template.feed.onRendered(function feedOnRendered() {
-  this.autorun(function(){
-    let posts = appBodyRef.displayPosts.get();
-    if (playerReady) {
-      window.onYouTubeIframeAPIReady();
     }
   });
 });

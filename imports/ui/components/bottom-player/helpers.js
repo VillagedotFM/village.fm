@@ -9,9 +9,7 @@ Template.bottom_player.helpers({
     let nowPlayingPost = appBodyRef.nowPlaying.get();
     if (nowPlayingPost) {
       return nowPlayingPost;
-    } else {
-      return appBodyRef.displayPosts.get()[0]
-    }
+    } 
   },
   completed: function() {
 

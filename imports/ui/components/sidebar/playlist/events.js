@@ -1,15 +1,17 @@
 //To eliminate some weirdness with SC.stream, make sure everything else is paused
 pauseEverythingElse = function(id) {
   let posts = appBodyRef.postOrder.get();
-  _.each(posts, function(post){
-    if (post && post._id !== id) {
-      if (window['scplayer-' + post._id]) {
-        window['scplayer-' + post._id].pause();
-      } else if (window['ytplayer-' + post._id]) {
-        window['ytplayer-' + post._id].pauseVideo();
+  if (appBodyRef.nowPlaying.get()) {
+    _.each(posts, function(post){
+      if (post && post._id !== id) {
+        if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
+          window['scplayer-' + post._id].pause();
+        } else if (post.type == 'youtube' && window['ytplayer-' + post._id] && appBodyRef.nowPlaying.get()._id == post._id) {
+          window['ytplayer-' + post._id].pauseVideo();
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 Template.playlist.events({
@@ -30,6 +32,11 @@ Template.playlist.events({
   "click .sr-playlist__play--play": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
+
+    pauseEverythingElse(selectedId);
+    appBodyRef.nowPlaying.set(selectedPost);
+
+    $('.post__video-play#'+selectedId).hide();
 
     if (selectedPost.type === 'youtube') {
       window['ytplayer-' + selectedId].playVideo();

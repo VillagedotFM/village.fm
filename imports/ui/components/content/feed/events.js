@@ -124,6 +124,10 @@ Template.feed.events({
   "click .post__video-play": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
+    pauseEverythingElse(selectedId);
+    appBodyRef.nowPlaying.set(selectedPost);
+
+    $('.post__video-play#'+selectedId).hide();
 
     if (selectedPost.type === 'youtube') {
       window['ytplayer-' + selectedId].playVideo();
