@@ -17,7 +17,7 @@
                     {{#if videoReady @index}}
                       <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
                     {{else}}
-                      <span class="sr-playlist__spinner {{showSpinner}}"></span>
+                      <span class="sr-playlist__spinner {{showSpinner}}" id={{_id}}></span>
                     {{/if}}
                     {{#if showEqualizer}}
                       <span class="sr-playlist__equalizer"></span>
