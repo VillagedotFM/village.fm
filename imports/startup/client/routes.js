@@ -17,7 +17,7 @@ FlowRouter.route('/post/:postId', {  //Permalink
   name: 'Post',
   action() {
     // TODO: render single post (in what village?)
-    BlazeLayout.render('app_body', { tabs: 'tabs', post: 'post' });
+    BlazeLayout.render('app_body', { tabs: 'tabs', inbox: 'inbox' });
   },
 });
 
