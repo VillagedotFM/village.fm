@@ -3,7 +3,7 @@
 
     {{#each posts}}
 
-      <article class="post">
+      <article id="{{_id}}" class="post">
           <div class="post__inner">
               <div class="post__rating {{isUpvoted}} bg-color-content">
                   <i class="fa fa-caret-up"></i>
@@ -26,16 +26,14 @@
                           <span class="post__share-text">Share</span>
                           <div class="share-dropdown">
                               <ul class="share-dropdown__list">
-                                  <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
-                                  <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
-                                  <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
-                                  <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u=village.fm/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="http://twitter.com/share?text=Listen&url=village.fm/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
                               </ul>
                           </div>
                       </span>
                   </div>
                   <div class="post__top-middle">
-                      <h1 class="post__title">{{artist}} - {{title}}</h1>
+                      <a href="/post/{{_id}}"><h1 class="post__title">{{artist}} - {{title}}</h1></a>
                       <div class="post__posted-by">
                           <div class="post__author color-main user-dropdown-handle">
                               <span>{{getUserName createdBy}}</span>

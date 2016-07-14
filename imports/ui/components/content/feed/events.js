@@ -38,5 +38,5 @@ Template.feed.events({
   "click .post__video-play": function(event, template){
     //TODO: find which video to play
     yt.player.playVideo();
-  }
+  },
 });

@@ -4,4 +4,7 @@ import '../../api/villages/methods.js';
 import '../../api/villages/server/publications.js';
 import '../../api/server/publications.js';
 import './user-config.js';
+import './config.js';
 import './useraccounts-configuration.js';
+// Seo
+import '../../api/seo/seo.js';

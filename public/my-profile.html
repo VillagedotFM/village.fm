@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Village.fm</title>
+    <!--Reset-->
+    <link rel="stylesheet" href="css/reset.css">
+    <!--Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Signika:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!--Perfect scrollbar-->
+    <link rel="stylesheet" href="css/perfect-scrollbar.min.css">
+    <!--General styles-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--Media queries-->
+    <link rel="stylesheet" href="css/tablet.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/retina.css">
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon-retina-ipad.png">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon-retina-iphone.png">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon-standard-ipad.png">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon-standard-iphone.png">
+</head>
+<body>
+<div class="wrapper">
+    <div class="mobile-menu visible-mobile">
+        <div class="mobile-menu__top">
+            <a href="index.html" class="mobile-menu__logo"></a>
+        </div>
+        <ul class="mobile-menu__list">
+            <li class="mobile-menu__item mobile-menu__item--playlist mobile-menu__item--active">
+                <a>Playlist</a>
+            </li>
+            <li class="mobile-menu__item mobile-menu__item--post">
+                <a>Post</a>
+            </li>
+            <li class="mobile-menu__item mobile-menu__item--profile">
+                <a href="my-profile.html">Profile</a>
+            </li>
+            <li class="mobile-menu__item mobile-menu__item--log-out">
+                <a>Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__hum visible-mobile"></div>
+            <a href="index.html" class="header__logo hidden-mobile"></a>
+            <a href="index.html" class="header__logo-mobile"></a>
+            <div class="header__right-block">
+                <div class="header__notifications active">
+                    <div class="ntf-dropdown">
+                        <div class="ntf-dropdown__top">
+                            <div class="ntf-dropdown__back visible-mobile arrow-back"></div>
+                            <span class="ntf-dropdown__title hidden-mobile">Notifications</span>
+                            <span class="ntf-dropdown__mark-all color-main">Mark All as Read</span>
+                        </div>
+                        <div class="ntf-dropdown__list-wrapper">
+                            <ul class="ntf-dropdown__list">
+                                <li class="ntf-dropdown__item ntf-dropdown__item--unread">
+                                    <div class="ntf-dropdown__item-inner">
+                                        <div class="ntf-dropdown__img-wrap">
+                                            <img src="images/villagers/posted-comment-4.png" alt="">
+                                        </div>
+                                        <div class="ntf-dropdown__caption">
+                                            <p class="ntf-dropdown__text">
+                                                <a href="#" class="color-main">Rebecca Moore</a> and 23 others upvote your
+                                                song: “Tame Impala - Cause I’m a Man”
+                                            </p>
+                                                <span class="ntf-dropdown__date color-secondary-text">
+                                                    <i class="ntf-dropdown__icon upvote-xs"></i>
+                                                    <span class="ntf-dropdown__hours-ago">2h ago</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="ntf-dropdown__item ntf-dropdown__item--unread">
+                                    <div class="ntf-dropdown__item-inner">
+                                        <div class="ntf-dropdown__img-wrap">
+                                            <img src="images/villagers/posted-comment-4.png" alt="">
+                                        </div>
+                                        <div class="ntf-dropdown__caption">
+                                            <p class="ntf-dropdown__text">
+                                                <a href="#" class="color-main">Rebecca Moore</a> commented your song: “Tame
+                                                Impala - Cause I’m a Man”
+                                            </p>
+                                                <span class="ntf-dropdown__date color-secondary-text">
+                                                    <i class="ntf-dropdown__icon comment-xs"></i>
+                                                    <span class="ntf-dropdown__hours-ago">2h ago</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="ntf-dropdown__item">
+                                    <div class="ntf-dropdown__item-inner">
+                                        <div class="ntf-dropdown__img-wrap">
+                                            <img src="images/villagers/posted-comment-1.png" alt="">
+                                        </div>
+                                        <div class="ntf-dropdown__caption">
+                                            <p class="ntf-dropdown__text">
+                                                <a href="#" class="color-main">David Fisher</a> replied to your comment on
+                                                song: “Tame Impala - Cause I’m a Man”
+                                            </p>
+                                                <span class="ntf-dropdown__date color-secondary-text">
+                                                    <i class="ntf-dropdown__icon reply-xs"></i>
+                                                    <span class="ntf-dropdown__hours-ago">3h ago</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="ntf-dropdown__item ntf-dropdown__item--place">
+                                    <div class="ntf-dropdown__item-inner">
+                                        <div class="ntf-dropdown__img-wrap">
+                                            <div class="ntf-dropdown__place-icon">
+                                                <div class="ntf-dropdown__place-icon__inner"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ntf-dropdown__caption">
+                                            <p class="ntf-dropdown__text">
+                                                Your song <a href="#" class="color-main">“Tame Impala - Cause I’m a Man” </a>
+                                                was the most upvoted song of the week
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="ntf-dropdown__item">
+                                    <div class="ntf-dropdown__item-inner">
+                                        <div class="ntf-dropdown__img-wrap">
+                                            <img src="images/villagers/posted-comment-5.png" alt="">
+                                        </div>
+                                        <div class="ntf-dropdown__caption">
+                                            <p class="ntf-dropdown__text">
+                                                Your Facebook friend <a href="#" class="color-main">Antony Salamon</a>
+                                                just joined the Village
+                                            </p>
+                                                <span class="ntf-dropdown__date color-secondary-text">
+                                                    <i class="ntf-dropdown__icon friend-xs"></i>
+                                                    <span class="ntf-dropdown__hours-ago">3d ago</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-profile">
+                    <span class="header-profile__thumb">
+                        <img src="images/header-profile-img.png" class="header-profile__img" />
+                    </span>
+                    <span class="header-profile__name">
+                        Jason Smith
+                        <i class="fa fa-caret-down arrow"></i>
+                    </span>
+                    <div class="profile-dropdown">
+                        <div class="profile-dropdown__top">
+                            <a href="my-profile.html"><img src="images/header-profile-img.png" class="profile-dropdown__img" /></a>
+                            <div class="profile-dropdown__name-wrap">
+                                <a href="my-profile.html" class="profile-dropdown__name">Jason Smith</a>
+                                        <span class="profile-dropdown__caption">
+                                            <span class="color-main">912</span>
+                                            upvotes collected
+                                        </span>
+                            </div>
+                            <div class="profile-dropdown__descr">
+                                <p><a href="#" class="color-secondary-text">86</a> songs posted</p>
+                                <p><a href="#" class="color-secondary-text">912</a> upvotes collected</p>
+                            </div>
+                        </div>
+                        <div class="profile-dropdown__bottom">
+                            <p class="profile-dropdown__bottom-row">
+                                <a href="#" class="color-main profile-dropdown__logout">View Profile</a>
+                            </p>
+                            <p class="profile-dropdown__bottom-row">
+                                <a href="#" class="color-main profile-dropdown__logout">Log Out</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="profile">
+            <div class="profile__inner">
+                <div class="profile__img" style="background-image: url(images/profile-img.png);">
+                </div>
+                <div class="profile__block">
+                    <h2 class="profile__name">Jasons Smith  <span class="color-main"># 5</span></h2>
+                    <div class="profile__total-upvotes">
+                        <i class="cup profile__cup"></i>
+                        <span class="color-main profile__upvotes-place">83rd</span>
+                        <span class="color-secondary-text profile__upvotes">- 912 upvotes</span>
+                    </div>
+                    <div class="last-listens">
+                        <span class="last-listens__title">Last Listens:</span>
+                        <div class="last-listens__wrap">
+                            <div class="last-listens__inner">
+                                <a href="#" class="last-listens__item">
+                                    <div class="last-listens__img-wrap">
+                                        <img src="images/last-listen-item-1.png" alt="">
+                                    </div>
+                                    <div class="last-listens__descr">
+                                        <span class="last-listens__track-name">Imagine Dragons</span>
+                                        <span>Smoke and Mirrors</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="last-listens__item">
+                                    <div class="last-listens__img-wrap">
+                                        <img src="images/last-listen-item-2.png" alt="">
+                                    </div>
+                                    <div class="last-listens__descr">
+                                        <span class="last-listens__track-name">Bastille</span>
+                                        <span>Of The Night</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="last-listens__item">
+                                    <div class="last-listens__img-wrap">
+                                        <img src="images/last-listen-item-3.png" alt="">
+                                    </div>
+                                    <div class="last-listens__descr">
+                                        <span class="last-listens__track-name">The Neighborhood</span>
+                                        <span>Sweater Weather</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="last-listens__item">
+                                    <div class="last-listens__img-wrap">
+                                        <img src="images/last-listen-item-4.png" alt="">
+                                    </div>
+                                    <div class="last-listens__descr">
+                                        <span class="last-listens__track-name">Sebastian Lind</span>
+                                        <span>Waiting for Someone</span>
+                                    </div>
+                                </a>
+                                <a href="" class="last-listens__item">
+                                    <div class="last-listens__img-wrap">
+                                        <img src="images/last-listen-item-5.png" alt="">
+                                    </div>
+                                    <div class="last-listens__descr">
+                                        <span class="last-listens__track-name">Adele</span>
+                                        <span>don't you remember</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside class="sidebar sidebar--profile-page">
+            <div class="sidebar__inner">
+                <div class="sr-controls hidden-mobile">
+                    <div class="sr-controls__inner">
+                        <span class="sr-controls__prev"></span>
+                        <span class="sr-controls__play sr-controls__play--paused"></span>
+                        <span class="sr-controls__next"></span>
+                    </div>
+                </div>
+                <div class="sr-top clearfix">
+                    <div class="sr-top__item sr-top__item--half-width active">
+                        <h4 class="sr-top__item-title">268 upvotes</h4>
+                    </div>
+                    <div class="sr-top__item sr-top__item--half-width">
+                        <h4 class="sr-top__item-title">112 posts</h4>
+                    </div>
+                </div>
+                <div class="sr-playlist sr-playlist--profile-page">
+                    <ul class="sr-playlist__list bg-color-playlist">
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">102</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:47</span>
+                                <span class="sr-playlist__play paused"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Adele</span>
+                                        - Hello
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Rebeca Moore</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item sr-playlist__item--active">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">90</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">4:11</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">The Neighborhood</span>
+                                        - Sweater Weather
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">82</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner display"></span>
+                                <span class="sr-playlist__time hidden">4:35</span>
+                                <span class="sr-playlist__play sr-playlist__play--paused hidden"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Bastille</span>
+                                        - Of The Night
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:12</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">The Weekends</span>
+                                        - The Hills
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__equalizer"></span>
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time hidden">3:12</span>
+                                <span class="sr-playlist__play hidden"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Sebastian Lind</span>
+                                        - Waiting for Something
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">2:49</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Bear’s Den</span>
+                                        - Bad Blood
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:32</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Imagine Dragons</span>
+                                        - Smoke and Mirrors
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                        <li class="sr-playlist__item">
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block upvote-block--active">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">226</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <span class="sr-playlist__spinner hidden"></span>
+                                <span class="sr-playlist__time">3:21</span>
+                                <span class="sr-playlist__play"></span>
+                            </div>
+                            <div class="sr-playlist__middle">
+                                    <span class="sr-playlist__title">
+                                        <span class="sr-playlist__artist">Stephan</span>
+                                        - Crossfire
+                                    </span>
+                                <br>
+                                    <span class="sr-playlist__posted-by">
+                                        posted by
+                                        <span class="sr-playlist__author">Jason Chernofsky</span>
+                                    </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="container container--profile-page hidden-mobile">
+            <div class="upload-section hidden-mobile">
+                <div class="upload-section__upload clearfix">
+                    <button type="submit" name="post-upload" class="btn pull-right hidden-mobile upload-section__button">
+                        <span>Post a Song</span>
+                    </button>
+                    <div class="upload-section__input-wrapper">
+                        <input type="text" name="post-link" class="upload-section__input" placeholder="enter any Soundcloud or YouTube link here...">
+                    </div>
+                </div>
+                <div class="uploaded-item clearfix">
+                    <form action="">
+                        <div class="uploaded-item__img-wrap">
+                            <div class="uploaded-item__img-background">
+                                <img src="images/uploaded-img.png" alt="">
+                            </div>
+                        </div>
+                        <div class="uploaded-item__descr clearfix">
+                            <div class="uploaded-item__input-wrap">
+                                <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
+                            </div>
+                            <div class="uploaded-item__input-wrap">
+                                <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
+                            </div>
+                            <div class="uploaded-item__textarea-wrap">
+                                <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
+                                <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
+                            </div>
+                        </div>
+                        <div class="uploaded-item__btns">
+                            <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
+                            <button type="submit" name="post" class="btn">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="content">
+                <div class="villagers hidden-mobile">
+                    <span class="villagers__quantity">
+                        8 Friends:
+                    </span>
+                    <div class="villagers__wrapper">
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-1.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-2.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-3.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-4.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-5.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-6.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-7.png" alt="">
+                        </a>
+                        <a href="#" class="villagers__img">
+                            <img src="images/villagers/villager-8.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="posts-wrapper">
+                    <article class="post">
+                        <div class="post__inner">
+                            <div class="post__rating bg-color-content">
+                                <i class="fa fa-caret-up"></i>
+                                <span>102</span>
+                            </div>
+                            <div class="post__left-block color-secondary-text">
+                                2nd <br>
+                                place
+                            </div>
+                            <div class="post__top clearfix">
+                                <div class="post__top-upvote upvote-block visible-mobile">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">102</span>
+                                </div>
+                                <a href="#" class="post__top-left">
+                                    <img src="images/post-author-1.png" alt="" class="post__author-img">
+                                </a>
+                                <div class="post__top-right">
+                                        <span class="post__share color-secondary-text">
+                                            <span class="post__share-text">Share</span>
+                                            <div class="share-dropdown">
+                                                <ul class="share-dropdown__list">
+                                                    <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                                    <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                                    <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                                    <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                                                </ul>
+                                            </div>
+                                        </span>
+                                </div>
+                                <div class="post__top-middle">
+                                    <h1 class="post__title">Adele - Hello</h1>
+                                    <div class="post__posted-by">
+                                        <div class="post__author color-main user-dropdown-handle">
+                                            <span>Rebecca Moore</span>
+                                            <div class="user-dropdown">
+                                                <div class="user-dropdown__inner">
+                                                    <a href="my-profile.html">
+                                                        <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                                    </a>
+                                                    <div class="user-dropdown__name-wrap">
+                                                        <span class="user-dropdown__name">Jason Smith</span>
+                                                        <a href="other-profile.html" class="user-dropdown__link color-main">
+                                                            View Profile
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="post__date color-secondary-text">posted 2 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post__video-wrapper">
+                                <div class="post__video post__video--1">
+                                    <button class="post__video-play"></button>
+                                </div>
+                                <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+                            </div>
+                            <div class="post__upvoted clearfix">
+                                <div class="post__upvoted-left">
+                                    <span class="color-secondary-text">Upvoted by:</span>
+                                    <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                                </div>
+                                <div class="post__upvoted-right align-right">
+                                    <span class="color-secondary-text">1,042 listens</span>
+                                </div>
+                            </div>
+                            <div class="post__comments-send clearfix">
+                                    <span class="post__comments color-secondary-text active" data-id="1">
+                                        <span class="hidden-mobile-inline">Comments (16)</span>
+                                        <span class="visible-mobile-inline">16</span>
+                                    </span>
+                                <span class="post__send color-secondary-text" data-id="1">Send to Friend</span>
+                            </div>
+                            <!--comments-block-->
+                            <div class="comments-block" data-id="1">
+                                <div class="comments-block__posted">
+
+                                    <!--posted-comment-->
+                                    <div class="posted-comment">
+                                        <div class="posted-comment__inner">
+                                            <div class="posted-comment__upvote-cell">
+                                                <div class="upvote-block upvote-block--active">
+                                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                                    <span class="upvote-block__number">3</span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__comment-cell clearfix">
+                                                <div class="posted-comment__img-wrap">
+                                                    <a href="#"><img src="images/villagers/posted-comment-1.png" alt=""></a>
+                                                </div>
+                                                <div class="posted-comment__text-wrap">
+                                                        <span class="posted-comment__author-wrap">
+                                                            <a href="#" class="posted-comment__author color-main">David Fisher</a>
+                                                            <span class="posted-comment__date color-secondary-text">at 1:39</span>
+                                                        </span>
+                                                        <span class="posted-comment__comment">
+                                                            Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                                            lectus rutrum quam.Isse donec lectus velit maevcenas, ut.
+                                                        </span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__date-cell">
+                                                <span class="posted-comment__time-ago color-secondary-text">8h ago</span>
+                                                <span class="posted-comment__reply color-main">Reply</span>
+                                            </div>
+                                        </div>
+                                        <div class="user-comment user-comment--reply">
+                                            <div class="user-comment__inner">
+                                                <div class="user-comment__img-cell">
+                                                    <img src="images/header-profile-img.png" alt="">
+                                                </div>
+                                                <div class="user-comment__comment-cell">
+                                                    <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a reply...">
+                                                </div>
+                                                <div class="user-comment__submit-cell">
+                                                    <button class="user-comment__reply"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/posted-comment-->
+
+                                    <!--posted-comment-->
+                                    <div class="posted-comment">
+                                        <div class="posted-comment__inner">
+                                            <div class="posted-comment__upvote-cell">
+                                                <div class="upvote-block">
+                                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                                    <span class="upvote-block__number">2</span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__comment-cell clearfix">
+                                                <div class="posted-comment__img-wrap">
+                                                    <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
+                                                </div>
+                                                <div class="posted-comment__text-wrap">
+                                                        <span class="posted-comment__author-wrap">
+                                                            <a href="#" class="posted-comment__author color-main">Erica Clark</a>
+                                                            <span class="posted-comment__date color-secondary-text">at 0:32</span>
+                                                        </span>
+                                                        <span class="posted-comment__comment">
+                                                            Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                                        </span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__date-cell">
+                                                <span class="posted-comment__time-ago color-secondary-text">12h ago</span>
+                                                <span class="posted-comment__reply color-main">Reply</span>
+                                            </div>
+                                        </div>
+                                        <div class="posted-comment posted-comment--reply">
+                                            <div class="posted-comment__inner">
+                                                <div class="posted-comment__upvote-cell">
+                                                    <div class="upvote-block">
+                                                        <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                                        <span class="upvote-block__number">0</span>
+                                                    </div>
+                                                </div>
+                                                <div class="posted-comment__comment-cell clearfix">
+                                                    <div class="posted-comment__img-wrap">
+                                                        <a href="#"><img src="images/villagers/posted-comment-3.png" alt=""></a>
+                                                    </div>
+                                                    <div class="posted-comment__text-wrap">
+                                                            <span class="posted-comment__author-wrap">
+                                                                <a href="#" class="posted-comment__author color-main">Jason Smith</a>
+                                                                <span class="posted-comment__date color-secondary-text">at 1:25</span>
+                                                            </span>
+                                                            <span class="posted-comment__comment">
+                                                                Lorem ipsum dolor sit amet, semper at suspend isse donec
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="posted-comment__date-cell">
+                                                    <span class="posted-comment__time-ago color-secondary-text">11h ago</span>
+                                                    <span class="posted-comment__reply color-main">Reply</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/posted-comment-->
+
+                                    <!--posted-comment-->
+                                    <div class="posted-comment">
+                                        <div class="posted-comment__inner">
+                                            <div class="posted-comment__upvote-cell">
+                                                <div class="upvote-block">
+                                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                                    <span class="upvote-block__number">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__comment-cell clearfix">
+                                                <div class="posted-comment__img-wrap">
+                                                    <a href="#"><img src="images/villagers/posted-comment-2.png" alt=""></a>
+                                                </div>
+                                                <div class="posted-comment__text-wrap">
+                                                        <span class="posted-comment__author-wrap">
+                                                            <a href="#" class="posted-comment__author color-main">Erica Clark</a>
+                                                            <span class="posted-comment__date color-secondary-text">at 0:32</span>
+                                                        </span>
+                                                        <span class="posted-comment__comment">
+                                                            Lorem ipsum dolor sit amet, semper at suspend isse donec donec lectus rutrum quam.
+                                                        </span>
+                                                </div>
+                                            </div>
+                                            <div class="posted-comment__date-cell">
+                                                <span class="posted-comment__time-ago color-secondary-text">1d ago</span>
+                                                <span class="posted-comment__reply color-main">Reply</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/posted-comment-->
+
+                                    <div class="comments-block__more-link-wrap">
+                                        <a href="#" class="comments-block__more-link color-secondary-text">
+                                            More (12)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="user-comment">
+                                    <div class="user-comment__inner">
+                                        <div class="user-comment__img-cell">
+                                            <img src="images/header-profile-img.png" alt="">
+                                        </div>
+                                        <div class="user-comment__comment-cell">
+                                            <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a comment...">
+                                        </div>
+                                        <div class="user-comment__submit-cell">
+                                            <button class="user-comment__submit"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/comments-block-->
+
+                            <div class="send-to-friend" data-id="1" style="display: none;">
+                                <div class="send-to-friend__inner">
+                                    <div class="send-to-friend__name-wrap">
+                                        <input type="text" class="send-to-friend__input" data-id="1" placeholder="click here to type a friend’s name...">
+                                    </div>
+                                    <div class="send-to-friend__send-wrap">
+                                        <button class="send-to-friend__send-btn"></button>
+                                    </div>
+                                </div>
+                                <ul class="send-to-friend__list" data-id="1" style="display: none;">
+                                    <li>
+                                        <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">David Fisher</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="1" class="send-to-friend__checkbox">
+                                            <label for="1"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Erica Davidson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="2" class="send-to-friend__checkbox">
+                                            <label for="2"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="3" class="send-to-friend__checkbox">
+                                            <label for="3"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Dave Willson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="4" class="send-to-friend__checkbox">
+                                            <label for="4"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Ann Davson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="5" class="send-to-friend__checkbox">
+                                            <label for="5"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="post">
+                        <div class="post__inner">
+                            <div class="post__rating post__rating--active bg-color-content">
+                                <i class="fa fa-caret-up"></i>
+                                <span>102</span>
+                            </div>
+                            <div class="post__left-block post__left-block--from color-secondary-text">
+                                From <br>
+                                    <span class="color-main">
+                                       Jason <br>
+                                       Chernofsky
+                                    </span>
+                            </div>
+                            <div class="post__top clearfix">
+                                <div class="post__top-upvote upvote-block upvote-block--active visible-mobile">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">102</span>
+                                </div>
+                                <a href="#" class="post__top-left">
+                                    <img src="images/post-author-1.png" alt="" class="post__author-img">
+                                </a>
+                                <div class="post__top-right">
+                                        <span class="post__share color-secondary-text">
+                                            <span class="post__share-text">Share</span>
+                                            <div class="share-dropdown">
+                                                <ul class="share-dropdown__list">
+                                                    <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                                    <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                                    <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                                    <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                                                </ul>
+                                            </div>
+                                        </span>
+                                </div>
+                                <div class="post__top-middle">
+                                    <h1 class="post__title">Alt-J - Intro</h1>
+                                    <div class="post__posted-by">
+                                        <div class="post__author color-main user-dropdown-handle">
+                                            <span>Rebecca Moore</span>
+                                            <div class="user-dropdown">
+                                                <div class="user-dropdown__inner">
+                                                    <a href="my-profile.html">
+                                                        <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                                    </a>
+                                                    <div class="user-dropdown__name-wrap">
+                                                        <span class="user-dropdown__name">Jason Smith</span>
+                                                        <a href="other-profile.html" class="user-dropdown__link color-main">
+                                                            View Profile
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="post__date color-secondary-text">posted 2 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post__video-wrapper">
+                                <div class="post__video post__video--2">
+                                    <button class="post__video-play"></button>
+                                </div>
+                                <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+                            </div>
+                            <div class="post__upvoted clearfix">
+                                <div class="post__upvoted-left">
+                                    <span class="color-secondary-text">Upvoted by:</span>
+                                    <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                                </div>
+                                <div class="post__upvoted-right align-right">
+                                    <span class="color-secondary-text">1,042 listens</span>
+                                </div>
+                            </div>
+                            <div class="post__comments-send clearfix">
+                                    <span class="post__comments color-secondary-text" data-id="2">
+                                        <span class="hidden-mobile-inline">Comments (0)</span>
+                                        <span class="visible-mobile-inline">0</span>
+                                    </span>
+                                <span class="post__send color-secondary-text active" data-id="2">Send to Friend</span>
+                            </div>
+                            <div class="post-comments hidden">
+                                <div class="user-comment">
+                                    <div class="user-comment__inner">
+                                        <div class="user-comment__img-cell">
+                                            <img src="images/header-profile-img.png" alt="">
+                                        </div>
+                                        <div class="user-comment__comment-cell">
+                                            <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                                        </div>
+                                        <div class="user-comment__submit-cell">
+                                            <button class="user-comment__submit"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comments-block" data-id="2" style="display: none;">
+                                <div class="user-comment">
+                                    <div class="user-comment__inner">
+                                        <div class="user-comment__img-cell">
+                                            <img src="images/header-profile-img.png" alt="">
+                                        </div>
+                                        <div class="user-comment__comment-cell">
+                                            <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                                        </div>
+                                        <div class="user-comment__submit-cell">
+                                            <button class="user-comment__submit"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="send-to-friend" data-id="2">
+                                <div class="send-to-friend__inner">
+                                    <div class="send-to-friend__name-wrap">
+                                        <input type="text" class="send-to-friend__input" data-id="2" placeholder="click here to type a friend’s name...">
+                                    </div>
+                                    <div class="send-to-friend__send-wrap">
+                                        <button class="send-to-friend__send-btn"></button>
+                                    </div>
+                                </div>
+                                <ul class="send-to-friend__list" data-id="2">
+                                    <li>
+                                        <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">David Fisher</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="6" class="send-to-friend__checkbox">
+                                            <label for="6"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Erica Davidson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="7" class="send-to-friend__checkbox">
+                                            <label for="7"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="8" class="send-to-friend__checkbox">
+                                            <label for="8"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Dave Willson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="9" class="send-to-friend__checkbox">
+                                            <label for="9"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Ann Davson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="10" class="send-to-friend__checkbox">
+                                            <label for="10"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="post post--last">
+                        <div class="post__inner">
+                            <div class="post__rating post__rating--active bg-color-content">
+                                <i class="fa fa-caret-up"></i>
+                                <span>102</span>
+                            </div>
+                            <div class="post__left-block post__left-block--from color-secondary-text">
+                                From <br>
+                                    <span class="color-main">
+                                       Jason <br>
+                                       Chernofsky
+                                    </span>
+                            </div>
+                            <div class="post__top clearfix">
+                                <div class="post__top-upvote upvote-block upvote-block--active visible-mobile">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">102</span>
+                                </div>
+                                <a href="#" class="post__top-left">
+                                    <img src="images/post-author-2.png" alt="" class="post__author-img">
+                                </a>
+                                <div class="post__top-right">
+                                        <span class="post__share color-secondary-text">
+                                            <span class="post__share-text">Share</span>
+                                            <div class="share-dropdown">
+                                                <ul class="share-dropdown__list">
+                                                    <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
+                                                    <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
+                                                    <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
+                                                    <li><a href="#" class="share-dropdown__google">Google+</a></li>
+                                                </ul>
+                                            </div>
+                                        </span>
+                                </div>
+                                <div class="post__top-middle">
+                                    <h1 class="post__title">Bastille - Of The Night</h1>
+                                    <div class="post__posted-by">
+                                        <div class="post__author color-main user-dropdown-handle">
+                                            <span>Antony Davidson</span>
+                                            <div class="user-dropdown">
+                                                <div class="user-dropdown__inner">
+                                                    <a href="my-profile.html">
+                                                        <img src="images/profile-40x40.png" class="user-dropdown__img">
+                                                    </a>
+                                                    <div class="user-dropdown__name-wrap">
+                                                        <span class="user-dropdown__name">Jason Smith</span>
+                                                        <a href="other-profile.html" class="user-dropdown__link color-main">
+                                                            View Profile
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="post__date color-secondary-text">posted 12 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post__video-wrapper">
+                                <div class="post__video post__video--3">
+                                    <button class="post__video-play"></button>
+                                </div>
+                                <h3 class="post__video-title">Lorem ipsum dolor sit amet, semper at suspend isse donec at lectus velit</h3>
+                            </div>
+                            <div class="post__upvoted clearfix">
+                                <div class="post__upvoted-left">
+                                    <span class="color-secondary-text">Upvoted by:</span>
+                                    <span> <a href="#" class="color-main">Jason Cherhofsky</a>, <a href="#" class="color-main">David Fisher</a>, <a href="#" class="color-main">Erica Clark</a> and <a href="#" class="color-main">15 others</a></span>
+                                </div>
+                                <div class="post__upvoted-right align-right">
+                                    <span class="color-secondary-text">1,042 listens</span>
+                                </div>
+                            </div>
+                            <div class="post__comments-send clearfix">
+                                    <span class="post__comments color-secondary-text" data-id="3">
+                                        <span class="hidden-mobile-inline">Comments (0)</span>
+                                        <span class="visible-mobile-inline">0</span>
+                                    </span>
+                                <span class="post__send color-secondary-text" data-id="3">Send to Friend</span>
+                            </div>
+                            <div class="comments-block" data-id="3" >
+                                <div class="user-comment">
+                                    <div class="user-comment__inner">
+                                        <div class="user-comment__img-cell">
+                                            <img src="images/header-profile-img.png" alt="">
+                                        </div>
+                                        <div class="user-comment__comment-cell">
+                                            <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a first comment...">
+                                        </div>
+                                        <div class="user-comment__submit-cell">
+                                            <button class="user-comment__submit"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="send-to-friend" data-id="3" style="display: none;">
+                                <div class="send-to-friend__inner">
+                                    <div class="send-to-friend__name-wrap">
+                                        <input type="text" class="send-to-friend__input" data-id="3" placeholder="click here to type a friend’s name...">
+                                    </div>
+                                    <div class="send-to-friend__send-wrap">
+                                        <button class="send-to-friend__send-btn"></button>
+                                    </div>
+                                </div>
+                                <ul class="send-to-friend__list" data-id="3" style="display: none;">
+                                    <li>
+                                        <img src="images/villagers/posted-comment-1.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">David Fisher</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="11" class="send-to-friend__checkbox">
+                                            <label for="11"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-2.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Erica Davidson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="12" class="send-to-friend__checkbox">
+                                            <label for="12"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-4.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Rebecca Davidovsky</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="13" class="send-to-friend__checkbox">
+                                            <label for="13"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-5.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Dave Willson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="14" class="send-to-friend__checkbox">
+                                            <label for="14"></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/villagers/posted-comment-6.png" alt="" class="send-to-friend__img">
+                                        <span class="send-to-friend__friend">Ann Davson</span>
+                                        <div class="send-to-friend__checkbox-wrap visible-mobile">
+                                            <input type="checkbox" id="15" class="send-to-friend__checkbox">
+                                            <label for="15"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="us-mobile visible-mobile hidden">
+        <div class="us-mobile__upload clearfix">
+            <button type="submit" name="post-upload" class="us-mobile__mobile-btn pull-right hidden">
+            </button>
+            <div class="us-mobile__input-wrapper us-mobile__input-wrapper--uploaded">
+                <input type="text" name="post-link" class="us-mobile__input" placeholder="enter any Soundcloud or YouTube link here...">
+            </div>
+        </div>
+        <div class="uploaded-item-mobile clearfix">
+            <form action="">
+                <div class="uploaded-item-mobile__img-wrap">
+                    <div class="uploaded-item-mobile__img">
+                        <div class="uploaded-item-mobile__bg uploaded-item-mobile__bg--loading">
+                            <div class="uploaded-item-mobile__spinner"></div>
+                            <!--<img src="images/uploaded-img.png" alt="">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="uploaded-item-mobile__descr clearfix">
+                    <div class="uploaded-item-mobile__input-wrap">
+                        <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
+                    </div>
+                    <div class="uploaded-item-mobile__input-wrap">
+                        <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
+                    </div>
+                    <div class="uploaded-item-mobile__textarea-wrap">
+                        <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
+                        <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
+                    </div>
+                </div>
+                <div class="uploaded-item-mobile__btns">
+                    <button class="btn btn--inverse uploaded-item-mobile__cancel">Cancel</button>
+                    <button type="submit" name="post" class="btn">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <aside class="bottom-player">
+        <div class="bottom-player__video visible-mobile hidden"></div>
+        <div class="bottom-player__inner clearfix">
+            <div class="bottom-player__left">
+                <div class="bottom-player__rating">
+                    <div class="upvote-block upvote-block--active">
+                        <i class="fa fa-caret-up upvote-block__arrow"></i>
+                        <span class="upvote-block__number">226</span>
+                    </div>
+                </div>
+                <div class="bottom-player__song-btn">
+                    <div class="bottom-player__song-more"></div>
+                    <div class="bottom-player__play bottom-player__play--paused"></div>
+                </div>
+                <div class="bottom-player__song">
+                    <div class="bottom-player__song-img">
+                        <img src="images/bottom-song.png" alt="">
+                    </div>
+                    <div class="bottom-player__song-descr">
+                        <span class="bottom-player__song-title"><span class="bold">Bastille</span> - Of The Night</span>
+                        <br>
+                        <span class="bottom-player__song-posted-by color-secondary-text">posted by Jason Chernofsky</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-player__right">
+                <div class="bottom-progress-bar">
+                    <span class="bottom-progress-bar__time-start hidden-mobile">2:05</span>
+                    <span class="bottom-progress-bar__time-finish hidden-mobile">4:23</span>
+                    <div class="bottom-progress-bar__line">
+                        <span class="bottom-progress-bar__range" style="width: 60%"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <aside class="now-playing" style="display: none">
+        <div class="now-playing__inner">
+            <div class="now-playing__top">
+                <span class="now-playing__arrow-down"></span>
+                <span class="now-playing__view-post">View Post</span>
+                <span class="now-playing__heading">Now Playing</span>
+            </div>
+            <div class="now-playing__main">
+                <!--<div class="now-playing__video"></div>-->
+                <div class="now-playing__cover"></div>
+                <h2 class="now-playing__title">
+                    <span class="bold">Bastille</span>
+                    - Of The Night
+                </h2>
+            </div>
+            <div class="now-playing__posted-by">
+                <div class="now-playing__img-wrapper">
+                    <img src="images/jason.png" alt="">
+                </div>
+                <div class="now-playing__caption">
+                    <p class="now-playing__author">
+                        <span class="color-main semibold">Jason Chernofsky </span>
+                        <span class="color-secondary-text">posted 2 days ago</span>
+                    </p>
+                    <p class="now-playing__text">
+                        Lorem ipsum dolor sit amet, semper at suspend isse
+                        donec at lectus velit maec
+                    </p>
+                </div>
+            </div>
+            <div class="player">
+                <div class="player__progress-bar">
+                    <div class="player__range" style="width: 60%"></div>
+                    <span class="player__time-start">2:05</span>
+                    <span class="player__time-end">4:23</span>
+                </div>
+                <div class="player__controls">
+                    <span class="player__controls__prev"></span>
+                    <span class="player__controls__play player__controls__play--paused"></span>
+                    <span class="player__controls__next"></span>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+    <div class="sign-up" style="display: none;">
+        <div class="sign-up__inner">
+            <h2 class="sign-up__title semibold">
+                <span class="color-other-text">Welcome to</span>
+                <span class="color-main">Village.fm</span>
+            </h2>
+            <p class="sign-up__text">
+                Enjoy friendly community with a
+                perfect music taste!
+            </p>
+            <a href="#" class="sign-up__button">
+                <i class="fa fa-facebook"></i>
+                <span>Sign up with facebook</span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="lib/perfect-scrollbar.jquery.min.js"></script>
+<script src="js/sr-playlist.js"></script>
+<script src="js/main.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>
