@@ -157,6 +157,9 @@ Meteor.methods({
       .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
     }
 
+    if (autoArtist === autoTitle) {   //If regex fails, return the entire title in the Title field and leave the Artist blank
+      autoArtist = '';
+    }
     return {
       artist : autoArtist,
       title : autoTitle
