@@ -114,6 +114,7 @@ Template.feed.events({
     }
 
     $('input[name=post-comment]').val('');
+    appBodyRef.replyTo.set(null);
   },
   "click .posted-comment__reply": function(event, template){
     let commentId = this._id;
