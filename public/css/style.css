@@ -808,7 +808,7 @@ input, textarea {
     display: block;
     clear: both;
 }
-.sr-playlist__item:hover {
+.sr-playlist__item:hover, .sr-playlist__item-active {
     background: #f3f7fa;
 }
 .sr-playlist__item:hover .sr-playlist__equalizer{

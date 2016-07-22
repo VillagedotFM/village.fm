@@ -9,12 +9,12 @@ export const Posts = new Mongo.Collection('posts');
 //   update() { return true; },
 //   remove() { return true; },
 // });
+
 Posts.allow({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
-
 
 Posts.schema = new SimpleSchema({
 
@@ -81,35 +81,35 @@ Posts.schema = new SimpleSchema({
   {
     type: String,
     label: "Duration",        //https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=id&key=key
-    max: 10                   //data.items[0].contentDetails.duration
+    max: 10,                  //data.items[0].contentDetails.duration
   },
 
   taggedUsers:
   {
     type: [String],
     label: "Tagged Users",        //User Entered
-    defaultValue: []
+    defaultValue: [],
   },
 
   tags:                     //data.items[0].snippet.tags
   {                         //SC tag_list
     type: [String],
     label: "Tags",
-    defaultValue: []
+    defaultValue: [],
   },
 
   related:                 //search?part=snippet&relatedToVideoId=vidId&type=video&key=key //for(data.items).id.videoId
   {                        //SC tracks/ comma separated list of tags
     type: [String],
     label: "Related Songs",
-    defaultValue: []
+    defaultValue: [],
   },
 
   genre:                     //SC only (can always fill in manually or scrape youtube)
   {
     type: [String],
     label: "Genre",
-    defaultValue: []
+    defaultValue: [],
   },
 
   upvotes:
