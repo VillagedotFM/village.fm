@@ -9,7 +9,7 @@ import '../../ui/components/profile/profile.js';
 FlowRouter.route('/', {
   name: 'Home',
   action() {
-    BlazeLayout.render('app_body', { tabs: 'tabs', inbox: 'inbox' });
+    BlazeLayout.render('app_body', { tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite' });
   },
 });
 
