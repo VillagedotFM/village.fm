@@ -2,10 +2,15 @@ let resetForm = () => {
   $("input[name=post-link]").val('');
   $('input[name=post-link]').prop('disabled', false);
   $('.postLinkBtn').prop('disabled', true);
+  Tags.set('taggedUsers', []);
 
   uploadRef.showForm.set(false);
 };
 
+//TODO: make attributes (link, type, vidId) reactive vars instead of data on the DOM
+//and make sure to clear them on insert!
+
+//TODO: scope jquery elements to template
 
 Template.upload.events({
   'keyup input[name=post-link]'(event, instance) {
@@ -57,9 +62,6 @@ Template.upload.events({
 
     //Check for duplicates
     var posts = Posts.find().fetch();
-    _.each(posts, function(post) {
-      console.log(post.vidId)
-    });
     var duplicate = _.find(posts, function(post) {
       return post.vidId == vidId;
     });
@@ -74,7 +76,7 @@ Template.upload.events({
     var thumbnail;
     var title = '';
     if (type === 'youtube') {
-      thumbnail = "http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
+      thumbnail = "https://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
 
       //Grab formatted auto and title
       //Only pass in title if Soundcloud
@@ -103,8 +105,10 @@ Template.upload.events({
       });
     } else {
       SC.resolve(link).then(function(track) {
+        //Handle not streamable (NEED DESIGN)
         thumbnail = track.artwork_url;
         title = track.title;
+        console.log(track);
 
         //Grab formatted auto and title
         //Only pass in title if Soundcloud
@@ -162,7 +166,8 @@ Template.upload.events({
       thumbnail: $('.uploadedThumbnail').prop("src"),
       artist: $('input[name=post-author]').val(),
       title: $('input[name=post-name]').val(),
-      description: $('textarea[name=post-caption]').val()
+      description: $('textarea[name=post-caption]').val(),
+      taggedUsers: Tags.get('taggedUsers')
     }
 
     if (type === 'youtube') {

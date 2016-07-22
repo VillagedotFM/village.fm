@@ -112,6 +112,12 @@ Posts.schema = new SimpleSchema({
     defaultValue: []
   },
 
+  upvotes:
+  {
+    type: Number,
+    label: "Upvotes",
+    defaultValue: 1
+  },
 
 
   upvotedBy:                //# of upvotes = upvotedBy.length
@@ -134,6 +140,13 @@ Posts.schema = new SimpleSchema({
           return new Date();
       }
     }
+  },
+
+  listens:
+  {
+    type: Number,
+    label: "Listens",
+    defaultValue: 0
   },
 
   listenedBy:                 //# of listens = listenedBy.length

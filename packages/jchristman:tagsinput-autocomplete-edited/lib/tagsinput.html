@@ -1,0 +1,20 @@
+<template name='tagsinput'>
+{{#with setup}}
+    <div class='tagsinput'>
+        {{#if autocompleteSettings}}
+        <!-- {{#textareaAutocomplete settings=autocompleteSettings id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}{{/textareaAutocomplete}} -->
+            {{> inputAutocomplete settings=autocompleteSettings id='taggedUsers' name='taggedUsers' type='text' placeholder='Tag some friends (optional)' class='form-control input-md'}}
+        {{else}}
+            <input id={{tagId}} name={{tagName}} type='text' placeholder={{tagPlaceholder}} class='form-control input-md'>
+        {{/if}}
+    </div>
+    {{#if currentTags}}
+    Tagged users:
+    {{/if}}
+    <div data-schema-key={{data_schema_key}}>
+      {{#each currentTags}}
+      <div class='{{../tagClass}} tagsinput-value'><span>{{profile.name}}</span>&nbsp;&nbsp;<span class='tagclose' data-id={{_id}}>&nbsp;&nbsp;&times;&nbsp;</span></div>
+      {{/each}}
+    </div>
+{{/with}}
+</template>

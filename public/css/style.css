@@ -179,6 +179,12 @@ input, textarea {
     -ms-filter: blur(3px);
     filter: blur(3px);
 }
+.posts-wrapper{
+  padding-bottom: 100px;
+}
+.inbox-post {
+  background-color: #fff3f3 !important;
+}
 .arrow-back {
     display: block;
     width: 12px;
@@ -805,6 +811,9 @@ input, textarea {
 .sr-playlist__item:hover {
     background: #f3f7fa;
 }
+.sr-playlist__item:hover .sr-playlist__equalizer{
+    display: none;
+}
 .sr-playlist__item--inbox {
     background: #fff3f3;
 }
@@ -1082,6 +1091,14 @@ input, textarea {
     resize: none;
     line-height: 1.2;
 }
+#taggedUsers {
+    width: 100%;
+    border: 1px solid #f4f6f8;
+    border-radius: 4px;
+    padding: 12px 14px;
+    resize: none;
+    line-height: 1.2;
+}
 .uploaded-item__max-chars {
     position: absolute;
     bottom: 10px;
@@ -1220,6 +1237,16 @@ input, textarea {
     border-radius: 50%;
     margin-right: 8px;
     float: left;
+}
+.tagging-dropdown__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.tagging-dropdown__name {
+  position: absolute;
+  padding-top: 10px;
 }
 .more-users-dropdown__name-wrap {
     padding-top: 4px;
@@ -1621,6 +1648,22 @@ input, textarea {
 .post__video-play:hover {
     background-position: -150px -100px;
 }
+.post__video-pause {
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: url(../images/icons-sprite.png) 0 -350px no-repeat;
+  cursor: pointer;
+}
+.post__video-pause:hover {
+background-position: -150px -350px;
+}
 .post__upvoted {
     font-size: 12px;
     margin-bottom: 20px;
@@ -1745,6 +1788,8 @@ input, textarea {
     vertical-align: middle;
 }
 .user-comment__img-cell img {
+    width: 30px;
+    height: 30px;
     display: block;
     border-radius: 50%;
 }
@@ -1760,6 +1805,14 @@ input, textarea {
     text-overflow: ellipsis;
 }
 .user-comment__submit-cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 45px;
+    border-left: 1px solid #f4f6f8;
+    text-align: center;
+    cursor: pointer;
+}
+.user-reply__submit-cell {
     display: table-cell;
     vertical-align: middle;
     width: 45px;
@@ -1807,6 +1860,12 @@ input, textarea {
     display: table-cell;
     vertical-align: top;
 }
+.posted-comment-reply__upvote-cell {
+    width: 40px;
+    padding-top: 6px;
+    display: table-cell;
+    vertical-align: top;
+}
 .posted-comment__comment-cell {
     display: table-cell;
     vertical-align: top;
@@ -1814,10 +1873,15 @@ input, textarea {
 }
 .posted-comment__img-wrap {
     width: 40px;
+    height: 40px;
     float: left;
     margin-right: 9px;
     border-radius: 4px;
     overflow: hidden;
+}
+.posted-comment__img-wrap img {
+  height: 40px;
+  width: 40px;
 }
 .posted-comment__text-wrap {
     padding-right: 20px;
@@ -1831,7 +1895,7 @@ input, textarea {
     display: table-cell;
     vertical-align: top;
     text-align: right;
-    width: 45px;
+    width: 100px;
     font-size: 12px;
     position: relative;
 }
@@ -2003,11 +2067,6 @@ input, textarea {
     padding: 0 15px;
     float: left;
     position: relative;
-}
-
-#ytplayer {
-  height: 100%;
-  width: 100%;
 }
 .bottom-player__rating {
     float: left;
