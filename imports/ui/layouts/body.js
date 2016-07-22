@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
+import { SEO } from '../../api/seo/seo.js';
 import  moment  from 'moment';
 import SC from '../../../public/js/sc3.js';
 import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
@@ -68,6 +69,28 @@ Template.app_body.onRendered(function() {
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
+
+  if (FlowRouter.current().params.postId) {
+    const _id = FlowRouter.getParam('postId');
+    this.subscribe('posts.single', _id, {onReady: function() {
+      const post = Posts.findOne({_id});
+      SEO.set({
+        title: post.artist+' - '+post.title,
+        description: 'Check out this song on Village.fm',
+        meta: {
+          'property="og:image"': post.thumbnail,
+          'name="twitter:image"': post.thumbnail,
+          'property="og:type"': 'website',
+          'property="og:site_name"': 'Village.fm',
+          'name="twitter:card"': 'summary',
+        }
+      });
+
+      element = document.getElementById(_id);
+      alignWithTop = true;
+      element.scrollIntoView(alignWithTop);
+    }});
+  }
 });
 
 

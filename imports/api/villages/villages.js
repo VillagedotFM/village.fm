@@ -83,8 +83,6 @@ Villages.schema = new SimpleSchema({
     defaultValue: []
   },
 
-
-
   createdAt: {
     type: Date,
     autoValue: function() {
