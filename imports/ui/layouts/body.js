@@ -28,7 +28,29 @@ import '../components/mobile-content/mobile-content.js';
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
   this.subscribe('villages.all');
-  this.subscribe('posts.all');
+  this.autorun(() => {
+    this.subscribe('posts.all', {onReady: function() {
+      if (FlowRouter.current().params.postId) {
+        const _id = FlowRouter.getParam('postId');
+        const post = Posts.findOne({_id});
+        SEO.set({
+          title: post.artist+' - '+post.title,
+          description: 'Check out this song on Village.fm',
+          meta: {
+            'property="og:image"': post.thumbnail,
+            'name="twitter:image"': post.thumbnail,
+            'property="og:type"': 'website',
+            'property="og:site_name"': 'Village.fm',
+            'name="twitter:card"': 'summary',
+          }
+        });
+
+        /*element = document.getElementById(_id);
+        alignWithTop = true;
+        element.scrollIntoView(alignWithTop);*/
+      } 
+    }});
+  });
   this.subscribe('comments.all');
   this.subscribe('inbox.all');
   window.Villages = Villages;
@@ -69,28 +91,6 @@ Template.app_body.onRendered(function() {
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
-
-  if (FlowRouter.current().params.postId) {
-    const _id = FlowRouter.getParam('postId');
-    this.subscribe('posts.single', _id, {onReady: function() {
-      const post = Posts.findOne({_id});
-      SEO.set({
-        title: post.artist+' - '+post.title,
-        description: 'Check out this song on Village.fm',
-        meta: {
-          'property="og:image"': post.thumbnail,
-          'name="twitter:image"': post.thumbnail,
-          'property="og:type"': 'website',
-          'property="og:site_name"': 'Village.fm',
-          'name="twitter:card"': 'summary',
-        }
-      });
-
-      element = document.getElementById(_id);
-      alignWithTop = true;
-      element.scrollIntoView(alignWithTop);
-    }});
-  }
 });
 
 
@@ -100,3 +100,8 @@ Template.app_body.events({
      $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
   }
 });
+
+
+
+
+
