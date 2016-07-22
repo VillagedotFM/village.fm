@@ -13,6 +13,15 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
+
+      Meteor.call('listenPost', post._id, function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Listened!" + post._id);
+        }
+      });
+
       pauseEverythingElse(post._id);
       appBodyRef.nowPlaying.set(post);
       appBodyRef.state.set(1);
@@ -68,6 +77,15 @@ createYTPlayer = function(post, index) {
         appBodyRef.nowPlaying.set(nextPost);
       }
     } else if(event.data === 1){    //PLAYING
+
+      Meteor.call('listenPost', post._id, function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Listened!" + post._id);
+        }
+      });
+      
       appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
       pauseEverythingElse(post._id);
       appBodyRef.prevPost.set(allPosts[index - 1]);

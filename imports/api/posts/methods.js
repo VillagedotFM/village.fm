@@ -37,6 +37,19 @@ Meteor.methods({
     }
   },
 
+  listenPost:function(postId){
+    Posts.update({
+        _id: postId,
+    },{
+        $addToSet: {
+            listenedBy: this.userId
+        },
+        $inc: {
+            listens: 1
+        }
+    });
+  },
+
   //TODO: Break out these 3 functions
   getTypeAndId:function(link){
     //Matches links that are in a valid youtube format and grabs the video id. Does NOT check to see if video exists (line 95)
@@ -157,6 +170,9 @@ Meteor.methods({
       .replace(/^(|.*\s)'(.*)'(\s.*|)$/, '$2').trim(); // 'Track title'
     }
 
+    if (autoArtist === autoTitle) {   //If regex fails, return the entire title in the Title field and leave the Artist blank
+      autoArtist = '';
+    }
     return {
       artist : autoArtist,
       title : autoTitle

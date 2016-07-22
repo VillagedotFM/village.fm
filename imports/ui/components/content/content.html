@@ -1,7 +1,9 @@
 <template name='content'>
-  {{> upload}}
+  {{#if currentUser}}
+    {{> Template.dynamic template=upload}}
+  {{/if}}
   <div class="content">
-      {{> invite}}
+      {{> Template.dynamic template=invite}}
       {{> feed}}
   </div>
 </template>

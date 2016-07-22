@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="post__upvoted-right align-right">
-                        <span class="color-secondary-text">{{listenedBy.length}} listens</span>
+                        <span class="color-secondary-text">{{listens}} listens</span>
                     </div>
                 </div>
                 <div class="post__comments-send clearfix">
@@ -114,7 +114,9 @@
                         <span class="hidden-mobile-inline">Comments ({{comments.length}})</span>
                         <span class="visible-mobile-inline">{{comments.length}}</span>
                     </span>
-                    <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
+                    {{#if currentUser}}
+                      <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
+                    {{/if}}
                 </div>
                 <div class="comments-block" data-id={{_id}}>
                     <div class="comments-block__posted">
@@ -142,7 +144,9 @@
                                 </div>
                                 <div class="posted-comment__date-cell">
                                     <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
-                                    <span class="posted-comment__reply color-main">Reply</span>
+                                    {{#if currentUser}}
+                                      <span class="posted-comment__reply color-main">Reply</span>
+                                    {{/if}}
                                 </div>
                             </div>
                             {{#if replyTo _id}}
@@ -198,19 +202,21 @@
                           </div>
                         {{/if}}
                     </div>
-                    <div class="user-comment">
+                    {{#if currentUser}}
+                      <div class="user-comment">
                         <div class="user-comment__inner">
-                            <div class="user-comment__img-cell">
-                                <img src="{{getUserImage currentUser._id}}" alt="">
-                            </div>
-                            <div class="user-comment__comment-cell">
-                                <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
-                            </div>
-                            <div class="user-comment__submit-cell">
-                                <button class="user-comment__submit"></button>
-                            </div>
+                          <div class="user-comment__img-cell">
+                            <img src="{{getUserImage currentUser._id}}" alt="">
+                          </div>
+                          <div class="user-comment__comment-cell">
+                            <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
+                          </div>
+                          <div class="user-comment__submit-cell">
+                            <button class="user-comment__submit"></button>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                    {{/if}}
                 </div>
 
                 <div class="send-to-friend" data-id='{{_id}}' style="display: none;">
@@ -337,7 +343,7 @@
                       </div>
                   </div>
                   <div class="post__upvoted-right align-right">
-                      <span class="color-secondary-text">{{listenedBy.length}} listens</span>
+                      <span class="color-secondary-text">{{listens}} listens</span>
                   </div>
               </div>
               <div class="post__comments-send clearfix">
@@ -345,7 +351,9 @@
                       <span class="hidden-mobile-inline">Comments ({{comments.length}})</span>
                       <span class="visible-mobile-inline">{{comments.length}}</span>
                   </span>
-                  <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
+                  {{#if currentUser}}
+                    <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
+                  {{/if}}
               </div>
               <div class="comments-block" data-id={{_id}}>
                   <div class="comments-block__posted">
@@ -373,7 +381,9 @@
                               </div>
                               <div class="posted-comment__date-cell">
                                   <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
-                                  <span class="posted-comment__reply color-main">Reply</span>
+                                  {{#if currentUser}}
+                                    <span class="posted-comment__reply color-main">Reply</span>
+                                  {{/if}}
                               </div>
                           </div>
                           {{#if replyTo _id}}
@@ -429,19 +439,21 @@
                         </div>
                       {{/if}}
                   </div>
-                  <div class="user-comment">
+                  {{#if currentUser}}
+                    <div class="user-comment">
                       <div class="user-comment__inner">
-                          <div class="user-comment__img-cell">
-                              <img src="{{getUserImage currentUser._id}}" alt="">
-                          </div>
-                          <div class="user-comment__comment-cell">
-                              <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
-                          </div>
-                          <div class="user-comment__submit-cell">
-                              <button class="user-comment__submit"></button>
-                          </div>
+                        <div class="user-comment__img-cell">
+                          <img src="{{getUserImage currentUser._id}}" alt="">
+                        </div>
+                        <div class="user-comment__comment-cell">
+                          <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
+                        </div>
+                        <div class="user-comment__submit-cell">
+                          <button class="user-comment__submit"></button>
+                        </div>
                       </div>
-                  </div>
+                    </div>
+                  {{/if}}
               </div>
 
               <div class="send-to-friend" data-id='{{_id}}' style="display: none;">
