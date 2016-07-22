@@ -26,8 +26,6 @@ dburles:collection-helpers
 http
 session
 
-sacha:spin
-momentjs:moment
 manuel:reactivearray
 jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
