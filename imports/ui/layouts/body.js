@@ -27,7 +27,6 @@ import '../components/mobile-content/mobile-content.js';
 
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
-  this.subscribe('villages.all');
   this.autorun(() => {
     this.subscribe('posts.all', {onReady: function() {
       if (FlowRouter.current().params.postId) {
@@ -45,14 +44,17 @@ Template.app_body.onCreated(function appBodyOnCreated() {
           }
         });
 
-        /*element = document.getElementById(_id);
-        alignWithTop = true;
-        element.scrollIntoView(alignWithTop);*/
+        Meteor.setTimeout(function(){
+          element = document.getElementById(_id);
+          alignWithTop = true;
+          element.scrollIntoView(alignWithTop);
+        }, 100);
       } 
     }});
+    this.subscribe('villages.all');
+    this.subscribe('comments.all');
+    this.subscribe('inbox.all');
   });
-  this.subscribe('comments.all');
-  this.subscribe('inbox.all');
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
@@ -93,15 +95,9 @@ Template.app_body.onRendered(function() {
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
 });
 
-
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
   }
 });
-
-
-
-
-
