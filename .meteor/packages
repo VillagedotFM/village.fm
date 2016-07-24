@@ -31,7 +31,6 @@ jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
 keepnox:perfect-scrollbar
 
-
 # ui
 blaze-html-templates
 momentjs:moment
@@ -55,4 +54,3 @@ mobile-experience
 # production
 spiderable
 tomwasd:flow-router-seo
-gadicohen:phantomjs
