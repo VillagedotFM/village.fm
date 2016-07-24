@@ -27,10 +27,34 @@ import '../components/mobile-content/mobile-content.js';
 
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
-  this.subscribe('villages.all');
-  this.subscribe('posts.all');
-  this.subscribe('comments.all');
-  this.subscribe('inbox.all');
+  this.autorun(() => {
+    this.subscribe('posts.all', {onReady: function() {
+      if (FlowRouter.current().params.postId) {
+        const _id = FlowRouter.getParam('postId');
+        const post = Posts.findOne({_id});
+        SEO.set({
+          title: post.artist+' - '+post.title,
+          description: 'Check out this song on Village.fm',
+          meta: {
+            'property="og:image"': post.thumbnail,
+            'name="twitter:image"': post.thumbnail,
+            'property="og:type"': 'website',
+            'property="og:site_name"': 'Village.fm',
+            'name="twitter:card"': 'summary',
+          }
+        });
+
+        Meteor.setTimeout(function(){
+          element = document.getElementById(_id);
+          alignWithTop = true;
+          element.scrollIntoView(alignWithTop);
+        }, 100);
+      } 
+    }});
+    this.subscribe('villages.all');
+    this.subscribe('comments.all');
+    this.subscribe('inbox.all');
+  });
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
@@ -69,30 +93,7 @@ Template.app_body.onRendered(function() {
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
-
-  if (FlowRouter.current().params.postId) {
-    const _id = FlowRouter.getParam('postId');
-    this.subscribe('posts.single', _id, {onReady: function() {
-      const post = Posts.findOne({_id});
-      SEO.set({
-        title: post.artist+' - '+post.title,
-        description: 'Check out this song on Village.fm',
-        meta: {
-          'property="og:image"': post.thumbnail,
-          'name="twitter:image"': post.thumbnail,
-          'property="og:type"': 'website',
-          'property="og:site_name"': 'Village.fm',
-          'name="twitter:card"': 'summary',
-        }
-      });
-
-      element = document.getElementById(_id);
-      alignWithTop = true;
-      element.scrollIntoView(alignWithTop);
-    }});
-  }
 });
-
 
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
