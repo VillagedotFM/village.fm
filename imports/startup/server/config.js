@@ -23,4 +23,3 @@ SEO.routes.upsert({routeName: 'Post'}, {$set: {
     'name="twitter:card"': 'summary',
   }
 }});
-

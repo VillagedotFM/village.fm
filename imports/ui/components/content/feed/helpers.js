@@ -83,5 +83,9 @@ Template.feed.helpers({
         }
       ]
     };
+  },
+  // Get current window location
+  currentUrl() {
+    return window.location.host;
   }
 });
