@@ -6,7 +6,7 @@ Template.notifications.helpers({
   },
   notifications: function(){
     if(Notifications.find({'intendedFor': Meteor.userId()}).count() > 0)
-      return Notifications.find({'intendedFor': Meteor.userId()});
+      return Notifications.find({'intendedFor': Meteor.userId()}, { sort: { createdAt: -1 } });
     return false;
   },
   isRead: function() {
