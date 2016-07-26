@@ -10,8 +10,8 @@ if(Meteor.isServer){
     var post = Posts.findOne({_id:comment.postId});
     var username = Meteor.users.findOne(userId).profile.name;
     var comments = Comments.find({postId: comment.postId}).fetch();
-    var commentors = _.uniq(comments, function(comment) { return comment.userId; });
-    commentors = _.pluck(commentors, 'userId');
+    var commentors = _.uniq(comments, function(comment) { return comment.createdBy; });
+    commentors = _.pluck(commentors, 'createdBy');
 
     //Notify poster of comment
     if (userId !== post.createdBy) {      //if not their comment
@@ -68,10 +68,74 @@ if(Meteor.isServer){
   });
 
   Comments.after.update(function (userId, comment, fieldNames, modifier, options) {
-    // let newTags = _.difference(post.taggedUsers, this.previous.taggedUsers);
+    var post = Posts.findOne({_id:comment.postId});
+
+    //Replies
+    if (_.contains(fieldNames, 'replies') && this.previous.replies.length < comment.replies.length) {
+      var username = Meteor.users.findOne(modifier.$push.replies.createdBy).profile.name;
+      var content;
+      if(comment.content.length < 20)
+        content = comment.content;
+      else {
+        content = comment.content.substr(0,20) + '...'
+      }
+
+
+      var repliers = _.uniq(comment.replies, function(reply) { return reply.createdBy; });
+      repliers = _.pluck(repliers, 'createdBy');
+      var others = repliers.length - 1; //Minus 1 for current replier
+      if(_.contains(repliers, comment.createdBy))
+        others = others - 1;              //Subtract another one for own replies
+
+      if(comment.createdBy !== userId) {
+        var message;
+        if (others > 1) {
+          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was replied to by " + username + " and " + (others - 1) + " others";
+        } else {
+          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was replied to by " + username;
+        }
+
+        Notifications.insert({
+          intendedFor: comment.createdBy,
+          message: message,
+          userId: userId,
+          postId: post._id,
+          thumbnail: post.thumbnail,
+          type: 'reply'
+        });
+      }
+    }
+
+    // if (_.contains(fieldNames, 'likes') && this.previous.likes.length < comment.likes.length) {
+    //   var username = Meteor.users.findOne(userId).profile.name;
     //
-    // if (newTags.length === 0) {
-    //   return;
+    //   var content;
+    //   if(comment.content.length < 20)
+    //     content = comment.content;
+    //   else {
+    //     content = comment.content.substr(0,20) + '...'
+    //   }
+    //
+    //   var others = comment.likes.length - 1;  //Minus 1 for current upvoter
+    //   if(_.contains(comment.likes, comment.userId))
+    //     others = others - 1;                //Subtract another one for own upvotes
+    //   if(comment.userId !== userId) {
+    //     var message;
+    //     if (others > 0) {
+    //       message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username + " and " + (others) + " others";
+    //     } else {
+    //       message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username;
+    //     }
+    //
+    //     Notifications.insert({
+    //       intendedFor: comment.userId,
+    //       message: message,
+    //       userId: userId,
+    //       postId: post._id,
+    //       thumbnail: post.thumbnail,
+    //       type: 'upvote'
+    //     });
+    //   }
     // }
 
   });
