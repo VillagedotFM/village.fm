@@ -31,10 +31,12 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   this.subscribe('posts.all');
   this.subscribe('comments.all');
   this.subscribe('inbox.all');
+  this.subscribe('notifications.all');
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
   window.Inbox = Inbox;
+  window.Notifications = Notifications;
 
   //Set up reactive-vars
   appBodyRef = this;

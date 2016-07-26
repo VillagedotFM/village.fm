@@ -1,5 +1,5 @@
 <template name='notifications'>
-  <div class="header__notifications active">
+  <div class="header__notifications {{newNotifications}}">
       <div class="ntf-dropdown">
           <div class="ntf-dropdown__top">
               <div class="ntf-dropdown__back visible-mobile arrow-back"></div>
@@ -8,23 +8,25 @@
           </div>
           <div class="ntf-dropdown__list-wrapper">
               <ul class="ntf-dropdown__list">
-                  <li class="ntf-dropdown__item ntf-dropdown__item--unread">
+
+                {{#each notifications}}
+                  <li class="ntf-dropdown__item ntf-dropdown__item{{isRead}}">
                       <div class="ntf-dropdown__item-inner">
                           <div class="ntf-dropdown__img-wrap">
-                              <img src="images/villagers/posted-comment-4.png" alt="">
+                              <a href='/{{userId}}' ><img src="{{getUserImage userId}}" alt=""></a>
                           </div>
                           <div class="ntf-dropdown__caption">
                               <p class="ntf-dropdown__text">
-                                  <a href="#" class="color-main">Rebecca Moore</a> and 23 others upvote your
-                                  song: “Tame Impala - Cause I’m a Man”
+                                  {{message}}
                               </p>
                               <span class="ntf-dropdown__date color-secondary-text">
-                                  <i class="ntf-dropdown__icon upvote-xs"></i>
-                                  <span class="ntf-dropdown__hours-ago">2h ago</span>
+                                  <i class="ntf-dropdown__icon {{type}}-xs"></i>
+                                  <span class="ntf-dropdown__hours-ago">{{howLong}}</span>
                               </span>
                           </div>
                       </div>
                   </li>
+                {{/each}}
                   <li class="ntf-dropdown__item ntf-dropdown__item--unread">
                       <div class="ntf-dropdown__item-inner">
                           <div class="ntf-dropdown__img-wrap">
