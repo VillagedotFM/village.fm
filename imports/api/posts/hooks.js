@@ -29,20 +29,20 @@ if(Meteor.isServer){
   });
 
   Posts.after.update(function (userId, post, fieldNames, modifier, options) {
+
+    //Tagged Users
     let newTags = _.difference(post.taggedUsers, this.previous.taggedUsers);
 
-    if (newTags.length === 0) {
-      return;
-    }
+    if (newTags.length !== 0) {
+      //Send post to tagged users' Inbox
 
-    //Send post to tagged users' Inbox
-
-    _.each(newTags, function(tag) {
-      Inbox.insert({
-        to: tag,
-        from: userId,
-        postId: post._id
+      _.each(newTags, function(tag) {
+        Inbox.insert({
+          to: tag,
+          from: userId,
+          postId: post._id
+        });
       });
-    });
+    }
   });
 }
