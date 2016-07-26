@@ -35,36 +35,36 @@ if(Meteor.isServer){
       });
     }
 
-    // //Notifying each commentors
-    // var intendedFor = _.reject(commentors, function(commentor) {
-    //   return commentor === userId;
-    // });
-    // if(commentors.length === 1)
-    //   return
-    // else if(intendedFor.length === 1) {
-    //   var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username;
-    //   Notifications.insert({
-    //     intendedFor: intendedFor,
-    //     message: message,
-    //     userId: userId,
-    //     postId: post._id,
-    //     thumbnail: post.thumbnail,
-    //     type: 'comment'
-    //   });
-    // } else {
-    //   _.each(intendedFor, function(commentor) {
-    //     var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username+ " and " + (intendedFor.length-1) + " others";
-    //
-    //     Notifications.insert({
-    //       intendedFor: commentor,
-    //       message: message,
-    //       userId: userId,
-    //       postId: post._id,
-    //       thumbnail: post.thumbnail,
-    //       type: 'comment'
-    //     });
-    //   });
-    // }
+    //Notifying each commentors
+    var intendedFor = _.reject(commentors, function(commentor) {
+      return commentor === userId;
+    });
+    if(commentors.length !== 1) {
+      if(intendedFor.length === 1) {
+        var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username;
+        Notifications.insert({
+          intendedFor: intendedFor[0],
+          message: message,
+          userId: userId,
+          postId: post._id,
+          thumbnail: post.thumbnail,
+          type: 'comment'
+        });
+      } else {
+        _.each(intendedFor, function(commentor) {
+          var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username+ " and " + (intendedFor.length-1) + " others";
+
+          Notifications.insert({
+            intendedFor: commentor,
+            message: message,
+            userId: userId,
+            postId: post._id,
+            thumbnail: post.thumbnail,
+            type: 'comment'
+          });
+        });
+      }
+    }
   });
 
   Comments.after.update(function (userId, comment, fieldNames, modifier, options) {
