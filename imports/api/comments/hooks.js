@@ -106,37 +106,38 @@ if(Meteor.isServer){
       }
     }
 
-    // if (_.contains(fieldNames, 'likes') && this.previous.likes.length < comment.likes.length) {
-    //   var username = Meteor.users.findOne(userId).profile.name;
-    //
-    //   var content;
-    //   if(comment.content.length < 20)
-    //     content = comment.content;
-    //   else {
-    //     content = comment.content.substr(0,20) + '...'
-    //   }
-    //
-    //   var others = comment.likes.length - 1;  //Minus 1 for current upvoter
-    //   if(_.contains(comment.likes, comment.userId))
-    //     others = others - 1;                //Subtract another one for own upvotes
-    //   if(comment.userId !== userId) {
-    //     var message;
-    //     if (others > 0) {
-    //       message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username + " and " + (others) + " others";
-    //     } else {
-    //       message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username;
-    //     }
-    //
-    //     Notifications.insert({
-    //       intendedFor: comment.userId,
-    //       message: message,
-    //       userId: userId,
-    //       postId: post._id,
-    //       thumbnail: post.thumbnail,
-    //       type: 'upvote'
-    //     });
-    //   }
-    // }
+    //Upvotes
+    if (_.contains(fieldNames, 'likes') && this.previous.likes.length < comment.likes.length) {
+      var username = Meteor.users.findOne(userId).profile.name;
+
+      var content;
+      if(comment.content.length < 20)
+        content = comment.content;
+      else {
+        content = comment.content.substr(0,20) + '...'
+      }
+
+      var others = comment.likes.length - 1;  //Minus 1 for current upvoter
+      if(_.contains(comment.likes, comment.createdBy))
+        others = others - 1;                //Subtract another one for own upvotes
+      if(comment.createdBy !== userId) {
+        var message;
+        if (others > 0) {
+          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username + " and " + (others) + " others";
+        } else {
+          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username;
+        }
+
+        Notifications.insert({
+          intendedFor: comment.createdBy,
+          message: message,
+          userId: userId,
+          postId: post._id,
+          thumbnail: post.thumbnail,
+          type: 'upvote'
+        });
+      }
+    }
 
   });
 }
