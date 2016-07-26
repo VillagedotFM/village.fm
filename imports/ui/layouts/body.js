@@ -56,6 +56,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });
+
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
