@@ -17,6 +17,11 @@ check
 ecmascript
 es5-shim
 tracker
+email
+
+# automated
+percolate:synced-cron
+meteorhacks:aggregate
 
 # data
 mongo

@@ -12,6 +12,9 @@ Template.feed.helpers({
   showInbox() {
     return appBodyRef.inboxOpen.get();
   },
+  selectedPost() {
+    return FlowRouter.current().params.postId;
+  },
   inboxItems() {
     var inboxItems = [];
     _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {

@@ -58,6 +58,5 @@ Template.playlist.events({
     let postId = this._id;
     let inboxId = Inbox.findOne({postId:postId, to: Meteor.userId()})._id;
     Inbox.remove({_id:inboxId});
-
   }
 });
