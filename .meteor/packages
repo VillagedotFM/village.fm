@@ -35,6 +35,7 @@ keepnox:perfect-scrollbar
 alanning:roles
 
 # ui
+twbs:bootstrap
 blaze-html-templates
 momentjs:moment
 reactive-var

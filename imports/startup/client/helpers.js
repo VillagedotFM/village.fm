@@ -1,3 +1,5 @@
+import { Posts } from '../../api/posts/posts.js';
+
 Meteor.subscribe("users.allData");
 
 

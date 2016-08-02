@@ -1,11 +1,27 @@
 <template name="fake-users">
     <div class="wrapper">
-        {{> mobile_menu}}
-
         {{> header}}
         <div class="main">
-            <div class="container hidden-mobile container{{profilePadding}}">
-                <div>FAKE USERS</div>
+            <div class="container--no-padding">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-md-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>FAKE USERS</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <input id="fileInput" type="file" name="myFileInput" class="myFileInput" value="">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button class="btn btn-w-m btn-success" type="button" id="parseFile">Import</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
