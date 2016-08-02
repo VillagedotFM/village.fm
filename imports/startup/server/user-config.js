@@ -6,9 +6,9 @@ Accounts.onCreateUser(function (options, user) {
             user.profile = options.profile;
         }
 
-        //TODO check all admin emails and admin roles
         let email = user.services.facebook.email;
-        if (email === "cristi.ambrozie@gmail.com") {
+        if (email === "cristi.ambrozie@gmail.com" || email === "danny@village.fm " ||
+            email === " jason@village.fm" || email === " nate@village.fm") {
             user.roles = ['admin'];
         }
         else {
