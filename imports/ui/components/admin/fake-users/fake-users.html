@@ -1,3 +1,12 @@
 <template name="fake-users">
-    <div>FAKE USERS</div>
+    <div class="wrapper">
+        {{> mobile_menu}}
+
+        {{> header}}
+        <div class="main">
+            <div class="container hidden-mobile container{{profilePadding}}">
+                <div>FAKE USERS</div>
+            </div>
+        </div>
+    </div>
 </template>
