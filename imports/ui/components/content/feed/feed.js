@@ -110,7 +110,6 @@ createYTPlayer = function(post, index) {
   }
 }
 
-
 Template.feed.onCreated(function feedOnCreated() {
   const feedRef = this;
 
@@ -131,7 +130,6 @@ Template.feed.onCreated(function feedOnCreated() {
       }, 100);
   });
 
-
   //Load youtube iframe api async
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -149,6 +147,17 @@ Template.feed.onCreated(function feedOnCreated() {
     });
 
     let posts = appBodyRef.postOrder.get();
+
+    // If Selected Post
+    if (FlowRouter.current().params.postId) {
+      const selectedPostId = FlowRouter.current().params.postId;
+      const selectedPostIndex = posts.map(function(x) {return x._id; }).indexOf(selectedPostId);
+      // If selected post isn't already first in array
+      if (selectedPostIndex > 0) {
+        // Swap 0 post to the 1 place and selected to 0
+        posts.move(selectedPostIndex,0);
+      }
+    }
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
