@@ -37,7 +37,7 @@ var adminRoutes = FlowRouter.group({
 adminRoutes.route('/fakeUsers', {
     name: 'admin-fakeUsers',
     action() {
-        BlazeLayout.render('admin_body', {content: 'fake-users'});
+        BlazeLayout.render('admin_body', {content: 'fakeUsers'});
     },
 });
 
