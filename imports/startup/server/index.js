@@ -13,5 +13,6 @@ import '../../api/server/publications.js';
 import './user-config.js';
 import './config.js';
 import './useraccounts-configuration.js';
+import './fixtures.js';
 // Seo
 import '../../api/seo/seo.js';

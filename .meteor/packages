@@ -31,6 +31,8 @@ jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
 keepnox:perfect-scrollbar
 
+# roles
+alanning:roles
 
 # ui
 blaze-html-templates
@@ -42,6 +44,7 @@ sacha:spin
 # routing
 kadira:blaze-layout
 kadira:flow-router
+arillo:flow-router-helpers
 
 # service api
 hpx7:youtube-iframe-player
