@@ -37,6 +37,43 @@ Meteor.methods({
         }
     },
 
+    upvotePostByFakeUsers: function (postId, fakeUsersIds) {
+        console.log(fakeUsersIds);
+
+        _.each(fakeUsersIds, function (fakeUserId) {
+
+            if (fakeUserId && fakeUserId != "") {
+                let affected = Posts.update({
+                    _id: postId,
+                    upvotedBy: {$ne: fakeUserId},
+                }, {
+                    $addToSet: {
+                        upvotedBy: fakeUserId
+                    },
+                    $inc: {
+                        upvotes: 1
+                    },
+                    $set: {
+                        lastUpvote: new Date()
+                    }
+                });
+
+                if (!affected) {
+                    Posts.update(
+                        postId
+                        , {
+                            $pull: {
+                                upvotedBy: fakeUserId
+                            },
+                            $inc: {
+                                upvotes: -1
+                            }
+                        });
+                }
+            }
+        });
+    },
+
     listenPost: function (postId) {
         Posts.update({
             _id: postId,

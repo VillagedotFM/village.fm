@@ -5,3 +5,7 @@
 .margin-top-20 {
     margin-top: 20px;
 }
+
+.select2-dropdown {
+    z-index: 999999;
+}

@@ -105,11 +105,11 @@ Template.upload.events({
 
                         if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
                             Meteor.setTimeout(function () {
-                                $("#fakeUsers").select2({
+                                $("#fakeUsersPost").select2({
                                     placeholder: "Select a fake user",
                                     allowClear: true
                                 });
-                            }, 500);
+                            }, 300);
                         }
                     }
                 }
@@ -138,11 +138,11 @@ Template.upload.events({
 
                         if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
                             Meteor.setTimeout(function () {
-                                $("#fakeUsers").select2({
+                                $("#fakeUsersPost").select2({
                                     placeholder: "Select a fake user",
                                     allowClear: true
                                 });
-                            }, 500);
+                            }, 300);
                         }
                     }
                 });
@@ -190,7 +190,7 @@ Template.upload.events({
             taggedUsers: Tags.get('taggedUsers')
         };
 
-        let fakeUserId = $("#fakeUsers").val();
+        let fakeUserId = $("#fakeUsersPost").val();
         if (fakeUserId === "") {
             fakeUserId = null;
         }
