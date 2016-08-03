@@ -2,7 +2,6 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   SC.stream('/tracks/'+post.vidId).then(function(player){
     window['scplayer-'+post._id] = player;
@@ -148,16 +147,8 @@ Template.feed.onCreated(function feedOnCreated() {
 
     let posts = appBodyRef.postOrder.get();
 
-    // If Selected Post
-    if (FlowRouter.current().params.postId) {
-      const selectedPostId = FlowRouter.current().params.postId;
-      const selectedPostIndex = posts.map(function(x) {return x._id; }).indexOf(selectedPostId);
-      // If selected post isn't already first in array
-      if (selectedPostIndex > 0) {
-        // Swap 0 post to the 1 place and selected to 0
-        posts.move(selectedPostIndex,0);
-      }
-    }
+    // Global function to check and move if selected post
+    checkAndMoveSelectedPost(posts);
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...

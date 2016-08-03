@@ -46,17 +46,9 @@ Template.playlist.helpers({
       displayPosts.splice(0, inboxCount);
       return displayPosts;
     } else {
-      //Set post order
-      // If Selected Post
-      if (FlowRouter.current().params.postId) {
-        const selectedPostId = FlowRouter.current().params.postId;
-        const selectedPostIndex = posts.map(function(x) {return x._id; }).indexOf(selectedPostId);
+      // Global function to check and move if selected post
+      checkAndMoveSelectedPost(posts);
 
-        // If selected post isn't already first in array
-        if (selectedPostIndex > 0) {
-          posts.move(selectedPostIndex,0);
-        }
-      }
       appBodyRef.postOrder.set(posts);
       return posts;
     }
