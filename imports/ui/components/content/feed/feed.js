@@ -148,7 +148,7 @@ Template.feed.onCreated(function feedOnCreated() {
     let posts = appBodyRef.postOrder.get();
 
     // Global function to check and move if selected post
-    checkAndMoveSelectedPost(posts);
+    Global.checkAndMoveSelectedPost(posts);
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...

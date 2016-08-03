@@ -1,9 +1,6 @@
-Array.prototype.move = function(from,to){
-  this.splice(to,0,this.splice(from,1)[0]);
-  return this;
-};
-
-checkAndMoveSelectedPost = function(posts) {
+// Declare a global variable
+Global = {};
+Global.checkAndMoveSelectedPost = function(posts) {
 	// If Selected Post
 	if (FlowRouter.current().params.postId) {
 	  const selectedPostId = FlowRouter.current().params.postId;
@@ -16,3 +13,12 @@ checkAndMoveSelectedPost = function(posts) {
 	}
   return posts;  
 }
+
+// Helper functions
+Array.prototype.move = function(from,to){
+  this.splice(to,0,this.splice(from,1)[0]);
+  return this;
+};
+
+
+

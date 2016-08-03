@@ -47,7 +47,7 @@ Template.playlist.helpers({
       return displayPosts;
     } else {
       // Global function to check and move if selected post
-      checkAndMoveSelectedPost(posts);
+      Global.checkAndMoveSelectedPost(posts);
 
       appBodyRef.postOrder.set(posts);
       return posts;
