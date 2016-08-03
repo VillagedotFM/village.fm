@@ -56,7 +56,10 @@ Template.feed.helpers({
     }
   },
   rank(index) {
-    return index + 1;
+    return FlowRouter.current().params.postId ? index : index + 1;
+  },
+  notSelectedPost(index) {
+    return index === 0 && FlowRouter.current().params.postId;
   },
   postedAgo: function() {
     return moment(this.createdAt).fromNow();
