@@ -188,11 +188,17 @@ Template.upload.events({
             title: $('input[name=post-name]').val(),
             description: $('textarea[name=post-caption]').val(),
             taggedUsers: Tags.get('taggedUsers')
+        };
+
+        let fakeUserId = $("#fakeUsers").val();
+        if (fakeUserId === "") {
+            fakeUserId = null;
         }
+        console.log(fakeUserId);
 
         if (type === 'youtube') {
             //Grab duration and insert post
-            Meteor.call('insertPostWithDuration', post, function (error, data) {
+            Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
                 if (error) {
                     console.log(error);
                 } else if (data) {
@@ -216,7 +222,7 @@ Template.upload.events({
                 post.duration = track.duration;
 
                 //Grab duration and insert post
-                Meteor.call('insertPostWithDuration', post, function (error, data) {
+                Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
                     if (error) {
                         console.log(error);
                     } else if (data) {

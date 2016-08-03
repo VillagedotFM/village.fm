@@ -3,17 +3,16 @@ import {Roles} from "meteor/alanning:roles";
 
 Meteor.methods({
 
-    fakeUser_create(thumbnail, firstName, lastNameInitial, email, category) {
+    fakeUser_create(thumbnail, name, email, category) {
 
         let user = Accounts.createUser({
             username: email,
             email: email,
             password: 'villageFM1234',
             profile: {
-                firstName: firstName,
-                lastNameInitial: lastNameInitial,
+                name: name,
                 category: category,
-                picture: thumbnail,
+                picture: thumbnail
             }
         });
 

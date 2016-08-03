@@ -74,15 +74,14 @@ let parseFile = (content) => {
             let line = lines[i];
             let line_parts = line.split('\t');
 
-            if (line_parts && line_parts.length > 4) {
+            if (line_parts && line_parts.length > 3) {
                 let email = line_parts[0];
-                let firstName = line_parts[1];
-                let lastNameInitial = line_parts[2];
-                let thumbnail = line_parts[3];
-                let category = line_parts[4];
+                let name = line_parts[1];
+                let thumbnail = line_parts[2];
+                let category = line_parts[3];
 
 
-                Meteor.call("fakeUser_create", thumbnail, firstName, lastNameInitial, email, category, function (err, data) {
+                Meteor.call("fakeUser_create", thumbnail, name, email, category, function (err, data) {
                     if (err) {
                         if (err.reason.indexOf("Username already exists") > -1) {
                             console.error("Fake user " + email + " already exists");
