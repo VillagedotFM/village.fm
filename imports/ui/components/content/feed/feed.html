@@ -240,10 +240,12 @@
                   <i class="fa fa-caret-up"></i>
                   <span>{{upvotes}}</span>
               </div>
-              <div class="post__left-block color-secondary-text">
-                  {{rank @index}}{{getNumberEnd (rank @index)}} <br>
-                  place
-              </div>
+              {{#unless notSelectedPost @index}}
+                <div class="post__left-block color-secondary-text">
+                    {{rank @index}}{{getNumberEnd (rank @index)}} <br>
+                    place
+                </div>
+              {{/unless}}
               <div class="post__top clearfix">
                   <div class="post__top-upvote upvote-block {{mobileUpvoted}} visible-mobile">
                       <i class="fa fa-caret-up upvote-block__arrow"></i>
