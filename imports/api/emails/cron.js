@@ -26,7 +26,7 @@ SyncedCron.add({
             "$gte": lastDay
           },
           "upvotes": {
-            "$gte": 0
+            "$gte": 1
           },
         }
       },
