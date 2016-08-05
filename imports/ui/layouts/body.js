@@ -3,6 +3,7 @@ import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
 import { Inbox } from '../../api/inbox/inbox.js';
+import { Emails } from '../../api/emails/emails.js'; 
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -49,6 +50,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     this.subscribe('comments.all');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
+    this.subscribe('emails.all');
   });
 
   window.Villages = Villages;
@@ -56,6 +58,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   window.Comments = Comments;
   window.Inbox = Inbox;
   window.Notifications = Notifications;
+  window.Emails = Emails;
 
   //Set up reactive-vars
   appBodyRef = this;

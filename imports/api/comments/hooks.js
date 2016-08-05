@@ -3,11 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Comments } from './comments.js';
 import { Notifications } from '../notifications/notifications.js';
 import { Posts } from '../posts/posts.js';
-
-import {sendgrid} from 'sendgrid';
-
-// sendgrid = require('sendgrid')('8Iwdy7n8QgiHjQ_8PoC9Lw');
-// Email = sendgrid.Email;
+import { Emails } from '../emails/emails.js';
 
 if(Meteor.isServer){
   Comments.after.insert(function (userId, comment) {
@@ -39,33 +35,14 @@ if(Meteor.isServer){
         type: 'comment'
       });
 
-      /*var xsmtpapi = {
-        "to": receiver,
-        "sub": {
-          ":firstname":post.createdBy,
-          ":friendname":username,
-          ":artist":post.artist,
-          ":title":post.title,
-        },
-        "filters": {
-          "templates": {
-            "settings": {
-              "enable": 1,
-              "template_id": "d0fa08b2-9400-405f-a47e-d09bbda979b1"
-            }
-          }
-        },
-      }
-
-      Email.send({
-        from: "hello@village.fm",
-        to:receiver,
-        subject: "Subject",
-        headers: {
-          "X-SMTPAPI": JSON.stringify(xsmtpapi),
-          "Content-Type" : "text/html"
+      Emails.insert({
+        to: post.createdBy,
+        value: 4,
+        meta: {
+          from: userId,
+          postId: post._id,
         }
-      });*/
+      });
     }
 
     //Notifying each commentors
