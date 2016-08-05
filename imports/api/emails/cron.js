@@ -148,7 +148,6 @@ SyncedCron.add({
       Email.send({
 	      from: "hello@village.fm",
 	      to:userDetails.email,
-	      subject: "Subject",
 	      headers: {
 	        "X-SMTPAPI": JSON.stringify(xsmtpapi),
 	        "Content-Type" : "text/html"
