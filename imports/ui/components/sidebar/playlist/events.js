@@ -59,5 +59,10 @@ Template.playlist.events({
     let inboxId = Inbox.findOne({postId:postId, to: Meteor.userId()})._id;
     Inbox.remove({_id:inboxId});
 
+  },
+  'click .sr-playlist__right-btn': function(event, template) {
+    $('.us-mobile').hide();
+    $('.sidebar').hide();
+    $('.container').show();
   }
 });

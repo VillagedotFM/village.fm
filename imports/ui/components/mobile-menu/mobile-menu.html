@@ -4,22 +4,22 @@
           <a href="/" class="mobile-menu__logo"></a>
       </div>
       <ul class="mobile-menu__list">
-          <li class="mobile-menu__item mobile-menu__item--playlist {{mobileActive}}">
+          <li class="mobile-menu__item mobile-menu__item--playlist">
               <a href="/">Playlist</a>
           </li>
 
           {{#if currentUser}}
-            <li class="mobile-menu__item mobile-menu__item--post {{mobileActive}}">
-              <a href="">Post</a>
+            <li class="mobile-menu__item mobile-menu__item--post">
+              <a>Post</a>
             </li>
-            <li class="mobile-menu__item mobile-menu__item--profile {{mobileActive}}">
+            <li class="mobile-menu__item mobile-menu__item--profile">
                 <a href="/{{currentUser._id}}">Profile</a>
             </li>
-            <li class="mobile-menu__item mobile-menu__item--log-out {{mobileActive}}">
+            <li class="mobile-menu__item mobile-menu__item--log-out">
                 <a href="">Log Out</a>
             </li>
           {{else}}
-            <li class="mobile-menu__item mobile-menu__item--profile {{mobileActive}}" id="mobileSignIn">
+            <li class="mobile-menu__item mobile-menu__item--profile" id="mobileSignIn">
                 <a href="">Sign up</a>
             </li>
           {{/if}}

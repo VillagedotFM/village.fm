@@ -1,47 +1,55 @@
 <template name='now_playing_popup'>
   <aside class="now-playing" style="display: none">
+    {{#with nowPlaying}}
       <div class="now-playing__inner">
           <div class="now-playing__top">
               <span class="now-playing__arrow-down"></span>
-              <span class="now-playing__view-post">View Post</span>
+              <a href="/post/{{_id}}">
+                <span class="now-playing__view-post">View Post</span>
+              </a>
               <span class="now-playing__heading">Now Playing</span>
           </div>
           <div class="now-playing__main">
               <!--<div class="now-playing__video"></div>-->
-              <div class="now-playing__cover"></div>
+              <div class="now-playing__cover" style="background-image: url({{thumbnail}})"></div>
               <h2 class="now-playing__title">
-                  <span class="bold">Bastille</span>
-                  - Of The Night
+                  <span class="bold">{{artist}}</span>
+                  - {{title}}
               </h2>
           </div>
           <div class="now-playing__posted-by">
               <div class="now-playing__img-wrapper">
-                  <img src="images/jason.png" alt="">
+                <a href="/{{createdBy}}">
+                  <img src="{{getUserImage createdBy}}" >
+                </a>
               </div>
               <div class="now-playing__caption">
                   <p class="now-playing__author">
-                      <span class="color-main semibold">Jason Chernofsky </span>
-                      <span class="color-secondary-text">posted 2 days ago</span>
+                      <span class="color-main semibold">{{getUserName createdBy}} </span>
+                      <span class="color-secondary-text">posted {{postedAgo}}</span>
                   </p>
                   <p class="now-playing__text">
-                      Lorem ipsum dolor sit amet, semper at suspend isse
-                      donec at lectus velit maec
+                    {{#if description}}
+                      {{description}}
+                    {{else}}
+                      {{getUserName createdBy 'first'}} had nothing to say about the song :(
+                    {{/if}}
                   </p>
               </div>
           </div>
           <div class="player">
               <div class="player__progress-bar">
-                  <div class="player__range" style="width: 60%"></div>
-                  <span class="player__time-start">2:05</span>
-                  <span class="player__time-end">4:23</span>
+                  <div class="player__range" style="width: {{completedPercentage}}"></div>
+                  <span class="player__time-start">{{completed}}</span>
+                  <span class="player__time-end">{{duration}}</span>
               </div>
               <div class="player__controls">
                   <span class="player__controls__prev"></span>
-                  <span class="player__controls__play player__controls__play--paused"></span>
+                  <span class="player__controls__play {{playOrPause}}"></span>
                   <span class="player__controls__next"></span>
               </div>
           </div>
       </div>
-
+    {{/with}}
   </aside>
 </template>
