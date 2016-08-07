@@ -31,14 +31,14 @@ Template.mobile_menu.events({
 
     hideMenu();
   },
-  'click .mobile-menu__item--playlist': function(event, template) {
+  'click .mobile-menu__item--playlist, click .mobile-menu__logo': function(event, template) {
     $('.us-mobile').hide();
     $('.container').hide();
     $('.sidebar').show();
     hideMenu();
   },
   'click .mobile-menu__item--post': function(event, template) {
-    $('.us-mobile').hide();
+    $('.us-mobile').show();
     $('.sidebar').hide();
     $('.container').show();
     hideMenu();

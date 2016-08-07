@@ -49,7 +49,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
           alignWithTop = true;
           element.scrollIntoView(alignWithTop);
         }, 100);
-      } 
+      }
     }});
     this.subscribe('villages.all');
     this.subscribe('comments.all');
@@ -96,6 +96,11 @@ Template.app_body.onRendered(function() {
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
+
+  $('.us-mobile').hide();
+  // $('.container').hide();
+  $('.sidebar').show();
+  hideMenu();
 });
 
 Template.app_body.events({
