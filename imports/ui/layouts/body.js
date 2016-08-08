@@ -50,7 +50,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     this.subscribe('comments.all');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
-    this.subscribe('emails.all');
   });
 
   window.Villages = Villages;
@@ -58,7 +57,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   window.Comments = Comments;
   window.Inbox = Inbox;
   window.Notifications = Notifications;
-  window.Emails = Emails;
 
   //Set up reactive-vars
   appBodyRef = this;
