@@ -2,6 +2,9 @@ import { Posts } from '../posts/posts.js';
 import { Emails } from '../emails/emails.js';
 import { Comments } from '../comments/comments.js';
 
+var nodemailer = require('nodemailer');
+var smtpapi    = require('smtpapi');
+
 console.log('Time now ' + new Date());
 const t = new Date();
 t.setSeconds(t.getSeconds() + 10);
@@ -11,7 +14,7 @@ SyncedCron.add({
   name: 'aggregateNotifications',
   schedule: function(parser) {
     // Run once a day 
-    return parser.text('every 30 seconds');
+    return parser.text('every 24 hours');
   },
   job: function() {
     // Get most upvoted last day Post from each user that posted
@@ -26,7 +29,7 @@ SyncedCron.add({
             "$gte": lastDay
           },
           "upvotes": {
-            "$gte": 1
+            "$gte": 0
           },
         }
       },
@@ -59,16 +62,18 @@ SyncedCron.add({
     ]);
 
     _(usersPostingInLastDayAndMostUpvotedPost).each(function(item) {
-      // Insert most upvoted post for each user to Emails
-      Emails.insert({
-        to: item._id,
-        value: 3,
-        meta: {
-          count: item.post.upvotes,
-          postId: item.post.id,
-        }
-      });
-
+      // Insert most upvoted post for each user to Emails if larger than 3
+      if(item.post.upvotes >= 3) {
+      	Emails.insert({
+	        to: item._id,
+	        value: 3,
+	        meta: {
+	          count: item.post.upvotes,
+	          postId: item.post.id,
+	        }
+	      });
+      }
+      
       // Aggregate all Emails for user and select most important one
       email = Emails.aggregate([{
         "$match": {
@@ -97,21 +102,19 @@ SyncedCron.add({
       // Pick which kind of daily email to send
       switch (emailItem.value) {
         case 5:
-          username = Meteor.users.findOne(emailItem.meta.from).profile
-            .name;
+          username = Meteor.users.findOne(emailItem.meta.from).profile.name;
           post = Posts.findOne(emailItem.meta.postId);
 
           template = "81cb32ef-be4a-4f2d-8f59-995a8b7711b6";
           sub = {
-            "{firstname}": userDetails.first_name,
-            "{username}": username,
-            "{artist}": post.artist,
-            "{trackname}": post.title,
+            "-firstname-": [userDetails.first_name],
+            "-username-": [username],
+            "-artist-": [post.artist],
+            "-trackname-": [post.title],
           };
           break;
         case 4:
-          username = Meteor.users.findOne(emailItem.meta.from).profile
-            .name;
+          username = Meteor.users.findOne(emailItem.meta.from).profile.name;
           post = Posts.findOne(emailItem.meta.postId);
 
           // Aggregate Number of Comments for particular post
@@ -130,11 +133,11 @@ SyncedCron.add({
 
           template = "c356a9dd-d16d-4f2e-850f-9d17b17ee449";
           sub = {
-            "{firstname}": userDetails.first_name,
-            "{username}": username,
-            "{comments_count}": commentsCount[0].count,
-            "{artist}": post.artist,
-            "{trackname}": post.title,
+            "-firstname-": [userDetails.first_name],
+            "-username-": [username],
+            "-comments_count-": [commentsCount[0].count],
+            "-artist-": [post.artist],
+            "-trackname-": [post.title],
           };
           break;
         case 3:
@@ -142,10 +145,10 @@ SyncedCron.add({
 
           template = "d0fa08b2-9400-405f-a47e-d09bbda979b1";
           sub = {
-            "{firstname}": userDetails.first_name,
-            "{upvotes_count}": emailItem.meta.count,
-            "{artist}": post.artist,
-            "{trackname}": post.title,
+            "-firstname-": [userDetails.first_name],
+            "-upvotes_count-": [emailItem.meta.count],
+            "-artist-": [post.artist],
+            "-trackname-": [post.title],
           };
           break;
         case 2:
@@ -160,27 +163,37 @@ SyncedCron.add({
           break;
       }
 
-      const xsmtpapi = {
-        "filters": {
-          "templates": {
-            "settings": {
-              "enable": 1,
-              "template_id": template
-            }
-          }
-        },
-        "sub": sub,
-      }
+      var header = new smtpapi();
 
-      // Send daily email
-      Email.send({
-        from: "hello@village.fm",
-        to: userDetails.email,
-        headers: {
-          "X-SMTPAPI": JSON.stringify(xsmtpapi),
-          "Content-Type": "text/html"
+      header.setFilters({
+        "templates": {
+          "settings": {
+            "enable": 1,
+            "template_id": template
+          }
         }
       });
+
+      header.setSubstitutions(sub)
+
+      // Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+			  from:     "Village.fm <hello@village.fm>",
+			  to:       userDetails.email,
+			  text:     "Hello world",
+			  html:     "<b>Hello world</b>",
+			  headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+			  smtpTransport.close();
+
+			  console.log( error || "Message sent");
+			});
     });
   }
 });

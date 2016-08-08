@@ -12,7 +12,6 @@ import '../../api/inbox/methods.js';
 import '../../api/inbox/server/publications.js';
 import '../../api/server/publications.js';
 import './user-config.js';
-import './email-config.js';
 import './config.js';
 import './useraccounts-configuration.js';
 // Seo
@@ -21,3 +20,5 @@ import '../../api/seo/seo.js';
 import '../../api/emails/emails.js';
 import '../../api/emails/server/publications.js';
 import '../../api/emails/cron.js';
+
+import './server-global.js';
