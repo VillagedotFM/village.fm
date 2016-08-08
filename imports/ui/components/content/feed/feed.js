@@ -2,7 +2,6 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   SC.stream('/tracks/'+post.vidId).then(function(player){
     window['scplayer-'+post._id] = player;
@@ -110,7 +109,6 @@ createYTPlayer = function(post, index) {
   }
 }
 
-
 Template.feed.onCreated(function feedOnCreated() {
   const feedRef = this;
 
@@ -131,7 +129,6 @@ Template.feed.onCreated(function feedOnCreated() {
       }, 100);
   });
 
-
   //Load youtube iframe api async
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -149,6 +146,9 @@ Template.feed.onCreated(function feedOnCreated() {
     });
 
     let posts = appBodyRef.postOrder.get();
+
+    // Global function to check and move if selected post
+    Global.checkAndMoveSelectedPost(posts);
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...

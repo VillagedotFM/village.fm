@@ -43,13 +43,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             'name="twitter:card"': 'summary',
           }
         });
-
-        Meteor.setTimeout(function(){
-          element = document.getElementById(_id);
-          alignWithTop = true;
-          element.scrollIntoView(alignWithTop);
-        }, 100);
-      }
+      } 
     }});
     this.subscribe('villages.all');
     this.subscribe('comments.all');
