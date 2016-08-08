@@ -16,6 +16,7 @@ Template.header.events({
     $('.sr-inbox__arrow').removeClass('fa-caret-up');
   },
   'click .header__hum': function(event, template){
+    event.stopPropagation();
     $('.header__hum').toggleClass('header__hum--active');
     $('.main, .header, .bottom-player, .us-mobile').toggleClass('menu-open');
   },

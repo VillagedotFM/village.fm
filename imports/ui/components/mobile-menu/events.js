@@ -31,7 +31,7 @@ Template.mobile_menu.events({
 
     hideMenu();
   },
-  'click .mobile-menu__item--playlist, click .mobile-menu__logo': function(event, template) {
+  'click .mobile-menu__item--playlist, click .mobile-menu__logo, click .mobile-menu__item--profile': function(event, template) {
     $('.us-mobile').hide();
     $('.container').hide();
     $('.sidebar').show();
