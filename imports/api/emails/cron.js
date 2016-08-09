@@ -12,6 +12,7 @@ console.log('Setting job to future in 10 seconds ' + t);
 
 SyncedCron.add({
   name: 'aggregateNotifications',
+  timezone: 'Australia/Sydney',
   schedule: function(parser) {
     // Run once a day 
     return parser.text('every 24 hours');

@@ -20,7 +20,7 @@ tracker
 email
 
 # automated
-percolate:synced-cron
+saucecode:timezoned-synced-cron
 meteorhacks:aggregate
 
 # data
