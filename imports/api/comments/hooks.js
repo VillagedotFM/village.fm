@@ -3,12 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import { Comments } from './comments.js';
 import { Notifications } from '../notifications/notifications.js';
 import { Posts } from '../posts/posts.js';
-
+import { Emails } from '../emails/emails.js';
 
 if(Meteor.isServer){
   Comments.after.insert(function (userId, comment) {
     var post = Posts.findOne({_id:comment.postId});
     var username = Meteor.users.findOne(userId).profile.name;
+    var receiver = Meteor.users.findOne(userId).services.facebook.email;
     var comments = Comments.find({postId: comment.postId}).fetch();
     var commentors = _.uniq(comments, function(comment) { return comment.createdBy; });
     commentors = _.pluck(commentors, 'createdBy');
@@ -32,6 +33,15 @@ if(Meteor.isServer){
         postId: post._id,
         thumbnail: post.thumbnail,
         type: 'comment'
+      });
+
+      Emails.insert({
+        to: post.createdBy,
+        value: 4,
+        meta: {
+          from: userId,
+          postId: post._id,
+        }
       });
     }
 
