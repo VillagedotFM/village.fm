@@ -16,3 +16,9 @@ import './config.js';
 import './useraccounts-configuration.js';
 // Seo
 import '../../api/seo/seo.js';
+// Emails
+import '../../api/emails/emails.js';
+import '../../api/emails/server/publications.js';
+import '../../api/emails/cron.js';
+
+import './server-global.js';

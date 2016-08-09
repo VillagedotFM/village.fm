@@ -1,6 +1,6 @@
 // Declare a global variable
-Global = {};
-Global.checkAndMoveSelectedPost = function(posts) {
+GlobalClient = {};
+GlobalClient.checkAndMoveSelectedPost = function(posts) {
 	// If Selected Post
 	if (FlowRouter.current().params.postId) {
 	  const selectedPostId = FlowRouter.current().params.postId;

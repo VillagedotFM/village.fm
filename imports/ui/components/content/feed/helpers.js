@@ -12,6 +12,9 @@ Template.feed.helpers({
   showInbox() {
     return appBodyRef.inboxOpen.get();
   },
+  selectedPost() {
+    return FlowRouter.current().params.postId;
+  },
   inboxItems() {
     var inboxItems = [];
     _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
@@ -89,6 +92,6 @@ Template.feed.helpers({
   },
   // Get current window location
   currentUrl() {
-    return window.location.host;
+    return window.location.origin;
   }
 });
