@@ -83,6 +83,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
+
+  appBodyRef.mobile = new ReactiveVar(false);       //Mobile indicator
 });
 
 Template.app_body.onRendered(function() {
@@ -91,11 +93,22 @@ Template.app_body.onRendered(function() {
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
+
+  if(window.matchMedia("(max-width: 767px)").matches) {
+    $('.us-mobile').hide();
+    $('.container').hide();
+    $('.sidebar').show();
+    hideMenu();
+
+    appBodyRef.mobile.set(true);
+  }
+
 });
 
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
+     hideMenu();
   }
 });
