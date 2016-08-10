@@ -3,6 +3,7 @@ import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
 import { Inbox } from '../../api/inbox/inbox.js';
+import { Emails } from '../../api/emails/emails.js'; 
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -27,14 +28,35 @@ import '../components/mobile-content/mobile-content.js';
 
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
-  this.subscribe('villages.all');
-  this.subscribe('posts.all');
-  this.subscribe('comments.all');
-  this.subscribe('inbox.all');
+  this.autorun(() => {
+    this.subscribe('posts.all', {onReady: function() {
+      if (FlowRouter.current().params.postId) {
+        const _id = FlowRouter.getParam('postId');
+        const post = Posts.findOne({_id});
+        SEO.set({
+          title: post.artist+' - '+post.title,
+          description: 'Check out this song on Village.fm',
+          meta: {
+            'property="og:image"': post.thumbnail,
+            'name="twitter:image"': post.thumbnail,
+            'property="og:type"': 'website',
+            'property="og:site_name"': 'Village.fm',
+            'name="twitter:card"': 'summary',
+          }
+        });
+      } 
+    }});
+    this.subscribe('villages.all');
+    this.subscribe('comments.all');
+    this.subscribe('inbox.all');
+    this.subscribe('notifications.all');
+  });
+
   window.Villages = Villages;
   window.Posts = Posts;
   window.Comments = Comments;
   window.Inbox = Inbox;
+  window.Notifications = Notifications;
 
   //Set up reactive-vars
   appBodyRef = this;
@@ -61,6 +83,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
+
+  appBodyRef.mobile = new ReactiveVar(false);       //Mobile indicator
 });
 
 Template.app_body.onRendered(function() {
@@ -70,33 +94,21 @@ Template.app_body.onRendered(function() {
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
 
-  if (FlowRouter.current().params.postId) {
-    const _id = FlowRouter.getParam('postId');
-    this.subscribe('posts.single', _id, {onReady: function() {
-      const post = Posts.findOne({_id});
-      SEO.set({
-        title: post.artist+' - '+post.title,
-        description: 'Check out this song on Village.fm',
-        meta: {
-          'property="og:image"': post.thumbnail,
-          'name="twitter:image"': post.thumbnail,
-          'property="og:type"': 'website',
-          'property="og:site_name"': 'Village.fm',
-          'name="twitter:card"': 'summary',
-        }
-      });
+  if(window.matchMedia("(max-width: 767px)").matches) {
+    $('.us-mobile').hide();
+    $('.container').hide();
+    $('.sidebar').show();
+    hideMenu();
 
-      element = document.getElementById(_id);
-      alignWithTop = true;
-      element.scrollIntoView(alignWithTop);
-    }});
+    appBodyRef.mobile.set(true);
   }
-});
 
+});
 
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
+     hideMenu();
   }
 });

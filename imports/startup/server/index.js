@@ -6,6 +6,7 @@ import '../../api/villages/server/publications.js';
 import '../../api/notifications/methods.js';
 import '../../api/notifications/server/publications.js';
 import '../../api/comments/methods.js';
+import '../../api/comments/hooks.js';
 import '../../api/comments/server/publications.js';
 import '../../api/inbox/methods.js';
 import '../../api/inbox/server/publications.js';
@@ -15,3 +16,9 @@ import './config.js';
 import './useraccounts-configuration.js';
 // Seo
 import '../../api/seo/seo.js';
+// Emails
+import '../../api/emails/emails.js';
+import '../../api/emails/server/publications.js';
+import '../../api/emails/cron.js';
+
+import './server-global.js';
