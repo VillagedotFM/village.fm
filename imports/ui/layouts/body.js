@@ -3,6 +3,7 @@ import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
 import { Inbox } from '../../api/inbox/inbox.js';
+import { Emails } from '../../api/emails/emails.js'; 
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
