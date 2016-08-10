@@ -3,6 +3,7 @@ import { HTTP } from 'meteor/http';
 import  moment  from 'moment';
 
 import { Posts } from './posts.js';
+import { Notifications } from '../notifications/notifications.js';
 
 //TODO: this stops video
 Meteor.methods({
@@ -34,6 +35,34 @@ Meteor.methods({
             upvotes: -1
         }
       });
+    } else {
+
+      //Notify poster of upvote
+      var post = Posts.findOne({_id:postId});
+      var userId = Meteor.userId();
+      var username = Meteor.users.findOne(userId).profile.name;
+      if (userId !== post.createdBy) {
+        var message;
+        var others = post.upvotedBy.length - 1; //Minus one for current upvoter
+        if(_.contains(post.upvotedBy, post.createdBy))
+          others = others - 1;                  //Minus another for poster's upvote
+        if (others > 1) {
+          message = "Your post, " + post.artist + "-" + post.title + ", was upvoted by " + username + " and " + others + " others";
+        }
+        else {
+          message = "Your post, " + post.artist + "-" + post.title + ", was upvoted by " + username;
+        }
+
+        Notifications.insert({
+          intendedFor: post.createdBy,
+          message: message,
+          userId: userId,
+          postId: post._id,
+          thumbnail: post.thumbnail,
+          type: 'upvote'
+        });
+      }
+
     }
   },
 
@@ -224,5 +253,5 @@ Meteor.methods({
         }
       });
     });
-  }
+  },
 });

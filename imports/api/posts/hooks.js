@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Posts } from './posts.js';
 import { Inbox } from '../inbox/inbox.js';
+import { Emails } from '../emails/emails.js';
 
 
 if(Meteor.isServer){
@@ -18,31 +19,38 @@ if(Meteor.isServer){
     }
 
     //Send post to tagged users' Inbox
-
     _.each(tagged, function(tag) {
-      Inbox.insert({
-        to: tag,
-        from: userId,
-        postId: post._id
-      });
+      insertNewItem_TaggedInPost(tag, userId, post._id);
     });
   });
 
   Posts.after.update(function (userId, post, fieldNames, modifier, options) {
+
+    //Tagged Users
     let newTags = _.difference(post.taggedUsers, this.previous.taggedUsers);
 
-    if (newTags.length === 0) {
-      return;
-    }
-
-    //Send post to tagged users' Inbox
-
-    _.each(newTags, function(tag) {
-      Inbox.insert({
-        to: tag,
-        from: userId,
-        postId: post._id
+    if (newTags.length !== 0) {
+      //Send post to tagged users' Inbox
+      _.each(newTags, function(tag) {
+        insertNewItem_TaggedInPost(tag, userId, post._id);
       });
-    });
+    }
+  });
+}
+
+function insertNewItem_TaggedInPost(tag, userId, postId) {
+  Inbox.insert({
+    to: tag,
+    from: userId,
+    postId: postId
+  });
+
+  Emails.insert({
+    to: tag,
+    value: 5,
+    meta: {
+      from: userId,
+      postId: postId
+    }
   });
 }

@@ -73,7 +73,7 @@ Posts.schema = new SimpleSchema({
   {
     type: String,
     label: "Description",    //User Entered
-    max: 400,
+    max: 140,
     optional: true
   },
 

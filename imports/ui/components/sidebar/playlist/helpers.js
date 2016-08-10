@@ -27,12 +27,11 @@ Template.playlist.helpers({
       else if (time === 'year')
       time_filter.setDate(date.getDate()-365);
 
-      posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}});
+      posts = Posts.find({"createdAt" : { $gte : time_filter }}, {sort: {upvotes:-1, lastUpvote:-1}}).fetch();
     }
 
     //Inbox
     if (appBodyRef.inboxOpen.get()) {
-      posts = posts.fetch();
       var inboxItems = [];
       _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
         inboxItems.push(Posts.findOne(inboxItem.postId));
@@ -47,8 +46,10 @@ Template.playlist.helpers({
       displayPosts.splice(0, inboxCount);
       return displayPosts;
     } else {
-      //Set post order
-      appBodyRef.postOrder.set(posts.fetch());
+      // Global function to check and move if selected post
+      GlobalClient.checkAndMoveSelectedPost(posts);
+
+      appBodyRef.postOrder.set(posts);
       return posts;
     }
 
