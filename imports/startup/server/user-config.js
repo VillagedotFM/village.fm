@@ -1,3 +1,5 @@
+import { Villages } from '../../api/villages/villages.js';
+
 var nodemailer = require('nodemailer');
 var smtpapi    = require('smtpapi');
 
@@ -6,6 +8,14 @@ Accounts.onCreateUser(function(options, user) {
         options.profile.picture = "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
         user.profile = options.profile;
     }
+
+    //Add user to main village
+    let villageId = Villages.findOne({})._id;
+    Villages.update({_id:villageId}, {
+      $addToSet: {
+          users: user._id
+      }
+    });
 
     var header = new smtpapi();
 
@@ -40,5 +50,6 @@ Accounts.onCreateUser(function(options, user) {
 
 		  console.log( error || "Message sent");
 		});
+    
     return user;
 });
