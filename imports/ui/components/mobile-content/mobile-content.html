@@ -1,10 +1,10 @@
 <template name='mobile_content'>
-  <div class="us-mobile visible-mobile">
+  <div class="us-mobile visible-mobile hidden">
       <div class="us-mobile__upload clearfix">
           <button type="submit" name="post-upload" class="us-mobile__mobile-btn pull-right hidden">
           </button>
           <div class="us-mobile__input-wrapper us-mobile__input-wrapper--uploaded">
-              <input type="text" name="post-link" id="mobile-link" class="us-mobile__input" placeholder="enter any Soundcloud or YouTube link here...">
+              <input type="text" name="post-link" class="us-mobile__input" placeholder="enter any Soundcloud or YouTube link here...">
           </div>
       </div>
       <div class="uploaded-item-mobile clearfix">
@@ -12,30 +12,26 @@
               <div class="uploaded-item-mobile__img-wrap">
                   <div class="uploaded-item-mobile__img">
                       <div class="uploaded-item-mobile__bg uploaded-item-mobile__bg--loading">
-                        {{#if uploadedThumbnail}}
-                          <img src="{{uploadedThumbnail}}" class="mobile-uploaded-thumbnail" alt="">
-                        {{else}}
                           <div class="uploaded-item-mobile__spinner"></div>
-                        {{/if}}
+                          <!--<img src="images/uploaded-img.png" alt="">-->
                       </div>
-
                   </div>
               </div>
               <div class="uploaded-item-mobile__descr clearfix">
                   <div class="uploaded-item-mobile__input-wrap">
-                      <input type="text" name="post-author" id="mobile-artist" value="{{uploadedArtist}}" placeholder="enter Artist Name here...">
+                      <input type="text" name="post-author" value="The Neighbourhood" placeholder="enter Artist Name here...">
                   </div>
                   <div class="uploaded-item-mobile__input-wrap">
-                      <input type="text" name="post-name" id="mobile-title" value="{{uploadedTitle}}" placeholder="enter Song Name here...">
+                      <input type="text" name="post-name" value="Sweater Weather" placeholder="enter Song Name here...">
                   </div>
                   <div class="uploaded-item-mobile__textarea-wrap">
-                      <textarea name="post-caption" maxlength="140" id="mobile-description" placeholder="What do you love about this song?"></textarea>
-                      {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
+                      <textarea name="post-caption" maxlength="140" placeholder="Enter your thoughts or Tag some friends by using @ symbol(optional)"></textarea>
+                      <span class="uploaded-item__max-chars color-secondary-text">0/140</span>
                   </div>
               </div>
               <div class="uploaded-item-mobile__btns">
                   <button class="btn btn--inverse uploaded-item-mobile__cancel">Cancel</button>
-                  <button type="submit" name="post" class="btn" id="mobile-post-btn">Post</button>
+                  <button type="submit" name="post" class="btn">Post</button>
               </div>
           </form>
       </div>
