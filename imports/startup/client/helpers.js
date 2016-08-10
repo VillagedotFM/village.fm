@@ -35,7 +35,7 @@ UI.registerHelper("profilePadding", function(){
 });
 
 UI.registerHelper("ownProfile", function(){
-  return FlowRouter.current().params._id == Meteor.userId() || false;
+  return (FlowRouter.current().params._id == Meteor.userId() ? true : false );
 });
 
 UI.registerHelper("getUserVillagerNum", function (userId) {

@@ -17,11 +17,6 @@ check
 ecmascript
 es5-shim
 tracker
-email
-
-# automated
-saucecode:timezoned-synced-cron
-meteorhacks:aggregate
 
 # data
 mongo
@@ -35,6 +30,7 @@ manuel:reactivearray
 jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
 keepnox:perfect-scrollbar
+
 
 # ui
 blaze-html-templates
@@ -57,5 +53,5 @@ accounts-facebook
 mobile-experience
 
 # production
-jazeee:spiderable-longer-timeout
+spiderable
 tomwasd:flow-router-seo

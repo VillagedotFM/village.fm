@@ -1,12 +1,8 @@
 @media (max-width: 767px){
-  #__blaze-root{
-    height: 100%;
-  }
     .wrapper {
         padding-top: 43px;
         position: relative;
         margin: 0 auto;
-        height: 100%;
     }
     .visible-mobile {
         display: block;

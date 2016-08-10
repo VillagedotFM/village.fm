@@ -45,7 +45,11 @@ Template.feed.events({
     if(Meteor.userId()) {
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
-        console.log( err || "Upvoted!" + upvotedPost._id);
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Upvoted!" + upvotedPost._id);
+        }
       });
     } else {
       alert('Please login to upvote posts!');
@@ -55,7 +59,11 @@ Template.feed.events({
     if(Meteor.userId()) {
       let upvotedComment = this;
       Meteor.call('upvoteComment', upvotedComment._id, function(err, data) {
-        console.log( err || "Upvoted comment");
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Upvoted comment");
+        }
       });
     } else {
       alert('Please login to upvote comments!');
@@ -66,7 +74,11 @@ Template.feed.events({
       let parentComment = $(event.currentTarget).data('parent');
       let index = $(event.currentTarget).data('value');
       Meteor.call('upvoteReply', parentComment, index, function(err, data) {
-        console.log( err || "Upvoted reply");
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Upvoted reply");
+        }
       });
     } else {
       alert('Please login to upvote comments!');

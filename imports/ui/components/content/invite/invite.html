@@ -10,28 +10,26 @@
               <img src="{{getUserImage this}}" style="width: 30px; height: 30px; border-radius: 50%;">
           </a>
         {{/each}}
-        {{#if dottedUsers}}
-            <span class="villagers__img villagers__img--last">
-                <div class="villagers__dots">
-                    <div class="more-users-dropdown">
-                        <div class="more-users-dropdown__wrap">
-                            <ul class="more-users-dropdown__inner">
-                              {{#each dottedUsers}}
-                                  <li class="more-users-dropdown__user">
-                                      <a href="/{{this}}">
-                                          <img src="{{getUserImage this}}" class="more-users-dropdown__img">
-                                        <div class="more-users-dropdown__name-wrap">
-                                          <span class="more-users-dropdown__name">{{getUserName this}}</span>
-                                        </div>
-                                      </a>
-                                  </li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </span>
-          {{/if}}
+          <span class="villagers__img villagers__img--last">
+              <div class="villagers__dots">
+                  <div class="more-users-dropdown">
+                      <div class="more-users-dropdown__wrap">
+                          <ul class="more-users-dropdown__inner">
+                            <!-- {{#each dottedUsers}}
+                                <li class="more-users-dropdown__user">
+                                    <a href="/{{this}}">
+                                        <img src="{{getUserImage this}}" class="more-users-dropdown__img">
+                                      <div class="more-users-dropdown__name-wrap">
+                                        <span class="more-users-dropdown__name">{{getUserName this}}</span>
+                                      </div>
+                                    </a>
+                                </li>
+                              {{/each}} -->
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </span>
       </div>
       <!-- <div class="villagers__invite">
           <span class="villagers__invite-btn color-secondary-text">
