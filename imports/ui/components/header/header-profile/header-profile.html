@@ -1,35 +1,42 @@
 <template name='header_profile'>
-  <div class="header-profile">
-    <span class="header-profile__thumb">
-      <img src="{{getUserImage currentUser._id}}" class="header-profile__img" />
-    </span>
-    <span class="header-profile__name">
-      {{getUserName currentUser._id}}
-      <i class="fa fa-caret-down arrow"></i>
-    </span>
-    <div class="profile-dropdown">
-      <div class="profile-dropdown__top">
-        <a href="/{{currentUser._id}}"><img src="{{getUserImage currentUser._id}}" class="header-profile__img" /></a>
-        <div class="profile-dropdown__name-wrap">
-          <a href="/{{currentUser._id}}" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
-          <span class="profile-dropdown__caption">
+    <div class="header-profile">
+        <span class="header-profile__thumb">
+          <img src="{{getUserImage currentUser._id}}" class="header-profile__img"/>
+        </span>
+        <span class="header-profile__name">
+            {{getUserName currentUser._id}}
+            <i class="fa fa-caret-down arrow"></i>
+        </span>
+        <div class="profile-dropdown">
+            <div class="profile-dropdown__top">
+                <a href="/{{currentUser._id}}"><img src="{{getUserImage currentUser._id}}" class="header-profile__img"/></a>
+                <div class="profile-dropdown__name-wrap">
+                    <a href="/{{currentUser._id}}" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
+                    <span class="profile-dropdown__caption">
             Villager #
             <span class="color-main">{{getUserVillagerNum currentUser._id}}</span>
           </span>
+                </div>
+                <div class="profile-dropdown__descr">
+                    <p><a class="color-secondary-text">{{postCount}}</a> songs posted</p>
+                    <p><a class="color-secondary-text">{{getUpvotesNum currentUser._id}}</a> upvotes collected <span
+                            class="color-main">{{getUserVillagerNum currentUser._id}}{{getNumberEnd (getUserVillagerNum currentUser._id)}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="profile-dropdown__bottom">
+                <p class="profile-dropdown__bottom-row">
+                    <a href="/{{currentUser._id}}" class="color-main profile-dropdown__logout">View Profile</a>
+                </p>
+                {{#if isInRole 'admin'}}
+                    <p class="profile-dropdown__bottom-row">
+                        <a href="{{pathFor 'admin-fakeUsers'}}" class="color-main profile-dropdown__logout">Fake users</a>
+                    </p>
+                {{/if}}
+                <p class="profile-dropdown__bottom-row">
+                    <a class="color-main profile-dropdown__logout logOutBtn">Log Out</a>
+                </p>
+            </div>
         </div>
-        <div class="profile-dropdown__descr">
-          <p><a class="color-secondary-text">{{postCount}}</a> songs posted</p>
-          <p><a class="color-secondary-text">{{getUpvotesNum currentUser._id}}</a> upvotes collected <span class="color-main">{{getUserVillagerNum currentUser._id}}{{getNumberEnd (getUserVillagerNum currentUser._id)}}</span></p>
-        </div>
-      </div>
-      <div class="profile-dropdown__bottom">
-        <p class="profile-dropdown__bottom-row">
-          <a href="/{{currentUser._id}}" class="color-main profile-dropdown__logout">View Profile</a>
-        </p>
-        <p class="profile-dropdown__bottom-row">
-          <a class="color-main profile-dropdown__logout logOutBtn">Log Out</a>
-        </p>
-      </div>
     </div>
-  </div>
 </template>

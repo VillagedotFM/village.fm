@@ -1,20 +1,20 @@
 <template name='header'>
-  <header class="header">
-      <div class="header__inner">
-          <div class="header__hum visible-mobile"></div>
-          <a href="/" class="header__logo hidden-mobile"></a>
-          <a href="/" class="header__logo-mobile"></a>
-          <div class="header__right-block">
-            {{#if currentUser}}
-              {{> notifications}}
-              {{> header_profile}}
-            {{else}}
-              <a class="sign-up__button signUpBtn">
-                  <i class="fa fa-facebook"></i>
-                  <span>Sign up with facebook</span>
-              </a>
-            {{/if}}
-          </div>
-      </div>
-  </header>
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__hum visible-mobile"></div>
+            <a href="/" class="header__logo hidden-mobile"></a>
+            <a href="/" class="header__logo-mobile"></a>
+            <div class="header__right-block">
+                {{#if currentUser}}
+                    {{> notifications}}
+                    {{> header_profile}}
+                {{else}}
+                    <a class="sign-up__button signUpBtn">
+                        <i class="fa fa-facebook"></i>
+                        <span>Sign up with facebook</span>
+                    </a>
+                {{/if}}
+            </div>
+        </div>
+    </header>
 </template>

@@ -1,45 +1,61 @@
 <template name='upload'>
-  <div class="upload-section hidden-mobile">
-    <form class="linkUpload">
-      <div class="upload-section__upload clearfix">
-          <button type="submit" name="post-upload" disabled class="btn pull-right hidden-mobile upload-section__button postLinkBtn">
-              <span>Post a Song</span>
-          </button>
-          <div class="upload-section__input-wrapper">
-              <input type="text" name="post-link" class="upload-section__input" placeholder="Enter any Soundcloud or YouTube link here...">
-          </div>
-      </div>
-    </form>
-    {{#if showForm}}
-      <div class="uploaded-item {{showUploadForm}} clearfix">
-          <form class="postUpload">
-              <div class="uploaded-item__img-wrap">
-                  <div class="uploaded-item__img-background">
-                      <img src="{{uploadedThumbnail}}" class="uploadedThumbnail" alt="">
-                  </div>
-              </div>
-              <div class="uploaded-item__descr clearfix">
-                  <div class="uploaded-item__input-wrap">
-                      <input type="text" name="post-author" value="{{uploadedArtist}}" placeholder="enter Artist Name here...">
-                  </div>
-                  <div class="uploaded-item__input-wrap">
-                      <input type="text" name="post-name" value="{{uploadedTitle}}" placeholder="enter Song Name here...">
-                  </div>
-                  <div class="uploaded-item__textarea-wrap">
-                      <textarea name="post-caption" maxlength="140" placeholder="What do you love about this post?"></textarea>
-                      {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
-                  </div>
-              </div>
-              <div class="uploaded-item__btns">
-                  <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
-                  <button type="submit" name="post" class="btn postUploadBtn">Post</button>
-              </div>
-          </form>
-      </div>
-    {{/if}}
-  </div>
+    <div class="upload-section hidden-mobile">
+        <form class="linkUpload">
+            <div class="upload-section__upload clearfix">
+                <button type="submit" name="post-upload" disabled
+                        class="btn pull-right hidden-mobile upload-section__button postLinkBtn">
+                    <span>Post a Song</span>
+                </button>
+                <div class="upload-section__input-wrapper">
+                    <input type="text" name="post-link" class="upload-section__input"
+                           placeholder="Enter any Soundcloud or YouTube link here...">
+                </div>
+            </div>
+        </form>
+        {{#if showForm}}
+            <div class="uploaded-item {{showUploadForm}} clearfix">
+                <form class="postUpload">
+                    <div class="uploaded-item__img-wrap">
+                        <div class="uploaded-item__img-background">
+                            <img src="{{uploadedThumbnail}}" class="uploadedThumbnail" alt="">
+                        </div>
+                    </div>
+                    <div class="uploaded-item__descr clearfix">
+                        <div class="uploaded-item__input-wrap">
+                            <input type="text" name="post-author" value="{{uploadedArtist}}"
+                                   placeholder="enter Artist Name here...">
+                        </div>
+                        <div class="uploaded-item__input-wrap">
+                            <input type="text" name="post-name" value="{{uploadedTitle}}"
+                                   placeholder="enter Song Name here...">
+                        </div>
+                        <div class="uploaded-item__textarea-wrap">
+                            <textarea name="post-caption" maxlength="140"
+                                      placeholder="What do you love about this post?"></textarea>
+                            {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
+                        </div>
+                        {{#if isInRole 'admin'}}
+                            <div class="margin-top-15">
+                                <select id="fakeUsersPost" class="form-control">
+                                    <option></option>
+                                    {{#each fakeUsers}}
+                                        <option value="{{_id}}">{{profile.name}} - {{profile.category}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        {{/if}}
+                    </div>
+                    <div class="uploaded-item__btns">
+                        <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
+                        <button type="submit" name="post" class="btn postUploadBtn">Post</button>
+                    </div>
+                </form>
+            </div>
+        {{/if}}
+    </div>
 </template>
 
 <template name="userPill">
-  <span><img src="{{getUserImage _id}}" class="tagging-dropdown__img"/> &nbsp;</span><span class="tagging-dropdown__name">{{profile.name}}</span>
+    <span><img src="{{getUserImage _id}}" class="tagging-dropdown__img"/> &nbsp;</span><span
+        class="tagging-dropdown__name">{{profile.name}}</span>
 </template>

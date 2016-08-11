@@ -2,6 +2,10 @@ import './playlist.html';
 import './events.js';
 import './helpers.js';
 
+let postToVote = new ReactiveVar();
+
+export {postToVote};
+
 
 Template.playlist.onRendered(function playlistOnRendered(){
     this.autorun(function(){

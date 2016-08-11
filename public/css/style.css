@@ -120,6 +120,10 @@ input, textarea {
     padding-left: 390px;
     padding-top: 60px;
 }
+.container--no-padding {
+    width: 100%;
+    padding-top: 60px;
+}
 .container--profile-page {
     padding-top: 0;
 }

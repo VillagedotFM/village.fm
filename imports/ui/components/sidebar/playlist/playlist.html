@@ -1,79 +1,114 @@
 <template name='playlist'>
-  <div class="sr-playlist sr-playlist{{profilePadding}}">
-      <ul class="sr-playlist__list bg-color-playlist">
-        {{#if showInbox}}
-          {{#each inboxItems}}
-            <li class="sr-playlist__item sr-playlist__item--inbox">
-              {{#with inboxPost}}
-                <div class="sr-playlist__left">
-                    <div class="upvote-block {{isUpvoted}}">
-                        <i class="fa fa-caret-up upvote-block__arrow"></i>
-                        <span class="upvote-block__number">{{upvotes}}</span>
-                    </div>
-                </div>
-                <div class="sr-playlist__right-btn"></div>
-                <div class="sr-playlist__right">
-                  <button class="sr-playlist__remove"></button>
-                    {{#if videoReady @index}}
-                      <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
-                    {{else}}
-                      <span class="sr-playlist__spinner {{showSpinner}}" id={{_id}}></span>
-                    {{/if}}
-                    {{#if showEqualizer}}
-                      <span class="sr-playlist__equalizer"></span>
-                    {{else}}
-                      <span class="sr-playlist__time">{{duration}}</span>
-                    {{/if}}
-                </div>
-                <div class="sr-playlist__middle">
+    <div class="sr-playlist sr-playlist{{profilePadding}}">
+        <ul class="sr-playlist__list bg-color-playlist">
+            {{#if showInbox}}
+                {{#each inboxItems}}
+                    <li class="sr-playlist__item sr-playlist__item--inbox">
+                        {{#with inboxPost}}
+                            <div class="sr-playlist__left">
+                                <div class="upvote-block {{isUpvoted}}">
+                                    <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                    <span class="upvote-block__number">{{upvotes}}</span>
+                                </div>
+                            </div>
+                            <div class="sr-playlist__right-btn"></div>
+                            <div class="sr-playlist__right">
+                                <button class="sr-playlist__remove"></button>
+                                {{#if videoReady @index}}
+                                    <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
+                                {{else}}
+                                    <span class="sr-playlist__spinner {{showSpinner}}" id={{_id}}></span>
+                                {{/if}}
+                                {{#if showEqualizer}}
+                                    <span class="sr-playlist__equalizer"></span>
+                                {{else}}
+                                    <span class="sr-playlist__time">{{duration}}</span>
+                                {{/if}}
+                            </div>
+                            <div class="sr-playlist__middle">
                     <span class="sr-playlist__title">
                         <span class="sr-playlist__artist">{{artist}}</span>
                         - {{title}}</span>
-                    <br>
-                    <span class="sr-playlist__posted-by">
+                                <br>
+                                <span class="sr-playlist__posted-by">
                         sent by
                         <span class="sr-playlist__author">{{getUserName ../from}}</span>
                         <span class="sr-playlist__date">{{sentAgo ../createdAt}}</span>
                     </span>
-                </div>
-                {{/with}}
-            </li>
-          {{/each}}
-        {{/if}}
-          {{#each posts}}
-            <li class="sr-playlist__item" id="playlist-{{@index}}">
-                <div class="sr-playlist__left">
-                    <div class="upvote-block {{isUpvoted}}">
-                        <i class="fa fa-caret-up upvote-block__arrow"></i>
-                        <span class="upvote-block__number">{{upvotes}}</span>
+                            </div>
+                        {{/with}}
+                    </li>
+                {{/each}}
+            {{/if}}
+            {{#each posts}}
+                <li class="sr-playlist__item" id="playlist-{{@index}}">
+                    <div class="sr-playlist__left">
+                        <div class="upvote-block {{isUpvoted}}">
+                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                            <span class="upvote-block__number">{{upvotes}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="sr-playlist__right-btn"></div>
-                <div class="sr-playlist__right">
-                    {{#if videoReady @index}}
-                      <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
-                    {{else}}
-                      <span class="sr-playlist__spinner {{showSpinner}}"></span>
-                    {{/if}}
-                    {{#if showEqualizer}}
-                      <span class="sr-playlist__equalizer"></span>
-                    {{else}}
-                      <span class="sr-playlist__time">{{duration}}</span>
-                    {{/if}}
-                </div>
-                <div class="sr-playlist__middle">
+                    <div class="sr-playlist__right-btn"></div>
+                    <div class="sr-playlist__right">
+                        {{#if videoReady @index}}
+                            <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
+                        {{else}}
+                            <span class="sr-playlist__spinner {{showSpinner}}"></span>
+                        {{/if}}
+                        {{#if showEqualizer}}
+                            <span class="sr-playlist__equalizer"></span>
+                        {{else}}
+                            <span class="sr-playlist__time">{{duration}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="sr-playlist__middle">
                     <span class="sr-playlist__title">
                         <span class="sr-playlist__artist">{{artist}}</span>
                         - {{title}}
                     </span>
                         <br>
-                    <span class="sr-playlist__posted-by">
+                        <span class="sr-playlist__posted-by">
                         posted by
                         <span class="sr-playlist__author">{{getUserName createdBy}}</span>
                     </span>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div id="fakeUsersVotingModal" class="modal fade" aria-hidden="true" style="z-index: 999999; top: 50px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">
+                        Vote this song
+                    </h4>
                 </div>
-            </li>
-          {{/each}}
-      </ul>
-  </div>
+                <div class="modal-body">
+                    <h4>Upvoted by:</h4>
+                    <div>
+                        {{#each postToVote.upvotedBy}}
+                            <small>{{getUserName this}},</small>
+                        {{/each}}
+                    </div>
+                    <div class="margin-top-15">
+                        <select id="fakeUsersVote" class="form-control" multiple="multiple">
+                            {{#each fakeUsers}}
+                                <option value="{{_id}}">{{profile.name}} - {{profile.category}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button id="confirmFakeUsersVote" type="button"
+                                class="btn btn-success">Vote
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

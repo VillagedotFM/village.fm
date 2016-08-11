@@ -31,8 +31,11 @@ jchristman:tagsinput-autocomplete-edited
 matb33:collection-hooks
 keepnox:perfect-scrollbar
 
+# roles
+alanning:roles
 
 # ui
+twbs:bootstrap
 blaze-html-templates
 momentjs:moment
 reactive-var
@@ -42,12 +45,14 @@ sacha:spin
 # routing
 kadira:blaze-layout
 kadira:flow-router
+arillo:flow-router-helpers
 
 # service api
 hpx7:youtube-iframe-player
 
 # accounts
 accounts-facebook
+accounts-password
 
 # mobile
 mobile-experience
