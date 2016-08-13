@@ -1279,9 +1279,9 @@ input, textarea {
   overflow: visible;
 }
 
-.more-users-dropdown__user:nth-child(-n+3) {
+/*.more-users-dropdown__user:nth-child(-n+3) {
   display: none;
-}
+}*/
 
 
 .upvoter:nth-child(1):after {
