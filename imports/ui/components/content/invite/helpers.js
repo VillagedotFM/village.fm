@@ -3,11 +3,14 @@ Template.invite.helpers({
     return Villages.findOne({});
   },
   firstUsers() {
-    return Villages.findOne({}, {fields: {users: 1}, limit: 8}).users;
+    if (Villages.findOne({}, {fields: {users: 1}}).users.length > 8)
+      return Villages.findOne({}, {fields: {users: 1}}).users.slice(0,8);
+
+    return Villages.findOne({}, {fields: {users: 1}}).users;
   },
   dottedUsers() {
     if (Villages.findOne({}, {fields: {users: 1}}).users.length > 8) {
-      return Villages.findOne({}, {fields: {users: 1}, skip: 8}).users;
+      return Villages.findOne({}, {fields: {users: 1}}).users.slice(8,Villages.findOne({}, {fields: {users: 1}}).users.length);
     } //Dropdown on hover of circle with ellipsis
   }
 });
