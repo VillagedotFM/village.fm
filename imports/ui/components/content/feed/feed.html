@@ -18,17 +18,15 @@
                         <img src="{{getUserImage createdBy}}" alt="" class="post__author-img">
                     </a>
                     <div class="post__top-right">
-                        <!-- <span class="post__share color-secondary-text">
-                            <span class="post__share-text">Share</span>
-                            <div class="share-dropdown">
-                                <ul class="share-dropdown__list">
-                                    <li><a href="#" class="share-dropdown__fb">Facebook</a></li>
-                                    <li><a href="#" class="share-dropdown__twitter">Twitter</a></li>
-                                    <li><a href="#" class="share-dropdown__tumblr">Tumblr</a></li>
-                                    <li><a href="#" class="share-dropdown__google">Google+</a></li>
-                                </ul>
-                            </div>
-                        </span> -->
+                      <span class="post__share color-secondary-text">
+                          <span class="post__share-text">Share</span>
+                          <div class="share-dropdown">
+                              <ul class="share-dropdown__list">
+                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="http://twitter.com/share?text=Check out {{artist}} - {{title}} on Village.fm&url={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
+                              </ul>
+                          </div>
+                      </span>
                     </div>
                     <div class="post__top-middle">
                         <h1 class="post__title">{{artist}} - {{title}}</h1>
@@ -242,10 +240,12 @@
                   <i class="fa fa-caret-up"></i>
                   <span>{{upvotes}}</span>
               </div>
-              <div class="post__left-block color-secondary-text">
-                  {{rank @index}}{{getNumberEnd (rank @index)}} <br>
-                  place
-              </div>
+              {{#unless notSelectedPost @index}}
+                <div class="post__left-block color-secondary-text">
+                    {{rank @index}}{{getNumberEnd (rank @index)}} <br>
+                    place
+                </div>
+              {{/unless}}
               <div class="post__top clearfix">
                   <div class="post__top-upvote upvote-block {{mobileUpvoted}} visible-mobile">
                       <i class="fa fa-caret-up upvote-block__arrow"></i>
@@ -255,15 +255,15 @@
                       <img src="{{getUserImage createdBy}}" alt="" class="post__author-img">
                   </a>
                   <div class="post__top-right">
-                      <!-- <span class="post__share color-secondary-text">
+                      <span class="post__share color-secondary-text">
                           <span class="post__share-text">Share</span>
                           <div class="share-dropdown">
                               <ul class="share-dropdown__list">
-                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u=village.fm/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
-                                  <li><a href="http://twitter.com/share?text=Listen&url=village.fm/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
+                                  <li><a href="http://twitter.com/share?text=Check out {{artist}} - {{title}} on Village.fm&url={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
                               </ul>
                           </div>
-                      </span> -->
+                      </span>
                   </div>
                   <div class="post__top-middle">
                       <a href="/post/{{_id}}"><h1 class="post__title">{{artist}} - {{title}}</h1></a>

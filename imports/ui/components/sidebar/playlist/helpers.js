@@ -29,79 +29,79 @@ Template.playlist.helpers({
             else if (time === 'year')
                 time_filter.setDate(date.getDate() - 365);
 
-            posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}});
+            posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}}).fetch();
         }
 
-        //Inbox
-        if (appBodyRef.inboxOpen.get()) {
-            posts = posts.fetch();
-            var inboxItems = [];
-            _.each(Inbox.find({to: Meteor.userId()}).fetch(), function (inboxItem) {
-                inboxItems.push(Posts.findOne(inboxItem.postId));
-            });
-            _.each(inboxItems, function (inboxItem, index) {
-                posts.splice(index, 0, inboxItem);
-            });
-            appBodyRef.postOrder.set(posts);
+    //Inbox
+    if (appBodyRef.inboxOpen.get()) {
+      var inboxItems = [];
+      _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+        inboxItems.push(Posts.findOne(inboxItem.postId));
+      });
+      _.each(inboxItems, function(inboxItem, index) {
+        posts.splice(index, 0, inboxItem);
+      });
+      appBodyRef.postOrder.set(posts);
 
-            let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
-            let displayPosts = posts;
-            displayPosts.splice(0, inboxCount);
-            return displayPosts;
-        } else {
-            //Set post order
-            appBodyRef.postOrder.set(posts.fetch());
-            return posts;
-        }
+      let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
+      let displayPosts = posts;
+      displayPosts.splice(0, inboxCount);
+      return displayPosts;
+    } else {
+      // Global function to check and move if selected post
+      GlobalClient.checkAndMoveSelectedPost(posts);
 
-    },
-    showInbox() {
-        return appBodyRef.inboxOpen.get();
-    },
-    inboxItems() {
-        return Inbox.find({to: Meteor.userId()});
-    },
-    inboxPost: function () {
-        return Posts.findOne(this.postId);
-    },
-    sentAgo: function (createdAt) {
-        return moment(createdAt).fromNow();
-    },
-    isUpvoted: function () {
-        if (_.contains(this.upvotedBy, Meteor.userId()))
-            return 'upvote-block--active';
-        else
-            return '';
-    },
-    playOrPause: function () {
-        if (appBodyRef.nowPlaying.get()) {
-            if (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1) {
-                return 'sr-playlist__play--paused';
-            } else {
-                return 'sr-playlist__play--play';
-            }
-        } else {
-            return 'sr-playlist__play--play';
-        }
-    },
-    showEqualizer: function () {
-        //if this song is the current post AND it's playing, show equalizer and hide duration
-        if (appBodyRef.nowPlaying.get()) {
-            return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
-        } else {
-            return false;
-        }
-    },
-    showSpinner: function () {
-        if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))
-            return 'display';
-        else
-            return 'hidden';
-    },
+      appBodyRef.postOrder.set(posts);
+      return posts;
+    }
+  },
+  showInbox() {
+      return appBodyRef.inboxOpen.get();
+  },
+  inboxItems() {
+      return Inbox.find({to: Meteor.userId()});
+  },
+  inboxPost: function () {
+      return Posts.findOne(this.postId);
+  },
+  sentAgo: function (createdAt) {
+      return moment(createdAt).fromNow();
+  },
+  isUpvoted: function () {
+      if (_.contains(this.upvotedBy, Meteor.userId()))
+          return 'upvote-block--active';
+      else
+          return '';
+  },
+  playOrPause: function () {
+      if (appBodyRef.nowPlaying.get()) {
+          if (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1) {
+              return 'sr-playlist__play--paused';
+          } else {
+              return 'sr-playlist__play--play';
+          }
+      } else {
+          return 'sr-playlist__play--play';
+      }
+  },
+  showEqualizer: function () {
+      //if this song is the current post AND it's playing, show equalizer and hide duration
+      if (appBodyRef.nowPlaying.get()) {
+          return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
+      } else {
+          return false;
+      }
+  },
+  showSpinner: function () {
+      if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))
+          return 'display';
+      else
+          return 'hidden';
+  },
 
-    postToVote: function () {
-        return postToVote.get();
-    },
+  postToVote: function () {
+      return postToVote.get();
+  },
 
     fakeUsers: function () {
         return Meteor.users.find({

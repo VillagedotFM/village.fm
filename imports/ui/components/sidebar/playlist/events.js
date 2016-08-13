@@ -1,20 +1,22 @@
 import {postToVote} from "./playlist.js";
 
 //To eliminate some weirdness with SC.stream, make sure everything else is paused
-pauseEverythingElse = function (id) {
-    let posts = appBodyRef.postOrder.get();
-    if (appBodyRef.nowPlaying.get()) {
-        _.each(posts, function (post) {
-            if (post && post._id !== id) {
-                if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
-                    window['scplayer-' + post._id].pause();
-                } else if (post.type == 'youtube' && window['ytplayer-' + post._id] && appBodyRef.nowPlaying.get()._id == post._id) {
-                    window['ytplayer-' + post._id].pauseVideo();
-                }
-            }
-        });
-    }
-};
+pauseEverythingElse = function(id) {
+  let posts = appBodyRef.postOrder.get();
+  if (appBodyRef.nowPlaying.get()) {
+    _.each(posts, function(post){
+      if (post && post._id !== id) {
+        if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
+          window['scplayer-'+post._id].seek(0);
+          window['scplayer-' + post._id].pause();
+        } else if (post.type == 'youtube' && window['ytplayer-' + post._id] && appBodyRef.nowPlaying.get()._id == post._id) {
+          window['ytplayer-' + post._id].seekTo(0);
+          window['ytplayer-' + post._id].pauseVideo();
+        }
+      }
+    });
+  }
+}
 
 Template.playlist.events({
     "click .upvote-block": function (event, template) {
@@ -103,5 +105,11 @@ Template.playlist.events({
             }
             $("#fakeUsersVotingModal").modal('hide');
         }
-    }
+    },
+
+  'click .sr-playlist__right-btn': function(event, template) {
+    $('.us-mobile').hide();
+    $('.sidebar').hide();
+    $('.container').show();
+  }
 });
