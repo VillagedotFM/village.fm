@@ -63,8 +63,6 @@ createYTPlayer = function(post, index) {
   onPlayerStateChange = function(event) {
     if(event.data === 0){           //ENDED
       appBodyRef.state.set(0);      //Keep track of video state (playing/paused)
-      window['ytplayer-' + post._id].seekTo(0);
-      window['ytplayer-' + post._id].pauseVideo();
       let nextPost = appBodyRef.nextPost.get();
 
       if (nextPost) { //Play next post if it exists
@@ -84,7 +82,7 @@ createYTPlayer = function(post, index) {
           console.log("Listened!" + post._id);
         }
       });
-      
+
       appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
       pauseEverythingElse(post._id);
       appBodyRef.prevPost.set(allPosts[index - 1]);
