@@ -21,18 +21,19 @@ Template.upload.events({
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
             if (error) {
                 console.log(error);
-            } else if (data === 'soundcloud') {
+            } else if (data) {
+              if (data === 'soundcloud') {
                 //Soundcloud can only be used on client so grab the id here
                 SC.resolve(potentialLink).then(function (track) {
-                    //Allow link to be submitted
-                    uploadRef.missingData.set(false);
-                    $('.postLinkBtn').prop('disabled', false);
+                  //Allow link to be submitted
+                  uploadRef.missingData.set(false);
+                  $('.postLinkBtn').prop('disabled', false);
 
-                    //Add attributes to input
-                    $("input[name=post-link]").data('type', data);
-                    $("input[name=post-link]").data('vidId', track.id);
+                  //Add attributes to input
+                  $("input[name=post-link]").data('type', data);
+                  $("input[name=post-link]").data('vidId', track.id);
                 });
-            } else if (data) {
+              } else {
                 //Allow link to be submitted
                 uploadRef.missingData.set(false);
                 $('.postLinkBtn').prop('disabled', false);
@@ -40,114 +41,105 @@ Template.upload.events({
                 //Add attributes to input
                 $("input[name=post-link]").data('type', data.type);
                 $("input[name=post-link]").data('vidId', data.vidId);
+              }
+
+              //Grab attributes from input data
+              let vidId = $("input[name=post-link]").data('vidId');
+              let type = $("input[name=post-link]").data('type');
+              let link = $("input[name=post-link]").val();
+
+              //Check for duplicates
+              var posts = Posts.find().fetch();
+              var duplicate = _.find(posts, function (post) {
+                  return post.vidId == vidId;
+              });
+              if (duplicate) {
+                  //TODO: Handle displaying other post (NEED DESIGN)
+                  alert('Someone already posted that song');
+                  uploadRef.duplicate.set(duplicate);
+                  resetForm();
+                  return;
+              }
+
+              var thumbnail;
+              var title = '';
+              if (type === 'youtube') {
+                  thumbnail = "https://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
+
+                  //Grab formatted auto and title
+                  //Only pass in title if Soundcloud
+                  Meteor.call('getArtistAndTitle', vidId, title, function (error, data) {
+                      if (error) {
+                          console.log(error);
+                      } else if (data) {
+
+                          //TODO: Handle reporting link not working (NEED DESIGN)
+                          if (data === 'Song not found') {
+                              alert('Couldn\'t find that song, try another link');
+                              uploadRef.notFound.set(true);
+                              resetForm();
+                              return;
+                          } else {
+                              //Set auto values in form
+                              uploadRef.uploadedThumbnail.set(thumbnail);
+                              uploadRef.uploadedArtist.set(data.artist);
+                              uploadRef.uploadedTitle.set(data.title);
+
+                              uploadRef.showForm.set(true);
+
+                              $('input[name=post-author]').focus();
+
+                              if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+                                  Meteor.setTimeout(function () {
+                                      $("#fakeUsersPost").select2({
+                                          placeholder: "Select a fake user",
+                                          allowClear: true
+                                      });
+                                  }, 300);
+                              }
+                          }
+                      }
+                  });
+              } else {
+                  SC.resolve(link).then(function (track) {
+                      //Handle not streamable (NEED DESIGN)
+                      thumbnail = track.artwork_url;
+                      title = track.title;
+                      console.log(track);
+
+                      //Grab formatted auto and title
+                      //Only pass in title if Soundcloud
+                      Meteor.call('getArtistAndTitle', vidId, title, function (error, data) {
+                          if (error) {
+                              console.log(error);
+                          } else if (data) {
+                              //Set auto values in form
+                              uploadRef.uploadedThumbnail.set(thumbnail);
+                              uploadRef.uploadedArtist.set(data.artist);
+                              uploadRef.uploadedTitle.set(data.title);
+
+                              uploadRef.showForm.set(true);
+
+                              $('input[name=post-author]').focus();
+
+                              if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+                                  Meteor.setTimeout(function () {
+                                      $("#fakeUsersPost").select2({
+                                          placeholder: "Select a fake user",
+                                          allowClear: true
+                                      });
+                                  }, 300);
+                              }
+                          }
+                      });
+                  });
+              }
             } else {
                 //Don't allow link to be submitted
                 uploadRef.missingData.set(true);
                 $('.postLinkBtn').prop('disabled', true);
             }
         });
-    },
-    "submit .linkUpload"(event, instance) {
-        event.preventDefault();
-
-        if (uploadRef.missingData.get()) //Don't allow submit
-            return;
-
-        //Don't allow user to change link after submitted
-        $('input[name=post-link]').prop('disabled', true);
-        let link = $("input[name=post-link]").val();
-        $('.postLinkBtn').prop('disabled', true);
-
-        //Grab attributes from input data
-        let vidId = $("input[name=post-link]").data('vidId');
-        let type = $("input[name=post-link]").data('type');
-
-        //Check for duplicates
-        var posts = Posts.find().fetch();
-        var duplicate = _.find(posts, function (post) {
-            return post.vidId == vidId;
-        });
-        if (duplicate) {
-            //TODO: Handle displaying other post (NEED DESIGN)
-            alert('Someone already posted that song');
-            uploadRef.duplicate.set(duplicate);
-            resetForm();
-            return;
-        }
-
-        var thumbnail;
-        var title = '';
-        if (type === 'youtube') {
-            thumbnail = "https://img.youtube.com/vi/" + vidId + "/hqdefault.jpg";
-
-            //Grab formatted auto and title
-            //Only pass in title if Soundcloud
-            Meteor.call('getArtistAndTitle', vidId, title, function (error, data) {
-                if (error) {
-                    console.log(error);
-                } else if (data) {
-
-                    //TODO: Handle reporting link not working (NEED DESIGN)
-                    if (data === 'Song not found') {
-                        alert('Couldn\'t find that song, try another link');
-                        uploadRef.notFound.set(true);
-                        resetForm();
-                        return;
-                    } else {
-                        //Set auto values in form
-                        uploadRef.uploadedThumbnail.set(thumbnail);
-                        uploadRef.uploadedArtist.set(data.artist);
-                        uploadRef.uploadedTitle.set(data.title);
-
-                        uploadRef.showForm.set(true);
-
-                        $('input[name=post-author]').focus();
-
-                        if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
-                            Meteor.setTimeout(function () {
-                                $("#fakeUsersPost").select2({
-                                    placeholder: "Select a fake user",
-                                    allowClear: true
-                                });
-                            }, 300);
-                        }
-                    }
-                }
-            });
-        } else {
-            SC.resolve(link).then(function (track) {
-                //Handle not streamable (NEED DESIGN)
-                thumbnail = track.artwork_url;
-                title = track.title;
-                console.log(track);
-
-                //Grab formatted auto and title
-                //Only pass in title if Soundcloud
-                Meteor.call('getArtistAndTitle', vidId, title, function (error, data) {
-                    if (error) {
-                        console.log(error);
-                    } else if (data) {
-                        //Set auto values in form
-                        uploadRef.uploadedThumbnail.set(thumbnail);
-                        uploadRef.uploadedArtist.set(data.artist);
-                        uploadRef.uploadedTitle.set(data.title);
-
-                        uploadRef.showForm.set(true);
-
-                        $('input[name=post-author]').focus();
-
-                        if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
-                            Meteor.setTimeout(function () {
-                                $("#fakeUsersPost").select2({
-                                    placeholder: "Select a fake user",
-                                    allowClear: true
-                                });
-                            }, 300);
-                        }
-                    }
-                });
-            });
-        }
     },
     'keyup input[name=post-author], keyup input[name=post-name]'(event, instance) {
         //Check is artist and title have vaule, if not -> disable submit and display red error
