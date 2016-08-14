@@ -1,12 +1,12 @@
 Template.notifications.events({
   'click .header__notifications': function(){
-    if (appBodyRef.mobile) {
+    if (appBodyRef.mobile.get()) {
       $('.ntf-dropdown').show();
       $('html, body').addClass('overflow-hidden');
     }
   },
   'click .ntf-dropdown__back': function(event, template){
-    if (appBodyRef.mobile) {
+    if (appBodyRef.mobile.get()) {
       event.stopPropagation();
       $('.ntf-dropdown').hide();
       $('html, body').removeClass('overflow-hidden');

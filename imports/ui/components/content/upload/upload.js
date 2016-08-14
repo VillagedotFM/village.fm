@@ -23,4 +23,5 @@ Template.upload.onCreated(function uploadOnCreated() {
     uploadRef.uploadedThumbnail = new ReactiveVar(null);
     uploadRef.uploadedArtist = new ReactiveVar(null);
     uploadRef.uploadedTitle = new ReactiveVar(null);
+    uploadRef.chars = new ReactiveVar(0);
 });

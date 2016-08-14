@@ -1,4 +1,7 @@
 Template.upload.helpers({
+    chars() {
+      return Template.instance().chars.get();
+    },
     notFound() {
         return Template.instance().notFound.get();
     },

@@ -153,12 +153,32 @@ Template.upload.events({
             $(event.target).addClass('formError');
         }
     },
+    'keyup textarea[name=post-caption]'(event, instance) {
+      if($('textarea[name=post-caption]').val().length < 141)
+        uploadRef.chars.set($('textarea[name=post-caption]').val().length);
+
+      if ($('textarea[name=post-caption]').val().length === 140)
+        $('.uploaded-item__max-chars.color-secondary-text').css('color','red');
+      else
+        $('.uploaded-item__max-chars.color-secondary-text').css('color','#c4cacf');
+    },
     "click .uploaded-item__cancel"(event, instance) {
         resetForm();
     },
     //TODO: Tagged users, tags, related, genre (SC only)
     'submit .postUpload'(event, instance) {
         event.preventDefault();
+
+        if ($.trim($('input[name=post-author]').val()).length < 1) {
+          uploadRef.missingData.set(true);
+          $('.postUploadBtn').prop('disabled', true);
+          $('input[name=post-author]').addClass('formError');
+        }
+        if ($.trim($('input[name=post-name]').val()).length < 1) {
+          uploadRef.missingData.set(true);
+          $('.postUploadBtn').prop('disabled', true);
+          $('input[name=post-name]').addClass('formError');
+        }
 
         if (uploadRef.missingData.get()) //Don't allow submit
             return;

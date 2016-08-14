@@ -28,6 +28,7 @@
                         <div class="uploaded-item__textarea-wrap">
                             <textarea name="post-caption" maxlength="140"
                                       placeholder="What do you love about this post?"></textarea>
+                            <span class="uploaded-item__max-chars color-secondary-text">{{chars}}/140</span>
                             {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
                         </div>
                         {{#if isInRole 'admin'}}
