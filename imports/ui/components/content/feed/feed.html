@@ -68,6 +68,9 @@
                     </div>
                     <h3 class="post__video-title">
                       {{description}}
+                      {{#each taggedUsers}}
+                        &nbsp;@{{getUserName this}}&nbsp;
+                      {{/each}}
                     </h3>
                 </div>
                 <div class="post__upvoted clearfix">
@@ -302,11 +305,10 @@
                     {{/if}}
                   </div>
                   <h3 class="post__video-title">
-                    {{#if description}}
-                      {{description}}
-                    {{else}}
-                      {{getUserName createdBy 'first'}} had nothing to say about the song :(
-                    {{/if}}
+                    {{description}}
+                    {{#each taggedUsers}}
+                      &nbsp;@{{getUserName this}}&nbsp;
+                    {{/each}}
                   </h3>
               </div>
               <div class="post__upvoted clearfix">
