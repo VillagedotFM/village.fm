@@ -3,3 +3,4 @@ import './events.js';
 import './helpers.js';
 import './notifications/notifications.js';
 import './header-profile/header-profile.js';
+import './header-village/header-village.js';

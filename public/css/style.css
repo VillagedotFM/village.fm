@@ -252,11 +252,16 @@ input, textarea {
 .header__logo {
     width: 133px;
     height: 40px;
-    display: inline-block;
+    float: left;
     background: url(../images/icons-sprite.png) 0 0 no-repeat;
 }
 .header__logo:hover {
     background-position: -150px 0;
+}
+.header__left-block {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .header__right-block {
     float: right;
