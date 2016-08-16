@@ -13,6 +13,13 @@ FlowRouter.route('/', {
     },
 });
 
+FlowRouter.route('/:villageSlug', {
+    name: 'Village',
+    action() {
+        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+    },
+});
+
 FlowRouter.route('/post/:postId', {  //Permalink
     name: 'Post',
     action() {
