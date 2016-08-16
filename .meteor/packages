@@ -29,6 +29,7 @@ aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
 http
+todda00:friendly-slugs
 session
 
 manuel:reactivearray
