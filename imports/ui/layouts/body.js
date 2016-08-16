@@ -28,8 +28,9 @@ import '../components/mobile-content/mobile-content.js';
 
 Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
+  this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
-    this.subscribe('posts.all', {onReady: function() {
+    this.subscribe('posts.all', this.getVillageSlug(), {onReady: function() {
       if (FlowRouter.current().params.postId) {
         const _id = FlowRouter.getParam('postId');
         const post = Posts.findOne({_id});
@@ -46,7 +47,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         });
       } 
     }});
-    this.subscribe('villages.all');
+    this.subscribe('villages.all', this.getVillageSlug());
     this.subscribe('comments.all');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');

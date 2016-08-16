@@ -9,9 +9,9 @@
         </span>
         <div class="profile-dropdown">
             <div class="profile-dropdown__top">
-                <a href="/{{currentUser._id}}"><img src="{{getUserImage currentUser._id}}" class="header-profile__img"/></a>
+                <a href="/profile/{{currentUser._id}}"><img src="{{getUserImage currentUser._id}}" class="header-profile__img"/></a>
                 <div class="profile-dropdown__name-wrap">
-                    <a href="/{{currentUser._id}}" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
+                    <a href="/profile/{{currentUser._id}}" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
                     <span class="profile-dropdown__caption">
             Villager #
             <span class="color-main">{{getUserVillagerNum currentUser._id}}</span>
@@ -26,7 +26,7 @@
             </div>
             <div class="profile-dropdown__bottom">
                 <p class="profile-dropdown__bottom-row">
-                    <a href="/{{currentUser._id}}" class="color-main profile-dropdown__logout">View Profile</a>
+                    <a href="/profile/{{currentUser._id}}" class="color-main profile-dropdown__logout">View Profile</a>
                 </p>
                 {{#if isInRole 'admin'}}
                     <p class="profile-dropdown__bottom-row">

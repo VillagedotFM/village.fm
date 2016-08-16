@@ -27,7 +27,7 @@ FlowRouter.route('/post/:postId', {  //Permalink
     },
 });
 
-FlowRouter.route('/:_id', {
+FlowRouter.route('/profile/:_id', {
     name: 'Profile',
     action() {
         BlazeLayout.render('app_body', {profile: 'profile', tabs: 'profile_tabs'});
