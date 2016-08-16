@@ -115,7 +115,7 @@ Template.feed.onCreated(function feedOnCreated() {
       let orderedPosts = appBodyRef.displayPosts.get();
 
       var checkYT = setInterval(function () {
-        if(YT.loaded){
+        if (typeof YT != 'undefined' && YT.loaded) {
           _.each(orderedPosts, function(post, index) {
             if (post.type === 'youtube') {
               createYTPlayer(post, index);
