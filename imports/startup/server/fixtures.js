@@ -10,4 +10,17 @@ Meteor.startup(() => {
             description: 'The main Village',
         });
     }
+    
+    // When only the Main Village is present, add blog villages
+    if (Villages.find().count() === 1) {
+    	console.log("No blog Villages found, creating defaults");
+    	const blogs = ['eclecticasfuck', 'soulection', 'freshasfuck', 'okayplayer', 'indieheads', 'psytrance', 'psybient', 'iambient', 'heavyblogisheavy', 'fusionculture', 'ethniczone'];
+    	blogs.forEach(blog => {
+    		Villages.insert({
+    			name: blog,
+    			// TODO: use template string
+    			description: 'The ' + blog + ' Village'
+    		})
+    	});
+    } 
 });
