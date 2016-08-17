@@ -3,6 +3,7 @@ Template.header_village.helpers({
 		return Villages.findOne();
 	},
 	isMainVillage(){
-		return Villages.findOne().name == 'Main';
+		const village = Villages.findOne({});
+		return village && village.name == 'Main';
 	}
 });
