@@ -43,8 +43,8 @@ Template.controls.events({
       //go back a post if there is a prevPost
       if (prevPost) {
 
-        pauseEverythingElse(prevPost._id);
         appBodyRef.nowPlaying.set(prevPost);
+        pauseEverythingElse(prevPost._id);
 
         $('.post__video-play#'+prevPost._id).hide();
 
@@ -61,10 +61,10 @@ Template.controls.events({
     let nextPost = appBodyRef.nextPost.get();
 
     if (nextPost) {
-      pauseEverythingElse(nextPost._id);
       appBodyRef.nowPlaying.set(nextPost);
+      // pauseEverythingElse(nextPost._id);
 
-      $('.post__video-play#'+nextPost._id).hide();
+      // $('.post__video-play#'+nextPost._id).hide();
       if (nextPost.type === 'youtube') {
         window['ytplayer-' + nextPost._id].playVideo();
       } else {

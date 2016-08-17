@@ -3,7 +3,7 @@ import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
 import { Inbox } from '../../api/inbox/inbox.js';
-import { Emails } from '../../api/emails/emails.js'; 
+import { Emails } from '../../api/emails/emails.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -11,7 +11,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import { SEO } from '../../api/seo/seo.js';
 import  moment  from 'moment';
-import SC from '../../../public/js/sc3.js';
+import { SC } from '../../../public/js/sc3.js';
 import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 
 import './body.html';
@@ -44,7 +44,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             'name="twitter:card"': 'summary',
           }
         });
-      } 
+      }
     }});
     this.subscribe('villages.all');
     this.subscribe('comments.all');

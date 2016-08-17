@@ -3,9 +3,15 @@ import './helpers.js';
 import './events.js';
 
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
+
+  if(typeof window['scplayer-'+post._id] !== 'undefined'){
+    console.log(window['scplayer-'+post._id]);
+    return;
+  }
+
   SC.stream('/tracks/'+post.vidId).then(function(player){
     window['scplayer-'+post._id] = player;
-
+    console.log('tally');
     appBodyRef.videosReady.push(index);
 
     let allPosts = appBodyRef.postOrder.get();
@@ -94,8 +100,8 @@ createYTPlayer = function(post, index) {
 
   }
 
-  if (window[name].l) {
-    console.log(window[name].l);
+  if (typeof window[name].l !== 'undefined') {
+    console.log(window[name]);
   } else {
     window[name] = new YT.Player(name, {
       events: {

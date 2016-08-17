@@ -9,7 +9,7 @@ pauseEverythingElse = function(id) {
         if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
           window['scplayer-'+post._id].seek(0);
           window['scplayer-' + post._id].pause();
-        } else if (post.type == 'youtube' && window['ytplayer-' + post._id] && appBodyRef.nowPlaying.get()._id == post._id) {
+        } else if (post.type == 'youtube' && window['ytplayer-' + post._id]) {
           window['ytplayer-' + post._id].seekTo(0);
           window['ytplayer-' + post._id].pauseVideo();
         }
