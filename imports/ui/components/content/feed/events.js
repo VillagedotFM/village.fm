@@ -111,10 +111,12 @@ Template.feed.events({
     appBodyRef.replyTo.set(commentId);
   },
   "click .post__video-play": function(event, template){
+    appBodyRef.state.set(1);
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
     pauseEverythingElse(selectedId);
     appBodyRef.nowPlaying.set(selectedPost);
+    window['state-'+selectedPost._id] = 1;
 
     $('.post__video-play#'+selectedId).hide();
 
@@ -125,9 +127,10 @@ Template.feed.events({
     }
   },
   "click .post__video-pause": function(event, template){
+    appBodyRef.state.set(2);
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
-
+    window['state-'+selectedPost._id] = 2;
     if (selectedPost.type === 'youtube') {
       window['ytplayer-' + selectedId].pauseVideo();
     } else {

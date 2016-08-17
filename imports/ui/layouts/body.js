@@ -80,6 +80,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.state = new ReactiveVar(-1);           //Current post state
   appBodyRef.completed = new ReactiveVar("0:00");   //Duration completed for current song
+  appBodyRef.playing = new ReactiveVar(false);   //Duration completed for current song
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);

@@ -45,8 +45,19 @@ Template.now_playing_popup.helpers({
     return moment(this.createdAt).fromNow();
   },
   //player__controls__play--paused
-  playOrPause() {
+  playOrPause: function() {
     let state = appBodyRef.state.get();
-    return state === 1 ? 'player__controls__play--paused' : 'player__controls__play--play';
+    let now = appBodyRef.nowPlaying.get();
+    let time = appBodyRef.completed.get();
+    // if (this.type === 'youtube') {
+    //   if (window['ytplayer-'+ this._id].getPlayerState() === 1){
+    //     return 'player__controls__play--paused';
+    //   } else {
+    //     return 'player__controls__play--play';
+    //   }
+    // } else {
+    //   return window['scplayer-'+ this._id].isPlaying() ? 'player__controls__play--paused' : 'player__controls__play--play';
+    // }
+    return window['state-'+this._id] === 1 ? 'player__controls__play--paused' : 'player__controls__play--play';
   }
 });

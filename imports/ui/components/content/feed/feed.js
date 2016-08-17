@@ -5,7 +5,6 @@ import './events.js';
 createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
   if(typeof window['scplayer-'+post._id] !== 'undefined'){
-    console.log(window['scplayer-'+post._id]);
     return;
   }
 
@@ -18,7 +17,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
-
+      window['state-'+post._id] = 1;
       Meteor.call('listenPost', post._id, function(err, data) {
         if (err) {
           console.log(err);
@@ -27,14 +26,15 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
         }
       });
 
+      appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
       pauseEverythingElse(post._id);
-      appBodyRef.nowPlaying.set(post);
-      appBodyRef.state.set(1);
       appBodyRef.prevPost.set(allPosts[index - 1]);
       appBodyRef.nextPost.set(allPosts[index + 1]);
+      appBodyRef.nowPlaying.set(post);
     });
 
     window['scplayer-'+post._id].on('pause', function(event){
+      window['state-'+post._id] = 2;
       appBodyRef.state.set(2);
     });
 
@@ -57,6 +57,7 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 }
 
 createYTPlayer = function(post, index) {
+  // window['state-'+post._id] = 0;
   let allPosts = appBodyRef.postOrder.get();
   let yt_id = post.vidId;
   let name = 'ytplayer-'+ post._id;
@@ -69,17 +70,21 @@ createYTPlayer = function(post, index) {
   onPlayerStateChange = function(event) {
     if(event.data === 0){           //ENDED
       appBodyRef.state.set(0);      //Keep track of video state (playing/paused)
+      window['state-'+post._id] = 2;
+
       let nextPost = appBodyRef.nextPost.get();
 
       if (nextPost) { //Play next post if it exists
+        window['state-'+nextPost._id] = 2;
         if (nextPost.type === 'youtube') {
           window['ytplayer-' + nextPost._id].playVideo();
         } else {
           window['scplayer-' + nextPost._id].play();
         }
-        appBodyRef.nowPlaying.set(nextPost);
+        // appBodyRef.nowPlaying.set(nextPost);
       }
     } else if(event.data === 1){    //PLAYING
+      window['state-'+post._id] = 1;
 
       Meteor.call('listenPost', post._id, function(err, data) {
         if (err) {
@@ -95,13 +100,13 @@ createYTPlayer = function(post, index) {
       appBodyRef.nextPost.set(allPosts[index + 1]);
       appBodyRef.nowPlaying.set(post);
     } else if (event.data === 2) {  //PAUSED
+      window['state-'+post._id] = 2;
       appBodyRef.state.set(2);      //Keep track of video state (playing/paused)
     }
 
   }
 
   if (typeof window[name].l !== 'undefined') {
-    console.log(window[name]);
   } else {
     window[name] = new YT.Player(name, {
       events: {
