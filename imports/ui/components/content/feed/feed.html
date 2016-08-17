@@ -57,10 +57,10 @@
                       {{#if videoReady @index}}
                         {{#if isPlaying}}
                           {{#unless isYoutube}}
-                            <button class="post__video-pause" id={{_id}}></button>
+                            <button class="post__video-pause" id="{{_id}}"></button>
                           {{/unless}}
                         {{else}}
-                          <button class="post__video-play" id={{_id}}></button>
+                          <button class="post__video-play" id="{{_id}}"></button>
                         {{/if}}
                       {{else}}
                         {{> spinner}}
@@ -271,7 +271,7 @@
                               <span>{{getUserName createdBy}}</span>
                               <div class="user-dropdown">
                                   <div class="user-dropdown__inner">
-                                    <a href="/{{createdBy}}">
+                                    <a href="/profile/{{createdBy}}">
                                         <img src="{{getUserImage createdBy}}" class="more-users-dropdown__img">
                                       <div class="more-users-dropdown__name-wrap">
                                         <span class="more-users-dropdown__name">{{getUserName createdBy}}</span>
@@ -317,7 +317,7 @@
                       <span class="color-secondary-text">Upvoted by:</span>
                         <span>
                           {{#each upvotedBy}}
-                            <a href="/{{this}}" class="color-main upvoter">{{getUserName this}}</a>
+                            <a href="/profile/{{this}}" class="color-main upvoter">{{getUserName this}}</a>
                           {{/each}}
                         <a href="" class="color-main upvoterOthers">{{upvoterOthers}}
                             <div class="tooltiptext more-users-dropdown">
