@@ -11,11 +11,11 @@ Template.playlist.helpers({
         if (user) {
             let profileTab = appBodyRef.profileTab.get();
             if (profileTab === 'mutual')
-                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}});
+                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}}).fetch();
             else if (profileTab === 'upvotes')
-                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}});
+                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}}).fetch();
             else if (profileTab === 'posts')
-                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}});
+                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}}).fetch();
         } else {  //Time Filters
             let time = appBodyRef.timeFilter.get();
 
