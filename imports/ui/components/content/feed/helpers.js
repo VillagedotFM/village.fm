@@ -26,10 +26,20 @@ Template.feed.helpers({
     return Comments.find({postId: this._id}).fetch();
   },
   isPlaying: function() {
-    if (appBodyRef.nowPlaying.get()) {
-      return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
-    }
-    return false;
+    let state = appBodyRef.state.get();
+    let now = appBodyRef.nowPlaying.get();
+    let time = appBodyRef.completed.get();
+    // console.log(state);
+    // if (this.type === 'youtube') {
+    //   if (window['ytplayer-'+ this._id].getPlayerState() === 1){
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // } else {
+    //   return window['scplayer-'+ this._id].isPlaying();
+    // }
+    return window['state-'+this._id] === 1 ? true : false;
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
