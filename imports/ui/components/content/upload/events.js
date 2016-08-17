@@ -188,7 +188,8 @@ Template.upload.events({
         let type = $("input[name=post-link]").data('type');
         let link = $("input[name=post-link]").val();
 
-        var villageId = Villages.findOne({})._id;
+        const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
+        var villageId = Villages.findOne({slug: villageSlug})._id;
 
         let post = {
             villages: [villageId],

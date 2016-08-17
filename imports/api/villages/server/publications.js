@@ -4,5 +4,5 @@ import { Villages } from '../villages.js';
 
 
 Meteor.publish('villages.all', function villagesAll(villageSlug) {
-  return Villages.find({ slug: ( villageSlug ? villageSlug : 'main' ) });
+  return Villages.find({});
 });

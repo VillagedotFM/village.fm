@@ -1,9 +1,6 @@
 Template.header_village.helpers({
 	village() {
-		return Villages.findOne();
-	},
-	isMainVillage(){
-		const village = Villages.findOne({});
-		return village && village.name == 'Main';
+		const villageSlug = FlowRouter.getParam('villageSlug');
+       	return Villages.findOne({slug: villageSlug});
 	}
 });
