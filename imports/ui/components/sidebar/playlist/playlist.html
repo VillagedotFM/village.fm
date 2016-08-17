@@ -4,7 +4,6 @@
             {{#if showInbox}}
                 {{#each inboxItems}}
                     <li class="sr-playlist__item sr-playlist__item--inbox">
-                        {{#with inboxPost}}
                             <div class="sr-playlist__left">
                                 <div class="upvote-block {{isUpvoted}}">
                                     <i class="fa fa-caret-up upvote-block__arrow"></i>
@@ -36,7 +35,6 @@
                         <span class="sr-playlist__date">{{sentAgo ../createdAt}}</span>
                     </span>
                             </div>
-                        {{/with}}
                     </li>
                 {{/each}}
             {{/if}}

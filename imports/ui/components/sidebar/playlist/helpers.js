@@ -66,7 +66,19 @@ Template.playlist.helpers({
       return appBodyRef.inboxOpen.get();
   },
   inboxItems() {
-      return Inbox.find({to: Meteor.userId()});
+    var inboxItems = [];
+    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+      const post = Posts.findOne(inboxItem.postId);
+      if(FlowRouter.getParam('villageSlug')){
+        const village = Villages.findOne({_id: post.villages[0]});
+        if(village.slug == FlowRouter.getParam('villageSlug')){
+          inboxItems.push(post);
+        }
+      } else {
+        inboxItems.push(post);
+      }
+    });
+    return inboxItems;
   },
   inboxPost: function () {
       return Posts.findOne(this.postId);
