@@ -27,6 +27,13 @@ FlowRouter.route('/post/:postId', {  //Permalink
     },
 });
 
+FlowRouter.route('/:villageSlug/post/:postId', {
+    name: 'Post',
+    action() {
+        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+    },
+});
+
 FlowRouter.route('/profile/:_id', {
     name: 'Profile',
     action() {
