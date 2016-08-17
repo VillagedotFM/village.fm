@@ -186,6 +186,9 @@ input, textarea {
 .posts-wrapper{
   padding-bottom: 100px;
 }
+.posts-wrapper--profile-page{
+  padding-top: 190px;
+}
 .inbox-post {
   background-color: #fff3f3 !important;
 }
@@ -608,8 +611,9 @@ input, textarea {
     position: relative;
 }
 .sidebar--profile-page {
-    top: 75px;
-    position: absolute;
+    top: 130px;
+    height: 90%;
+    position: fixed;
 }
 .sr-controls {
     height: 60px;
@@ -2171,7 +2175,8 @@ background-position: -150px -350px;
     padding: 20px;
     overflow: hidden;
     line-height: 1;
-    position: relative;
+    position: fixed;
+    width: 1020px;
     z-index: 99999;
 }
 .profile__inner {
