@@ -12,6 +12,7 @@ Template.playlist.onRendered(function playlistOnRendered(){
     //On scroll of window
     $('.wrapper').on('scroll', function(){
       let scrollTop = $('.wrapper').scrollTop();
+      
 
       //Find the post (in view) that matches in the playlist
       let index = parseInt(scrollTop / 500);  //850 is semi arbitrary
