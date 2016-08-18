@@ -89,6 +89,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
+  $('.sr-playlist').perfectScrollbar();
+  
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();
