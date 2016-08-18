@@ -60,24 +60,28 @@
                           {{/if}}
                         </div>
                       {{else}}
-                        <div class="post__video">
-                          <img src="{{thumbnail}}" alt="" class="sc-thumbnail">
-                          <div class="sc-info">
-                            {{creator}} on <br>
-                            <a href="{{link}}">
-                              <img src="images/sclogo.png" alt="" class="sc-logo"/>
-                            </a>
-                          </div>
-                          {{#if videoReady @index}}
-                            {{#if isPlaying}}
-                              <button class="post__video-pause" id={{_id}}></button>
-                            {{else}}
-                              <button class="post__video-play" id={{_id}}></button>
-                            {{/if}}
-                          {{else}}
-                            {{> spinner}}
-                          {{/if}}
+                      <div class="post__video">
+                        <img src="{{thumbnail}}" alt="" class="sc-thumbnail">
+                        <div class="sc-info">
+                          <a href="{{creator.link}}">
+                            <img src="{{creator.photo}}" alt="" class="sc-user-image"/><br>
+                            {{creator.username}}
+                          </a>
+                           on <br>
+                          <a href="{{link}}">
+                            <img src="images/sc-logo.png" alt="" class="sc-logo"/>
+                          </a>
                         </div>
+                        {{#if videoReady @index}}
+                          {{#if isPlaying}}
+                            <button class="post__video-pause" id={{_id}}></button>
+                          {{else}}
+                            <button class="post__video-play" id={{_id}}></button>
+                          {{/if}}
+                        {{else}}
+                          {{> spinner}}
+                        {{/if}}
+                      </div>
                       {{/if}}
 
                     <h3 class="post__video-title">
@@ -274,6 +278,7 @@
                               <ul class="share-dropdown__list">
                                   <li><a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
                                   <li><a href="http://twitter.com/share?text=Check out {{artist}} - {{title}} on Village.fm&url={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="" class="share-dropdown__copy" id="share-{{_id}}">Copy Link</a></li>
                               </ul>
                           </div>
                       </span>

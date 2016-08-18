@@ -1627,6 +1627,12 @@ input, textarea {
 .share-dropdown__list>li>a.share-dropdown__twitter:before {
     background-position: 0 -950px;
 }
+.share-dropdown__list>li>a.share-dropdown__copy:before {
+    background-position: 0 -850px;
+}
+.share-dropdown__list>li>a.share-dropdown__copy--active:before {
+    background-position: -150px -850px;
+}
 .share-dropdown__list>li>a.share-dropdown__tumblr:before {
     background-position: 0 -1000px;
 }
