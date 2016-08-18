@@ -258,10 +258,17 @@ input, textarea {
 .header__logo:hover {
     background-position: -150px 0;
 }
-.header__left-block {
-    float: left;
-    margin-top: 10px;
-    margin-left: 10px;
+.header__center-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+}
+.header__center-block img {
+    height: 50px;
+    display: block;
+    margin: 0 auto;
 }
 .header__right-block {
     float: right;
