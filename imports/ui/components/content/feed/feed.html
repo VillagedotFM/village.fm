@@ -1,5 +1,5 @@
 <template name='feed'>
-  <div class="posts-wrapper">
+  <div class="posts-wrapper posts-wrapper{{profilePadding}}">
     {{#if showInbox}}
       {{#each inboxItems}}
         <article class="post inbox-post">
@@ -49,23 +49,41 @@
                     </div>
                 </div>
                 <div class="post__video-wrapper">
-                    <div class="post__video" style="background-image: url({{thumbnail}})">
                       {{#if isYoutube}}
-
-                      {{/if}}
-
-                      {{#if videoReady @index}}
-                        {{#if isPlaying}}
-                          {{#unless isYoutube}}
-                            <button class="post__video-pause" id={{_id}}></button>
-                          {{/unless}}
-                        {{else}}
-                          <button class="post__video-play" id={{_id}}></button>
-                        {{/if}}
+                        <div class="post__video" style="background-image: url({{thumbnail}})">
+                          {{#if videoReady @index}}
+                            {{#unless isPlaying}}
+                              <button class="post__video-play" id={{_id}}></button>
+                            {{/unless}}
+                          {{else}}
+                            {{> spinner}}
+                          {{/if}}
+                        </div>
                       {{else}}
-                        {{> spinner}}
+                      <div class="post__video">
+                        <img src="{{thumbnail}}" alt="" class="sc-thumbnail">
+                        <div class="sc-info">
+                          <a href="{{creator.link}}">
+                            <img src="{{creator.photo}}" alt="" class="sc-user-image"/><br>
+                            {{creator.username}}
+                          </a>
+                           on <br>
+                          <a href="{{link}}">
+                            <img src="images/sc-logo.png" alt="" class="sc-logo"/>
+                          </a>
+                        </div>
+                        {{#if videoReady @index}}
+                          {{#if isPlaying}}
+                            <button class="post__video-pause" id={{_id}}></button>
+                          {{else}}
+                            <button class="post__video-play" id={{_id}}></button>
+                          {{/if}}
+                        {{else}}
+                          {{> spinner}}
+                        {{/if}}
+                      </div>
                       {{/if}}
-                    </div>
+
                     <h3 class="post__video-title">
                       {{description}}
                       {{#each taggedUsers}}
@@ -260,12 +278,13 @@
                               <ul class="share-dropdown__list">
                                   <li><a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__fb">Facebook</a></li>
                                   <li><a href="http://twitter.com/share?text=Check out {{artist}} - {{title}} on Village.fm&url={{currentUrl}}/post/{{_id}}" target="_blank" class="share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="" class="share-dropdown__copy" id="share-{{_id}}">Copy Link</a></li>
                               </ul>
                           </div>
                       </span>
                   </div>
                   <div class="post__top-middle">
-                      <a href="/post/{{_id}}"><h1 class="post__title">{{artist}} - {{title}}</h1></a>
+                      <h1 class="post__title">{{artist}} - {{title}}</h1>
                       <div class="post__posted-by">
                           <div class="post__author color-main user-dropdown-handle">
                               <span>{{getUserName createdBy}}</span>
@@ -285,18 +304,35 @@
                   </div>
               </div>
               <div class="post__video-wrapper">
+                {{#if isYoutube}}
                   <div class="post__video" style="background-image: url({{thumbnail}})">
-                    {{#if isYoutube}}
                     <iframe id="ytplayer-{{_id}}" type="text/html" width="464" height="270"
                       src="https://www.youtube.com/embed/{{vidId}}?enablejsapi=1"
                       frameborder="0"></iframe>
+                    {{#if videoReady @index}}
+                      {{#unless isPlaying}}
+                        <button class="post__video-play" id={{_id}}></button>
+                      {{/unless}}
+                    {{else}}
+                      {{> spinner}}
                     {{/if}}
-
+                  </div>
+                {{else}}
+                  <div class="post__video">
+                    <img src="{{thumbnail}}" alt="" class="sc-thumbnail">
+                    <div class="sc-info">
+                      <a href="{{creator.link}}">
+                        <img src="{{creator.photo}}" alt="" class="sc-user-image"/><br>
+                        {{creator.username}}
+                      </a>
+                       on <br>
+                      <a href="{{link}}">
+                        <img src="images/sc-logo.png" alt="" class="sc-logo"/>
+                      </a>
+                    </div>
                     {{#if videoReady @index}}
                       {{#if isPlaying}}
-                        {{#unless isYoutube}}
-                          <button class="post__video-pause" id={{_id}}></button>
-                        {{/unless}}
+                        <button class="post__video-pause" id={{_id}}></button>
                       {{else}}
                         <button class="post__video-play" id={{_id}}></button>
                       {{/if}}
@@ -304,6 +340,7 @@
                       {{> spinner}}
                     {{/if}}
                   </div>
+                {{/if}}
                   <h3 class="post__video-title">
                     {{description}}
                     {{#each taggedUsers}}
