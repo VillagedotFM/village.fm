@@ -15,7 +15,6 @@ Template.now_playing_popup.events({
     $('.container').show();
   },
   "click .player__controls__play--play": function(event, template){
-    appBodyRef.state.set(1);
     var currentPost;
     //If no post is current selected, play the first
     if (appBodyRef.nowPlaying.get()) {
@@ -24,12 +23,6 @@ Template.now_playing_popup.events({
       currentPost = appBodyRef.displayPosts.get()[0];
     }
 
-    pauseEverythingElse(currentPost._id);
-    appBodyRef.nowPlaying.set(currentPost);
-    window['state-'+currentPost._id] = 1;
-
-    $('.post__video-play#'+currentPost._id).hide();
-
     if (currentPost.type === 'youtube') {
       window['ytplayer-' + currentPost._id].playVideo();
     } else {
@@ -37,9 +30,7 @@ Template.now_playing_popup.events({
     }
   },
   "click .player__controls__play--paused": function(event, template){
-    appBodyRef.state.set(2);
     let currentPost = appBodyRef.nowPlaying.get();
-    window['state-'+currentPost._id] = 2;
     if (currentPost.type === 'youtube') {
       window['ytplayer-' + currentPost._id].pauseVideo();
     } else {
@@ -47,7 +38,6 @@ Template.now_playing_popup.events({
     }
   },
   "click .player__controls__prev": function(event, template){
-    appBodyRef.state.set(3);
     let currentPost = appBodyRef.nowPlaying.get();
     let prevPost = appBodyRef.prevPost.get();
     let completed = appBodyRef.completed.get();
@@ -63,13 +53,6 @@ Template.now_playing_popup.events({
       //go back a post if there is a prevPost
       if (prevPost) {
 
-        window['state-'+currentPost._id] = 2;
-        window['state-'+prevPost._id] = 1;
-        pauseEverythingElse(prevPost._id);
-        appBodyRef.nowPlaying.set(prevPost);
-
-        $('.post__video-play#'+prevPost._id).hide();
-
         if (prevPost.type === 'youtube') {
           window['ytplayer-' + prevPost._id].playVideo();
         } else {
@@ -79,15 +62,10 @@ Template.now_playing_popup.events({
     }
   },
   "click .player__controls__next": function(event, template){
-    appBodyRef.state.set(4);
     let currentPost = appBodyRef.nowPlaying.get();
     let nextPost = appBodyRef.nextPost.get();
 
     if (nextPost) {
-      window['state-'+currentPost._id] = 2;
-      window['state-'+nextPost._id] = 1;
-      pauseEverythingElse(nextPost._id);
-      appBodyRef.nowPlaying.set(nextPost);
 
       $('.post__video-play#'+nextPost._id).hide();
       if (nextPost.type === 'youtube') {

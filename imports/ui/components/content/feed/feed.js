@@ -15,6 +15,10 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
     let allPosts = appBodyRef.postOrder.get();
 
+    window['scplayer-'+post._id].on('state-change', function(event){
+      appBodyRef.state.set(event);
+    });
+
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
       window['state-'+post._id] = 1;
@@ -26,7 +30,6 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
         }
       });
 
-      appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
       pauseEverythingElse(post._id);
       appBodyRef.prevPost.set(allPosts[index - 1]);
       appBodyRef.nextPost.set(allPosts[index + 1]);
@@ -35,11 +38,9 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
 
     window['scplayer-'+post._id].on('pause', function(event){
       window['state-'+post._id] = 2;
-      appBodyRef.state.set(2);
     });
 
     window['scplayer-'+post._id].on('finish', function(event){
-      appBodyRef.state.set(0);
       window['scplayer-'+post._id].seek(0);     //Reset to 0 incase user wants to replay
 
       let nextPost = appBodyRef.nextPost.get();
@@ -68,8 +69,8 @@ createYTPlayer = function(post, index) {
   }
 
   onPlayerStateChange = function(event) {
+    appBodyRef.state.set(event.data);
     if(event.data === 0){           //ENDED
-      appBodyRef.state.set(0);      //Keep track of video state (playing/paused)
       window['state-'+post._id] = 2;
 
       let nextPost = appBodyRef.nextPost.get();
@@ -93,15 +94,13 @@ createYTPlayer = function(post, index) {
           console.log("Listened!" + post._id);
         }
       });
-
-      appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
+      // debugger;
       pauseEverythingElse(post._id);
       appBodyRef.prevPost.set(allPosts[index - 1]);
       appBodyRef.nextPost.set(allPosts[index + 1]);
       appBodyRef.nowPlaying.set(post);
     } else if (event.data === 2) {  //PAUSED
       window['state-'+post._id] = 2;
-      appBodyRef.state.set(2);      //Keep track of video state (playing/paused)
     }
 
   }
@@ -161,13 +160,14 @@ Template.feed.onCreated(function feedOnCreated() {
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
-    let lastIndex = (appBodyRef.bottomHits.get() * 3) + 3;
-
-    if (lastIndex < posts.length) { //make sure there are enough posts
-      appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
-    } else {
-      appBodyRef.displayPosts.set(posts.slice(0, posts.length));
-    }
+    // let lastIndex = (appBodyRef.bottomHits.get() * 3) + 3;
+    //
+    // if (lastIndex < posts.length) { //make sure there are enough posts
+    //   appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
+    // } else {
+    //   appBodyRef.displayPosts.set(posts.slice(0, posts.length));
+    // }
+    appBodyRef.displayPosts.set(posts);
   });
 
 

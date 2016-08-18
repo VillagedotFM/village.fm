@@ -5,14 +5,14 @@ pauseEverythingElse = function(id) {
   let posts = appBodyRef.postOrder.get();
   // if (appBodyRef.nowPlaying.get()) {
     _.each(posts, function(post){
-      if (post && post._id !== id) {
-        window['state-'+post._id] = 2;
+      if (post._id !== id) {
+        // window['state-'+post._id] = 2;
         if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
           window['scplayer-'+post._id].seek(0);
           window['scplayer-' + post._id].pause();
         } else if (post.type == 'youtube' && window['ytplayer-' + post._id]) {
           window['ytplayer-' + post._id].pauseVideo();
-          window['ytplayer-' + post._id].seekTo(0);
+          // window['ytplayer-' + post._id].seekTo(0);
         }
       }
     });
@@ -51,15 +51,8 @@ Template.playlist.events({
         }
     },
     "click .sr-playlist__play--play": function (event, template) {
-      appBodyRef.state.set(1);
         let selectedId = event.currentTarget.id;
         let selectedPost = Posts.findOne(selectedId);
-
-        pauseEverythingElse(selectedId);
-        appBodyRef.nowPlaying.set(selectedPost);
-
-        $('.post__video-play#' + selectedId).hide();
-        window['state-'+selectedPost._id] = 1;
 
         if (selectedPost.type === 'youtube') {
             window['ytplayer-' + selectedId].playVideo();
@@ -68,10 +61,8 @@ Template.playlist.events({
         }
     },
     "click .sr-playlist__play--paused": function (event, template) {
-      appBodyRef.state.set(2);
         let selectedId = event.currentTarget.id;
         let selectedPost = Posts.findOne(selectedId);
-        window['state-'+selectedPost._id] = 2;
 
         if (selectedPost.type === 'youtube') {
             window['ytplayer-' + selectedId].pauseVideo();

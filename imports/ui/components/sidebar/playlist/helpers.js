@@ -75,29 +75,11 @@ Template.playlist.helpers({
   },
   playOrPause: function () {
     let state = appBodyRef.state.get();
-    let now = appBodyRef.nowPlaying.get();
-    let time = appBodyRef.completed.get();
-    // if (this.type === 'youtube') {
-    //   if (window['ytplayer-'+ this._id].getPlayerState() === 1){
-    //     return 'sr-playlist__play--paused';
-    //   } else {
-    //     return 'sr-playlist__play--play';
-    //   }
-    // } else {
-    //   return window['scplayer-'+ this._id].isPlaying() ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
-    // }
     return window['state-'+this._id] === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
   },
   showEqualizer: function () {
     let state = appBodyRef.state.get();
-    let time = appBodyRef.completed.get();
-      //if this song is the current post AND it's playing, show equalizer and hide duration
-      // if (appBodyRef.nowPlaying.get()) {
-      //     return (this._id === appBodyRef.nowPlaying.get()._id && Session.get('state') === 1);
-      // } else {
-      //     return false;
-      // }
-      return window['state-'+this._id] === 1 ? true : false;
+    return window['state-'+this._id] === 1 ? true : false;
   },
   showSpinner: function () {
       if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))

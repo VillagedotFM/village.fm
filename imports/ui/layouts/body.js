@@ -90,7 +90,17 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
 Template.app_body.onRendered(function() {
   $('.sr-playlist').perfectScrollbar();
-  
+
+  Tracker.autorun(function(comp) {
+    if (appBodyRef.postOrder.get()[0]) {
+      appBodyRef.nowPlaying.set(appBodyRef.postOrder.get()[0]);
+      console.log(appBodyRef.postOrder.get()[0]);
+      console.log('-----------');
+      console.log(appBodyRef.postOrder.get());
+      comp.stop();
+    }
+  });
+
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();

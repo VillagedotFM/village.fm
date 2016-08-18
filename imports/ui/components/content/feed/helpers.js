@@ -1,44 +1,32 @@
 Template.feed.helpers({
   posts() {
-    if (appBodyRef.inboxOpen.get()) {
-      let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
-      let displayPosts = appBodyRef.displayPosts.get();
-      displayPosts.splice(0, inboxCount);
-      return displayPosts;
-    } else {
+    // if (appBodyRef.inboxOpen.get()) {
+    //   let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
+    //   let displayPosts = appBodyRef.displayPosts.get();
+    //   displayPosts.splice(0, inboxCount);
+    //   return displayPosts;
+    // } else {
       return appBodyRef.displayPosts.get();
-    }
+    // }
   },
-  showInbox() {
-    return appBodyRef.inboxOpen.get();
-  },
+  // showInbox() {
+  //   return appBodyRef.inboxOpen.get();
+  // },
   selectedPost() {
     return FlowRouter.current().params.postId;
   },
-  inboxItems() {
-    var inboxItems = [];
-    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-      inboxItems.push(Posts.findOne(inboxItem.postId));
-    });
-    return inboxItems;
-  },
+  // inboxItems() {
+  //   var inboxItems = [];
+  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+  //     inboxItems.push(Posts.findOne(inboxItem.postId));
+  //   });
+  //   return inboxItems;
+  // },
   comments: function() {
     return Comments.find({postId: this._id}).fetch();
   },
   isPlaying: function() {
-    let state = appBodyRef.state.get();
-    let now = appBodyRef.nowPlaying.get();
-    let time = appBodyRef.completed.get();
-    // console.log(state);
-    // if (this.type === 'youtube') {
-    //   if (window['ytplayer-'+ this._id].getPlayerState() === 1){
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // } else {
-    //   return window['scplayer-'+ this._id].isPlaying();
-    // }
+    let state = appBodyRef.state.get(); 
     return window['state-'+this._id] === 1 ? true : false;
   },
   isUpvoted: function() {
