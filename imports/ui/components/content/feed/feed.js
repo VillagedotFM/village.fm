@@ -194,14 +194,14 @@ Template.feed.onCreated(function feedOnCreated() {
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
-    // let lastIndex = (appBodyRef.bottomHits.get() * 3) + 3;
-    //
-    // if (lastIndex < posts.length) { //make sure there are enough posts
-    //   appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
-    // } else {
-    //   appBodyRef.displayPosts.set(posts.slice(0, posts.length));
-    // }
-    appBodyRef.displayPosts.set(posts);
+    let lastIndex = (appBodyRef.bottomHits.get() * 9) + 9;
+
+    if (lastIndex < posts.length) { //make sure there are enough posts
+      appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
+    } else {
+      appBodyRef.displayPosts.set(posts.slice(0, posts.length));
+    }
+    // appBodyRef.displayPosts.set(posts);
   });
 
 
