@@ -1457,6 +1457,29 @@ input, textarea {
     padding-left: 60px;
     background: #ffffff;
 }
+
+.sc-thumbnail {
+  height: 175px;
+  width: 175px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+.sc-info {
+  float: right;
+  margin-right: 60px;
+  margin-top: 50px;
+}
+.sc-user-image{
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+}
+.sc-logo {
+  cursor: pointer;
+  height: 55px;
+  width: 100%;
+}
+
 .post__inner {
     border-left: 1px solid #f4f6f8;
     padding: 15px 30px 15px 60px;
@@ -1619,6 +1642,10 @@ input, textarea {
     width: 100%;
     height: 270px;
     position: relative;
+    background: #2e2f2f;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #ffffff;
     -webkit-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;

@@ -103,6 +103,7 @@ Template.upload.events({
               } else {
                   SC.resolve(link).then(function (track) {
                       //Handle not streamable (NEED DESIGN)
+                      console.log(track.user.username);
                       thumbnail = track.artwork_url;
                       title = track.title;
                       console.log(track);
@@ -232,6 +233,11 @@ Template.upload.events({
         } else {
             SC.resolve(link).then(function (track) {
                 post.duration = track.duration;
+                post.creator = {
+                  'username': track.user.username,
+                  'link': track.user.permalink_url,
+                  'photo': track.user.avatar_url
+                }
 
                 //Grab duration and insert post
                 Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {

@@ -112,6 +112,26 @@ Posts.schema = new SimpleSchema({
     defaultValue: [],
   },
 
+  creator:                     //SC only (can always fill in manually or scrape youtube)
+  {
+    type: Object,
+    label: "creator",
+    optional: true
+  },
+
+  "creator.username": {
+    type: String,
+    label: "Username",
+  },
+  "creator.link": {
+    type: String,
+    label: "Link",
+  },
+  "creator.photo": {
+    type: String,
+    label: "Photo",
+  },
+
   upvotes:
   {
     type: Number,
