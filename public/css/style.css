@@ -612,7 +612,7 @@ input, textarea {
 }
 .sidebar--profile-page {
     top: 130px;
-    height: 90%;
+    height: 81%;
     position: fixed;
 }
 .sr-controls {
@@ -761,7 +761,7 @@ input, textarea {
     width: 420px;
     padding-right: 45px;
     position: absolute;
-    top: 156px;
+    top: 100px;
     bottom: 0;
 }
 .sr-playlist--profile-page {
