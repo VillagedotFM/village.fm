@@ -24,7 +24,16 @@ Template.controls.events({
   },
   "click .sr-controls__prev": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
-    let prevPost = appBodyRef.prevPost.get();
+    let order = appBodyRef.postOrder.get();
+    let index = $.map(order, function(post, index) {
+      if(post._id === currentPost._id) {
+        return index;
+      }
+    });
+
+    let prevPost = order[index[0]-1];
+    console.log(prevPost);
+    console.log(index[0]);
     let completed = appBodyRef.completed.get();
 
     if (completed > 5) {
@@ -39,7 +48,18 @@ Template.controls.events({
       if (prevPost) {
 
         if (prevPost.type === 'youtube') {
-          window['ytplayer-' + prevPost._id].playVideo();
+          let check = window['ytplayer-' + prevPost._id].getVideoData();
+          if (check.title !== '') {
+            window['ytplayer-' + prevPost._id].playVideo();
+          } else {
+            let prevPrev = order[index[0] - 2];
+            console.log(prevPrev);
+            if (prevPrev.type === 'youtube') {
+              window['ytplayer-' + prevPrev._id].playVideo();
+            } else {
+              window['scplayer-' + prevPrev._id].play();
+            }
+          }
         } else {
           window['scplayer-' + prevPost._id].play();
         }
@@ -48,11 +68,31 @@ Template.controls.events({
   },
   "click .sr-controls__next": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
-    let nextPost = appBodyRef.nextPost.get();
+    let order = appBodyRef.postOrder.get();
+    let index = $.map(order, function(post, index) {
+      if(post._id === currentPost._id) {
+        return index;
+      }
+    });
+
+    let nextPost = order[index[0]+1];
+    console.log(nextPost);
+    console.log(index[0]);
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        window['ytplayer-' + nextPost._id].playVideo();
+        let check = window['ytplayer-' + nextPost._id].getVideoData();
+        if (check.title !== '') {
+          window['ytplayer-' + nextPost._id].playVideo();
+        } else {
+          let nextNext = order[index[0] + 2];
+          console.log(nextNext);
+          if (nextNext.type === 'youtube') {
+            window['ytplayer-' + nextNext._id].playVideo();
+          } else {
+            window['scplayer-' + nextNext._id].play();
+          }
+        }
       } else {
         window['scplayer-' + nextPost._id].play();
       }

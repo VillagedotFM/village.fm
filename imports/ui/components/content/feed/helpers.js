@@ -26,7 +26,7 @@ Template.feed.helpers({
     return Comments.find({postId: this._id}).fetch();
   },
   isPlaying: function() {
-    let state = appBodyRef.state.get(); 
+    let state = appBodyRef.state.get();
     return window['state-'+this._id] === 1 ? true : false;
   },
   isUpvoted: function() {
