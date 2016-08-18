@@ -103,7 +103,7 @@ Template.upload.events({
               } else {
                   SC.resolve(link).then(function (track) {
                       //Handle not streamable (NEED DESIGN)
-                      console.log(track.user.username);
+                      scUser = track.user.username;
                       thumbnail = track.artwork_url;
                       title = track.title;
                       console.log(track);
@@ -116,7 +116,11 @@ Template.upload.events({
                           } else if (data) {
                               //Set auto values in form
                               uploadRef.uploadedThumbnail.set(thumbnail);
-                              uploadRef.uploadedArtist.set(data.artist);
+                              if (data.artist !== '') {
+                                uploadRef.uploadedArtist.set(data.artist);
+                              } else {
+                                uploadRef.uploadedArtist.set(scUser);
+                              }
                               uploadRef.uploadedTitle.set(data.title);
 
                               uploadRef.showForm.set(true);
