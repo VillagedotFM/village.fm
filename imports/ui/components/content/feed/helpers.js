@@ -91,5 +91,18 @@ Template.feed.helpers({
   // Get current window location
   currentUrl() {
     return window.location.origin;
+  },
+  postUrl(id) {
+    const post = Posts.findOne({_id: id});
+    if(post){
+      const village = Villages.findOne({_id: post.villages[0]});
+      if(village && village.slug){
+        if(village.name != 'Main'){
+          return '/' + village.slug + '/post/' + id;
+        }
+      }
+    }
+
+    return '/post/' + id;
   }
 });

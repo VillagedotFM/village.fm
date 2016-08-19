@@ -256,6 +256,7 @@ input, textarea {
 .header__logo {
     height: 40px;
     display: inline-block;
+    float: left;
 }
 .header__logo img {
   height: 100%;
@@ -265,6 +266,23 @@ input, textarea {
 }
 .header__logo:active {
     content:url(../images/img_menu_logo_pressed@3x.png);
+}
+.header__left-block {
+     float: left;
+     margin-top: 10px;
+     margin-left: 10px;
+ }
+.header__center-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+}
+.header__center-block img {
+    height: 50px;
+    display: block;
+    margin: 0 auto;
 }
 .header__right-block {
     float: right;
@@ -912,6 +930,10 @@ input, textarea {
     font-weight: 700;
 }
 .sr-playlist__posted-by {
+    font-size: 12px;
+    color: #afafaf;
+}
+.sr-playlist__posted-in {
     font-size: 12px;
     color: #afafaf;
 }

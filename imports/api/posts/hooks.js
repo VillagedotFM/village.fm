@@ -3,9 +3,24 @@ import { Meteor } from 'meteor/meteor';
 import { Posts } from './posts.js';
 import { Inbox } from '../inbox/inbox.js';
 import { Emails } from '../emails/emails.js';
+import { Villages } from '../villages/villages.js';
 
 
 if(Meteor.isServer){
+
+  Posts.before.insert(function(userId, post) {
+    //Add Village Name & Slug to post to denormalise
+    if(post.villages){
+      const village = Villages.findOne({ _id: post.villages[0]});
+
+      if(village){
+        post.villageName = village.name;
+        post.villageSlug = village.slug;
+      }
+      
+    }
+  });
+
   Posts.after.insert(function (userId, post) {
     //Create YTPlayer
     // createYTPlayer(post, "last");

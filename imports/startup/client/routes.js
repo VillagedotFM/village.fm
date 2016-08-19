@@ -13,14 +13,28 @@ FlowRouter.route('/', {
     },
 });
 
-FlowRouter.route('/post/:postId', {  //Permalink
-    name: 'Post',
+FlowRouter.route('/:villageSlug', {
+    name: 'Village',
     action() {
-        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
     },
 });
 
-FlowRouter.route('/:_id', {
+FlowRouter.route('/post/:postId', {  //Permalink
+    name: 'Post',
+    action() {
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+    },
+});
+
+FlowRouter.route('/:villageSlug/post/:postId', {
+    name: 'Post',
+    action() {
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+    },
+});
+
+FlowRouter.route('/profile/:_id', {
     name: 'Profile',
     action() {
         BlazeLayout.render('app_body', {profile: 'profile', tabs: 'profile_tabs'});

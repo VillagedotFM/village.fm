@@ -6,6 +6,9 @@
               <img src="images/img_menu_logo_normal@3x.png" alt="">
             </a>
             <a href="/" class="header__logo-mobile"></a>
+            <div class="header__center-block hidden-mobile">
+                 {{> header_village}}
+            </div>
             <div class="header__right-block">
                 {{#if currentUser}}
                     {{> notifications}}

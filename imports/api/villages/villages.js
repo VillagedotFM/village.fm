@@ -16,6 +16,9 @@ Villages.allow({
   remove() { return true; },
 });
 
+// Add slugs to new Villages
+Villages.friendlySlugs();
+
 
 Villages.schema = new SimpleSchema({
   name:
@@ -23,6 +26,16 @@ Villages.schema = new SimpleSchema({
     type: String,
     label: "Village Name",     //User Entered
     max: 50
+  },
+
+  slug:
+  {
+    type: String,
+    label: "Slug",
+    max: 200,
+    autoValue: function() {
+      return '/';
+    }
   },
 
   image:
