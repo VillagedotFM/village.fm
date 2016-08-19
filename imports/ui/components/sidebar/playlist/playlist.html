@@ -33,7 +33,9 @@
                             <span class="sr-playlist__author">{{getUserName createdBy}}</span>
                         </span>
                         {{#if villageName}}
-                          <span class="sr-playlist__posted-in">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                          {{#unless isMainVillage villageSlug}}
+                            <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                          {{/unless}}
                         {{/if}}
                     </div>
                 </li>
