@@ -91,6 +91,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 Template.app_body.onRendered(function() {
   $('.sr-playlist').perfectScrollbar();
 
+
   Tracker.autorun(function(comp) {
     if (appBodyRef.postOrder.get()[0]) {
       appBodyRef.nowPlaying.set(appBodyRef.postOrder.get()[0]);
@@ -99,6 +100,21 @@ Template.app_body.onRendered(function() {
       console.log(appBodyRef.postOrder.get());
       comp.stop();
     }
+  });
+
+  Tracker.autorun(function() {
+    let post = appBodyRef.nowPlaying.get();
+    var scrubber = document.getElementById('bottom-slider');
+    $(scrubber).on("input change", function() {
+      let completed = appBodyRef.completed.get();
+      let duration = '00:' + post.duration; //5:08 -> 00:05:08 for moment weirdness
+      let seek = ($(scrubber).val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
+      if (post.type === 'youtube') {
+        window['ytplayer-'+post._id].seekTo(seek, true);
+      } else {
+        window['scplayer-'+post._id].seek(seek*1000);
+      }
+    });
   });
 
   //TODO: use reactive-var instead of show/hide

@@ -49,6 +49,6 @@ Template.bottom_player.helpers({
     let completedPercentage = ''+(moment.duration(completed, 'seconds').asSeconds())/(moment.duration(duration, "mm:ss").asSeconds());
 
     //Only take first 5 characters (including decimal) so 0.XXX, multiple by 100 and add % -> "XX.X%"
-    return (completedPercentage.substring(0,5) * 100)+'%';
+    return (completedPercentage.substring(0,5) * 100);
   }
 });
