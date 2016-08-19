@@ -2,17 +2,33 @@ import './feed.html';
 import './helpers.js';
 import './events.js';
 
-createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
+createSCPlayer = function(post) {  //Initialize all Soundcloud players
+
+  if(typeof window['scplayer-'+post._id] !== 'undefined'){
+    return;
+  }
+
   SC.stream('/tracks/'+post.vidId).then(function(player){
     window['scplayer-'+post._id] = player;
-
-    appBodyRef.videosReady.push(index);
-
     let allPosts = appBodyRef.postOrder.get();
+    console.log('tally');
+    let indexes = $.map(allPosts, function(obj, idx) {
+      if(obj._id === post._id) {
+        return idx;
+      }
+    });
+
+    let nextPost = allPosts[indexes[0]+1];
+
+    appBodyRef.videosReady.push(indexes[0]);
+
+    window['scplayer-'+post._id].on('state-change', function(event){
+      appBodyRef.state.set(event);
+    });
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
-
+      window['state-'+post._id] = 1;
       Meteor.call('listenPost', post._id, function(err, data) {
         if (err) {
           console.log(err);
@@ -22,27 +38,44 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
       });
 
       pauseEverythingElse(post._id);
+      // appBodyRef.prevPost.set(allPosts[index - 1]);
+      // appBodyRef.nextPost.set(allPosts[index + 1]);
       appBodyRef.nowPlaying.set(post);
-      appBodyRef.state.set(1);
-      appBodyRef.prevPost.set(allPosts[index - 1]);
-      appBodyRef.nextPost.set(allPosts[index + 1]);
     });
 
     window['scplayer-'+post._id].on('pause', function(event){
-      appBodyRef.state.set(2);
+      window['state-'+post._id] = 2;
     });
 
     window['scplayer-'+post._id].on('finish', function(event){
-      appBodyRef.state.set(0);
       window['scplayer-'+post._id].seek(0);     //Reset to 0 incase user wants to replay
 
-      let nextPost = appBodyRef.nextPost.get();
+      // let nextPost = appBodyRef.nextPost.get();
 
       if (nextPost) { //Play next post if it exists
         if (nextPost.type === 'youtube') {
-          window['ytplayer-' + nextPost._id].playVideo();
+            let check = window['ytplayer-' + nextPost._id].getVideoData();
+            if (check.title !== '') {
+              window['ytplayer-' + nextPost._id].playVideo();
+            } else {
+              let nextNext = allPosts[indexes[0] + 2];
+              if (nextNext.type === 'youtube') {
+                window['ytplayer-' + nextNext._id].playVideo();
+              } else {
+                window['scplayer-' + nextNext._id].play();
+              }
+            }
         } else {
-          window['scplayer-' + nextPost._id].play();
+          if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+            let nextNext = allPosts[index[0] + 2];
+            if (nextNext.type === 'youtube') {
+              window['ytplayer-' + nextNext._id].playVideo();
+            } else {
+              window['scplayer-' + nextNext._id].play();
+            }
+          } else {
+            window['scplayer-' + nextPost._id].play();
+          }
         }
         appBodyRef.nowPlaying.set(nextPost);
       }
@@ -50,30 +83,61 @@ createSCPlayer = function(post, index) {  //Initialize all Soundcloud players
   });
 }
 
-createYTPlayer = function(post, index) {
+createYTPlayer = function(post) {
+  // window['state-'+post._id] = 0;
   let allPosts = appBodyRef.postOrder.get();
   let yt_id = post.vidId;
   let name = 'ytplayer-'+ post._id;
+  let indexes = $.map(allPosts, function(obj, idx) {
+    if(obj._id === post._id) {
+      return idx;
+    }
+  });
+
+  let nextPost = allPosts[indexes[0]+1];
 
   onPlayerReady = function(event) {
     console.log('ready');
-    appBodyRef.videosReady.push(index);
+    appBodyRef.videosReady.push(indexes[0]);
   }
 
   onPlayerStateChange = function(event) {
+    appBodyRef.state.set(event.data);
     if(event.data === 0){           //ENDED
-      appBodyRef.state.set(0);      //Keep track of video state (playing/paused)
-      let nextPost = appBodyRef.nextPost.get();
+      window['state-'+post._id] = 2;
+
+      // let nextPost = appBodyRef.nextPost.get();
 
       if (nextPost) { //Play next post if it exists
+        window['state-'+nextPost._id] = 2;
         if (nextPost.type === 'youtube') {
-          window['ytplayer-' + nextPost._id].playVideo();
+          let check = window['ytplayer-' + nextPost._id].getVideoData();
+          if (check.title !== '') {
+            window['ytplayer-' + nextPost._id].playVideo();
+          } else {
+            let nextNext = allPosts[indexes[0] + 2];
+            if (nextNext.type === 'youtube') {
+              window['ytplayer-' + nextNext._id].playVideo();
+            } else {
+              window['scplayer-' + nextNext._id].play();
+            }
+          }
         } else {
-          window['scplayer-' + nextPost._id].play();
+          if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+            let nextNext = allPosts[index[0] + 2];
+            if (nextNext.type === 'youtube') {
+              window['ytplayer-' + nextNext._id].playVideo();
+            } else {
+              window['scplayer-' + nextNext._id].play();
+            }
+          } else {
+            window['scplayer-' + nextPost._id].play();
+          }
         }
-        appBodyRef.nowPlaying.set(nextPost);
+        // appBodyRef.nowPlaying.set(nextPost);
       }
     } else if(event.data === 1){    //PLAYING
+      window['state-'+post._id] = 1;
 
       Meteor.call('listenPost', post._id, function(err, data) {
         if (err) {
@@ -82,20 +146,18 @@ createYTPlayer = function(post, index) {
           console.log("Listened!" + post._id);
         }
       });
-
-      appBodyRef.state.set(1);      //Keep track of video state (playing/paused)
+      // debugger;
       pauseEverythingElse(post._id);
-      appBodyRef.prevPost.set(allPosts[index - 1]);
-      appBodyRef.nextPost.set(allPosts[index + 1]);
+      // appBodyRef.prevPost.set(allPosts[index - 1]);
+      // appBodyRef.nextPost.set(allPosts[index + 1]);
       appBodyRef.nowPlaying.set(post);
     } else if (event.data === 2) {  //PAUSED
-      appBodyRef.state.set(2);      //Keep track of video state (playing/paused)
+      window['state-'+post._id] = 2;
     }
 
   }
 
-  if (window[name].l) {
-    console.log(window[name].l);
+  if (typeof window[name].l !== 'undefined') {
   } else {
     window[name] = new YT.Player(name, {
       events: {
@@ -115,10 +177,10 @@ Template.feed.onCreated(function feedOnCreated() {
       let orderedPosts = appBodyRef.displayPosts.get();
 
       var checkYT = setInterval(function () {
-        if (typeof YT != 'undefined' && YT.loaded) {
+        if(typeof YT != 'undefined' && YT.loaded){
           _.each(orderedPosts, function(post, index) {
             if (post.type === 'youtube') {
-              createYTPlayer(post, index);
+              createYTPlayer(post);
             }
           });
 
@@ -150,13 +212,14 @@ Template.feed.onCreated(function feedOnCreated() {
 
     //Number of posts to display after a user scrolls to the bottom.
     //Their first visit = 3, scroll to the bottom once = 6, twice = 9...
-    let lastIndex = (appBodyRef.bottomHits.get() * 3) + 3;
+    let lastIndex = (appBodyRef.bottomHits.get() * 9) + 9;
 
     if (lastIndex < posts.length) { //make sure there are enough posts
       appBodyRef.displayPosts.set(posts.slice(0, lastIndex));
     } else {
       appBodyRef.displayPosts.set(posts.slice(0, posts.length));
     }
+    // appBodyRef.displayPosts.set(posts);
   });
 
 
@@ -167,7 +230,7 @@ Template.feed.onCreated(function feedOnCreated() {
 
       _.each(allPosts, function(post, index) {
         if (post.type === 'soundcloud') {
-            createSCPlayer(post, index);
+            createSCPlayer(post);
         }
       });
     }

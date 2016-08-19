@@ -103,6 +103,7 @@ Template.upload.events({
               } else {
                   SC.resolve(link).then(function (track) {
                       //Handle not streamable (NEED DESIGN)
+                      scUser = track.user.username;
                       thumbnail = track.artwork_url;
                       title = track.title;
                       console.log(track);
@@ -115,7 +116,11 @@ Template.upload.events({
                           } else if (data) {
                               //Set auto values in form
                               uploadRef.uploadedThumbnail.set(thumbnail);
-                              uploadRef.uploadedArtist.set(data.artist);
+                              if (data.artist !== '') {
+                                uploadRef.uploadedArtist.set(data.artist);
+                              } else {
+                                uploadRef.uploadedArtist.set(scUser);
+                              }
                               uploadRef.uploadedTitle.set(data.title);
 
                               uploadRef.showForm.set(true);
@@ -188,7 +193,7 @@ Template.upload.events({
         let type = $("input[name=post-link]").data('type');
         let link = $("input[name=post-link]").val();
 
-        const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
+        const villageSlug = FlowRouter.getParam('villageSlug') || '/';
         var villageId = Villages.findOne({slug: villageSlug})._id;
 
         let post = {
@@ -233,6 +238,11 @@ Template.upload.events({
         } else {
             SC.resolve(link).then(function (track) {
                 post.duration = track.duration;
+                post.creator = {
+                  'username': track.user.username,
+                  'link': track.user.permalink_url,
+                  'photo': track.user.avatar_url
+                }
 
                 //Grab duration and insert post
                 Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {

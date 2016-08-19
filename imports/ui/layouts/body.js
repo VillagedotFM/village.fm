@@ -3,7 +3,7 @@ import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
 import { Inbox } from '../../api/inbox/inbox.js';
-import { Emails } from '../../api/emails/emails.js'; 
+import { Emails } from '../../api/emails/emails.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -11,7 +11,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import { SEO } from '../../api/seo/seo.js';
 import  moment  from 'moment';
-import SC from '../../../public/js/sc3.js';
+import { SC } from '../../../public/js/sc3.js';
 import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 
 import './body.html';
@@ -45,7 +45,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             'name="twitter:card"': 'summary',
           }
         });
-      } 
+      }
     }});
     this.subscribe('villages.all', this.getVillageSlug());
     this.subscribe('comments.all');
@@ -81,6 +81,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.state = new ReactiveVar(-1);           //Current post state
   appBodyRef.completed = new ReactiveVar("0:00");   //Duration completed for current song
+  appBodyRef.playing = new ReactiveVar(false);   //Duration completed for current song
 
   //Soundcloud widget controller
   appBodyRef.scplayer = new ReactiveVar(null);
@@ -89,6 +90,34 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
+  $('.sr-playlist').perfectScrollbar();
+
+
+  Tracker.autorun(function(comp) {
+    if (appBodyRef.postOrder.get()[0]) {
+      appBodyRef.nowPlaying.set(appBodyRef.postOrder.get()[0]);
+      console.log(appBodyRef.postOrder.get()[0]);
+      console.log('-----------');
+      console.log(appBodyRef.postOrder.get());
+      comp.stop();
+    }
+  });
+
+  Tracker.autorun(function() {
+    let post = appBodyRef.nowPlaying.get();
+    var scrubber = document.getElementById('bottom-slider');
+    $(scrubber).on("input change", function() {
+      let completed = appBodyRef.completed.get();
+      let duration = '00:' + post.duration; //5:08 -> 00:05:08 for moment weirdness
+      let seek = ($(scrubber).val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
+      if (post.type === 'youtube') {
+        window['ytplayer-'+post._id].seekTo(seek, true);
+      } else {
+        window['scplayer-'+post._id].seek(seek*1000);
+      }
+    });
+  });
+
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();

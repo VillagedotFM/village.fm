@@ -48,9 +48,7 @@
         display: inline-block;
         background: url(../images/other-icons-sprite.png) 0 -150px no-repeat;
     }
-    .header__logo:hover {
-        background-position: 0 -150px;
-    }
+    
     .sidebar {
         position: relative;
         width: 100%;

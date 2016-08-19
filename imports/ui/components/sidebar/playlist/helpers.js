@@ -11,11 +11,11 @@ Template.playlist.helpers({
         if (user) {
             let profileTab = appBodyRef.profileTab.get();
             if (profileTab === 'mutual')
-                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}});
+                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}}).fetch();
             else if (profileTab === 'upvotes')
-                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}});
+                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}}).fetch();
             else if (profileTab === 'posts')
-                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}});
+                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}}).fetch();
         } else {  //Time Filters
             let time = appBodyRef.timeFilter.get();
 
@@ -92,23 +92,12 @@ Template.playlist.helpers({
           return '';
   },
   playOrPause: function () {
-      if (appBodyRef.nowPlaying.get()) {
-          if (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1) {
-              return 'sr-playlist__play--paused';
-          } else {
-              return 'sr-playlist__play--play';
-          }
-      } else {
-          return 'sr-playlist__play--play';
-      }
+    let state = appBodyRef.state.get();
+    return window['state-'+this._id] === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
   },
   showEqualizer: function () {
-      //if this song is the current post AND it's playing, show equalizer and hide duration
-      if (appBodyRef.nowPlaying.get()) {
-          return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
-      } else {
-          return false;
-      }
+    let state = appBodyRef.state.get();
+    return window['state-'+this._id] === 1 ? true : false;
   },
   showSpinner: function () {
       if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))

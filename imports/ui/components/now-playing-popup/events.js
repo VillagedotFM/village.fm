@@ -23,11 +23,6 @@ Template.now_playing_popup.events({
       currentPost = appBodyRef.displayPosts.get()[0];
     }
 
-    pauseEverythingElse(currentPost._id);
-    appBodyRef.nowPlaying.set(currentPost);
-
-    $('.post__video-play#'+currentPost._id).hide();
-
     if (currentPost.type === 'youtube') {
       window['ytplayer-' + currentPost._id].playVideo();
     } else {
@@ -58,11 +53,6 @@ Template.now_playing_popup.events({
       //go back a post if there is a prevPost
       if (prevPost) {
 
-        pauseEverythingElse(prevPost._id);
-        appBodyRef.nowPlaying.set(prevPost);
-
-        $('.post__video-play#'+prevPost._id).hide();
-
         if (prevPost.type === 'youtube') {
           window['ytplayer-' + prevPost._id].playVideo();
         } else {
@@ -76,8 +66,6 @@ Template.now_playing_popup.events({
     let nextPost = appBodyRef.nextPost.get();
 
     if (nextPost) {
-      pauseEverythingElse(nextPost._id);
-      appBodyRef.nowPlaying.set(nextPost);
 
       $('.post__video-play#'+nextPost._id).hide();
       if (nextPost.type === 'youtube') {

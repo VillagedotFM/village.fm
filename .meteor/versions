@@ -76,8 +76,8 @@ modules-runtime@0.6.3
 momentjs:moment@2.13.1
 mongo@1.1.7
 mongo-id@1.0.4
-npm-bcrypt@0.8.7
 mongo-livedata@1.0.12
+npm-bcrypt@0.8.7
 npm-mongo@1.4.43
 numtel:template-from-string@0.1.0
 oauth@1.1.10
@@ -107,6 +107,7 @@ standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
 templating@1.1.9
 templating-tools@1.0.4
+todda00:friendly-slugs@0.6.0
 tomwasd:flow-router-seo@0.0.3
 tracker@1.0.13
 twbs:bootstrap@3.3.6
