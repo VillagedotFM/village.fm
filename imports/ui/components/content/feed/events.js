@@ -137,5 +137,9 @@ Template.feed.events({
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');
+  },
+  "mouseenter .post": function(event, template) {
+    $('.sr-playlist__item').removeClass('sr-playlist__item--active');
+    $('#playlist-' + this._id).addClass('sr-playlist__item--active');
   }
 });
