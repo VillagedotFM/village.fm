@@ -240,6 +240,7 @@ input, textarea {
     position: relative;
     margin: 0 auto;
     padding: 0 20px;
+    padding-left: 0;
 }
 .header__hum {
     width: 24px;
@@ -253,13 +254,17 @@ input, textarea {
     background-position: -150px -550px;
 }
 .header__logo {
-    width: 133px;
     height: 40px;
     display: inline-block;
-    background: url(../images/icons-sprite.png) 0 0 no-repeat;
+}
+.header__logo img {
+  height: 100%;
 }
 .header__logo:hover {
-    background-position: -150px 0;
+    content:url(../images/img_menu_logo_hover@3x.png);
+}
+.header__logo:active {
+    content:url(../images/img_menu_logo_pressed@3x.png);
 }
 .header__right-block {
     float: right;
