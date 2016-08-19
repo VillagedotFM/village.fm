@@ -60,15 +60,18 @@
                         {{/if}}
                     </div>
                     <div class="sr-playlist__middle">
-                    <span class="sr-playlist__title">
-                        <span class="sr-playlist__artist">{{artist}}</span>
-                        - {{title}}
-                    </span>
-                        <br>
+                        <span class="sr-playlist__title">
+                            <span class="sr-playlist__artist">{{artist}}</span>
+                            - {{title}}
+                        </span>
+                            <br>
                         <span class="sr-playlist__posted-by">
                         posted by
-                        <span class="sr-playlist__author">{{getUserName createdBy}}</span>
-                    </span>
+                            <span class="sr-playlist__author">{{getUserName createdBy}}</span>
+                        </span>
+                        {{#if villageName}}
+                          <span class="sr-playlist__posted-in">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                        {{/if}}
                     </div>
                 </li>
             {{/each}}

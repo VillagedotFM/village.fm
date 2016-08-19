@@ -918,6 +918,10 @@ input, textarea {
     font-size: 12px;
     color: #afafaf;
 }
+.sr-playlist__posted-in {
+    font-size: 12px;
+    color: #afafaf;
+}
 .sr-playlist__time {
     display: block;
     margin-top: 10px;

@@ -7,8 +7,7 @@ Template.inbox.helpers({
       _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
         const post = Posts.findOne(inboxItem.postId);
         if(FlowRouter.getParam('villageSlug')){
-          const village = Villages.findOne({_id: post.villages[0]});
-          if(village.slug == FlowRouter.getParam('villageSlug')){
+          if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
             inboxCount++;
           }
         } else {

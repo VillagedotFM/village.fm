@@ -45,6 +45,9 @@
                                 </div>
                             </div>
                             <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
+                            {{#if villageName}}
+                              <span>in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
@@ -281,6 +284,9 @@
                               </div>
                           </div>
                           <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
+                          {{#if villageName}}
+                            <span>in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                          {{/if}}
                       </div>
                   </div>
               </div>
