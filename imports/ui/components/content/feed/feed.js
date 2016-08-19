@@ -66,7 +66,16 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
               }
             }
         } else {
-          window['scplayer-' + nextPost._id].play();
+          if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+            let nextNext = allPosts[index[0] + 2];
+            if (nextNext.type === 'youtube') {
+              window['ytplayer-' + nextNext._id].playVideo();
+            } else {
+              window['scplayer-' + nextNext._id].play();
+            }
+          } else {
+            window['scplayer-' + nextPost._id].play();
+          }
         }
         appBodyRef.nowPlaying.set(nextPost);
       }
@@ -114,7 +123,16 @@ createYTPlayer = function(post) {
             }
           }
         } else {
-          window['scplayer-' + nextPost._id].play();
+          if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+            let nextNext = allPosts[index[0] + 2];
+            if (nextNext.type === 'youtube') {
+              window['ytplayer-' + nextNext._id].playVideo();
+            } else {
+              window['scplayer-' + nextNext._id].play();
+            }
+          } else {
+            window['scplayer-' + nextPost._id].play();
+          }
         }
         // appBodyRef.nowPlaying.set(nextPost);
       }
