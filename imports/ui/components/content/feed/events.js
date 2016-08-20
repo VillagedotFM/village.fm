@@ -108,6 +108,15 @@ Template.feed.events({
         postId: postId,
         content: content
       });
+
+      mixpanel.track('Commened on a Post', {
+        postId: postId,
+        reply: false
+      });
+
+      mixpanel.people.set({
+        dateOfLastComment: new Date().toISOString()
+      });
     }
 
     $('input[name='+name+']').val('');
@@ -125,6 +134,15 @@ Template.feed.events({
           createdBy: Meteor.userId()
         }
       }});
+
+      mixpanel.track('Commened on a Post', {
+        postId: postId,
+        reply: true
+      });
+
+      mixpanel.people.set({
+        dateOfLastComment: new Date().toISOString()
+      });
     }
 
     $('input[name=post-comment]').val('');
