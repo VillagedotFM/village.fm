@@ -6,7 +6,6 @@ Template.header.events({
         throw new Meteor.Error("Facebook login failed");
       } else {
         mixpanel.identify(Meteor.userId());
-        console.log(mixpanel.identify(Meteor.userId()));
         mixpanel.people.set({
           '$email': Meteor.user().services.facebook.email,
           '$first_name': Meteor.user().services.facebook.first_name,
