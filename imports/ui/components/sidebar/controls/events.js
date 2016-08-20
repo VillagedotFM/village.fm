@@ -8,11 +8,6 @@ Template.controls.events({
       currentPost = appBodyRef.displayPosts.get()[0];
     }
 
-    pauseEverythingElse(currentPost._id);
-    appBodyRef.nowPlaying.set(currentPost);
-
-    $('.post__video-play#'+currentPost._id).hide();
-
     if (currentPost.type === 'youtube') {
       window['ytplayer-' + currentPost._id].playVideo();
     } else {
@@ -29,7 +24,16 @@ Template.controls.events({
   },
   "click .sr-controls__prev": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
-    let prevPost = appBodyRef.prevPost.get();
+    let order = appBodyRef.postOrder.get();
+    let index = $.map(order, function(post, index) {
+      if(post._id === currentPost._id) {
+        return index;
+      }
+    });
+
+    let prevPost = order[index[0]-1];
+    console.log(prevPost);
+    console.log(index[0]);
     let completed = appBodyRef.completed.get();
 
     if (completed > 5) {
@@ -43,32 +47,71 @@ Template.controls.events({
       //go back a post if there is a prevPost
       if (prevPost) {
 
-        pauseEverythingElse(prevPost._id);
-        appBodyRef.nowPlaying.set(prevPost);
-
-        $('.post__video-play#'+prevPost._id).hide();
-
         if (prevPost.type === 'youtube') {
-          window['ytplayer-' + prevPost._id].playVideo();
+          let check = window['ytplayer-' + prevPost._id].getVideoData();
+          if (check.title !== '') {
+            window['ytplayer-' + prevPost._id].playVideo();
+          } else {
+            let prevPrev = order[index[0] - 2];
+            console.log(prevPrev);
+            if (prevPrev.type === 'youtube') {
+              window['ytplayer-' + prevPrev._id].playVideo();
+            } else {
+              window['scplayer-' + prevPrev._id].play();
+            }
+          }
         } else {
-          window['scplayer-' + prevPost._id].play();
+          if (typeof window['scplayer-' + prevPost._id] === 'undefined') {
+            let prevPrev = order[index[0] - 2];
+            if (prevPrev.type === 'youtube') {
+              window['ytplayer-' + prevPrev._id].playVideo();
+            } else {
+              window['scplayer-' + prevPrev._id].play();
+            }
+          } else {
+            window['scplayer-' + prevPost._id].play();
+          }
         }
       }
     }
   },
   "click .sr-controls__next": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
-    let nextPost = appBodyRef.nextPost.get();
+    let order = appBodyRef.postOrder.get();
+    let index = $.map(order, function(post, index) {
+      if(post._id === currentPost._id) {
+        return index;
+      }
+    });
+
+    let nextPost = order[index[0]+1];
+    console.log(nextPost);
+    console.log(index[0]);
 
     if (nextPost) {
-      pauseEverythingElse(nextPost._id);
-      appBodyRef.nowPlaying.set(nextPost);
-
-      $('.post__video-play#'+nextPost._id).hide();
       if (nextPost.type === 'youtube') {
-        window['ytplayer-' + nextPost._id].playVideo();
+        let check = window['ytplayer-' + nextPost._id].getVideoData();
+        if (check.title !== '') {
+          window['ytplayer-' + nextPost._id].playVideo();
+        } else {
+          let nextNext = order[index[0] + 2];
+          if (nextNext.type === 'youtube') {
+            window['ytplayer-' + nextNext._id].playVideo();
+          } else {
+            window['scplayer-' + nextNext._id].play();
+          }
+        }
       } else {
-        window['scplayer-' + nextPost._id].play();
+        if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+          let nextNext = order[index[0] + 2];
+          if (nextNext.type === 'youtube') {
+            window['ytplayer-' + nextNext._id].playVideo();
+          } else {
+            window['scplayer-' + nextNext._id].play();
+          }
+        } else {
+          window['scplayer-' + nextPost._id].play();
+        }
       }
     }
   }

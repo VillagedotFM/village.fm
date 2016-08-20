@@ -113,10 +113,6 @@ Template.feed.events({
   "click .post__video-play": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
-    pauseEverythingElse(selectedId);
-    appBodyRef.nowPlaying.set(selectedPost);
-
-    $('.post__video-play#'+selectedId).hide();
 
     if (selectedPost.type === 'youtube') {
       window['ytplayer-' + selectedId].playVideo();
@@ -127,11 +123,23 @@ Template.feed.events({
   "click .post__video-pause": function(event, template){
     let selectedId = event.currentTarget.id;
     let selectedPost = Posts.findOne(selectedId);
-
+    window['state-'+selectedPost._id] = 2;
     if (selectedPost.type === 'youtube') {
       window['ytplayer-' + selectedId].pauseVideo();
     } else {
       window['scplayer-' + selectedId].pause();
     }
+  },
+  "click .share-dropdown__copy": function(event, template){
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(window.location.origin+'/post/'+this._id).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');
+  },
+  "mouseenter .post": function(event, template) {
+    $('.sr-playlist__item').removeClass('sr-playlist__item--active');
+    $('#playlist-' + this._id).addClass('sr-playlist__item--active');
   }
 });

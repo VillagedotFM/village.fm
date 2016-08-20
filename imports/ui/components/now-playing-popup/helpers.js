@@ -10,11 +10,15 @@ Template.now_playing_popup.helpers({
     setInterval(function(){ //Track video progress for scrubber, convert to seconds if SC
       let post = appBodyRef.nowPlaying.get();
       if (post.type === 'youtube') {
-        var completed = window['ytplayer-'+post._id].getCurrentTime();
-        appBodyRef.completed.set(completed)
+        if (window['ytplayer-'+post._id].getCurrentTime) {
+          var completed = window['ytplayer-'+post._id].getCurrentTime();
+          appBodyRef.completed.set(completed)
+        }
       } else {
-        let completed = window['scplayer-'+post._id].currentTime();
-        appBodyRef.completed.set(completed / 1000)
+        if (typeof window['scplayer-'+post._id] !== 'undefined') {
+          let completed = window['scplayer-'+post._id].currentTime();
+          appBodyRef.completed.set(completed / 1000)
+        }
       }
     }, 500);
 
@@ -45,8 +49,8 @@ Template.now_playing_popup.helpers({
     return moment(this.createdAt).fromNow();
   },
   //player__controls__play--paused
-  playOrPause() {
+  playOrPause: function() {
     let state = appBodyRef.state.get();
-    return state === 1 ? 'player__controls__play--paused' : 'player__controls__play--play';
+    return window['state-'+this._id] === 1 ? 'player__controls__play--paused' : 'player__controls__play--play';
   }
 });

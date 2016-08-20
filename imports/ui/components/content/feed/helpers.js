@@ -1,42 +1,33 @@
 Template.feed.helpers({
   posts() {
-    if (appBodyRef.inboxOpen.get()) {
-      let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
-      let displayPosts = appBodyRef.displayPosts.get();
-      displayPosts.splice(0, inboxCount);
-      return displayPosts;
-    } else {
+    // if (appBodyRef.inboxOpen.get()) {
+    //   let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
+    //   let displayPosts = appBodyRef.displayPosts.get();
+    //   displayPosts.splice(0, inboxCount);
+    //   return displayPosts;
+    // } else {
       return appBodyRef.displayPosts.get();
-    }
+    // }
   },
-  showInbox() {
-    return appBodyRef.inboxOpen.get();
-  },
+  // showInbox() {
+  //   return appBodyRef.inboxOpen.get();
+  // },
   selectedPost() {
     return FlowRouter.current().params.postId;
   },
-  inboxItems() {
-    var inboxItems = [];
-    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-      const post = Posts.findOne(inboxItem.postId);
-      if(FlowRouter.getParam('villageSlug')){
-        if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
-          inboxItems.push(post);
-        }
-      } else {
-        inboxItems.push(post);
-      }
-    });
-    return inboxItems;
-  },
+  // inboxItems() {
+  //   var inboxItems = [];
+  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+  //     inboxItems.push(Posts.findOne(inboxItem.postId));
+  //   });
+  //   return inboxItems;
+  // },
   comments: function() {
     return Comments.find({postId: this._id}).fetch();
   },
   isPlaying: function() {
-    if (appBodyRef.nowPlaying.get()) {
-      return (this._id === appBodyRef.nowPlaying.get()._id && appBodyRef.state.get() === 1);
-    }
-    return false;
+    let state = appBodyRef.state.get();
+    return window['state-'+this._id] === 1 ? true : false;
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -108,7 +99,7 @@ Template.feed.helpers({
       if(village && village.slug){
         if(village.name != 'Main'){
           return '/' + village.slug + '/post/' + id;
-        } 
+        }
       }
     }
 

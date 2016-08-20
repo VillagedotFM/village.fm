@@ -34,6 +34,18 @@ Accounts.onCreateUser(function (options, user) {
       }
     });
 
+    //Assign villager Number
+    var users = Meteor.users.find({});
+    var max = 0;
+    users.forEach(function(user) {
+      if (user.profile.villagerNum) {
+        if (user.profile.villagerNum > max) {
+          max = user.profile.villagerNum;
+        }
+      }
+    });
+    user.profile.villagerNum = max + 1;
+
     //send email to facebook user (fake users are normal users with password and don't require emails being sent)
     /**
      * TODO: perhaps move this into a method outside this one and call it here,

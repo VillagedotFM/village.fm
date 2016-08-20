@@ -260,6 +260,8 @@ Meteor.methods({
                     return item;
                 }).join(':');
                 let duration = durationFormatted[0] == '0' ? durationFormatted.substring(1, 5) : durationFormatted;
+                if (duration.length < 3)
+                  duration = '0:'+duration;
 
                 post.duration = duration;
 

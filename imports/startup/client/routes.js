@@ -9,28 +9,28 @@ import "../../ui/components/profile/profile.js";
 FlowRouter.route('/', {
     name: 'Home',
     action() {
-        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
     },
 });
 
 FlowRouter.route('/:villageSlug', {
     name: 'Village',
     action() {
-        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
     },
 });
 
 FlowRouter.route('/post/:postId', {  //Permalink
     name: 'Post',
     action() {
-        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
     },
 });
 
 FlowRouter.route('/:villageSlug/post/:postId', {
     name: 'Post',
     action() {
-        BlazeLayout.render('app_body', {tabs: 'tabs', inbox: 'inbox', upload: 'upload', invite: 'invite'});
+        BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
     },
 });
 
