@@ -23,7 +23,7 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
     appBodyRef.videosReady.push(indexes[0]);
 
     window['scplayer-'+post._id].on('state-change', function(event){
-      appBodyRef.state.set(event);
+      appBodyRef.state.set(post._id+'-'+event);
     });
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
@@ -102,7 +102,7 @@ createYTPlayer = function(post) {
   }
 
   onPlayerStateChange = function(event) {
-    appBodyRef.state.set(event.data);
+    appBodyRef.state.set(post._id+'-'+event.data);
     if(event.data === 0){           //ENDED
       window['state-'+post._id] = 2;
 
