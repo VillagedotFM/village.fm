@@ -1,6 +1,7 @@
 import './feed.html';
 import './helpers.js';
 import './events.js';
+import './rendered.js';
 
 createSCPlayer = function(post) {  //Initialize all Soundcloud players
 
