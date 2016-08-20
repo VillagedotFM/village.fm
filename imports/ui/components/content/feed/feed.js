@@ -153,6 +153,9 @@ createYTPlayer = function(post) {
       appBodyRef.nowPlaying.set(post);
     } else if (event.data === 2) {  //PAUSED
       window['state-'+post._id] = 2;
+      if (appBodyRef.nowPlaying.get() !== post) {
+        window['ytplayer-' + post._id].seekTo(0);
+      }
     }
 
   }
