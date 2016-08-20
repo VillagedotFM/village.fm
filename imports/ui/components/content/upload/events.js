@@ -21,7 +21,17 @@ Template.upload.events({
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
             if (error) {
                 console.log(error);
+                mixpanel.track('Link error received', {
+                  linkErrorType: error.reason,
+                  type: 'Unknown'
+                });
+
             } else if (data) {
+              mixpanel.track('Song link entered', {
+                type: data.type,
+                vidId: data.vidId
+              });
+
               if (data === 'soundcloud') {
                 //Soundcloud can only be used on client so grab the id here
                 SC.resolve(potentialLink).then(function (track) {
@@ -58,6 +68,11 @@ Template.upload.events({
                   alert('Someone already posted that song');
                   uploadRef.duplicate.set(duplicate);
                   resetForm();
+                  mixpanel.track('Link error received', {
+                    linkErrorType: 'Already Posted',
+                    type: data.type
+                  });
+                  
                   return;
               }
 
@@ -140,6 +155,12 @@ Template.upload.events({
                   });
               }
             } else {
+
+                mixpanel.track('Link error received', {
+                  linkErrorType: 'Format',
+                  type: 'Unknown'
+                });
+
                 //Don't allow link to be submitted
                 uploadRef.missingData.set(true);
                 $('.postLinkBtn').prop('disabled', true);
