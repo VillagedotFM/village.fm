@@ -119,6 +119,10 @@ Template.feed.events({
     } else {
       window['scplayer-' + selectedId].play();
     }
+
+    mixpanel.track('Clicked play button', {
+      area: 'Feed'
+    });
   },
   "click .post__video-pause": function(event, template){
     let selectedId = event.currentTarget.id;

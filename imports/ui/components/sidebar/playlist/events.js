@@ -59,6 +59,10 @@ Template.playlist.events({
         } else {
             window['scplayer-' + selectedId].play();
         }
+
+        mixpanel.track('Clicked play button', {
+          area: 'Playlist'
+        });
     },
     "click .sr-playlist__play--paused": function (event, template) {
         let selectedId = event.currentTarget.id;
