@@ -78,6 +78,8 @@ Template.controls.events({
         }
       }
     }
+
+    mixpanel.track('Clicked Previous Track');
   },
   "click .sr-controls__next": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
@@ -118,5 +120,7 @@ Template.controls.events({
         }
       }
     }
+
+    mixpanel.track('Clicked Next Track');
   }
 });
