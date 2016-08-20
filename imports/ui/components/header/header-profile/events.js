@@ -8,7 +8,7 @@ Template.header_profile.events({
       if (err) {
           throw new Meteor.Error("Logout failed");
       } else {
-        console.log("Logged Out!");
+        mixpanel.track('Logged out');
       }
     });
   }
