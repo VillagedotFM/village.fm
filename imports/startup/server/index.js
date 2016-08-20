@@ -1,4 +1,3 @@
-import '../../api/analytics/methods.js';
 import '../../api/posts/methods.js';
 import '../../api/posts/hooks.js';
 import '../../api/posts/server/publications.js';

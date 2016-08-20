@@ -67,3 +67,6 @@ mobile-experience
 spiderable
 jazeee:spiderable-longer-timeout
 tomwasd:flow-router-seo
+
+# analytics
+jorisderuiter:mixpanel
