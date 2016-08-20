@@ -32,11 +32,11 @@ Template.playlist.helpers({
             const villageSlug = FlowRouter.getParam('villageSlug');
             const village = Villages.findOne({slug: villageSlug});
             if(village){
-              posts = Posts.find({"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}}).fetch(); 
+              posts = Posts.find({"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}}).fetch();
             } else {
-              posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}}).fetch(); 
+              posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: -1}}).fetch();
             }
-            
+
         }
 
     //Inbox

@@ -94,12 +94,26 @@ Template.app_body.onRendered(function() {
 
 
   Tracker.autorun(function(comp) {
-    if (appBodyRef.postOrder.get()[0]) {
-      appBodyRef.nowPlaying.set(appBodyRef.postOrder.get()[0]);
-      console.log(appBodyRef.postOrder.get()[0]);
-      console.log('-----------');
-      console.log(appBodyRef.postOrder.get());
+    let order = appBodyRef.postOrder.get();
+    if (order[0]) {
+      appBodyRef.nowPlaying.set(order[0]);
       comp.stop();
+    }
+  });
+
+  Tracker.autorun(function(){
+    let order = appBodyRef.postOrder.get();
+
+    if (appBodyRef.nowPlaying.get() !== null) {
+      let indexes = $.map(order, function(post, index) {
+        if(post._id === appBodyRef.nowPlaying.get()._id) {
+          return index;
+        }
+      });
+      console.log(indexes[0]);
+      if (typeof indexes[0] === 'undefined') {
+        appBodyRef.nowPlaying.set(order[0]);
+      }
     }
   });
 
