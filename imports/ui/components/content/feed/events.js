@@ -196,6 +196,22 @@ Template.feed.events({
       window['scplayer-' + selectedId].pause();
     }
   },
+  "click .share-dropdown__social": function(event, template){
+    window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');
+
+    mixpanel.track('Shared Song', {
+      platform: $(event.currentTarget).text()
+    });
+
+    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    mixpanel.register({
+        'totalPostsShared': totalPostsShared + 1
+    });
+
+    mixpanel.people.increment({
+        'totalPostsShared': 1
+    });
+  },
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
@@ -203,6 +219,19 @@ Template.feed.events({
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');
+
+    mixpanel.track('Shared Song', {
+      platform: 'Copy'
+    });
+
+    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    mixpanel.register({
+        'totalPostsShared': totalPostsShared + 1
+    });
+
+    mixpanel.people.increment({
+        'totalPostsShared': 1
+    });
   },
   "mouseenter .post": function(event, template) {
     $('.sr-playlist__item').removeClass('sr-playlist__item--active');
