@@ -1,6 +1,18 @@
 <template name='sidebar'>
   <aside class="sidebar sidebar{{profilePadding}}">
       <div class="sidebar__inner">
+        <div class="popup-upvote__wrapper">
+          {{#with upvotedSuccess}}
+            <div class="popup-upvote popup-upvote--success">
+                <img src="images/popup/after-upvote-success-icon.png" alt=""><p><span>{{artist}} - {{title}}</span> has been added to your profile</p>
+            </div>
+          {{/with}}
+          {{#if upvotedError}}
+            <div class="popup-upvote popup-upvote--fail">
+                <img src="images/popup/after-upvote-fail-icon.png" alt=""><p><span>Sorry! Something went wrong. Please, try again later!</span></p>
+            </div>
+          {{/if}}
+        </div>
           {{> controls}}
           {{> Template.dynamic template=tabs}}
           <!-- {{> Template.dynamic template=inbox}} -->

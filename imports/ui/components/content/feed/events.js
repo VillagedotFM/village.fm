@@ -45,7 +45,16 @@ Template.feed.events({
     if(Meteor.userId()) {
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
-        console.log( err || "Upvoted!" + upvotedPost._id);
+        if (err) {
+          appBodyRef.upvotedError.set(true);
+        } else {
+          if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+          }
+        }
       });
     } else {
       alert('Please login to upvote posts!');

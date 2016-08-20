@@ -13,9 +13,14 @@ Template.bottom_player.events({
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
         if (err) {
-          console.log(err);
+          appBodyRef.upvotedError.set(true);
         } else {
-          console.log(upvotedPost);
+          if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+          }
         }
       });
     } else {

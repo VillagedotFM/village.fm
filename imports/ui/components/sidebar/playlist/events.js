@@ -39,9 +39,14 @@ Template.playlist.events({
             else {
                 Meteor.call('upvotePost', upvotedPost._id, function (err, data) {
                     if (err) {
-                        console.log(err);
+                      appBodyRef.upvotedError.set(true);
                     } else {
-                        console.log("Upvoted!" + upvotedPost._id);
+                      if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
+                        appBodyRef.upvotedSuccess.set(upvotedPost);
+                        setTimeout(function(){
+                          appBodyRef.upvotedSuccess.set(null);
+                        }, 2000);
+                      }
                     }
                 });
             }

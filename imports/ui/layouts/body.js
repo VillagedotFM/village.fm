@@ -61,6 +61,10 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Set up reactive-vars
   appBodyRef = this;
+
+  appBodyRef.upvotedSuccess = new ReactiveVar(null);
+  appBodyRef.upvotedError = new ReactiveVar(null);
+
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
