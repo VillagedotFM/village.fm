@@ -72,7 +72,7 @@ Template.upload.events({
                     linkErrorType: 'Already Posted',
                     type: data.type
                   });
-                  
+
                   return;
               }
 
@@ -214,7 +214,7 @@ Template.upload.events({
         let type = $("input[name=post-link]").data('type');
         let link = $("input[name=post-link]").val();
 
-        const villageSlug = FlowRouter.getParam('villageSlug') || '/';
+        const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
         var villageId = Villages.findOne({slug: villageSlug})._id;
 
         let post = {
@@ -242,18 +242,35 @@ Template.upload.events({
                     console.log(error);
                 } else if (data) {
 
-                    //TODO: Handle insert error (NEED DESIGN)
-                    if (data === 'Couldn\'t insert post') {
-                        alert('Couldn\'t post song, try again later');
-                        uploadRef.postError.set(true);
-                        resetForm();
-                        return;
-                    } else {
-                        //TODO: Handle posting success (NEED DESIGN)
-                        alert('Your post is in the Village!');
-                        uploadRef.postSuccess.set(data); //_id of newly inserted song
-                        resetForm();
-                    }
+                  if(!fakeUserId){
+                    mixpanel.track('Posted a song', {
+                      type: post.type,
+                      hasDescription: ( post.description ? true : false ),
+                      taggedUsersCount: post.taggedUsers.length
+                    });
+
+                    const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                    mixpanel.register({
+                        'totalSongsPosted': totalSongsPosted + 1
+                    });
+
+                    mixpanel.people.increment({
+                      'totalSongsPosted': 1
+                    });
+                  }
+
+                  //TODO: Handle insert error (NEED DESIGN)
+                  if (data === 'Couldn\'t insert post') {
+                      alert('Couldn\'t post song, try again later');
+                      uploadRef.postError.set(true);
+                      resetForm();
+                      return;
+                  } else {
+                      //TODO: Handle posting success (NEED DESIGN)
+                      alert('Your post is in the Village!');
+                      uploadRef.postSuccess.set(data); //_id of newly inserted song
+                      resetForm();
+                  }
                 }
             });
         } else {
