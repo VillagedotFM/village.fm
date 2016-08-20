@@ -33,12 +33,30 @@ Template.feed.events({
     if (!taggedUsers)
       return;
 
-    Meteor.call('tagUsers', post, taggedUsers);
+    Meteor.call('tagUsers', post, taggedUsers, function(err, result){
+      if(!err){
+        mixpanel.track('Tagged a User', {
+          postId: post._id,
+          taggedUserCount: taggedUsers.length
+        });
+
+        const totalUsersTagged = mixpanel.get_property('totalUsersTagged');
+        mixpanel.register({
+            'totalUsersTagged': totalUsersTagged + taggedUsers.length
+        });
+
+        mixpanel.people.increment({
+            'totalUsersTagged': taggedUsers.length
+        });
+      }
+    });
     Tags.set('taggedUsers', []);
     $('.post__send[data-id="' + id +'"]').removeClass('active');
     $('.post__comments[data-id="' + id +'"]').addClass('active');
     send.hide();
     comment.show();
+
+
 
   },
   "click .post__rating": function(event, template){
