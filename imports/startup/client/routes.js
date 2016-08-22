@@ -25,6 +25,10 @@ FlowRouter.route('/', {
             'totalVillagesVisited': totalVillagesVisited + 1
         });
 
+        mixpanel.register({
+            'villageName': 'Main Village'
+        });
+
         mixpanel.people.increment({
             'totalVillagesVisited': 1
         });
@@ -37,7 +41,6 @@ FlowRouter.route('/:villageSlug', {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
 
         const village = Villages.findOne({slug: params.villageSlug});
-        console.log(village);
         if(village){
             mixpanel.track('Page Visit', {
                 type: 'Village',
@@ -47,6 +50,10 @@ FlowRouter.route('/:villageSlug', {
             const totalVillagesVisited = mixpanel.get_property('totalVillagesVisited');
             mixpanel.register({
                 'totalVillagesVisited': totalVillagesVisited + 1
+            });
+
+            mixpanel.register({
+                'villageName': village.name + ' Village'
             });
 
             mixpanel.people.increment({
@@ -96,6 +103,13 @@ FlowRouter.route('/:villageSlug/post/:postId', {
             mixpanel.register({
                 'totalPostsVisited': totalPostsVisited + 1
             });
+
+            const village = Villages.findOne({slug: params.villageSlug});
+            if(village){
+                mixpanel.register({
+                    'villageName': village.name + ' Village'
+                });
+            }
 
             mixpanel.people.increment({
                 'totalPostsVisited': 1
