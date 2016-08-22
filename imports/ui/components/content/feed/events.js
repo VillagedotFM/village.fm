@@ -135,6 +135,13 @@ Template.feed.events({
       mixpanel.people.set({
         dateOfLastComment: new Date().toISOString()
       });
+
+      const comments = Comments.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+      if(comments.length === 1){
+        mixpanel.people.increment({
+          'daysWithAComment': 1
+        });
+      }
     }
 
     $('input[name='+name+']').val('');
