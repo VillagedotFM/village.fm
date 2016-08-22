@@ -214,7 +214,7 @@ Template.upload.events({
         let type = $("input[name=post-link]").data('type');
         let link = $("input[name=post-link]").val();
 
-        const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
+        const villageSlug = FlowRouter.getParam('villageSlug') || '/';
         var villageId = Villages.findOne({slug: villageSlug})._id;
 
         let post = {
@@ -257,6 +257,13 @@ Template.upload.events({
                     mixpanel.people.increment({
                       'totalSongsPosted': 1
                     });
+
+                    const posts = Posts.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+                    if(posts.length === 1){
+                      mixpanel.people.increment({
+                        'daysWithAPost': 1
+                      });
+                    }
                   }
 
                   //TODO: Handle insert error (NEED DESIGN)
@@ -291,6 +298,30 @@ Template.upload.events({
                         alert('Your post is in the Village!');
                         uploadRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
+
+                        if(!fakeUserId){
+                          mixpanel.track('Posted a song', {
+                            type: post.type,
+                            hasDescription: ( post.description ? true : false ),
+                            taggedUsersCount: post.taggedUsers.length
+                          });
+
+                          const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                          mixpanel.register({
+                              'totalSongsPosted': totalSongsPosted + 1
+                          });
+
+                          mixpanel.people.increment({
+                            'totalSongsPosted': 1
+                          });
+
+                          const posts = Posts.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+                          if(posts.length === 1){
+                            mixpanel.people.increment({
+                              'daysWithAPost': 1
+                            });
+                          }
+                        }
                     }
                 });
             });
