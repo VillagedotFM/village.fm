@@ -112,11 +112,6 @@ FlowRouter.route('/profile/:_id', {
         const user = Meteor.users.findOne({_id: params._id});
 
         if(user){
-            if(Meteor.userId() == user._id){
-               
-            } else {
-
-            }
              mixpanel.track('Page Visit', {
                 type: ( Meteor.userId() == user._id ? 'Own Profile' : 'Other Profile'),
                 name: user.profile.name
