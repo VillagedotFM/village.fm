@@ -110,9 +110,12 @@ Template.playlist.helpers({
       return postToVote.get();
   },
 
-    fakeUsers: function () {
-        return Meteor.users.find({
-            roles: 'fakeUser'
-        }).fetch();
-    },
+  fakeUsers: function () {
+      return Meteor.users.find({
+          roles: 'fakeUser'
+      }).fetch();
+  },
+  isSubVillage: function() {
+    return FlowRouter.getParam('villageSlug');
+  }
 });
