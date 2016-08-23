@@ -162,7 +162,8 @@ Template.app_body.onRendered(function() {
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
   "click": function(event, template){
-     $('.send-to-friend__list, .sign-up, .invite-dropdown, .onboarding-popup').hide();
+     $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
      hideMenu();
+     appBodyRef.signUp.set(null);
   }
 });

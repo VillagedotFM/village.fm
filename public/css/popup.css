@@ -127,10 +127,10 @@
 }
 .popup-upvote__wrapper{
     position: absolute;
-    width: 100%;
+    width: 150%;
     bottom: 10px;
     padding: 0 10px;
-    z-index: 2;
+    z-index: 9999;
 }
 .popup-upvote{
     border-radius: 20px;
@@ -148,8 +148,7 @@
 }
 .popup-upvote img{
     vertical-align: middle;
-    padding-left: 50%;
-    padding-bottom: 5px;
+    padding-right: 10px;
 }
 .popup-upvote span{
     color: #fff;
@@ -461,6 +460,7 @@
     font-size: 12px;
     color: #2e2f2f;
     padding-right: 15px;
+    cursor: pointer;
 }
 .header__unloged.active{
     display: inline-block;
@@ -468,6 +468,7 @@
 .header__unloged a{
     display: inline-block;
     vertical-align: middle;
+    text-decoration: none;
 }
 .header__unloged img{
     display: inline-block;
