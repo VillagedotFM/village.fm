@@ -547,7 +547,7 @@ input, textarea {
     padding: 15px 20px;
     border-top: 1px solid #f4f6f8;
 }
-.profile-dropdown__bottom-row:first-child {
+.profile-dropdown__bottom-row {
     margin-bottom: 7px;
 }
 .header-profile:hover .profile-dropdown{

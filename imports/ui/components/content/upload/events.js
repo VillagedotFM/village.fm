@@ -15,7 +15,15 @@ let resetForm = () => {
 //TODO: scope jquery elements to template
 
 Template.upload.events({
+    'click .after-onboarding__overlay': function(event, template) {
+        $('.upload-section__upload').removeClass('after-onboarding');
+        $('.after-onboarding__overlay').hide();
+    },
     'keyup input[name=post-link]'(event, instance) {
+      $('.upload-section__upload').removeClass('after-onboarding');
+      $('.after-onboarding__overlay').hide();
+      uploadRef.duplicate.set(false);
+      uploadRef.notFound.set(false);
         let potentialLink = $("input[name=post-link]").val();
 
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
@@ -55,9 +63,8 @@ Template.upload.events({
               });
               if (duplicate) {
                   //TODO: Handle displaying other post (NEED DESIGN)
-                  alert('Someone already posted that song');
-                  uploadRef.duplicate.set(duplicate);
                   resetForm();
+                  uploadRef.duplicate.set(duplicate);
                   return;
               }
 
@@ -75,7 +82,7 @@ Template.upload.events({
 
                           //TODO: Handle reporting link not working (NEED DESIGN)
                           if (data === 'Song not found') {
-                              alert('Couldn\'t find that song, try another link');
+                            console.log('not found');
                               uploadRef.notFound.set(true);
                               resetForm();
                               return;
@@ -228,9 +235,8 @@ Template.upload.events({
                         resetForm();
                         return;
                     } else {
-                        //TODO: Handle posting success (NEED DESIGN)
-                        alert('Your post is in the Village!');
-                        uploadRef.postSuccess.set(data); //_id of newly inserted song
+                      console.log(data);
+                        appBodyRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
                     }
                 }
@@ -249,9 +255,8 @@ Template.upload.events({
                     if (error) {
                         console.log(error);
                     } else if (data) {
-                        //TODO: Handle posting success (NEED DESIGN)
-                        alert('Your post is in the Village!');
-                        uploadRef.postSuccess.set(data); //_id of newly inserted song
+                      console.log(data);
+                        appBodyRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
                     }
                 });

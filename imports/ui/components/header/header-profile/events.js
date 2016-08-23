@@ -11,5 +11,8 @@ Template.header_profile.events({
         console.log("Logged Out!");
       }
     });
+  },
+  "click .feedbackBtn": function(event, template) {
+    $('.feedback__contant').slideToggle();
   }
 });

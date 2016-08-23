@@ -1,6 +1,15 @@
 <template name="app_body">
 
   <div class="wrapper">
+    {{#if signUp}}
+      <div class="onboarding-popup">
+          <h3>Welcome to <span class="onboarding-popup__color">Village</span> prototype</h3>
+          <p><span class="onboarding-popup__color">Village</span> is one big collaborative playlist</p>
+          <p>If you’re in prototype, it means one of us like you and your taste in music a lot.</p>
+          <p>Thanks for being a part of it!</p>
+          <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with facebook</span></a>
+      </div>
+    {{/if}}
 
       {{> mobile_menu}}
 
@@ -27,6 +36,6 @@
   <script src="js/main.js"></script>
   <script src="js/sc3.js"></script>
   <script src="js/mobile.js"></script>
-  <script src="js/popup.js"></script>
+  <!--<script src="js/popup.js"></script>-->
 
 </template>

@@ -111,5 +111,11 @@ Template.playlist.events({
     $('.us-mobile').hide();
     $('.sidebar').hide();
     $('.container').show();
+  },
+  'click .after-post--overlay': function(event, template) {
+    $('.after-post--overlay').hide();
+    $('.after-post--bg').hide();
+    $('.after-post--text').hide();
+    $('.sidebar').removeClass('zindex');
   }
 });

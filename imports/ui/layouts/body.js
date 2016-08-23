@@ -15,6 +15,8 @@ import { SC } from '../../../public/js/sc3.js';
 import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 
 import './body.html';
+import './helpers.js';
+import './events.js';
 import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
 import '../components/profile/profile.js';
@@ -64,6 +66,10 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.upvotedSuccess = new ReactiveVar(null);
   appBodyRef.upvotedError = new ReactiveVar(null);
+
+  appBodyRef.signUp = new ReactiveVar(null);
+
+  appBodyRef.postSuccess = new ReactiveVar(null);
 
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
@@ -156,7 +162,7 @@ Template.app_body.onRendered(function() {
 Template.app_body.events({
   //TODO: use reactive-var instead of show/hide
   "click": function(event, template){
-     $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
+     $('.send-to-friend__list, .sign-up, .invite-dropdown, .onboarding-popup').hide();
      hideMenu();
   }
 });

@@ -2,17 +2,49 @@
     <div class="upload-section hidden-mobile">
         <form class="linkUpload">
             <div class="upload-section__upload clearfix">
-              {{#unless showForm}}
-              <button class="btn pull-right hidden-mobile upload-section__button postLinkBtn">
-              <span>Post a Song</span>
-          </button>
-          {{/unless}}
-                <div class="upload-section__input-wrapper">
-                    <input type="text" name="post-link" class="upload-section__input"
-                           placeholder="Enter any Soundcloud or YouTube link here...">
-                </div>
+              <div class="after-onboarding__overlay"></div>
+              <div class="upload-section__upload--shadow">
+                  <div class="upload-section__upload--border">
+                    {{#unless showForm}}
+                      <button class="btn pull-right hidden-mobile upload-section__button postLinkBtn">
+                        <span>Post a Song</span>
+                      </button>
+                    {{/unless}}
+                    <div class="upload-section__input-wrapper">
+                        <input type="text" name="post-link" class="upload-section__input"
+                               placeholder="Enter any Soundcloud or YouTube link here...">
+                    </div>
+                  </div>
+                  <div class="upload-section__upload--popup">
+                      <p class="title">You’ve joined the Village</p>
+                      <p class="text">Share a song you’ve<br> been loving lately or for a while<br> to the playlist</p>
+                  </div>
+              </div>
+            </div>
+            <div class="upload-section__upload--popup">
+                <p class="title">You’ve joined the Village</p>
+                <p class="text">Share a song you’ve<br> been loving lately or for a while<br> to the playlist</p>
+                <a href="#"><p class="lisen-text">Or just start listening<img src="images/popup/after-onboarding-play-icon.png" alt=""></p></a>
             </div>
         </form>
+        {{#if showError}}
+          {{#if duplicate}}
+            {{#with duplicate}}
+              <div class="post-sheduled">
+                <h3>Someone already posted that!</h3>
+                <img src="{{thumbnail}}" alt="" style="height: 105px; width: 117px">
+                <p>Leave a comment <span class="post-sheduled--color"><a href="/post/{{_id}}">here</a></span></p>
+              </div>
+            {{/with}}
+          {{else}}
+            {{#if notFound}}
+              <div class="post-sheduled">
+                <h3>Can't find that one :/</h3>
+                <p>Try another link!</p>
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/if}}
         {{#if showForm}}
             <div class="uploaded-item {{showUploadForm}} clearfix">
                 <form class="postUpload">
@@ -54,6 +86,7 @@
                 </form>
             </div>
         {{/if}}
+
     </div>
 </template>
 

@@ -1,5 +1,13 @@
 <template name='header'>
     <header class="header">
+      <div class="feedback__wrapper">
+          <div class="feedback__contant">
+              <form action="">
+                  <textarea name="" placeholder="Tell us what you think about Village.fm" rows="5"></textarea>
+                  <button type="submit" class="btn">Submit Feedback</button>
+              </form>
+          </div>
+        </div>
         <div class="header__inner">
             <div class="header__hum visible-mobile"></div>
             <a href="/" class="header__logo hidden-mobile">
@@ -14,10 +22,10 @@
                     {{> notifications}}
                     {{> header_profile}}
                 {{else}}
-                    <a class="sign-up__button signUpBtn">
-                        <i class="fa fa-facebook"></i>
-                        <span>Sign up with facebook</span>
-                    </a>
+                  <div class="header__unloged active">
+                      <img src="images/popup/unloged-icon.png" alt="">
+                      <a href="">Login</a> <span>/</span> <a href="">Sign Up</a>
+                  </div>
                 {{/if}}
             </div>
         </div>

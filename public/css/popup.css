@@ -582,7 +582,7 @@
 /*====================================Post Scheduled Style===========================================*/
 
 .post-sheduled{
-    display: none;
+    display: block;
     text-align: center;
 }
 .post-sheduled.visible{
