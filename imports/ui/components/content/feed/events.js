@@ -63,6 +63,7 @@ Template.feed.events({
     event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedPost = this;
+<<<<<<< HEAD
       Meteor.call('upvotePost', upvotedPost._id, function(err, affected) {
         if (err) {
           appBodyRef.upvotedError.set(true);
@@ -89,6 +90,12 @@ Template.feed.events({
             mixpanel.people.increment({
                 'totalPostsUpvoted': 1
             });
+
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+
           } else {
             const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
             mixpanel.register({

@@ -16,13 +16,6 @@ Template.bottom_player.events({
         if (err) {
           appBodyRef.upvotedError.set(true);
         } else {
-          if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
-            appBodyRef.upvotedSuccess.set(upvotedPost);
-            setTimeout(function(){
-              appBodyRef.upvotedSuccess.set(null);
-            }, 2000);
-          }
-
           if(affected){
             let postedBy = Meteor.users.findOne(upvotedPost.createdBy);
             mixpanel.track('Upvoted a Post', {
@@ -38,6 +31,12 @@ Template.bottom_player.events({
             mixpanel.people.increment({
                 'totalPostsUpvoted': 1
             });
+
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+
           } else {
             const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
             mixpanel.register({
@@ -47,7 +46,7 @@ Template.bottom_player.events({
             mixpanel.people.increment({
                 'totalPostsUpvoted': -1
             });
-          }
+          } 
         }
       });
     } else {
