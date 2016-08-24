@@ -62,35 +62,18 @@
                   </div>
               </div>
               <div class="post__video-wrapper">
-                {{#if isYoutube}}
-                  <div class="post__video" style="background-image: url({{thumbnail}})">
+                <div class="post__video" style="background-image: url({{thumbnail}})">
+                    {{#if isYoutube}}
                     <iframe id="ytplayer-{{_id}}" type="text/html" width="464" height="270"
                       src="https://www.youtube.com/embed/{{vidId}}?enablejsapi=1"
                       frameborder="0"></iframe>
-                    {{#if videoReady @index}}
-                      {{#unless isPlaying}}
-                        <button class="post__video-play" id={{_id}}></button>
-                      {{/unless}}
-                    {{else}}
-                      {{> spinner}}
                     {{/if}}
-                  </div>
-                {{else}}
-                  <div class="post__video">
-                    <img src="{{thumbnail}}" alt="" class="sc-thumbnail">
-                    <div class="sc-info">
-                      <a href="{{creator.link}}">
-                        <img src="{{creator.photo}}" alt="" class="sc-user-image"/><br>
-                        {{creator.username}}
-                      </a>
-                       on <br>
-                      <a href="{{link}}">
-                        <img src="images/sc-logo.png" alt="" class="sc-logo"/>
-                      </a>
-                    </div>
+
                     {{#if videoReady @index}}
                       {{#if isPlaying}}
-                        <button class="post__video-pause" id={{_id}}></button>
+                        {{#unless isYoutube}}
+                          <button class="post__video-pause" id={{_id}}></button>
+                        {{/unless}}
                       {{else}}
                         <button class="post__video-play" id={{_id}}></button>
                       {{/if}}
@@ -98,7 +81,6 @@
                       {{> spinner}}
                     {{/if}}
                   </div>
-                {{/if}}
                   <h3 class="post__video-title">
                     {{description}}
                     {{#each taggedUsers}}
