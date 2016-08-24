@@ -33,19 +33,38 @@ Template.feed.events({
     if (!taggedUsers)
       return;
 
-    Meteor.call('tagUsers', post, taggedUsers);
+    Meteor.call('tagUsers', post, taggedUsers, function(err, result){
+      if(!err){
+        mixpanel.track('Tagged a User', {
+          postId: post._id,
+          taggedUserCount: taggedUsers.length
+        });
+
+        const totalUsersTagged = mixpanel.get_property('totalUsersTagged');
+        mixpanel.register({
+            'totalUsersTagged': totalUsersTagged + taggedUsers.length
+        });
+
+        mixpanel.people.increment({
+            'totalUsersTagged': taggedUsers.length
+        });
+      }
+    });
     Tags.set('taggedUsers', []);
     $('.post__send[data-id="' + id +'"]').removeClass('active');
     $('.post__comments[data-id="' + id +'"]').addClass('active');
     send.hide();
     comment.show();
 
+
+
   },
   "click .post__rating": function(event, template){
     event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedPost = this;
-      Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
+<<<<<<< HEAD
+      Meteor.call('upvotePost', upvotedPost._id, function(err, affected) {
         if (err) {
           appBodyRef.upvotedError.set(true);
         } else {
@@ -54,6 +73,38 @@ Template.feed.events({
             setTimeout(function(){
               appBodyRef.upvotedSuccess.set(null);
             }, 2000);
+          }
+
+          if(affected){
+            let postedBy = Meteor.users.findOne(upvotedPost.createdBy);
+            mixpanel.track('Upvoted a Post', {
+              postId: upvotedPost._id,
+              createdBy: postedBy.profile.name
+            });
+
+            const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+            mixpanel.register({
+                'totalPostsUpvoted': totalPostsUpvoted + 1
+            });
+
+            mixpanel.people.increment({
+                'totalPostsUpvoted': 1
+            });
+
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+
+          } else {
+            const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+            mixpanel.register({
+                'totalPostsUpvoted': totalPostsUpvoted - 1
+            });
+
+            mixpanel.people.increment({
+                'totalPostsUpvoted': -1
+            });
           }
         }
       });
@@ -94,6 +145,22 @@ Template.feed.events({
         postId: postId,
         content: content
       });
+
+      mixpanel.track('Commened on a Post', {
+        postId: postId,
+        reply: false
+      });
+
+      mixpanel.people.set({
+        dateOfLastComment: new Date().toISOString()
+      });
+
+      const comments = Comments.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+      if(comments.length === 1){
+        mixpanel.people.increment({
+          'daysWithAComment': 1
+        });
+      }
     }
 
     $('input[name='+name+']').val('');
@@ -111,6 +178,15 @@ Template.feed.events({
           createdBy: Meteor.userId()
         }
       }});
+
+      mixpanel.track('Commened on a Post', {
+        postId: postId,
+        reply: true
+      });
+
+      mixpanel.people.set({
+        dateOfLastComment: new Date().toISOString()
+      });
     }
 
     $('input[name=post-comment]').val('');
@@ -131,6 +207,10 @@ Template.feed.events({
     } else {
       window['scplayer-' + selectedId].play();
     }
+
+    mixpanel.track('Clicked play button', {
+      area: 'Feed'
+    });
   },
   "click .post__video-pause": function(event, template){
     let selectedId = event.currentTarget.id;
@@ -142,6 +222,22 @@ Template.feed.events({
       window['scplayer-' + selectedId].pause();
     }
   },
+  "click .share-dropdown__social": function(event, template){
+    window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');
+
+    mixpanel.track('Shared Song', {
+      platform: $(event.currentTarget).text()
+    });
+
+    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    mixpanel.register({
+        'totalPostsShared': totalPostsShared + 1
+    });
+
+    mixpanel.people.increment({
+        'totalPostsShared': 1
+    });
+  },
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
@@ -149,6 +245,19 @@ Template.feed.events({
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');
+
+    mixpanel.track('Shared Song', {
+      platform: 'Copy'
+    });
+
+    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    mixpanel.register({
+        'totalPostsShared': totalPostsShared + 1
+    });
+
+    mixpanel.people.increment({
+        'totalPostsShared': 1
+    });
   },
   "mouseenter .post": function(event, template) {
     $('.sr-playlist__item').removeClass('sr-playlist__item--active');

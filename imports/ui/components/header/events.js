@@ -1,5 +1,4 @@
 Template.header.events({
-  //TODO: instead of hide, use reactive-var
   "click .header__unloged": function(event, template){
     event.stopPropagation();
     appBodyRef.signUp.set(true);

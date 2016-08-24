@@ -29,7 +29,17 @@ Template.upload.events({
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
             if (error) {
                 console.log(error);
+                mixpanel.track('Link error received', {
+                  linkErrorType: error.reason,
+                  type: 'Unknown'
+                });
+
             } else if (data) {
+              mixpanel.track('Song link entered', {
+                type: data.type,
+                vidId: data.vidId
+              });
+
               if (data === 'soundcloud') {
                 //Soundcloud can only be used on client so grab the id here
                 SC.resolve(potentialLink).then(function (track) {
@@ -64,6 +74,12 @@ Template.upload.events({
               if (duplicate) {
                   //TODO: Handle displaying other post (NEED DESIGN)
                   resetForm();
+                  
+                  mixpanel.track('Link error received', {
+                    linkErrorType: 'Already Posted',
+                    type: data.type
+                  });
+
                   uploadRef.duplicate.set(duplicate);
                   return;
               }
@@ -147,6 +163,12 @@ Template.upload.events({
                   });
               }
             } else {
+
+                mixpanel.track('Link error received', {
+                  linkErrorType: 'Format',
+                  type: 'Unknown'
+                });
+
                 //Don't allow link to be submitted
                 uploadRef.missingData.set(true);
                 $('.postLinkBtn').prop('disabled', true);
@@ -222,12 +244,63 @@ Template.upload.events({
         console.log(fakeUserId);
 
         if (type === 'youtube') {
+<<<<<<< HEAD
+          //Grab duration and insert post
+          Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
+            if (error) {
+              console.log(error);
+            } else if (data) {
+              if(!fakeUserId){
+                mixpanel.track('Posted a song', {
+                  type: post.type,
+                  hasDescription: ( post.description ? true : false ),
+                  taggedUsersCount: post.taggedUsers.length
+                });
+
+                const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                mixpanel.register({
+                    'totalSongsPosted': totalSongsPosted + 1
+                });
+
+                mixpanel.people.increment({
+                  'totalSongsPosted': 1
+                });
+
+                const posts = Posts.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+                if(posts.length === 1){
+                  mixpanel.people.increment({
+                    'daysWithAPost': 1
+                  });
+=======
             //Grab duration and insert post
             Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
                 if (error) {
                     console.log(error);
                 } else if (data) {
 
+<<<<<<< HEAD
+                  if(!fakeUserId){
+                    mixpanel.track('Posted a song', {
+                      type: post.type,
+                      hasDescription: ( post.description ? true : false ),
+                      taggedUsersCount: post.taggedUsers.length
+                    });
+
+                    const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                    mixpanel.register({
+                        'totalSongsPosted': totalSongsPosted + 1
+                    });
+
+                    mixpanel.people.increment({
+                      'totalSongsPosted': 1
+                    });
+
+                    const posts = Posts.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+                    if(posts.length === 1){
+                      mixpanel.people.increment({
+                        'daysWithAPost': 1
+                      });
+=======
                     //TODO: Handle insert error (NEED DESIGN)
                     if (data === 'Couldn\'t insert post') {
                         alert('Couldn\'t post song, try again later');
@@ -238,9 +311,51 @@ Template.upload.events({
                       console.log(data);
                         appBodyRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
+>>>>>>> staging
                     }
+                  }
+
+                  //TODO: Handle insert error (NEED DESIGN)
+                  if (data === 'Couldn\'t insert post') {
+                      alert('Couldn\'t post song, try again later');
+                      uploadRef.postError.set(true);
+                      resetForm();
+                      return;
+                  } else {
+                      //TODO: Handle posting success (NEED DESIGN)
+                      alert('Your post is in the Village!');
+                      uploadRef.postSuccess.set(data); //_id of newly inserted song
+                      resetForm();
+                  }
+>>>>>>> origin/feature/mixpanel
                 }
-            });
+
+                //TODO: Handle insert error (NEED DESIGN)
+                if (data === 'Couldn\'t insert post') {
+                    alert('Couldn\'t post song, try again later');
+                    uploadRef.postError.set(true);
+                    resetForm();
+                    return;
+                } else {
+                  appBodyRef.postSuccess.set(data); //_id of newly inserted song
+                  resetForm();
+                }
+
+                //TODO: Handle insert error (NEED DESIGN)
+                if (data === 'Couldn\'t insert post') {
+                    alert('Couldn\'t post song, try again later');
+                    uploadRef.postError.set(true);
+                    resetForm();
+                    return;
+                } else {
+                    //TODO: Handle posting success (NEED DESIGN)
+                    alert('Your post is in the Village!');
+                    uploadRef.postSuccess.set(data); //_id of newly inserted song
+                    resetForm();
+                }
+              }
+            }
+          });
         } else {
             SC.resolve(link).then(function (track) {
                 post.duration = track.duration;
@@ -258,6 +373,30 @@ Template.upload.events({
                       console.log(data);
                         appBodyRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
+
+                        if(!fakeUserId){
+                          mixpanel.track('Posted a song', {
+                            type: post.type,
+                            hasDescription: ( post.description ? true : false ),
+                            taggedUsersCount: post.taggedUsers.length
+                          });
+
+                          const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                          mixpanel.register({
+                              'totalSongsPosted': totalSongsPosted + 1
+                          });
+
+                          mixpanel.people.increment({
+                            'totalSongsPosted': 1
+                          });
+
+                          const posts = Posts.find({createdBy: Meteor.userId(), createdAt: { $gte: new Date(new Date().setDate(new Date().getDate()-1)) } }).fetch();
+                          if(posts.length === 1){
+                            mixpanel.people.increment({
+                              'daysWithAPost': 1
+                            });
+                          }
+                        }
                     }
                 });
             });

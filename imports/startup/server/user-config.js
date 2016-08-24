@@ -9,6 +9,8 @@ Accounts.onCreateUser(function (options, user) {
         if (options.profile) {  //Add facebook profile picture and tweak name
             options.profile.picture = "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
             options.profile.name = user.services.facebook.first_name + " " + user.services.facebook.last_name.charAt(0);
+            // FIX: Find another way how to know that a new user is logging in
+            options.profile.newUser = true;
             user.profile = options.profile;
         }
 
