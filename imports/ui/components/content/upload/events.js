@@ -271,7 +271,7 @@ Template.upload.events({
                     'daysWithAPost': 1
                   });
                 }
-
+                
                 //TODO: Handle insert error (NEED DESIGN)
                 if (data === 'Couldn\'t insert post') {
                     alert('Couldn\'t post song, try again later');
