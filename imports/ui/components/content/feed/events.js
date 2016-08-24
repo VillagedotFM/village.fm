@@ -63,7 +63,6 @@ Template.feed.events({
     event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedPost = this;
-<<<<<<< HEAD
       Meteor.call('upvotePost', upvotedPost._id, function(err, affected) {
         if (err) {
           appBodyRef.upvotedError.set(true);
