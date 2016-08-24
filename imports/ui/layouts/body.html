@@ -1,6 +1,26 @@
 <template name="app_body">
 
   <div class="wrapper">
+    {{#if signUp}}
+      <div class="onboarding-popup">
+          <h3>Welcome to <span class="onboarding-popup__color">The Village Beta!</span></h3>
+          <p>Here, you can discover and submit, and talk about music with fellow tastemakers.</p>
+          <p>Click the login button below to join..</p>
+          <br>
+          <p>Big fat hugs,</p>
+          <p>- Village Team</p>
+          <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with facebook</span></a>
+      </div>
+    {{/if}}
+    
+    {{#if guestAction}}
+      <div class="onboarding-popup">
+          <h3>You are not logged in!</h3>
+          <p>Only members can participate. To join Village, just click below to log in:</p>
+          <br>
+          <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with facebook</span></a>
+      </div>
+    {{/if}}
 
       {{> mobile_menu}}
 
@@ -27,5 +47,6 @@
   <script src="js/main.js"></script>
   <script src="js/sc3.js"></script>
   <script src="js/mobile.js"></script>
+  <!--<script src="js/popup.js"></script>-->
 
 </template>

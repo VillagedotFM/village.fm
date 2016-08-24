@@ -52,7 +52,11 @@
                           </div>
                           <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
                           {{#if villageSlug}}
-                            <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                            {{#unless isMainVillage villageSlug}}
+                              {{#unless isSubVillage }}
+                                <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                              {{/unless}}
+                            {{/unless}}
                           {{/if}}
                       </div>
                   </div>
@@ -182,7 +186,7 @@
                                         <img src="{{getUserImage currentUser._id}}" alt="">
                                     </div>
                                     <div class="user-comment__comment-cell">
-                                        <input type="text" name="post-comment" class="user-comment__comment" placeholder="click here to type a reply...">
+                                        <input type="text" name="post-comment" class="user-comment__comment" placeholder="Reply to this comment">
                                     </div>
                                     <div class="user-reply__submit-cell">
                                         <button class="user-comment__reply"></button>
@@ -235,7 +239,11 @@
                           <img src="{{getUserImage currentUser._id}}" alt="">
                         </div>
                         <div class="user-comment__comment-cell">
-                          <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="click here to type a comment...">
+                          {{#if comments}}
+                            <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="Add comment...">
+                          {{else}}
+                            <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="Be the first to comment on this post...">
+                          {{/if}}
                         </div>
                         <div class="user-comment__submit-cell">
                           <button class="user-comment__submit"></button>

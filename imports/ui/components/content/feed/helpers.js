@@ -104,5 +104,8 @@ Template.feed.helpers({
     }
 
     return '/post/' + id;
+  },
+  isSubVillage() {
+    return FlowRouter.getParam('villageSlug');
   }
 });

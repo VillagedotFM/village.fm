@@ -2,6 +2,9 @@ Template.upload.helpers({
     chars() {
       return Template.instance().chars.get();
     },
+    showError() {
+      return (Template.instance().notFound.get() || Template.instance().duplicate.get());
+    },
     notFound() {
         return Template.instance().notFound.get();
     },

@@ -60,10 +60,20 @@ Template.feed.events({
 
   },
   "click .post__rating": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, affected) {
-        if(!err){
+        if (err) {
+          appBodyRef.upvotedError.set(true);
+        } else {
+          if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+          }
+
           if(affected){
             let postedBy = Meteor.users.findOne(upvotedPost.createdBy);
             mixpanel.track('Upvoted a Post', {
@@ -92,20 +102,22 @@ Template.feed.events({
         }
       });
     } else {
-      alert('Please login to upvote posts!');
+      appBodyRef.guestAction.set('upvotePost');
     }
   },
   "click .posted-comment__upvote-cell": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedComment = this;
       Meteor.call('upvoteComment', upvotedComment._id, function(err, data) {
         console.log( err || "Upvoted comment");
       });
     } else {
-      alert('Please login to upvote comments!');
+      appBodyRef.guestAction.set('upvoteComment');
     }
   },
   "click .posted-comment-reply__upvote-cell": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let parentComment = $(event.currentTarget).data('parent');
       let index = $(event.currentTarget).data('value');
@@ -113,7 +125,7 @@ Template.feed.events({
         console.log( err || "Upvoted reply");
       });
     } else {
-      alert('Please login to upvote comments!');
+      appBodyRef.guestAction.set('upvoteComment');
     }
   },
   "click .user-comment__submit-cell": function(event, template){

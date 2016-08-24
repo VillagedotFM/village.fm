@@ -12,7 +12,7 @@
                 <a href="/profile/{{currentUser._id}}"><img src="{{getUserImage currentUser._id}}" class="header-profile__img"/></a>
                 <div class="profile-dropdown__name-wrap">
                     <a href="/profile/{{currentUser._id}}" class="profile-dropdown__name">{{getUserName currentUser._id}}</a>
-                    <span class="profile-dropdown__caption">
+                    <span class="profile-dropdown__caption color-main">
             Villager #
             <span class="color-main">{{getUserVillagerNum currentUser._id}}</span>
           </span>
@@ -33,6 +33,9 @@
                         <a href="{{pathFor 'admin-fakeUsers'}}" class="color-main profile-dropdown__logout">Fake users</a>
                     </p>
                 {{/if}}
+                <p class="profile-dropdown__bottom-row">
+                    <a href="mailto:yourhomies@village.fm?Subject=Village.fm%20Feedback" class="color-main profile-dropdown__logout feedbackBtn">Submit Feedback</a>
+                </p>
                 <p class="profile-dropdown__bottom-row">
                     <a class="color-main profile-dropdown__logout logOutBtn">Log Out</a>
                 </p>

@@ -15,6 +15,8 @@ import { SC } from '../../../public/js/sc3.js';
 import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 
 import './body.html';
+import './helpers.js';
+import './events.js';
 import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
 import '../components/profile/profile.js';
@@ -61,6 +63,15 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   //Set up reactive-vars
   appBodyRef = this;
+
+  appBodyRef.upvotedSuccess = new ReactiveVar(null);
+  appBodyRef.upvotedError = new ReactiveVar(null);
+
+  appBodyRef.signUp = new ReactiveVar(null);
+  appBodyRef.guestAction = new ReactiveVar(null);
+
+  appBodyRef.postSuccess = new ReactiveVar(null);
+
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
@@ -94,12 +105,26 @@ Template.app_body.onRendered(function() {
 
 
   Tracker.autorun(function(comp) {
-    if (appBodyRef.postOrder.get()[0]) {
-      appBodyRef.nowPlaying.set(appBodyRef.postOrder.get()[0]);
-      console.log(appBodyRef.postOrder.get()[0]);
-      console.log('-----------');
-      console.log(appBodyRef.postOrder.get());
+    let order = appBodyRef.postOrder.get();
+    if (order[0]) {
+      appBodyRef.nowPlaying.set(order[0]);
       comp.stop();
+    }
+  });
+
+  Tracker.autorun(function(){
+    let order = appBodyRef.postOrder.get();
+
+    if (appBodyRef.nowPlaying.get() !== null) {
+      let indexes = $.map(order, function(post, index) {
+        if(post._id === appBodyRef.nowPlaying.get()._id) {
+          return index;
+        }
+      });
+      console.log(indexes[0]);
+      if (typeof indexes[0] === 'undefined') {
+        appBodyRef.nowPlaying.set(order[0]);
+      }
     }
   });
 
@@ -133,12 +158,4 @@ Template.app_body.onRendered(function() {
     appBodyRef.mobile.set(true);
   }
 
-});
-
-Template.app_body.events({
-  //TODO: use reactive-var instead of show/hide
-  "click": function(event, template){
-     $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
-     hideMenu();
-  }
 });

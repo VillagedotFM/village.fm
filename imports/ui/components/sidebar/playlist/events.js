@@ -12,7 +12,6 @@ pauseEverythingElse = function(id) {
           window['scplayer-' + post._id].pause();
         } else if (post.type == 'youtube' && window['ytplayer-' + post._id]) {
           window['ytplayer-' + post._id].pauseVideo();
-          // window['ytplayer-' + post._id].seekTo(0);
         }
       }
     });
@@ -21,6 +20,7 @@ pauseEverythingElse = function(id) {
 
 Template.playlist.events({
     "click .upvote-block": function (event, template) {
+      event.stopPropagation();
         if (Meteor.userId()) {
             let upvotedPost = this;
             if (Roles.userIsInRole(Meteor.userId(), ["admin"])) {
@@ -38,16 +38,47 @@ Template.playlist.events({
                 }, 300);
             }
             else {
-                Meteor.call('upvotePost', upvotedPost._id, function (err, data) {
+                Meteor.call('upvotePost', upvotedPost._id, function (err, affected) {
                     if (err) {
-                        console.log(err);
+                      appBodyRef.upvotedError.set(true);
                     } else {
-                        console.log("Upvoted!" + upvotedPost._id);
+                      if(!(_.contains(upvotedPost.upvotedBy, Meteor.userId()))){
+                        appBodyRef.upvotedSuccess.set(upvotedPost);
+                        setTimeout(function(){
+                          appBodyRef.upvotedSuccess.set(null);
+                        }, 2000);
+                      }
+                      
+                      if(affected){
+                        let postedBy = Meteor.users.findOne(upvotedPost.createdBy);
+                        mixpanel.track('Upvoted a Post', {
+                          postId: upvotedPost._id,
+                          createdBy: postedBy.profile.name
+                        });
+
+                        const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+                        mixpanel.register({
+                            'totalPostsUpvoted': totalPostsUpvoted + 1
+                        });
+
+                        mixpanel.people.increment({
+                            'totalPostsUpvoted': 1
+                        });
+                      } else {
+                        const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+                        mixpanel.register({
+                            'totalPostsUpvoted': totalPostsUpvoted - 1
+                        });
+
+                        mixpanel.people.increment({
+                            'totalPostsUpvoted': -1
+                        });
+                      }
                     }
                 });
             }
         } else {
-            alert('Please login to upvote posts!');
+          appBodyRef.guestAction.set('upvotePost');
         }
     },
     "click .sr-playlist__play--play": function (event, template) {
@@ -111,5 +142,11 @@ Template.playlist.events({
     $('.us-mobile').hide();
     $('.sidebar').hide();
     $('.container').show();
+  },
+  'click .after-post--overlay': function(event, template) {
+    $('.after-post--overlay').hide();
+    $('.after-post--bg').hide();
+    $('.after-post--text').hide();
+    $('.sidebar').removeClass('zindex');
   }
 });
