@@ -127,7 +127,9 @@
 }
 .popup-upvote__wrapper{
     position: absolute;
-    width: 150%;
+    min-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
     bottom: 10px;
     padding: 0 10px;
     z-index: 9999;
