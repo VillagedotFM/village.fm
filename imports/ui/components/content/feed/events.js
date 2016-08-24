@@ -42,6 +42,7 @@ Template.feed.events({
 
   },
   "click .post__rating": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedPost = this;
       Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
@@ -57,20 +58,22 @@ Template.feed.events({
         }
       });
     } else {
-      alert('Please login to upvote posts!');
+      appBodyRef.guestAction.set('upvotePost');
     }
   },
   "click .posted-comment__upvote-cell": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let upvotedComment = this;
       Meteor.call('upvoteComment', upvotedComment._id, function(err, data) {
         console.log( err || "Upvoted comment");
       });
     } else {
-      alert('Please login to upvote comments!');
+      appBodyRef.guestAction.set('upvoteComment');
     }
   },
   "click .posted-comment-reply__upvote-cell": function(event, template){
+    event.stopPropagation();
     if(Meteor.userId()) {
       let parentComment = $(event.currentTarget).data('parent');
       let index = $(event.currentTarget).data('value');
@@ -78,7 +81,7 @@ Template.feed.events({
         console.log( err || "Upvoted reply");
       });
     } else {
-      alert('Please login to upvote comments!');
+      appBodyRef.guestAction.set('upvoteComment');
     }
   },
   "click .user-comment__submit-cell": function(event, template){

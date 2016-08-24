@@ -20,6 +20,7 @@ pauseEverythingElse = function(id) {
 
 Template.playlist.events({
     "click .upvote-block": function (event, template) {
+      event.stopPropagation();
         if (Meteor.userId()) {
             let upvotedPost = this;
             if (Roles.userIsInRole(Meteor.userId(), ["admin"])) {
@@ -51,7 +52,7 @@ Template.playlist.events({
                 });
             }
         } else {
-            alert('Please login to upvote posts!');
+          appBodyRef.guestAction.set('upvotePost');
         }
     },
     "click .sr-playlist__play--play": function (event, template) {
