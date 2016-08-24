@@ -8,6 +8,7 @@ Template.bottom_player.events({
     }
   },
   "click .upvote-block": function(event, template){
+    event.stopPropagation();
     //TODO: upvoting a post stops it...
     if(Meteor.userId()) {
       let upvotedPost = this;
@@ -24,7 +25,7 @@ Template.bottom_player.events({
         }
       });
     } else {
-      alert('Please login to upvote posts!');
+      appBodyRef.guestAction.set('upvotePost');
     }
   },
 });

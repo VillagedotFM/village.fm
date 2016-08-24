@@ -68,6 +68,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.upvotedError = new ReactiveVar(null);
 
   appBodyRef.signUp = new ReactiveVar(null);
+  appBodyRef.guestAction = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
 
@@ -157,13 +158,4 @@ Template.app_body.onRendered(function() {
     appBodyRef.mobile.set(true);
   }
 
-});
-
-Template.app_body.events({
-  //TODO: use reactive-var instead of show/hide
-  "click": function(event, template){
-     $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
-     hideMenu();
-     appBodyRef.signUp.set(null);
-  }
 });
