@@ -118,5 +118,6 @@ Template.playlist.events({
     $('.after-post--bg').hide();
     $('.after-post--text').hide();
     $('.sidebar').removeClass('zindex');
+    appBodyRef.postSuccess.set(null);
   }
 });
