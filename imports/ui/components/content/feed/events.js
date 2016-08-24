@@ -62,9 +62,11 @@ Template.feed.events({
   "click .post__rating": function(event, template){
     if(Meteor.userId()) {
       let upvotedPost = this;
-      Meteor.call('upvotePost', upvotedPost._id, function(err, affected) {
-        if(!err){
-          if(affected){
+      Meteor.call('upvotePost', upvotedPost._id, function(err, data) {
+        if (err) {
+          appBodyRef.upvotedError.set(true);
+        } else {
+          if(data){
             let postedBy = Meteor.users.findOne(upvotedPost.createdBy);
             mixpanel.track('Upvoted a Post', {
               postId: upvotedPost._id,
@@ -79,6 +81,12 @@ Template.feed.events({
             mixpanel.people.increment({
                 'totalPostsUpvoted': 1
             });
+
+            appBodyRef.upvotedSuccess.set(upvotedPost);
+            setTimeout(function(){
+              appBodyRef.upvotedSuccess.set(null);
+            }, 2000);
+
           } else {
             const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
             mixpanel.register({

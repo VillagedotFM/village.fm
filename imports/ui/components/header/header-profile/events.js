@@ -11,5 +11,8 @@ Template.header_profile.events({
         mixpanel.track('Logged out');
       }
     });
-  }
+  },
+  // "click .feedbackBtn": function(event, template) {
+  //   $('.feedback__contant').slideToggle();
+  // }
 });

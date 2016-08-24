@@ -15,7 +15,15 @@ let resetForm = () => {
 //TODO: scope jquery elements to template
 
 Template.upload.events({
+    'click .after-onboarding__overlay': function(event, template) {
+        $('.upload-section__upload').removeClass('after-onboarding');
+        $('.after-onboarding__overlay').hide();
+    },
     'keyup input[name=post-link]'(event, instance) {
+      $('.upload-section__upload').removeClass('after-onboarding');
+      $('.after-onboarding__overlay').hide();
+      uploadRef.duplicate.set(false);
+      uploadRef.notFound.set(false);
         let potentialLink = $("input[name=post-link]").val();
 
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
@@ -65,14 +73,13 @@ Template.upload.events({
               });
               if (duplicate) {
                   //TODO: Handle displaying other post (NEED DESIGN)
-                  alert('Someone already posted that song');
-                  uploadRef.duplicate.set(duplicate);
                   resetForm();
                   mixpanel.track('Link error received', {
                     linkErrorType: 'Already Posted',
                     type: data.type
                   });
 
+                  uploadRef.duplicate.set(duplicate);
                   return;
               }
 
@@ -90,7 +97,7 @@ Template.upload.events({
 
                           //TODO: Handle reporting link not working (NEED DESIGN)
                           if (data === 'Song not found') {
-                              alert('Couldn\'t find that song, try another link');
+                            console.log('not found');
                               uploadRef.notFound.set(true);
                               resetForm();
                               return;
@@ -242,6 +249,7 @@ Template.upload.events({
                     console.log(error);
                 } else if (data) {
 
+<<<<<<< HEAD
                   if(!fakeUserId){
                     mixpanel.track('Posted a song', {
                       type: post.type,
@@ -263,6 +271,18 @@ Template.upload.events({
                       mixpanel.people.increment({
                         'daysWithAPost': 1
                       });
+=======
+                    //TODO: Handle insert error (NEED DESIGN)
+                    if (data === 'Couldn\'t insert post') {
+                        alert('Couldn\'t post song, try again later');
+                        uploadRef.postError.set(true);
+                        resetForm();
+                        return;
+                    } else {
+                      console.log(data);
+                        appBodyRef.postSuccess.set(data); //_id of newly inserted song
+                        resetForm();
+>>>>>>> staging
                     }
                   }
 
@@ -294,9 +314,8 @@ Template.upload.events({
                     if (error) {
                         console.log(error);
                     } else if (data) {
-                        //TODO: Handle posting success (NEED DESIGN)
-                        alert('Your post is in the Village!');
-                        uploadRef.postSuccess.set(data); //_id of newly inserted song
+                      console.log(data);
+                        appBodyRef.postSuccess.set(data); //_id of newly inserted song
                         resetForm();
 
                         if(!fakeUserId){

@@ -13,7 +13,7 @@ Template.upload.onCreated(function uploadOnCreated() {
     //TODO: use these once we have designs
     uploadRef.notFound = new ReactiveVar(false);
     uploadRef.duplicate = new ReactiveVar(null);
-    uploadRef.postSuccess = new ReactiveVar(null);
+    
     uploadRef.postError = new ReactiveVar(false);
 
     uploadRef.missingData = new ReactiveVar(false);

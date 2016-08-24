@@ -7,6 +7,10 @@ UI.registerHelper("videoReady", function (index) {
     return (_.contains(appBodyRef.videosReady.list(), index));
 });
 
+UI.registerHelper("isMainVillage", function (slug) {
+    return (slug === '/');
+});
+
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
     if (user)

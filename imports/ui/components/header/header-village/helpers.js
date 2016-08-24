@@ -1,7 +1,7 @@
 Template.header_village.helpers({
 	village() {
 		const villageSlug = FlowRouter.getParam('villageSlug');
-		if (villageSlug)
+		if (villageSlug !== '/')
 			return Villages.findOne({slug: villageSlug});
 	},
 	villageLogoUrl(slug) {

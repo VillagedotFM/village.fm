@@ -1,4 +1,11 @@
 <template name='playlist'>
+  <div class="after-post--overlay"></div>
+  <div class="after-post--bg">
+
+  </div>
+  <div class="after-post--text">
+          <p>&nbsp;Thanks for adding to the playlist!</p>
+      </div>
     <div class="sr-playlist sr-playlist{{profilePadding}}">
         <ul class="sr-playlist__list bg-color-playlist">
             {{#each posts}}
@@ -33,7 +40,11 @@
                             <span class="sr-playlist__author">{{getUserName createdBy}}</span>
                         </span>
                         {{#if villageName}}
-                          <span class="sr-playlist__posted-in">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                            {{#unless isMainVillage villageSlug}}
+                                {{#unless isSubVillage }}
+                                    <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                                {{/unless}}   
+                            {{/unless}}
                         {{/if}}
                     </div>
                 </li>

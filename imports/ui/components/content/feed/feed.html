@@ -52,7 +52,11 @@
                           </div>
                           <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
                           {{#if villageSlug}}
-                            <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                            {{#unless isMainVillage villageSlug}}
+                              {{#unless isSubVillage }}
+                                <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                              {{/unless}}
+                            {{/unless}}
                           {{/if}}
                       </div>
                   </div>
