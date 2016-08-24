@@ -270,7 +270,8 @@ Template.upload.events({
                   mixpanel.people.increment({
                     'daysWithAPost': 1
                   });
-
+                }
+                
                 //TODO: Handle insert error (NEED DESIGN)
                 if (data === 'Couldn\'t insert post') {
                     alert('Couldn\'t post song, try again later');
