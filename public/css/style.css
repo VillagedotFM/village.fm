@@ -118,7 +118,7 @@ input, textarea {
 .container {
     width: 100%;
     padding-left: 390px;
-    padding-top: 60px;
+    padding-top: 80px;
 }
 .container--no-padding {
     width: 100%;
@@ -222,7 +222,7 @@ input, textarea {
 
 /*****  Header  *****/
 .header {
-    padding: 10px 0;
+    height: 80px;
     position: fixed;
     top: 0;
     left: 0;
@@ -236,11 +236,9 @@ input, textarea {
     transition: transform 0.3s;
 }
 .header__inner {
-    width: 1020px;
     position: relative;
-    margin: 0 auto;
-    padding: 0 20px;
-    padding-left: 0;
+    margin: 0 30px;
+    padding: 0;
 }
 .header__hum {
     width: 24px;
@@ -254,12 +252,12 @@ input, textarea {
     background-position: -150px -550px;
 }
 .header__logo {
-    height: 40px;
-    display: inline-block;
-    float: left;
+  margin-top: 23px;
+  height: 35px;
 }
 .header__logo img {
-  height: 100%;
+  margin-top: 23px;
+  height: 35px;
 }
 .header__logo:hover {
     content:url(../images/img_menu_logo_hover@3x.png);
@@ -280,13 +278,12 @@ input, textarea {
     pointer-events: none;
 }
 .header__center-block img {
-    height: 50px;
+    height: 80px;
     display: block;
     margin: 0 auto;
 }
 .header__right-block {
     float: right;
-    margin-top: 5px;
 }
 .header__notifications {
     width: 22px;
@@ -297,6 +294,7 @@ input, textarea {
     background: url(../images/icons-sprite.png) 0 -50px no-repeat;
     cursor: pointer;
     margin-right: 30px;
+    margin-top: 29px;
     position: relative;
 }
 .ntf-dropdown {
@@ -305,7 +303,7 @@ input, textarea {
     left: -130px;
     background: #ffffff;
     font-size: 12px;
-    width: 315px;
+    width: 295px;
     border-radius: 4px;
     -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -455,6 +453,7 @@ input, textarea {
 }
 .header-profile {
     position: relative;
+    margin-top: 25px;
 }
 .header-profile__img {
     width: 30px;
@@ -620,7 +619,7 @@ input, textarea {
     position: fixed;
     top: 0;
     height: 100%;
-    padding-top: 60px;
+    padding-top: 80px;
     padding-bottom: 54px;
     z-index: 9999;
     width: 375px;
@@ -2216,7 +2215,7 @@ input[type="range"] {
     height: 4px;
     background: #59d6d2;
     /*border: 1px solid #c4c4c4;*/
-
+    max-width: 100%;
     -webkit-transition: width .1s ease-in-out;
     -moz-transition: width .1s ease-in-out;
     -o-transition: width .1s ease-in-out;

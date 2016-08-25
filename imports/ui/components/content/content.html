@@ -3,7 +3,9 @@
     {{> Template.dynamic template=upload}}
   {{/if}}
   <div class="content">
-      {{> Template.dynamic template=invite}}
+      {{#unless ifVillageSlug}}
+        {{> Template.dynamic template=invite}}
+      {{/unless}}
       {{> feed}}
   </div>
 </template>
