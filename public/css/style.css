@@ -2216,7 +2216,7 @@ input[type="range"] {
     height: 4px;
     background: #59d6d2;
     /*border: 1px solid #c4c4c4;*/
-
+    max-width: 100%;
     -webkit-transition: width .1s ease-in-out;
     -moz-transition: width .1s ease-in-out;
     -o-transition: width .1s ease-in-out;
