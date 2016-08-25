@@ -13,6 +13,10 @@ Template.controls.events({
     } else {
       window['scplayer-' + currentPost._id].play();
     }
+
+    mixpanel.track('Clicked play button', {
+      area: 'Controls'
+    });
   },
   "click .sr-controls__play--paused": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
@@ -74,6 +78,8 @@ Template.controls.events({
         }
       }
     }
+
+    mixpanel.track('Clicked Previous Track');
   },
   "click .sr-controls__next": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
@@ -114,5 +120,7 @@ Template.controls.events({
         }
       }
     }
+
+    mixpanel.track('Clicked Next Track');
   }
 });
