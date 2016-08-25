@@ -48,7 +48,7 @@
         display: inline-block;
         background: url(../images/other-icons-sprite.png) 0 -150px no-repeat;
     }
-    
+
     .sidebar {
         position: relative;
         width: 100%;
@@ -131,7 +131,7 @@
     .ntf-dropdown {
         position: fixed;
         top: 0;
-        left: 0;
+        left: -50px;
         right: 0;
         bottom: 0;
         width: 100%;
