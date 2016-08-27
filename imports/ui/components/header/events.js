@@ -2,6 +2,8 @@ Template.header.events({
   "click .header__unloged": function(event, template){
     event.stopPropagation();
     appBodyRef.signUp.set(true);
+    
+    mixpanel.track('Clicked Sign In Button');
   },
   "click .header__logo, click header__logo-mobile"(event, instance) {
     $('.uploaded-item').hide();
