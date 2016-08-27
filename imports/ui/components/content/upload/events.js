@@ -19,12 +19,13 @@ Template.upload.events({
         $('.upload-section__upload').removeClass('after-onboarding');
         $('.after-onboarding__overlay').hide();
     },
-    'keyup input[name=post-link]'(event, instance) {
+    'input input[name=post-link]'(event, instance) {
+      console.log('Firing keyup');
       $('.upload-section__upload').removeClass('after-onboarding');
       $('.after-onboarding__overlay').hide();
       uploadRef.duplicate.set(false);
       uploadRef.notFound.set(false);
-        let potentialLink = $("input[name=post-link]").val();
+      let potentialLink = $("input[name=post-link]").val();
 
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
             if (error) {
