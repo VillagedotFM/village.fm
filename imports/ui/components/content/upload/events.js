@@ -20,7 +20,6 @@ Template.upload.events({
         $('.after-onboarding__overlay').hide();
     },
     'input input[name=post-link]'(event, instance) {
-      console.log('Firing keyup');
       $('.upload-section__upload').removeClass('after-onboarding');
       $('.after-onboarding__overlay').hide();
       uploadRef.duplicate.set(false);
@@ -242,13 +241,11 @@ Template.upload.events({
         if (fakeUserId === "") {
             fakeUserId = null;
         }
-        console.log(fakeUserId);
 
         if (type === 'youtube') {
           //Grab duration and insert post
           Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
             if (error) {
-              console.log(error);
             } else if (data) {
               if(!fakeUserId){
                 mixpanel.track('Posted a song', {
