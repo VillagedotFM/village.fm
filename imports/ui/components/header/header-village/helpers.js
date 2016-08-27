@@ -6,6 +6,6 @@ Template.header_village.helpers({
 	},
 	villageLogoUrl(slug) {
 		// TODO: use template string
-		return '/images/img-topbar-' + slug + '.png';
+		return 'images/img-topbar-' + slug + '@3x.png';
 	}
 });

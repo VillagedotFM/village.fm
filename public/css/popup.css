@@ -463,6 +463,7 @@
     color: #2e2f2f;
     padding-right: 15px;
     cursor: pointer;
+    margin-top: 25px;
 }
 .header__unloged.active{
     display: inline-block;

@@ -1,12 +1,10 @@
 Template.feed.rendered = () => {
 
-    const totalVillagesVisited = mixpanel.get_property('totalPostsInViewport');
-    
 	$('.wrapper').scroll(function() {
         if(isElementInViewport($('.post'))){
         	mixpanel.track('Scrolled Past Post');
 
-        	
+        	const totalPostsInViewport = mixpanel.get_property('totalPostsInViewport');
 	        mixpanel.register({
 	            'totalPostsInViewport': totalPostsInViewport + 1
 	        });

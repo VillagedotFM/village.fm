@@ -35,10 +35,11 @@ Template.app_body.events({
           '$name': Meteor.user().services.facebook.name,
           'gender': Meteor.user().services.facebook.gender
         });
-        
+
         console.log("Logged In!");
         appBodyRef.signUp.set(null);
         appBodyRef.guestAction.set(null);
+        $('.wrapper').scrollTop(0);
 
         var user = Meteor.user();
         // FIX: Find another way how to know that a new user is logging in
@@ -56,7 +57,7 @@ Template.app_body.events({
             // TODO: FB friends properties
           });
         }
-       
+
         mixpanel.people.set({
           '$email': Meteor.user().services.facebook.email,
           '$first_name': Meteor.user().services.facebook.first_name,
@@ -64,7 +65,7 @@ Template.app_body.events({
           '$name': Meteor.user().services.facebook.name,
           'gender': Meteor.user().services.facebook.gender
         });
-        
+
         setTimeout(function () {
           $('.upload-section__upload').addClass('after-onboarding');
           $('.after-onboarding__overlay').show();

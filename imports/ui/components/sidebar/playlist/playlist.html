@@ -37,13 +37,13 @@
                             <br>
                         <span class="sr-playlist__posted-by">
                         posted by
-                            <span class="sr-playlist__author">{{getUserName createdBy}}</span>
+                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{getUserName createdBy}}</span></a>
                         </span>
                         {{#if villageName}}
                             {{#unless isMainVillage villageSlug}}
                                 {{#unless isSubVillage }}
                                     <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
-                                {{/unless}}   
+                                {{/unless}}
                             {{/unless}}
                         {{/if}}
                     </div>

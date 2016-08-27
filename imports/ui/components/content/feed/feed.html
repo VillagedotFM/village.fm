@@ -38,8 +38,8 @@
                       <h1 class="post__title">{{artist}} - {{title}}</h1>
                       <div class="post__posted-by">
                           <div class="post__author color-main user-dropdown-handle">
-                              <span>{{getUserName createdBy}}</span>
-                              <div class="user-dropdown">
+                              <a href="/profile/{{createdBy}}"><span>{{getUserName createdBy}}</span></a>
+                              <!-- <div class="user-dropdown">
                                   <div class="user-dropdown__inner">
                                     <a href="/profile/{{createdBy}}">
                                         <img src="{{getUserImage createdBy}}" class="more-users-dropdown__img">
@@ -48,7 +48,7 @@
                                       </div>
                                     </a>
                                   </div>
-                              </div>
+                              </div> -->
                           </div>
                           <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
                           {{#if villageSlug}}
@@ -102,7 +102,7 @@
                                     <ul class="more-users-dropdown__inner">
                                       {{#each upvotedBy}}
                                           <li class="more-users-dropdown__user">
-                                              <a href="/{{this}}">
+                                              <a href="/profile/{{this}}">
                                                   <img src="{{getUserImage this}}" class="more-users-dropdown__img">
                                                 <div class="more-users-dropdown__name-wrap">
                                                   <span class="more-users-dropdown__name">{{getUserName this}}</span>
@@ -143,11 +143,11 @@
                               </div>
                               <div class="posted-comment__comment-cell clearfix">
                                   <div class="posted-comment__img-wrap">
-                                      <a href=""><img src="{{getUserImage createdBy}}" alt=""></a>
+                                      <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
                                   </div>
                                   <div class="posted-comment__text-wrap">
                                       <span class="posted-comment__author-wrap">
-                                          <a href="#" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
+                                          <a href="/profile/{{createdBy}}" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
                                       </span>
                                       <span class="posted-comment__comment">
                                           {{content}}
@@ -187,11 +187,11 @@
                                     </div>
                                     <div class="posted-comment__comment-cell clearfix">
                                         <div class="posted-comment__img-wrap">
-                                            <a href="#"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                            <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
                                         </div>
                                         <div class="posted-comment__text-wrap">
                                             <span class="posted-comment__author-wrap">
-                                                <a href="#" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
+                                                <a href="/profile/{{createdBy}}" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
                                             </span>
                                             <span class="posted-comment__comment">
                                                 {{content}}
