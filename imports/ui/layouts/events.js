@@ -35,11 +35,13 @@ Template.app_body.events({
           '$name': Meteor.user().services.facebook.name,
           'gender': Meteor.user().services.facebook.gender
         });
-        
+
         console.log("Logged In!");
         appBodyRef.signUp.set(null);
         appBodyRef.guestAction.set(null);
-        
+
+        $('.wrapper').scrollTop(0);
+
         setTimeout(function () {
           $('.upload-section__upload').addClass('after-onboarding');
           $('.after-onboarding__overlay').show();

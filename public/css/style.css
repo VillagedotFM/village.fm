@@ -125,7 +125,7 @@ input, textarea {
     padding-top: 60px;
 }
 .container--profile-page {
-    padding-top: 0;
+    padding-top: 20px;
 }
 .align-right {
     text-align: right;
@@ -259,12 +259,12 @@ input, textarea {
   margin-top: 23px;
   height: 35px;
 }
-.header__logo:hover {
+/*.header__logo:hover {
     content:url(../images/img_menu_logo_hover@3x.png);
 }
 .header__logo:active {
     content:url(../images/img_menu_logo_pressed@3x.png);
-}
+}*/
 .header__left-block {
      float: left;
      margin-top: 10px;
@@ -2233,7 +2233,7 @@ input[type="range"] {
 
 /*****  profile  *****/
 .profile {
-    margin-top: 60px;
+    margin-top: 80px;
     height: 130px;
     background: #ffffff;
     -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.3);

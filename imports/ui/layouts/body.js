@@ -102,6 +102,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
 Template.app_body.onRendered(function() {
   $('.sr-playlist').perfectScrollbar();
+  $('.wrapper').scrollTop(0);
+  $('.sr-playlist').scrollTop(0);
 
 
   Tracker.autorun(function(comp) {

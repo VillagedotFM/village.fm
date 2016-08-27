@@ -37,7 +37,7 @@
                             <br>
                         <span class="sr-playlist__posted-by">
                         posted by
-                            <span class="sr-playlist__author">{{getUserName createdBy}}</span>
+                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{getUserName createdBy}}</span></a>
                         </span>
                         {{#if villageName}}
                             {{#unless isMainVillage villageSlug}}

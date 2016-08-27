@@ -6,7 +6,7 @@
   </span>
       <div class="villagers__wrapper">
         {{#each firstUsers}}
-          <a href="/{{this}}" class="villagers__img">
+          <a href="/profile/{{this}}" class="villagers__img">
               <img src="{{getUserImage this}}" style="width: 30px; height: 30px; border-radius: 50%;">
           </a>
         {{/each}}
@@ -18,7 +18,7 @@
                             <ul class="more-users-dropdown__inner">
                               {{#each dottedUsers}}
                                   <li class="more-users-dropdown__user">
-                                      <a href="/{{this}}">
+                                      <a href="/profile/{{this}}">
                                           <img src="{{getUserImage this}}" class="more-users-dropdown__img">
                                         <div class="more-users-dropdown__name-wrap">
                                           <span class="more-users-dropdown__name">{{getUserName this}}</span>
