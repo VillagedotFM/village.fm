@@ -1,11 +1,13 @@
 Template.notifications.events({
-  'mouseenter .header__notifications': function() {
+  'mouseenter .header__notifications': function(event) {
     if(!appBodyRef.mobile.get()){
+      event.stopPropagation();
       mixpanel.track('Viewed Notifications');
     }
   },
-  'click .header__notifications': function(){
+  'click .header__notifications': function(event){
     if (appBodyRef.mobile.get()) {
+      event.stopPropagation();
       $('.ntf-dropdown').show();
       $('html, body').addClass('overflow-hidden');
       mixpanel.track('Viewed Notifications');
