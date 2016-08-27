@@ -178,8 +178,10 @@ Template.feed.events({
         }
       }});
 
+      const comment = Comments.findOne({ _id: commentId });
       mixpanel.track('Commened on a Post', {
-        postId: postId,
+        postId: comment.postId,
+        commentId: commentId,
         reply: true
       });
 
