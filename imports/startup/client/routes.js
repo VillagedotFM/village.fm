@@ -14,7 +14,9 @@ FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
-        
+        $('.sr-playlist').scrollTop(0);
+        $('.wrapper').scrollTop(0);
+
         mixpanel.track('Page Visit', {
             type: 'Village',
             name: 'Main Village'
@@ -39,6 +41,8 @@ FlowRouter.route('/:villageSlug', {
     name: 'Village',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+        $('.sr-playlist').scrollTop(0);
+        $('.wrapper').scrollTop(0);
 
         const village = Villages.findOne({slug: params.villageSlug});
         if(village){
@@ -67,6 +71,8 @@ FlowRouter.route('/post/:postId', {  //Permalink
     name: 'Post',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+        $('.sr-playlist').scrollTop(0);
+        $('.wrapper').scrollTop(0);
 
         const post = Posts.findOne({_id: params.postId});
         if(post){
@@ -91,6 +97,8 @@ FlowRouter.route('/:villageSlug/post/:postId', {
     name: 'Post',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+        $('.sr-playlist').scrollTop(0);
+        $('.wrapper').scrollTop(0);
 
         const post = Posts.findOne({_id: params.postId});
         if(post){
@@ -122,6 +130,8 @@ FlowRouter.route('/profile/:_id', {
     name: 'Profile',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {profile: 'profile', tabs: 'profile_tabs'});
+        $('.sr-playlist').scrollTop(0);
+        $('.wrapper').scrollTop(0);
 
         const user = Meteor.users.findOne({_id: params._id});
 
@@ -131,7 +141,7 @@ FlowRouter.route('/profile/:_id', {
                 name: user.profile.name
             });
         }
-        
+
     }
 });
 
