@@ -271,17 +271,16 @@ Template.upload.events({
                     'daysWithAPost': 1
                   });
                 }
-                
+
                 //TODO: Handle insert error (NEED DESIGN)
                 if (data === 'Couldn\'t insert post') {
                     alert('Couldn\'t post song, try again later');
-                    uploadRef.postError.set(true);
+                    appBodyRef.postError.set(true);
                     resetForm();
                     return;
                 } else {
                     //TODO: Handle posting success (NEED DESIGN)
-                    alert('Your post is in the Village!');
-                    uploadRef.postSuccess.set(data); //_id of newly inserted song
+                    appBodyRef.postSuccess.set(data); //_id of newly inserted song
                     resetForm();
                 }
               }
