@@ -39,32 +39,8 @@ Template.app_body.events({
         console.log("Logged In!");
         appBodyRef.signUp.set(null);
         appBodyRef.guestAction.set(null);
+
         $('.wrapper').scrollTop(0);
-
-        var user = Meteor.user();
-        // FIX: Find another way how to know that a new user is logging in
-        if(user.profile.newUser){
-          mixpanel.alias(Meteor.userId());
-          mixpanel.track('Signed Up', {
-            service: 'facebook'
-            // TODO: FB friends properties
-          });
-          Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.newUser": false}});
-        } else {
-          mixpanel.identify(Meteor.userId());
-          mixpanel.track('Signed In', {
-            service: 'facebook'
-            // TODO: FB friends properties
-          });
-        }
-
-        mixpanel.people.set({
-          '$email': Meteor.user().services.facebook.email,
-          '$first_name': Meteor.user().services.facebook.first_name,
-          '$last_name': Meteor.user().services.facebook.last_name,
-          '$name': Meteor.user().services.facebook.name,
-          'gender': Meteor.user().services.facebook.gender
-        });
 
         setTimeout(function () {
           $('.upload-section__upload').addClass('after-onboarding');

@@ -1,18 +1,27 @@
 Template.feed.rendered = () => {
 
-	$('.wrapper').scroll(function() {
-        if(isElementInViewport($('.post'))){
-        	mixpanel.track('Scrolled Past Post');
+	$('.wrapper').scroll(function(e) {
+        $('.post').each(function(){
+            if(isElementInViewport($(this))){
+                const user = Meteor.user();
+                if(user && !user.profile.postsViewed){
+                    user.profile.postsViewed = [];
+                }
 
-        	const totalPostsInViewport = mixpanel.get_property('totalPostsInViewport');
-	        mixpanel.register({
-	            'totalPostsInViewport': totalPostsInViewport + 1
-	        });
+                if(user && user.profile.postsViewed.indexOf($(this).attr('id')) < 0){
+                    Meteor.users.update({_id: Meteor.userId()}, { $addToSet: { 'profile.postsViewed': $(this).attr('id') }});
 
-	        mixpanel.people.increment({
-	            'totalPostsInViewport': 1
-	        });
-        }
+                    mixpanel.track('Unique Post Viewed');
+                    mixpanel.register({
+                        'totalUniquePostViewed': user.profile.postsViewed.length + 1
+                    });
+
+                    mixpanel.people.set({
+                        'totalUniquePostViewed': user.profile.postsViewed.length + 1
+                    });
+                }
+            }
+        });
     });
 };
 

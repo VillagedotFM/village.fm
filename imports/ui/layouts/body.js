@@ -123,7 +123,6 @@ Template.app_body.onRendered(function() {
           return index;
         }
       });
-      console.log(indexes[0]);
       if (typeof indexes[0] === 'undefined') {
         appBodyRef.nowPlaying.set(order[0]);
       }
