@@ -33,7 +33,9 @@ Template.app_body.events({
           '$first_name': Meteor.user().services.facebook.first_name,
           '$last_name': Meteor.user().services.facebook.last_name,
           '$name': Meteor.user().services.facebook.name,
-          'gender': Meteor.user().services.facebook.gender
+          'gender': Meteor.user().services.facebook.gender,
+          'anonymous': false
+
         });
 
         console.log("Logged In!");
