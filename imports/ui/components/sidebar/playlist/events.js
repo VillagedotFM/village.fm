@@ -90,6 +90,20 @@ Template.playlist.events({
             window['scplayer-' + selectedId].play();
         }
 
+        appBodyRef.isPlaying.set(true);
+        let checkIfListened = setInterval(function(){
+          const isPlaying = appBodyRef.isPlaying.get();
+          const completed = appBodyRef.completed.get();
+          const post = appBodyRef.nowPlaying.get();
+          if(post && isPlaying == parseInt(completed) > 4){
+            mixpanel.track('Listened to a Song', {
+              area: 'Playlist',
+              postId: post._id
+            });
+            clearInterval(checkIfListened);
+          }
+        }, 1000);
+
         mixpanel.track('Clicked play button', {
           area: 'Playlist'
         });
@@ -103,6 +117,7 @@ Template.playlist.events({
         } else {
             window['scplayer-' + selectedId].pause();
         }
+        appBodyRef.isPlaying.set(false);
     },
     "click .sr-playlist__remove": function (event, template) {
         let postId = this._id;

@@ -2,8 +2,6 @@ mixpanel.init(Meteor.settings.public.analyticsSettings.Mixpanel.key, {'loaded':f
     var distinct_id = mixpanel.get_distinct_id();
 }});
 
-console.log(Meteor.userId());
-
 if(!Meteor.userId()){
 	var anonymousUserId = localStorage.getItem('anonymousUserId');
 	if (!anonymousUserId){

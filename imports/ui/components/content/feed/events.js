@@ -209,6 +209,20 @@ Template.feed.events({
       window['scplayer-' + selectedId].play();
     }
 
+    appBodyRef.isPlaying.set(true);
+    let checkIfListened = setInterval(function(){
+      const isPlaying = appBodyRef.isPlaying.get();
+      const completed = appBodyRef.completed.get();
+      const post = appBodyRef.nowPlaying.get();
+      if(post && isPlaying == parseInt(completed) > 4){
+        mixpanel.track('Listened to a Song', {
+          area: 'Playlist',
+          postId: post._id
+        });
+        clearInterval(checkIfListened);
+      }
+    }, 1000);
+
     mixpanel.track('Clicked play button', {
       area: 'Feed'
     });
@@ -222,6 +236,7 @@ Template.feed.events({
     } else {
       window['scplayer-' + selectedId].pause();
     }
+    appBodyRef.isPlaying.set(false);
   },
   "click .share-dropdown__social": function(event, template){
     window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');
