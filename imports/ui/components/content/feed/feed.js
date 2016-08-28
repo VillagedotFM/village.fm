@@ -38,6 +38,51 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
         }
       });
 
+      appBodyRef.isPlaying.set(true);
+      let checkIfListened = setInterval(function(){
+        const isPlaying = appBodyRef.isPlaying.get();
+        const completed = appBodyRef.completed.get();
+        const post = appBodyRef.nowPlaying.get();
+        if(post && isPlaying == parseInt(completed) > 4){
+          mixpanel.track('Listened to a Song', {
+            area: 'Playlist',
+            postId: post._id
+          });
+          mixpanel.people.set({
+              'dateOfLastListen': new Date().toISOString()
+          });
+          clearInterval(checkIfListened);
+        }
+      }, 1000);
+
+      setInterval(function(){
+        const isPlaying = appBodyRef.isPlaying.get();
+        if(isPlaying){
+          let completed = appBodyRef.completed.get();
+          if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
+            const totalMinutesListened = mixpanel.get_property('totalMinutesListened');
+            mixpanel.register({
+                'totalMinutesListened': totalMinutesListened + 1
+            });
+
+            mixpanel.people.increment({
+                'totalMinutesListened': 1
+            });
+          }
+        }
+      }, 1000);
+
+
+      /*
+       mixpanel.register({
+          'totalMinutesListened': appBodyRef.totalMinutesListened
+      });
+
+      mixpanel.people.increment({
+          'totalMinutesListened': 1
+      });
+      */
+
       pauseEverythingElse(post._id);
       // appBodyRef.prevPost.set(allPosts[index - 1]);
       // appBodyRef.nextPost.set(allPosts[index + 1]);
@@ -147,6 +192,41 @@ createYTPlayer = function(post) {
           console.log("Listened!" + post._id);
         }
       });
+
+      appBodyRef.isPlaying.set(true);
+      let checkIfListened = setInterval(function(){
+        const isPlaying = appBodyRef.isPlaying.get();
+        const completed = appBodyRef.completed.get();
+        const post = appBodyRef.nowPlaying.get();
+        if(post && isPlaying == parseInt(completed) > 4){
+          mixpanel.track('Listened to a Song', {
+            area: 'Playlist',
+            postId: post._id
+          });
+          mixpanel.people.set({
+              'dateOfLastListen': new Date().toISOString()
+          });
+          clearInterval(checkIfListened);
+        }
+      }, 1000);
+
+      setInterval(function(){
+        const isPlaying = appBodyRef.isPlaying.get();
+        if(isPlaying){
+          let completed = appBodyRef.completed.get();
+          if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
+            const totalMinutesListened = mixpanel.get_property('totalMinutesListened');
+            mixpanel.register({
+                'totalMinutesListened': totalMinutesListened + 1
+            });
+
+            mixpanel.people.increment({
+                'totalMinutesListened': 1
+            });
+          }
+        }
+      }, 1000);
+
       // debugger;
       pauseEverythingElse(post._id);
       // appBodyRef.prevPost.set(allPosts[index - 1]);
