@@ -94,7 +94,7 @@ SyncedCron.add({
   timezone: 'Asia/Taipei',
   schedule: function(parser) {
     // Run once a day 
-    return parser.text('every 24 seconds');
+    return parser.text('every 24 hours');
   },
   job: function() {
     // Get most upvoted last day Post from each user that posted
