@@ -72,7 +72,7 @@ SyncedCron.add({
 				var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
 				var mailOptions = {
-				  from:     "Village.fm <hello@village.fm>",
+				  from:     "Village.fm <yourfriends@village.fm>",
 				  to:       user.services.facebook.email,
 				  text:     "Hello world",
 				  html:     "<b>Hello world</b>",
@@ -94,7 +94,7 @@ SyncedCron.add({
   timezone: 'Asia/Taipei',
   schedule: function(parser) {
     // Run once a day 
-    return parser.text('every 24 hours');
+    return parser.text('every 24 seconds');
   },
   job: function() {
     // Get most upvoted last day Post from each user that posted
@@ -207,6 +207,7 @@ SyncedCron.add({
 		          "-username-": [username ? username.profile.name : null],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
 		        break;
 		      case 4:
@@ -234,6 +235,7 @@ SyncedCron.add({
 		          "-comments_count-": [commentsCount[0].count],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
 		        break;
 		      case 3:
@@ -245,6 +247,7 @@ SyncedCron.add({
 		          "-upvotes_count-": [email.meta.count],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
 		        break;
 		      case 2:
@@ -278,7 +281,7 @@ SyncedCron.add({
 				var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
 				var mailOptions = {
-				  from:     "Village.fm <hello@village.fm>",
+				  from:     "Village.fm <yourfriends@village.fm>",
 				  to:       userDetails.email,
 				  text:     "Hello world",
 				  html:     "<b>Hello world</b>",
