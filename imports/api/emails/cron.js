@@ -1,6 +1,7 @@
 import { Posts } from '../posts/posts.js';
 import { Emails } from '../emails/emails.js';
 import { Comments } from '../comments/comments.js';
+import  moment  from 'moment';
 
 var nodemailer = require('nodemailer');
 var smtpapi    = require('smtpapi');
@@ -86,6 +87,43 @@ SyncedCron.add({
 				});
 	    }
     });
+  }
+});
+
+SyncedCron.add({
+  name: 'mostUpvotedPostDay',
+  timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+    // Run once a day 
+    return parser.text('every 24 hours');
+  },
+  job: function() {
+    // Define Last 24 hours
+    const lastDay = new Date(Date.now() - 1000 * 3600 * 24);
+
+    // Aggregate most upvoted last day post
+    var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastDay );
+
+		console.log(mostUpvotedPost);
+  }
+});
+
+SyncedCron.add({
+  name: 'mostUpvotedPostWeek',
+	timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+		// run once a week 4:00 pm CEST
+    return parser.text('at 00:00 pm on Thursday');
+  },
+  job: function() {
+    // Define Last 7 days
+		var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate() - 7);
+
+    // Aggregate most upvoted last week post
+    var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastWeek );
+
+		console.log(mostUpvotedPost);
   }
 });
 
@@ -299,3 +337,23 @@ SyncedCron.add({
 });
 
 SyncedCron.start();
+
+function getMostUpvotedPostInTimeRange (timeRange) {
+	mostUpvotedPost = Posts.aggregate([
+		{
+			"$match": {
+				"createdAt": {
+					"$gte": timeRange
+				}
+			}
+		}, {
+			"$sort": {
+				"upvotes": -1
+			}
+		}, {
+			"$limit": 1
+		}
+	]);
+
+	return mostUpvotedPost[0];
+}
