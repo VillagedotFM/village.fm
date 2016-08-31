@@ -90,6 +90,133 @@ SyncedCron.add({
   }
 });
 
+// Most upvoted users per time period
+//
+// Most upvoted user per day
+
+SyncedCron.add({
+  name: 'mostUpvotedUserDay',
+  timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+    // Run once a day 
+    return parser.text('every 24 hours');
+  },
+  job: function() {
+    // Define Last 24 hours
+    const lastDay = new Date(Date.now() - 1000 * 3600 * 24);
+
+    // Aggregate most upvoted last day user
+    var mostUpvotedUser = getMostUpvotedUserInTimeRange (lastDay);
+
+		var user = Meteor.users.findOne(mostUpvotedUser._id);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "ca4fdc68-8239-4957-846d-b612c4cb62de"
+					}
+				}
+			});
+
+			var sub = {
+					"-firstname-": [user.services.facebook.first_name],
+					"-timerange-": ['day'],
+				};
+
+			header.setSubstitutions(sub);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
+// Most upvoted user per week
+
+SyncedCron.add({
+  name: 'mostUpvotedUserWeek',
+  timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+    // run once a week 4:00 pm CEST
+    return parser.text('at 00:00 pm on Thursday');
+  },
+  job: function() {
+    // Define Last 7 days
+		var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate() - 7);
+
+    // Aggregate most upvoted last day user
+    var mostUpvotedUser = getMostUpvotedUserInTimeRange (lastWeek);
+
+		var user = Meteor.users.findOne(mostUpvotedUser._id);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "ca4fdc68-8239-4957-846d-b612c4cb62de"
+					}
+				}
+			});
+
+			var sub = {
+				"-firstname-": [user.services.facebook.first_name],
+				"-timerange-": ['week'],
+			};
+
+			header.setSubstitutions(sub);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
+// Most upvoted Posts per time period
+//
+// Most upvoted post per day
+
 SyncedCron.add({
   name: 'mostUpvotedPostDay',
   timezone: 'Australia/Sydney',
@@ -104,9 +231,54 @@ SyncedCron.add({
     // Aggregate most upvoted last day post
     var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastDay );
 
-		console.log(mostUpvotedPost);
+		var user = Meteor.users.findOne(mostUpvotedPost.createdBy);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "986445bf-35b4-4fd3-a149-3f5d9a1113ba"
+					}
+				}
+			});
+
+			var sub = {
+					"-firstname-": [user.services.facebook.first_name],
+					"-artist-": [mostUpvotedPost.artist],
+					"-trackname-": [mostUpvotedPost.title],
+					"-postId-": [mostUpvotedPost._id],
+					"-timerange-": ['day'],
+				};
+
+			header.setSubstitutions(sub);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
   }
 });
+
+// Most upvoted post per week
 
 SyncedCron.add({
   name: 'mostUpvotedPostWeek',
@@ -123,7 +295,50 @@ SyncedCron.add({
     // Aggregate most upvoted last week post
     var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastWeek );
 
-		console.log(mostUpvotedPost);
+		var user = Meteor.users.findOne(mostUpvotedPost.createdBy);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "986445bf-35b4-4fd3-a149-3f5d9a1113ba"
+					}
+				}
+			});
+
+			var sub = {
+					"-firstname-": [user.services.facebook.first_name],
+					"-artist-": [mostUpvotedPost.artist],
+					"-trackname-": [mostUpvotedPost.title],
+					"-postId-": [mostUpvotedPost._id],
+					"-timerange-": ['this week'],
+				};
+
+			header.setSubstitutions(sub);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
   }
 });
 
@@ -144,7 +359,7 @@ SyncedCron.add({
     usersPostingInLastDayAndMostUpvotedPost = Posts.aggregate([
       {
         "$match": {
-          "createdAt": {
+          "lastUpvote": {
             "$gte": lastDay
           },
           "upvotes": {
@@ -356,4 +571,29 @@ function getMostUpvotedPostInTimeRange (timeRange) {
 	]);
 
 	return mostUpvotedPost[0];
+}
+
+function getMostUpvotedUserInTimeRange (timeRange) {
+	mostUpvotedUser = Posts.aggregate([
+		{
+			"$match": {
+				"createdAt": {
+					"$gte": timeRange
+				}
+			}
+		}, {
+			"$group": {
+				"_id": "$createdBy",
+				"upvotes": { $sum: "$upvotes"},
+			}
+    },{
+			"$sort": {
+				"upvotes": -1
+			}
+		}, {
+			"$limit": 1
+		}
+	]);
+
+	return mostUpvotedUser[0];
 }
