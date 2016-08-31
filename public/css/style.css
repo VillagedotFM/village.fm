@@ -79,9 +79,12 @@ input, textarea {
     width: 1020px;
     margin: 0 auto;
 }
+iframe {
+  overflow: scroll;
+}
 .wrapper {
     overflow: auto;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
