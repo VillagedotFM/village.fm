@@ -27,20 +27,25 @@
         margin: 0;
     }
     .main {
-        padding-bottom: 53px;
+        margin-top: 17px;
+        padding-bottom: 60px;
         background: #ffffff;
     }
     .header {
         padding: 5px 0;
         text-align: center;
     }
+    .header__unloged {
+      margin-top: -5px;
+      margin-right: -15px;
+      margin-left: -100px;
+    }
     .header-profile{
         display: none;
     }
     .header__right-block {
-        margin-top: -22px;
-        margin-right: 10px;
-        margin-left: -120px;
+      margin-right: 10px;
+      margin-left: -10px;
     }
     .header__notifications {
         margin-right: 0;
@@ -49,6 +54,7 @@
         width: 31px;
         height: 33px;
         display: inline-block;
+        margin-top: 6px;
         background: url(../images/other-icons-sprite.png) 0 -150px no-repeat;
     }
 
@@ -134,7 +140,7 @@
     .ntf-dropdown {
         position: fixed;
         top: 0;
-        left: -50px;
+        left: 0;
         right: 0;
         bottom: 0;
         width: 100%;

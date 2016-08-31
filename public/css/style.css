@@ -118,14 +118,14 @@ input, textarea {
 .container {
     width: 100%;
     padding-left: 390px;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 .container--no-padding {
     width: 100%;
     padding-top: 60px;
 }
 .container--profile-page {
-    padding-top: 20px;
+    padding-top: 0;
 }
 .align-right {
     text-align: right;
@@ -222,7 +222,7 @@ input, textarea {
 
 /*****  Header  *****/
 .header {
-    height: 80px;
+    height: 60px;
     position: fixed;
     top: 0;
     left: 0;
@@ -245,18 +245,18 @@ input, textarea {
     height: 18px;
     float: left;
     background: url(../images/other-icons-sprite.png) 0 -550px no-repeat;
-    margin-top: 6px;
+    margin-top: 15px;
 }
 .header__hum--active,
 .header__hum:active {
     background-position: -150px -550px;
 }
 .header__logo {
-  margin-top: 23px;
+  margin-top: 13px;
   height: 35px;
 }
 .header__logo img {
-  margin-top: 23px;
+  margin-top: 13px;
   height: 35px;
 }
 /*.header__logo:hover {
@@ -278,12 +278,13 @@ input, textarea {
     pointer-events: none;
 }
 .header__center-block img {
-    height: 80px;
+    height: 60px;
     display: block;
     margin: 0 auto;
 }
 .header__right-block {
     float: right;
+    margin-top: 15px;
 }
 .header__notifications {
     width: 22px;
@@ -294,7 +295,6 @@ input, textarea {
     background: url(../images/icons-sprite.png) 0 -50px no-repeat;
     cursor: pointer;
     margin-right: 30px;
-    margin-top: 29px;
     position: relative;
 }
 .ntf-dropdown {
@@ -453,7 +453,6 @@ input, textarea {
 }
 .header-profile {
     position: relative;
-    margin-top: 25px;
 }
 .header-profile__img {
     width: 30px;
@@ -619,7 +618,7 @@ input, textarea {
     position: fixed;
     top: 0;
     height: 100%;
-    padding-top: 80px;
+    padding-top: 60px;
     padding-bottom: 54px;
     z-index: 9999;
     width: 375px;
@@ -2233,7 +2232,7 @@ input[type="range"] {
 
 /*****  profile  *****/
 .profile {
-    margin-top: 80px;
+    margin-top: 60px;
     height: 130px;
     background: #ffffff;
     -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.3);
