@@ -1,5 +1,6 @@
 Template.tabs.events({
   "click .timeFilter"(event, instance){
+    $('.sr-playlist').scrollTop(0);
     appBodyRef.timeFilter.set($(event.target).data('time'));
 
     mixpanel.track('Clicked Time Filter', {
