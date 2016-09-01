@@ -20,7 +20,8 @@ import './fixtures.js';
 import '../../api/seo/seo.js';
 // Emails
 import '../../api/emails/emails.js';
-import '../../api/emails/server/publications.js';
 import '../../api/emails/cron.js';
+import '../../api/emails/server/publications.js';
+import '../../api/emails/server/methods.js';
 
 import './server-global.js';
