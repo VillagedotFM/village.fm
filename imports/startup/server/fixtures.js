@@ -14,7 +14,7 @@ Meteor.startup(() => {
     // When only the Main Village is present, add blog villages
     if (Villages.find().count() === 1) {
     	console.log("No blog Villages found, creating defaults");
-    	const blogs = ['EclecticasFuck', 'EthnicZone', 'Freshasfuck', 'FusionCulture', 'HeavyBlog', 'IAmbient', 'Indieheads', 'Okayplayer', 'Psybient', 'Psytrance', 'Soulection'];
+    	const blogs = ['EclecticasFuck', 'EthnicZone', 'Freshasfuck', 'FusionCulture', 'HeavyBlog', 'IAmbient', 'Indieheads', 'Okayplayer', 'Psybient', 'Psytrance', 'Soulection', 'Cougar Microbes', 'Monstercat'];
     	blogs.forEach(blog => {
     		Villages.insert({
     			name: blog,
