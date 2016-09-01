@@ -1,3 +1,5 @@
+import { Email } from 'meteor/email';
+
 Template.header.events({
   "click .header__unloged": function(event, template){
     event.stopPropagation();
@@ -15,4 +17,15 @@ Template.header.events({
     $('.header__hum').toggleClass('header__hum--active');
     $('.main, .header, .bottom-player, .us-mobile').toggleClass('menu-open');
   },
+  'submit form': function(event, template) {
+    event.preventDefault();
+
+    var user = Meteor.user();
+    var feedbackText = template.find('#feedback-text');
+
+    Meteor.call('submitFeedbackForm', user.services.facebook.email, user.profile.name, feedbackText.value);
+
+    feedbackText.value = "";
+    $('.feedback__contant').slideToggle();
+  }
 });
