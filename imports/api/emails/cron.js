@@ -1,6 +1,7 @@
 import { Posts } from '../posts/posts.js';
 import { Emails } from '../emails/emails.js';
 import { Comments } from '../comments/comments.js';
+import  moment  from 'moment';
 
 var nodemailer = require('nodemailer');
 var smtpapi    = require('smtpapi');
@@ -72,7 +73,7 @@ SyncedCron.add({
 				var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
 				var mailOptions = {
-				  from:     "Village.fm <hello@village.fm>",
+				  from:     "Village.fm <yourfriends@village.fm>",
 				  to:       user.services.facebook.email,
 				  text:     "Hello world",
 				  html:     "<b>Hello world</b>",
@@ -89,6 +90,261 @@ SyncedCron.add({
   }
 });
 
+// Most upvoted users per time period
+//
+// Most upvoted user per week
+
+SyncedCron.add({
+  name: 'mostUpvotedUserWeek',
+  timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+    // run once a week 4:00 pm CEST
+    return parser.text('at 00:00 pm on Thursday');
+  },
+  job: function() {
+    // Define Last 7 days
+		var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate() - 7);
+
+    // Aggregate most upvoted last day user
+    var mostUpvotedUser = getMostUpvotedUserInTimeRange (lastWeek);
+
+		var user = Meteor.users.findOne(mostUpvotedUser._id);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "ca4fdc68-8239-4957-846d-b612c4cb62de"
+					}
+				}
+			});
+
+			var sub = {
+				"-firstname-": [user.services.facebook.first_name],
+				"-timerange-": ['this week'],
+			};
+
+			header.setSubstitutions(sub);
+			header.setASMGroupID(1237);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
+// Most upvoted post per month
+SyncedCron.add({
+  name: 'mostUpvotedUserMonth',
+  timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+    // run once a month on the last day
+    return parser.text('on the last day of the month');
+  },
+  job: function() {
+    // Define Last 30 Days
+		var lastMonth = new Date();
+		lastMonth.setDate(lastMonth.getDate() - 30);
+
+    // Aggregate most upvoted last day user
+    var mostUpvotedUser = getMostUpvotedUserInTimeRange (lastMonth);
+
+		var user = Meteor.users.findOne(mostUpvotedUser._id);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "ca4fdc68-8239-4957-846d-b612c4cb62de"
+					}
+				}
+			});
+
+			var sub = {
+				"-firstname-": [user.services.facebook.first_name],
+				"-timerange-": ['this month'],
+			};
+
+			header.setSubstitutions(sub);
+			header.setASMGroupID(1237);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
+// Most upvoted Posts per time period
+//
+// Most upvoted post per week
+
+SyncedCron.add({
+  name: 'mostUpvotedPostWeek',
+	timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+		// run once a week 4:00 pm CEST
+    return parser.text('at 00:00 pm on Thursday');
+  },
+  job: function() {
+    // Define Last 7 days
+		var lastWeek = new Date();
+		lastWeek.setDate(lastWeek.getDate() - 7);
+
+    // Aggregate most upvoted last week post
+    var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastWeek );
+
+		var user = Meteor.users.findOne(mostUpvotedPost.createdBy);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "986445bf-35b4-4fd3-a149-3f5d9a1113ba"
+					}
+				}
+			});
+
+			var sub = {
+					"-firstname-": [user.services.facebook.first_name],
+					"-artist-": [mostUpvotedPost.artist],
+					"-trackname-": [mostUpvotedPost.title],
+					"-postId-": [mostUpvotedPost._id],
+					"-timerange-": ['this week'],
+				};
+
+			header.setSubstitutions(sub);
+			header.setASMGroupID(1239);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
+SyncedCron.add({
+  name: 'mostUpvotedPostMonth',
+	timezone: 'Australia/Sydney',
+  schedule: function(parser) {
+		// run once a month on the last day
+    return parser.text('on the last day of the month');
+  },
+  job: function() {
+    // Define Last 30 Days
+		var lastMonth = new Date();
+		lastMonth.setDate(lastMonth.getDate() - 30);
+
+    // Aggregate most upvoted last week post
+    var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastMonth );
+
+		var user = Meteor.users.findOne(mostUpvotedPost.createdBy);
+
+		if (user) {
+
+			var header = new smtpapi();
+
+			header.setFilters({
+				"templates": {
+					"settings": {
+						"enable": 1,
+						"template_id": "986445bf-35b4-4fd3-a149-3f5d9a1113ba"
+					}
+				}
+			});
+
+			var sub = {
+					"-firstname-": [user.services.facebook.first_name],
+					"-artist-": [mostUpvotedPost.artist],
+					"-trackname-": [mostUpvotedPost.title],
+					"-postId-": [mostUpvotedPost._id],
+					"-timerange-": ['this month'],
+				};
+
+			header.setSubstitutions(sub);
+			header.setASMGroupID(1239);
+
+			// Send usin Nodemailer
+			var headers = { "x-smtpapi": header.jsonString() };
+
+			var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+			var mailOptions = {
+				from:     "Village.fm <yourfriends@village.fm>",
+				to:       user.services.facebook.email,
+				text:     "Hello world",
+				html:     "<b>Hello world</b>",
+				headers:  headers
+			}
+
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+				smtpTransport.close();
+
+				console.log( error || "Message sent");
+			});
+		}
+  }
+});
+
 SyncedCron.add({
   name: 'aggregateNotifications',
   timezone: 'Asia/Taipei',
@@ -101,6 +357,31 @@ SyncedCron.add({
 
     // Define Last 24 hours
     const lastDay = new Date(Date.now() - 1000 * 3600 * 24);
+
+		// Aggreagate most upvoted post of the day
+		var mostUpvotedPost = getMostUpvotedPostInTimeRange( lastDay );
+
+		Emails.insert({
+			to: mostUpvotedPost.createdBy,
+			value: 2,
+			meta: {
+				artist: mostUpvotedPost.artist,
+				postId: mostUpvotedPost._id,
+				timeRange: 'this day',
+				trackname: mostUpvotedPost.title
+			}
+		});
+
+		// Aggregate most upvoted user of the day
+		var mostUpvotedUser = getMostUpvotedUserInTimeRange (lastDay);
+
+		Emails.insert({
+			to: mostUpvotedPost.createdBy,
+			value: 1,
+			meta: {
+				timeRange: 'this day',
+			}
+		});
 
     // Aggregate most upvoted last day Post from each user
     usersPostingInLastDayAndMostUpvotedPost = Posts.aggregate([
@@ -193,7 +474,7 @@ SyncedCron.add({
     		const userDetails = user.services.facebook;
 
     		// Define let statements
-	    	let template, sub, post, username;
+	    	let template, sub, post, username, groupId;
 
 	    	// Pick which kind of daily email to send
 		    switch (email.value) {
@@ -207,7 +488,9 @@ SyncedCron.add({
 		          "-username-": [username ? username.profile.name : null],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
+						groupId = '1243';
 		        break;
 		      case 4:
 		        username = Meteor.users.findOne(email.meta.from);
@@ -234,7 +517,9 @@ SyncedCron.add({
 		          "-comments_count-": [commentsCount[0].count],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
+						groupId = '1241';
 		        break;
 		      case 3:
 		        post = Posts.findOne(email.meta.postId);
@@ -245,15 +530,30 @@ SyncedCron.add({
 		          "-upvotes_count-": [email.meta.count],
 		          "-artist-": [post.artist],
 		          "-trackname-": [post.title],
+							"-postId-": [post._id],
 		        };
+						groupId = '1245';
 		        break;
 		      case 2:
-		        // Need to build a function to get emails
 		        template = "986445bf-35b4-4fd3-a149-3f5d9a1113ba";
+
+						sub = {
+							"-firstname-": [userDetails.first_name],
+							"-artist-": [email.meta.artist],
+							"-trackname-": [email.meta.title],
+							"-postId-": [email.meta.postId],
+							"-timerange-": [email.meta.timeRange],
+						};
+						groupId = '1239';
 		        break;
 		      case 1:
-		        // Need to build a function to get emails
 		        template = "ca4fdc68-8239-4957-846d-b612c4cb62de";
+
+						sub = {
+							"-firstname-": [userDetails.first_name],
+							"-timerange-": [email.meta.timeRange],
+						};
+						groupId = '1237';
 		        break;
 		      default:
 		        break;
@@ -271,6 +571,7 @@ SyncedCron.add({
 		    });
 
 		    header.setSubstitutions(sub);
+				header.setASMGroupID(groupId);
 
 		    // Send usin Nodemailer
 				var headers = { "x-smtpapi": header.jsonString() };
@@ -278,7 +579,7 @@ SyncedCron.add({
 				var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
 				var mailOptions = {
-				  from:     "Village.fm <hello@village.fm>",
+				  from:     "Village.fm <yourfriends@village.fm>",
 				  to:       userDetails.email,
 				  text:     "Hello world",
 				  html:     "<b>Hello world</b>",
@@ -288,7 +589,7 @@ SyncedCron.add({
 				smtpTransport.sendMail(mailOptions, function(error, response) {
 				  smtpTransport.close();
 
-				  console.log( error || "Message sent");
+				  console.log( error || "Message sent to: "+userDetails.email);
 				});
       }
     });
@@ -296,3 +597,48 @@ SyncedCron.add({
 });
 
 SyncedCron.start();
+
+function getMostUpvotedPostInTimeRange (timeRange) {
+	mostUpvotedPost = Posts.aggregate([
+		{
+			"$match": {
+				"createdAt": {
+					"$gte": timeRange
+				}
+			}
+		}, {
+			"$sort": {
+				"upvotes": -1
+			}
+		}, {
+			"$limit": 1
+		}
+	]);
+
+	return mostUpvotedPost[0];
+}
+
+function getMostUpvotedUserInTimeRange (timeRange) {
+	mostUpvotedUser = Posts.aggregate([
+		{
+			"$match": {
+				"createdAt": {
+					"$gte": timeRange
+				}
+			}
+		}, {
+			"$group": {
+				"_id": "$createdBy",
+				"upvotes": { $sum: "$upvotes"},
+			}
+    },{
+			"$sort": {
+				"upvotes": -1
+			}
+		}, {
+			"$limit": 1
+		}
+	]);
+
+	return mostUpvotedUser[0];
+}

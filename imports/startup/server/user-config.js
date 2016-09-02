@@ -76,7 +76,7 @@ Accounts.onCreateUser(function (options, user) {
         var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
         var mailOptions = {
-            from:     "Village.fm <hello@village.fm>",
+            from:     "Village.fm <yourfriends@village.fm>",
             to:       user.services.facebook.email,
             text:     "Hello world",
             html:     "<b>Hello world</b>",

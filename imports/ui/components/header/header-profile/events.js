@@ -12,7 +12,7 @@ Template.header_profile.events({
       }
     });
   },
-  // "click .feedbackBtn": function(event, template) {
-  //   $('.feedback__contant').slideToggle();
-  // }
+  "click .feedbackBtn": function(event, template) {
+     $('.feedback__contant').slideToggle();
+  }
 });
