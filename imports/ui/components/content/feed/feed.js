@@ -60,9 +60,9 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
         if(isPlaying){
           let completed = appBodyRef.completed.get();
           if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
-            const totalMinutesListened = mixpanel.get_property('totalMinutesListened');
+            window.analytics.totalMinutesListened = window.analytics.totalMinutesListened + 1;
             mixpanel.register({
-                'totalMinutesListened': totalMinutesListened + 1
+                'totalMinutesListened': window.analytics.totalMinutesListened
             });
 
             mixpanel.people.increment({
@@ -215,9 +215,9 @@ createYTPlayer = function(post) {
         if(isPlaying){
           let completed = appBodyRef.completed.get();
           if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
-            const totalMinutesListened = mixpanel.get_property('totalMinutesListened');
+            window.analytics.totalMinutesListened = window.analytics.totalMinutesListened + 1;
             mixpanel.register({
-                'totalMinutesListened': totalMinutesListened + 1
+                'totalMinutesListened': window.analytics.totalMinutesListened
             });
 
             mixpanel.people.increment({

@@ -18,9 +18,9 @@ FlowRouter.route('/', {
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
 
-        const totalVillagesVisited = mixpanel.get_property('totalVillagesVisited');
+        window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
-            'totalVillagesVisited': totalVillagesVisited + 1
+            'totalVillagesVisited': window.analytics.totalVillagesVisited
         });
 
         mixpanel.register({
@@ -45,9 +45,9 @@ FlowRouter.route('/:villageSlug', {
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
 
-        const totalVillagesVisited = mixpanel.get_property('totalVillagesVisited');
+        window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
-            'totalVillagesVisited': totalVillagesVisited + 1
+            'totalVillagesVisited': window.analytics.totalVillagesVisited
         });
 
         mixpanel.register({
@@ -73,9 +73,9 @@ FlowRouter.route('/post/:postId', {  //Permalink
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
 
-        const totalPostsVisited = mixpanel.get_property('totalPostsVisited');
+        window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
-            'totalPostsVisited': totalPostsVisited + 1
+            'totalVillagesVisited': window.analytics.totalVillagesVisited
         });
 
         mixpanel.people.increment({
@@ -97,9 +97,9 @@ FlowRouter.route('/:villageSlug/post/:postId', {
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
 
-        const totalPostsVisited = mixpanel.get_property('totalPostsVisited');
+        window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
-            'totalPostsVisited': totalPostsVisited + 1
+            'totalVillagesVisited': window.analytics.totalVillagesVisited
         });
 
         mixpanel.people.increment({

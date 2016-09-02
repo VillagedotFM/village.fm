@@ -254,9 +254,9 @@ Template.upload.events({
                   taggedUsersCount: post.taggedUsers.length
                 });
 
-                const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                window.analytics.totalSongsPosted = window.analytics.totalSongsPosted + 1
                 mixpanel.register({
-                    'totalSongsPosted': totalSongsPosted + 1
+                    'totalSongsPosted': window.analytics.totalSongsPosted
                 });
 
                 mixpanel.people.increment({
@@ -309,9 +309,9 @@ Template.upload.events({
                             taggedUsersCount: post.taggedUsers.length
                           });
 
-                          const totalSongsPosted = mixpanel.get_property('totalSongsPosted');
+                          window.analytics.totalSongsPosted = window.analytics.totalSongsPosted + 1;
                           mixpanel.register({
-                              'totalSongsPosted': totalSongsPosted + 1
+                              'totalSongsPosted': window.analytics.totalSongsPosted
                           });
 
                           mixpanel.people.increment({

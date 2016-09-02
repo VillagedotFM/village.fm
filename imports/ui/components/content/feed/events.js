@@ -40,9 +40,9 @@ Template.feed.events({
           taggedUserCount: taggedUsers.length
         });
 
-        const totalUsersTagged = mixpanel.get_property('totalUsersTagged');
+        window.analytics.totalUsersTagged = window.analytics.totalUsersTagged + taggedUsers.length;
         mixpanel.register({
-            'totalUsersTagged': totalUsersTagged + taggedUsers.length
+            'totalUsersTagged': window.analytics.totalUsersTagged
         });
 
         mixpanel.people.increment({
@@ -81,9 +81,10 @@ Template.feed.events({
               createdBy: postedBy.profile.name
             });
 
-            const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+
+            window.analytics.totalPostsUpvoted = window.analytics.totalPostsUpvoted + 1;
             mixpanel.register({
-                'totalPostsUpvoted': totalPostsUpvoted + 1
+                'totalPostsUpvoted': window.analytics.totalPostsUpvoted
             });
 
             mixpanel.people.increment({
@@ -96,9 +97,9 @@ Template.feed.events({
             }, 2000);
 
           } else {
-            const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+            window.analytics.totalPostsUpvoted = window.analytics.totalPostsUpvoted - 1;
             mixpanel.register({
-                'totalPostsUpvoted': totalPostsUpvoted - 1
+                'totalPostsUpvoted': window.analytics.totalPostsUpvoted
             });
 
             mixpanel.people.increment({
@@ -231,9 +232,9 @@ Template.feed.events({
       platform: $(event.currentTarget).text()
     });
 
-    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    window.analytics.totalPostsShared = window.analytics.totalPostsShared + 1;
     mixpanel.register({
-        'totalPostsShared': totalPostsShared + 1
+        'totalPostsShared': window.analytics.totalPostsShared
     });
 
     mixpanel.people.increment({
@@ -252,9 +253,9 @@ Template.feed.events({
       platform: 'Copy'
     });
 
-    const totalPostsShared = mixpanel.get_property('totalPostsShared');
+    window.analytics.totalPostsShared = window.analytics.totalPostsShared + 1;
     mixpanel.register({
-        'totalPostsShared': totalPostsShared + 1
+        'totalPostsShared': window.analytics.totalPostsShared
     });
 
     mixpanel.people.increment({

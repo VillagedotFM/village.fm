@@ -49,9 +49,9 @@ Template.playlist.events({
                       createdBy: postedBy.profile.name
                     });
 
-                    const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+                    window.analytics.totalPostsUpvoted = window.analytics.totalPostsUpvoted + 1;
                     mixpanel.register({
-                        'totalPostsUpvoted': totalPostsUpvoted + 1
+                        'totalPostsUpvoted': window.analytics.totalPostsUpvoted
                     });
 
                     mixpanel.people.increment({
@@ -64,9 +64,9 @@ Template.playlist.events({
                     }, 2000);
 
                   } else {
-                    const totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
+                    window.analytics.totalPostsUpvoted = window.analytics.totalPostsUpvoted - 1
                     mixpanel.register({
-                        'totalPostsUpvoted': totalPostsUpvoted - 1
+                        'totalPostsUpvoted': window.analytics.totalPostsUpvoted
                     });
 
                     mixpanel.people.increment({
