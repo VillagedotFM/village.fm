@@ -16,9 +16,11 @@ Template.bottom_player.helpers({
     setInterval(function(){ //Track video progress for scrubber, convert to seconds if SC
       let post = appBodyRef.nowPlaying.get();
       if (post.type === 'youtube') {
-        if (window['ytplayer-'+post._id].getCurrentTime) {
-          var completed = window['ytplayer-'+post._id].getCurrentTime();
-          appBodyRef.completed.set(completed)
+        if ($('#ytplayer-'+post._id)[0]) {
+          if (window['ytplayer-'+post._id].getCurrentTime) {
+            var completed = window['ytplayer-'+post._id].getCurrentTime();
+            appBodyRef.completed.set(completed)
+          }
         }
       } else {
         if (typeof window['scplayer-'+post._id] !== 'undefined') {

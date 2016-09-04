@@ -73,10 +73,12 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.postSuccess = new ReactiveVar(null);
 
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
-  appBodyRef.isPlaying = new ReactiveVar(null); 
+  appBodyRef.isPlaying = new ReactiveVar(null);
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
-  appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)
+  appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
+
+  appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
   appBodyRef.prevPost = new ReactiveVar(null);
   appBodyRef.nextPost = new ReactiveVar(null);

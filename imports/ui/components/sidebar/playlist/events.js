@@ -85,7 +85,12 @@ Template.playlist.events({
         let selectedPost = Posts.findOne(selectedId);
 
         if (selectedPost.type === 'youtube') {
-            window['ytplayer-' + selectedId].playVideo();
+          if (window['ytplayer-'+selectedId]) {
+            window['ytplayer-'+selectedId].playVideo();
+          } else {
+            appBodyRef.loadIframe.push(selectedPost);
+            appBodyRef.nowPlaying.set(selectedPost);
+          }
         } else {
             window['scplayer-' + selectedId].play();
         }
