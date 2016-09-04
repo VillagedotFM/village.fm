@@ -9,7 +9,12 @@ Template.controls.events({
     }
 
     if (currentPost.type === 'youtube') {
-      window['ytplayer-' + currentPost._id].playVideo();
+      if (window['ytplayer-'+currentPost._id]) {
+        window['ytplayer-'+currentPost._id].playVideo();
+      } else {
+        appBodyRef.loadIframe.push(currentPost);
+        appBodyRef.nowPlaying.set(currentPost);
+      }
     } else {
       window['scplayer-' + currentPost._id].play();
     }
@@ -53,23 +58,22 @@ Template.controls.events({
       if (prevPost) {
 
         if (prevPost.type === 'youtube') {
-          let check = window['ytplayer-' + prevPost._id].getVideoData();
-          if (check.title !== '') {
-            window['ytplayer-' + prevPost._id].playVideo();
+          if (window['ytplayer-'+prevPost._id]) {
+            window['ytplayer-'+prevPost._id].playVideo();
           } else {
-            let prevPrev = order[index[0] - 2];
-            console.log(prevPrev);
-            if (prevPrev.type === 'youtube') {
-              window['ytplayer-' + prevPrev._id].playVideo();
-            } else {
-              window['scplayer-' + prevPrev._id].play();
-            }
+            appBodyRef.loadIframe.push(prevPost);
+            appBodyRef.nowPlaying.set(prevPost);
           }
         } else {
           if (typeof window['scplayer-' + prevPost._id] === 'undefined') {
             let prevPrev = order[index[0] - 2];
             if (prevPrev.type === 'youtube') {
-              window['ytplayer-' + prevPrev._id].playVideo();
+              if (window['ytplayer-'+prevPrev._id]) {
+                window['ytplayer-'+prevPrev._id].playVideo();
+              } else {
+                appBodyRef.loadIframe.push(prevPrev);
+                appBodyRef.nowPlaying.set(prevPrev);
+              }
             } else {
               window['scplayer-' + prevPrev._id].play();
             }
@@ -97,22 +101,22 @@ Template.controls.events({
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        let check = window['ytplayer-' + nextPost._id].getVideoData();
-        if (check.title !== '') {
-          window['ytplayer-' + nextPost._id].playVideo();
+        if (window['ytplayer-'+nextPost._id]) {
+          window['ytplayer-'+nextPost._id].playVideo();
         } else {
-          let nextNext = order[index[0] + 2];
-          if (nextNext.type === 'youtube') {
-            window['ytplayer-' + nextNext._id].playVideo();
-          } else {
-            window['scplayer-' + nextNext._id].play();
-          }
+          appBodyRef.loadIframe.push(nextPost);
+          appBodyRef.nowPlaying.set(nextPost);
         }
       } else {
         if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
           let nextNext = order[index[0] + 2];
           if (nextNext.type === 'youtube') {
-            window['ytplayer-' + nextNext._id].playVideo();
+            if (window['ytplayer-'+nextNext._id]) {
+              window['ytplayer-'+nextNext._id].playVideo();
+            } else {
+              appBodyRef.loadIframe.push(nextNext);
+              appBodyRef.nowPlaying.set(nextNext);
+            }
           } else {
             window['scplayer-' + nextNext._id].play();
           }
