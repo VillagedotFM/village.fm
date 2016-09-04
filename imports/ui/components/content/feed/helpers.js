@@ -107,5 +107,8 @@ Template.feed.helpers({
   },
   isSubVillage() {
     return FlowRouter.getParam('villageSlug');
+  },
+  loadIframe: function() {
+    return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
   }
 });

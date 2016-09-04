@@ -130,21 +130,26 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
 }
 
 createYTPlayer = function(post) {
-  // window['state-'+post._id] = 0;
-  let allPosts = appBodyRef.postOrder.get();
   let yt_id = post.vidId;
   let name = 'ytplayer-'+ post._id;
-  let indexes = $.map(allPosts, function(obj, idx) {
-    if(obj._id === post._id) {
-      return idx;
-    }
-  });
 
-  let nextPost = allPosts[indexes[0]+1];
+
+  // window['state-'+post._id] = 0;
+  // let allPosts = appBodyRef.postOrder.get();
+  // let indexes = $.map(allPosts, function(obj, idx) {
+  //   if(obj._id === post._id) {
+  //     return idx;
+  //   }
+  // });
+
+  // let nextPost = allPosts[indexes[0]+1];
+  // let prevPost = allPosts[indexes[0]-1];
 
   onPlayerReady = function(event) {
     console.log('ready');
-    appBodyRef.videosReady.push(indexes[0]);
+    if (appBodyRef.nowPlaying.get()._id === post._id) {
+      window[name].playVideo();
+    }
   }
 
   onPlayerStateChange = function(event) {
@@ -154,34 +159,34 @@ createYTPlayer = function(post) {
 
       // let nextPost = appBodyRef.nextPost.get();
 
-      if (nextPost) { //Play next post if it exists
-        window['state-'+nextPost._id] = 2;
-        if (nextPost.type === 'youtube') {
-          let check = window['ytplayer-' + nextPost._id].getVideoData();
-          if (check.title !== '') {
-            window['ytplayer-' + nextPost._id].playVideo();
-          } else {
-            let nextNext = allPosts[indexes[0] + 2];
-            if (nextNext.type === 'youtube') {
-              window['ytplayer-' + nextNext._id].playVideo();
-            } else {
-              window['scplayer-' + nextNext._id].play();
-            }
-          }
-        } else {
-          if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
-            let nextNext = allPosts[index[0] + 2];
-            if (nextNext.type === 'youtube') {
-              window['ytplayer-' + nextNext._id].playVideo();
-            } else {
-              window['scplayer-' + nextNext._id].play();
-            }
-          } else {
-            window['scplayer-' + nextPost._id].play();
-          }
-        }
-        // appBodyRef.nowPlaying.set(nextPost);
-      }
+      // if (nextPost) { //Play next post if it exists
+      //   window['state-'+nextPost._id] = 2;
+      //   if (nextPost.type === 'youtube') {
+      //     let check = window['ytplayer-' + nextPost._id].getVideoData();
+      //     if (check.title !== '') {
+      //       window['ytplayer-' + nextPost._id].playVideo();
+      //     } else {
+      //       let nextNext = allPosts[indexes[0] + 2];
+      //       if (nextNext.type === 'youtube') {
+      //         window['ytplayer-' + nextNext._id].playVideo();
+      //       } else {
+      //         window['scplayer-' + nextNext._id].play();
+      //       }
+      //     }
+      //   } else {
+      //     if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+      //       let nextNext = allPosts[index[0] + 2];
+      //       if (nextNext.type === 'youtube') {
+      //         window['ytplayer-' + nextNext._id].playVideo();
+      //       } else {
+      //         window['scplayer-' + nextNext._id].play();
+      //       }
+      //     } else {
+      //       window['scplayer-' + nextPost._id].play();
+      //     }
+      //   }
+      //   // appBodyRef.nowPlaying.set(nextPost);
+      // }
     } else if(event.data === 1){    //PLAYING
       window['state-'+post._id] = 1;
 
@@ -256,21 +261,23 @@ createYTPlayer = function(post) {
 Template.feed.onCreated(function feedOnCreated() {
   const feedRef = this;
 
-  //Populate iframes
-  feedRef.autorun(function () {
-      let orderedPosts = appBodyRef.displayPosts.get();
+  //Populate youtube iframes when clicked
+  feedRef.autorun(function(){
+     let loadedIframes = appBodyRef.loadIframe.list();   //Grab list of youtube posts to load
 
-      var checkYT = setInterval(function () {
-        if(typeof YT != 'undefined' && YT.loaded){
-          _.each(orderedPosts, function(post, index) {
-            if (post.type === 'youtube') {
-              createYTPlayer(post);
-            }
-          });
+     var checkYT = setInterval(function () {
+       if(typeof YT != 'undefined' && YT.loaded){
+         _.each(loadedIframes, function(post) {
+           if ($('#ytplayer-'+post._id)[0]) {
+             console.log('ready to load');
+             createYTPlayer(post);
+           }
+         });
 
-          clearInterval(checkYT);
-        }
-      }, 100);
+         clearInterval(checkYT);
+       }
+     }, 100);
+
   });
 
   //Load youtube iframe api async
@@ -278,7 +285,6 @@ Template.feed.onCreated(function feedOnCreated() {
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 
 
   //Set Pagination (sort of):
@@ -315,6 +321,8 @@ Template.feed.onCreated(function feedOnCreated() {
       _.each(allPosts, function(post, index) {
         if (post.type === 'soundcloud') {
             createSCPlayer(post);
+        } else {
+          appBodyRef.videosReady.push(index);
         }
       });
     }
