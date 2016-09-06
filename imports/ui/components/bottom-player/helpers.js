@@ -16,9 +16,9 @@ Template.bottom_player.helpers({
     setInterval(function(){ //Track video progress for scrubber, convert to seconds if SC
       let post = appBodyRef.nowPlaying.get();
       if (post.type === 'youtube') {
-        if ($('#ytplayer-'+post._id)[0]) {
-          if (window['ytplayer-'+post._id].getCurrentTime) {
-            var completed = window['ytplayer-'+post._id].getCurrentTime();
+        if (window['ytplayer'] && window['ytplayer'].l) {
+          if (window['ytplayer'].getCurrentTime) {
+            var completed = window['ytplayer'].getCurrentTime();
             appBodyRef.completed.set(completed)
           }
         }

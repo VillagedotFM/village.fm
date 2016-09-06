@@ -27,7 +27,17 @@ Template.feed.helpers({
   },
   isPlaying: function() {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? true : false;
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? true : false;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -46,8 +56,19 @@ Template.feed.helpers({
       return ' and ' + (this.upvotes - 3) + ' others';
     }
   },
-  videoReady: function(index) {          //Redundant of General helper but necessary because of weirdness
-    return (_.contains(appBodyRef.videosReady.list(), index));
+  vidReady: function(index) {
+    let nowPlaying = appBodyRef.nowPlaying.get();
+    let state = appBodyRef.state.get();
+
+    if (nowPlaying && nowPlaying.type === 'youtube') {
+      if (this._id === nowPlaying._id) {
+        return (state === 1 || state === 2) ? true : false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   },
   isYoutube() {
     if (this.type === 'youtube') {

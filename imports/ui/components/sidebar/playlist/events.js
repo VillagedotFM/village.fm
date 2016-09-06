@@ -3,19 +3,21 @@ import {postToVote} from "./playlist.js";
 //To eliminate some weirdness with SC.stream, make sure everything else is paused
 pauseEverythingElse = function(id) {
   let posts = appBodyRef.postOrder.get();
-  // if (appBodyRef.nowPlaying.get()) {
+  let nowPlaying = appBodyRef.nowPlaying.get();
+  if (nowPlaying) {
     _.each(posts, function(post){
       if (post._id !== id) {
-        // window['state-'+post._id] = 2;
         if (post.type == 'soundcloud' && window['scplayer-' + post._id]) {
           window['scplayer-'+post._id].seek(0);
           window['scplayer-' + post._id].pause();
-        } else if (post.type == 'youtube' && window['ytplayer-' + post._id]) {
-          window['ytplayer-' + post._id].pauseVideo();
+        } else {
+          if (nowPlaying.type !== 'youtube') {
+            window['ytplayer'].pauseVideo();
+          }
         }
       }
     });
-  // }
+  }
 }
 
 Template.playlist.events({
@@ -81,18 +83,19 @@ Template.playlist.events({
         }
     },
     "click .sr-playlist__play--play": function (event, template) {
-        let selectedId = event.currentTarget.id;
+        let selectedId = this._id;
         let selectedPost = Posts.findOne(selectedId);
+        let nowPlaying = appBodyRef.nowPlaying.get();
 
         if (selectedPost.type === 'youtube') {
-          if (window['ytplayer-'+selectedId]) {
-            window['ytplayer-'+selectedId].playVideo();
+          if (nowPlaying && nowPlaying._id === selectedId) {
+            window['ytplayer'].playVideo();
           } else {
-            appBodyRef.loadIframe.push(selectedPost);
             appBodyRef.nowPlaying.set(selectedPost);
           }
         } else {
-            window['scplayer-' + selectedId].play();
+          appBodyRef.nowPlaying.set(selectedPost);
+          window['scplayer-' + selectedId].play();
         }
 
         mixpanel.track('Clicked play button', {
@@ -100,15 +103,14 @@ Template.playlist.events({
         });
     },
     "click .sr-playlist__play--paused": function (event, template) {
-        let selectedId = event.currentTarget.id;
+        let selectedId = this._id;
         let selectedPost = Posts.findOne(selectedId);
 
         if (selectedPost.type === 'youtube') {
-            window['ytplayer-' + selectedId].pauseVideo();
+            window['ytplayer'].pauseVideo();
         } else {
             window['scplayer-' + selectedId].pause();
         }
-        appBodyRef.isPlaying.set(false);
     },
     "click .sr-playlist__remove": function (event, template) {
         let postId = this._id;

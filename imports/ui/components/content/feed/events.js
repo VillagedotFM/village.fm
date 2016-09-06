@@ -200,35 +200,39 @@ Template.feed.events({
     $('input[name=post-comment]').val('');
     appBodyRef.replyTo.set(commentId);
   },
-  "click .post__video-play": function(event, template){
-    let selectedId = event.currentTarget.id;
+  "click .post__video-pause": function(event, template){
+    event.stopPropagation();
+    let selectedId = this._id;
+    window['scplayer-' + selectedId].pause();
+  },
+  "click .post__video": function(event, template){
+    let selectedId = this._id;
     let selectedPost = Posts.findOne(selectedId);
+    let nowPlaying = appBodyRef.nowPlaying.get();
+    let state = appBodyRef.state.get();
 
     if (selectedPost.type === 'youtube') {
-      if (window['ytplayer-'+selectedId]) {
-        window['ytplayer-'+selectedId].playVideo();
+      if (nowPlaying && nowPlaying._id === selectedId) {
+        if (state === 1) {
+          window['ytplayer'].pauseVideo();
+        } else {
+          window['ytplayer'].playVideo();
+        }
       } else {
-        appBodyRef.loadIframe.push(selectedPost);
         appBodyRef.nowPlaying.set(selectedPost);
       }
     } else {
-      window['scplayer-' + selectedId].play();
+      appBodyRef.nowPlaying.set(selectedPost);
+      if (state === 1) {
+        window['scplayer-' + selectedId].pause();
+      } else {
+        window['scplayer-' + selectedId].play();
+      }
     }
 
     mixpanel.track('Clicked play button', {
       area: 'Feed'
     });
-  },
-  "click .post__video-pause": function(event, template){
-    let selectedId = event.currentTarget.id;
-    let selectedPost = Posts.findOne(selectedId);
-    window['state-'+selectedPost._id] = 2;
-    if (selectedPost.type === 'youtube') {
-      window['ytplayer-' + selectedId].pauseVideo();
-    } else {
-      window['scplayer-' + selectedId].pause();
-    }
-    appBodyRef.isPlaying.set(false);
   },
   "click .share-dropdown__social": function(event, template){
     window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');

@@ -1508,6 +1508,12 @@ iframe {
   width: 100%;
 }
 
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 .post__inner {
     border-left: 1px solid #f4f6f8;
     padding: 15px 30px 15px 60px;
@@ -1685,6 +1691,10 @@ iframe {
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+.post__video:hover {
+  cursor: pointer;
+}
 .post__video--1 {
     background-image: url(../images/video-1.png);
 }
@@ -1704,34 +1714,41 @@ iframe {
 .post__video-play {
     position: absolute;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 37px;
+    height: 37px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    background: url(../images/other-icons-sprite.png) 0 -100px no-repeat;
+    background: url(../images/icons-sprite.png) 0 -100px no-repeat;
     cursor: pointer;
 }
 .post__video-play:hover {
     background-position: -150px -100px;
 }
+.post__video:hover .post__video-play {
+    background-position: -150px -100px;
+}
 .post__video-pause {
   position: absolute;
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 37px;
+  height: 37px;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  background: url(../images/icons-sprite.png) 0 -350px no-repeat;
+  background: url(../images/icons-sprite.png) 0 -150px no-repeat;
   cursor: pointer;
 }
 .post__video-pause:hover {
-background-position: -150px -350px;
+  background-position: -150px -150px;
+}
+
+.post__video:hover .post__video-pause {
+  background-position: -150px -150px;
 }
 .post__upvoted {
     font-size: 12px;
