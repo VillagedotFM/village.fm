@@ -202,20 +202,24 @@ Template.feed.events({
   },
   "click .post__video-pause": function(event, template){
     event.stopPropagation();
+    appBodyRef.state.set(2);
     let selectedId = this._id;
     window['scplayer-' + selectedId].pause();
   },
   "click .post__video": function(event, template){
     let selectedId = this._id;
+    let selectedType = this.type;
     let selectedPost = Posts.findOne(selectedId);
     let nowPlaying = appBodyRef.nowPlaying.get();
     let state = appBodyRef.state.get();
 
-    if (selectedPost.type === 'youtube') {
+    if (selectedType === 'youtube') {
       if (nowPlaying && nowPlaying._id === selectedId) {
         if (state === 1) {
+          appBodyRef.state.set(2);
           window['ytplayer'].pauseVideo();
         } else {
+          appBodyRef.state.set(1);
           window['ytplayer'].playVideo();
         }
       } else {
@@ -224,8 +228,10 @@ Template.feed.events({
     } else {
       appBodyRef.nowPlaying.set(selectedPost);
       if (state === 1) {
+        appBodyRef.state.set(2);
         window['scplayer-' + selectedId].pause();
       } else {
+        appBodyRef.state.set(1);
         window['scplayer-' + selectedId].play();
       }
     }

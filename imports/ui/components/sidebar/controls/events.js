@@ -13,8 +13,10 @@ Template.controls.events({
     if (currentPost.type === 'youtube') {
       if (nowPlaying && window['ytplayer']) {
         if (state === 1) {
+          appBodyRef.state.set(2);
           window['ytplayer'].pauseVideo();
         } else {
+          appBodyRef.state.set(1);
           window['ytplayer'].playVideo();
         }
       } else {
@@ -22,9 +24,11 @@ Template.controls.events({
       }
     } else {
       if (state === 1) {
+        appBodyRef.state.set(2);
         window['scplayer-' + currentPost._id].pause();
       } else {
         appBodyRef.nowPlaying.set(currentPost);
+        appBodyRef.state.set(1);
         window['scplayer-' + currentPost._id].play();
       }
     }
@@ -62,7 +66,7 @@ Template.controls.events({
           if (window['ytplayer-'+prevPost._id]) {
             window['ytplayer-'+prevPost._id].playVideo();
           } else {
-            appBodyRef.loadIframe.push(prevPost);
+            // appBodyRef.loadIframe.push(prevPost);
             appBodyRef.nowPlaying.set(prevPost);
           }
         } else {
@@ -72,7 +76,7 @@ Template.controls.events({
               if (window['ytplayer-'+prevPrev._id]) {
                 window['ytplayer-'+prevPrev._id].playVideo();
               } else {
-                appBodyRef.loadIframe.push(prevPrev);
+                // appBodyRef.loadIframe.push(prevPrev);
                 appBodyRef.nowPlaying.set(prevPrev);
               }
             } else {
@@ -105,7 +109,7 @@ Template.controls.events({
         if (window['ytplayer-'+nextPost._id]) {
           window['ytplayer-'+nextPost._id].playVideo();
         } else {
-          appBodyRef.loadIframe.push(nextPost);
+          // appBodyRef.loadIframe.push(nextPost);
           appBodyRef.nowPlaying.set(nextPost);
         }
       } else {
@@ -115,7 +119,7 @@ Template.controls.events({
             if (window['ytplayer-'+nextNext._id]) {
               window['ytplayer-'+nextNext._id].playVideo();
             } else {
-              appBodyRef.loadIframe.push(nextNext);
+              // appBodyRef.loadIframe.push(nextNext);
               appBodyRef.nowPlaying.set(nextNext);
             }
           } else {

@@ -11,7 +11,7 @@ pauseEverythingElse = function(id) {
           window['scplayer-'+post._id].seek(0);
           window['scplayer-' + post._id].pause();
         } else {
-          if (nowPlaying.type !== 'youtube') {
+          if (nowPlaying.type !== 'youtube' && window['ytplayer'] && window['ytplayer'].l) {
             window['ytplayer'].pauseVideo();
           }
         }
@@ -84,17 +84,20 @@ Template.playlist.events({
     },
     "click .sr-playlist__play--play": function (event, template) {
         let selectedId = this._id;
+        let selectedType = this.type;
         let selectedPost = Posts.findOne(selectedId);
         let nowPlaying = appBodyRef.nowPlaying.get();
 
-        if (selectedPost.type === 'youtube') {
+        if (selectedType === 'youtube') {
           if (nowPlaying && nowPlaying._id === selectedId) {
+            appBodyRef.state.set(1);
             window['ytplayer'].playVideo();
           } else {
             appBodyRef.nowPlaying.set(selectedPost);
           }
         } else {
           appBodyRef.nowPlaying.set(selectedPost);
+          appBodyRef.state.set(1);
           window['scplayer-' + selectedId].play();
         }
 
@@ -104,12 +107,14 @@ Template.playlist.events({
     },
     "click .sr-playlist__play--paused": function (event, template) {
         let selectedId = this._id;
-        let selectedPost = Posts.findOne(selectedId);
+        let selectedType = this.type;
 
-        if (selectedPost.type === 'youtube') {
-            window['ytplayer'].pauseVideo();
+        if (selectedType === 'youtube') {
+          appBodyRef.state.set(2);
+          window['ytplayer'].pauseVideo();
         } else {
-            window['scplayer-' + selectedId].pause();
+          appBodyRef.state.set(2);
+          window['scplayer-' + selectedId].pause();
         }
     },
     "click .sr-playlist__remove": function (event, template) {

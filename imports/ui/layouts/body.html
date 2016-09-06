@@ -4,8 +4,8 @@
     {{#if signUp}}
       <div class="onboarding-popup">
           <h3>Welcome to the <span class="onboarding-popup__color">Village Beta!</span></h3>
-          {{#if village}}
-            <p>{{village.name}} Village is a community playlist where your taste matters.</p>
+          {{#if getVillage}}
+            <p>{{getVillage.name}} Village is a community playlist where your taste matters.</p>
           {{else}}
             <p>Village is one big playlist made up of community playlists where your taste matters.</p>
           {{/if}}

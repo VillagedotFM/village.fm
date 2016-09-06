@@ -62,26 +62,26 @@ Template.playlist.helpers({
       return posts;
     }
   },
-  showInbox() {
-      return appBodyRef.inboxOpen.get();
-  },
-  inboxItems() {
-    var inboxItems = [];
-    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-      const post = Posts.findOne(inboxItem.postId);
-      if(FlowRouter.getParam('villageSlug')){
-        if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
-           inboxItems.push(post);
-        }
-      } else {
-        inboxItems.push(post);
-      }
-    });
-    return inboxItems;
-  },
-  inboxPost: function () {
-      return Posts.findOne(this.postId);
-  },
+  // showInbox() {
+  //     return appBodyRef.inboxOpen.get();
+  // },
+  // inboxItems() {
+  //   var inboxItems = [];
+  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+  //     const post = Posts.findOne(inboxItem.postId);
+  //     if(FlowRouter.getParam('villageSlug')){
+  //       if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
+  //          inboxItems.push(post);
+  //       }
+  //     } else {
+  //       inboxItems.push(post);
+  //     }
+  //   });
+  //   return inboxItems;
+  // },
+  // inboxPost: function () {
+  //     return Posts.findOne(this.postId);
+  // },
   sentAgo: function (createdAt) {
       return moment(createdAt).fromNow();
   },

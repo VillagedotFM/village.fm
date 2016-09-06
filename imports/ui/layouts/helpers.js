@@ -5,8 +5,4 @@ Template.app_body.helpers({
   guestAction: function(){
     return appBodyRef.guestAction.get();
   },
-  village() {
-		const villageSlug = FlowRouter.getParam('villageSlug');
-		return Villages.findOne({slug: villageSlug});
-	}
 });

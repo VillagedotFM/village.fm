@@ -29,10 +29,9 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
 
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
-      let nowPlaying = appBodyRef.nowPlaying.get();
-      if (nowPlaying && nowPlaying._id === post._id) {
-        appBodyRef.state.set(1);
-      }
+      // appBodyRef.state.set(1);
+      pauseEverythingElse(post._id);
+
       Meteor.call('listenPost', post._id, function(err, data) {
         if (err) {
           console.log(err);
@@ -85,16 +84,14 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
       });
       */
 
-      pauseEverythingElse(post._id);
       // appBodyRef.prevPost.set(allPosts[index - 1]);
       // appBodyRef.nextPost.set(allPosts[index + 1]);
-      appBodyRef.nowPlaying.set(post);
     });
 
     window['scplayer-'+post._id].on('pause', function(event){
       let nowPlaying = appBodyRef.nowPlaying.get();
       if (nowPlaying && nowPlaying._id === post._id) {
-        appBodyRef.state.set(2);
+        // appBodyRef.state.set(2);
       }
     });
 
@@ -108,7 +105,7 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
           if (window['ytplayer-'+nextPost._id]) {
             window['ytplayer-'+nextPost._id].playVideo();
           } else {
-            appBodyRef.loadIframe.push(nextPost);
+            // appBodyRef.loadIframe.push(nextPost);
             appBodyRef.nowPlaying.set(nextPost);
           }
         } else {
@@ -118,7 +115,7 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
               if (window['ytplayer-'+nextNext._id]) {
                 window['ytplayer-'+nextNext._id].playVideo();
               } else {
-                appBodyRef.loadIframe.push(nextNext);
+                // appBodyRef.loadIframe.push(nextNext);
                 appBodyRef.nowPlaying.set(nextNext);
               }
             } else {
@@ -157,99 +154,99 @@ createYTPlayer = function(p) {     //Initialize the yt player
 
     event.target.addEventListener('onStateChange', function(event) {
       let post = appBodyRef.nowPlaying.get();
-      if (post.type === 'youtube')
+      if (post.type === 'youtube') {
         appBodyRef.state.set(event.data);           //Keep track of player state
 
-      if(event.data === 0){           //ENDED
-        // window['state-'+post._id] = 2;
+        if(event.data === 0){           //ENDED
+          // window['state-'+post._id] = 2;
 
-        // let nextPost = appBodyRef.nextPost.get();
+          // let nextPost = appBodyRef.nextPost.get();
 
-        // if (nextPost) { //Play next post if it exists
-        //   window['state-'+nextPost._id] = 2;
-        //   if (nextPost.type === 'youtube') {
-        //     if (window['ytplayer-'+nextPost._id]) {
-        //       window['ytplayer-'+nextPost._id].playVideo();
-        //     } else {
-        //       appBodyRef.loadIframe.push(nextPost);
-        //       appBodyRef.nowPlaying.set(nextPost);
-        //     }
-        //   } else {
-        //     if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
-        //       let nextNext = allPosts[index[0] + 2];
-        //       if (nextNext.type === 'youtube') {
-        //         if (window['ytplayer-'+nextNext._id]) {
-        //           window['ytplayer-'+nextNext._id].playVideo();
-        //         } else {
-        //           appBodyRef.loadIframe.push(nextNext);
-        //           appBodyRef.nowPlaying.set(nextNext);
-        //         }
-        //       } else {
-        //         window['scplayer-' + nextNext._id].play();
-        //       }
-        //     } else {
-        //       window['scplayer-' + nextPost._id].play();
-        //     }
-        //   }
-        //   // appBodyRef.nowPlaying.set(nextPost);
-        // }
-      } else if(event.data === 1){    //PLAYING
-        // window['state-'+post._id] = 1;
-        if (post.type === 'youtube') {
-          pauseEverythingElse(post._id);
+          // if (nextPost) { //Play next post if it exists
+          //   window['state-'+nextPost._id] = 2;
+          //   if (nextPost.type === 'youtube') {
+          //     if (window['ytplayer-'+nextPost._id]) {
+          //       window['ytplayer-'+nextPost._id].playVideo();
+          //     } else {
+          //       appBodyRef.loadIframe.push(nextPost);
+          //       appBodyRef.nowPlaying.set(nextPost);
+          //     }
+          //   } else {
+          //     if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+          //       let nextNext = allPosts[index[0] + 2];
+          //       if (nextNext.type === 'youtube') {
+          //         if (window['ytplayer-'+nextNext._id]) {
+          //           window['ytplayer-'+nextNext._id].playVideo();
+          //         } else {
+          //           appBodyRef.loadIframe.push(nextNext);
+          //           appBodyRef.nowPlaying.set(nextNext);
+          //         }
+          //       } else {
+          //         window['scplayer-' + nextNext._id].play();
+          //       }
+          //     } else {
+          //       window['scplayer-' + nextPost._id].play();
+          //     }
+          //   }
+          //   // appBodyRef.nowPlaying.set(nextPost);
+          // }
+        } else if(event.data === 1){    //PLAYING
+          if (post.type === 'youtube') {
+            pauseEverythingElse(post._id);
 
-          Meteor.call('listenPost', post._id, function(err, data) {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("Listened!" + post._id);
-            }
-          });
-
-
-          let checkIfListened = setInterval(function(){
-            const isPlaying = appBodyRef.state.get();
-            const completed = appBodyRef.completed.get();
-            const post = appBodyRef.nowPlaying.get();
-            if(post && true == parseInt(completed) > 4){
-              mixpanel.track('Listened to a Song', {
-                area: 'Playlist',
-                postId: post._id
-              });
-              mixpanel.people.set({
-                  'dateOfLastListen': new Date().toISOString()
-              });
-              clearInterval(checkIfListened);
-            }
-          }, 1000);
-
-          setInterval(function(){
-            const isPlaying = appBodyRef.state.get();
-            if(isPlaying === 1){
-              let completed = appBodyRef.completed.get();
-              if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
-                window.analytics.totalMinutesListened = window.analytics.totalMinutesListened + 1;
-                mixpanel.register({
-                    'totalMinutesListened': window.analytics.totalMinutesListened
-                });
-
-                mixpanel.people.increment({
-                    'totalMinutesListened': 1
-                });
+            Meteor.call('listenPost', post._id, function(err, data) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Listened!" + post._id);
               }
-            }
-          }, 1000);
-        }
+            });
 
-        // debugger;
-        // appBodyRef.prevPost.set(allPosts[index - 1]);
-        // appBodyRef.nextPost.set(allPosts[index + 1]);
-        // appBodyRef.nowPlaying.set(post);
-      } else if (event.data === 2) {  //PAUSED
-        // window['state-'+post._id] = 2;
-        // if (appBodyRef.nowPlaying.get() !== post) {
-        //   window['ytplayer-' + post._id].seekTo(0);
-        // }
+
+            let checkIfListened = setInterval(function(){
+              const isPlaying = appBodyRef.state.get();
+              const completed = appBodyRef.completed.get();
+              const post = appBodyRef.nowPlaying.get();
+              if(post && true == parseInt(completed) > 4){
+                mixpanel.track('Listened to a Song', {
+                  area: 'Playlist',
+                  postId: post._id
+                });
+                mixpanel.people.set({
+                    'dateOfLastListen': new Date().toISOString()
+                });
+                clearInterval(checkIfListened);
+              }
+            }, 1000);
+
+            setInterval(function(){
+              const isPlaying = appBodyRef.state.get();
+              if(isPlaying === 1){
+                let completed = appBodyRef.completed.get();
+                if(parseInt(completed) > 0 && parseInt(completed) % 60 === 0){
+                  window.analytics.totalMinutesListened = window.analytics.totalMinutesListened + 1;
+                  mixpanel.register({
+                      'totalMinutesListened': window.analytics.totalMinutesListened
+                  });
+
+                  mixpanel.people.increment({
+                      'totalMinutesListened': 1
+                  });
+                }
+              }
+            }, 1000);
+          }
+
+          // debugger;
+          // appBodyRef.prevPost.set(allPosts[index - 1]);
+          // appBodyRef.nextPost.set(allPosts[index + 1]);
+          // appBodyRef.nowPlaying.set(post);
+        } else if (event.data === 2) {  //PAUSED
+          // window['state-'+post._id] = 2;
+          // if (appBodyRef.nowPlaying.get() !== post) {
+          //   window['ytplayer-' + post._id].seekTo(0);
+          // }
+        }
       }
     });
 
@@ -277,6 +274,7 @@ Template.feed.onCreated(function feedOnCreated() {
       if (nowPlaying.type === 'youtube') {    //Grab the post and make sure it's youtube
         //If there is no player, initialize with post; if there is, load post
         if (window['ytplayer'] && window['ytplayer'].l) {
+          appBodyRef.state.set(-1);
           window['ytplayer'].loadVideoById(nowPlaying.vidId);
         } else {
           //Make sure YT API is loaded

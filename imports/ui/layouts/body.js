@@ -99,7 +99,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
-  appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
+  // appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
   appBodyRef.prevPost = new ReactiveVar(null);
   appBodyRef.nextPost = new ReactiveVar(null);
@@ -152,21 +152,6 @@ Template.app_body.onRendered(function() {
   //     }
   //   }
   // });
-
-  Tracker.autorun(function() {
-    let post = appBodyRef.nowPlaying.get();
-    var scrubber = document.getElementById('bottom-slider');
-    $(scrubber).on("input change", function() {
-      let completed = appBodyRef.completed.get();
-      let duration = '00:' + post.duration; //5:08 -> 00:05:08 for moment weirdness
-      let seek = ($(scrubber).val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
-      if (post.type === 'youtube') {
-        window['ytplayer-'+post._id].seekTo(seek, true);
-      } else {
-        window['scplayer-'+post._id].seek(seek*1000);
-      }
-    });
-  });
 
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
