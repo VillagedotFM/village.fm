@@ -86,7 +86,7 @@ Accounts.onCreateUser(function (options, user) {
         smtpTransport.sendMail(mailOptions, function(error, response) {
             smtpTransport.close();
 
-            console.log( error || "Message sent");
+            console.log( error || "Welcome Email to: "+ user.services.facebook.email +" - Message sent");
         });
     }
 

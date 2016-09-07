@@ -83,7 +83,7 @@ SyncedCron.add({
 				smtpTransport.sendMail(mailOptions, function(error, response) {
 				  smtpTransport.close();
 
-				  console.log( error || "Message sent");
+					console.log( error || "No first post in a 24 hours - Message sent to: "+user.services.facebook.email);
 				});
 	    }
     });
@@ -98,8 +98,8 @@ SyncedCron.add({
   name: 'mostUpvotedUserWeek',
   timezone: 'Australia/Sydney',
   schedule: function(parser) {
-    // run once a week 4:00 pm CEST
-    return parser.text('at 00:00 pm on Thursday');
+    // run once a week - on the first day of the week
+    return parser.text('on the first day of the week');
   },
   job: function() {
     // Define Last 7 days
@@ -148,7 +148,7 @@ SyncedCron.add({
 			smtpTransport.sendMail(mailOptions, function(error, response) {
 				smtpTransport.close();
 
-				console.log( error || "Message sent");
+				console.log( error || "Most Upvoted User in a Week - Message sent to "+user.services.facebook.email);
 			});
 		}
   }
@@ -209,7 +209,7 @@ SyncedCron.add({
 			smtpTransport.sendMail(mailOptions, function(error, response) {
 				smtpTransport.close();
 
-				console.log( error || "Message sent");
+				console.log( error || "Most Upvoted User in a Month - Message sent to: "+user.services.facebook.email);
 			});
 		}
   }
@@ -223,8 +223,8 @@ SyncedCron.add({
   name: 'mostUpvotedPostWeek',
 	timezone: 'Australia/Sydney',
   schedule: function(parser) {
-		// run once a week 4:00 pm CEST
-    return parser.text('at 00:00 pm on Thursday');
+		// run once a week - on the first day of the week
+    return parser.text('on the first day of the week');
   },
   job: function() {
     // Define Last 7 days
@@ -276,7 +276,7 @@ SyncedCron.add({
 			smtpTransport.sendMail(mailOptions, function(error, response) {
 				smtpTransport.close();
 
-				console.log( error || "Message sent");
+				console.log( error || "Most Upvoted Post in a Week - Message sent to: "+ user.services.facebook.email);
 			});
 		}
   }
@@ -339,7 +339,7 @@ SyncedCron.add({
 			smtpTransport.sendMail(mailOptions, function(error, response) {
 				smtpTransport.close();
 
-				console.log( error || "Message sent");
+				console.log( error || "Most Upvoted Post in a Month - message sent to: "+user.services.facebook.email);
 			});
 		}
   }
@@ -367,7 +367,7 @@ SyncedCron.add({
 			meta: {
 				artist: mostUpvotedPost.artist,
 				postId: mostUpvotedPost._id,
-				timeRange: 'this day',
+				timeRange: 'today',
 				trackname: mostUpvotedPost.title
 			}
 		});
@@ -379,7 +379,7 @@ SyncedCron.add({
 			to: mostUpvotedPost.createdBy,
 			value: 1,
 			meta: {
-				timeRange: 'this day',
+				timeRange: 'today',
 			}
 		});
 
@@ -470,7 +470,7 @@ SyncedCron.add({
     	// Get user details
     	const user = Meteor.users.findOne(email._id);
 
-    	if (user) {
+    	if (user.services && user.services.facebook) {
     		const userDetails = user.services.facebook;
 
     		// Define let statements
@@ -542,7 +542,7 @@ SyncedCron.add({
 							"-artist-": [email.meta.artist],
 							"-trackname-": [email.meta.title],
 							"-postId-": [email.meta.postId],
-							"-timerange-": [email.meta.timeRange],
+							"-timerange-": ['today'],
 						};
 						groupId = '1239';
 		        break;
@@ -551,7 +551,7 @@ SyncedCron.add({
 
 						sub = {
 							"-firstname-": [userDetails.first_name],
-							"-timerange-": [email.meta.timeRange],
+							"-timerange-": ['today'],
 						};
 						groupId = '1237';
 		        break;
@@ -589,7 +589,7 @@ SyncedCron.add({
 				smtpTransport.sendMail(mailOptions, function(error, response) {
 				  smtpTransport.close();
 
-				  console.log( error || "Message sent to: "+userDetails.email);
+				  console.log( error || "Daily message sent to: "+userDetails.email);
 				});
       }
     });
