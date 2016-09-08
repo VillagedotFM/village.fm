@@ -159,8 +159,8 @@ SyncedCron.add({
   name: 'mostUpvotedUserMonth',
   timezone: 'Australia/Sydney',
   schedule: function(parser) {
-    // run once a month on the last day
-    return parser.text('on the last day of the month');
+    // run once a month on the first day
+    return parser.text('on the first day of the month');
   },
   job: function() {
     // Define Last 30 Days
@@ -286,8 +286,8 @@ SyncedCron.add({
   name: 'mostUpvotedPostMonth',
 	timezone: 'Australia/Sydney',
   schedule: function(parser) {
-		// run once a month on the last day
-    return parser.text('on the last day of the month');
+		// run once a month on the first day
+    return parser.text('on the first day of the month');
   },
   job: function() {
     // Define Last 30 Days
