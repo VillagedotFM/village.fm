@@ -226,11 +226,16 @@ Template.feed.events({
         appBodyRef.nowPlaying.set(selectedPost);
       }
     } else {
-      appBodyRef.nowPlaying.set(selectedPost);
-      if (state === 1) {
-        appBodyRef.state.set(2);
-        window['scplayer-' + selectedId].pause();
+      if (nowPlaying && nowPlaying._id === selectedId) {
+        if (state === 1) {
+          appBodyRef.state.set(2);
+          window['scplayer-' + selectedId].pause();
+        } else {
+          appBodyRef.state.set(1);
+          window['scplayer-' + selectedId].play();
+        }
       } else {
+        appBodyRef.nowPlaying.set(selectedPost);
         appBodyRef.state.set(1);
         window['scplayer-' + selectedId].play();
       }

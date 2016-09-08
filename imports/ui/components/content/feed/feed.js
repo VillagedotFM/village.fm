@@ -151,6 +151,14 @@ createYTPlayer = function(p) {     //Initialize the yt player
 
   onPlayerReady = function(event) {
     console.log('ready');
+    let post = appBodyRef.nowPlaying.get();
+    if (post.type === 'youtube') {
+      let topy = $('#video-' + post._id).offset().top + 'px';
+      $('#ytplayer').show();
+      $('#ytplayer').css({top: topy});
+    } else {
+      $('#ytplayer').hide();
+    }
 
     event.target.addEventListener('onStateChange', function(event) {
       let post = appBodyRef.nowPlaying.get();
@@ -272,6 +280,9 @@ Template.feed.onCreated(function feedOnCreated() {
 
     if (nowPlaying) {
       if (nowPlaying.type === 'youtube') {    //Grab the post and make sure it's youtube
+        let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
+        $('#ytplayer').show();
+        $('#ytplayer').css({top: topy});
         //If there is no player, initialize with post; if there is, load post
         if (window['ytplayer'] && window['ytplayer'].l) {
           appBodyRef.state.set(-1);
@@ -289,6 +300,8 @@ Template.feed.onCreated(function feedOnCreated() {
             }
           }, 100);
         }
+      } else {
+        $('#ytplayer').hide();
       }
     }
   });
