@@ -99,6 +99,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
+  appBodyRef.notInFeed = new ReactiveVar(null);    
+
   // appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
   appBodyRef.prevPost = new ReactiveVar(null);
