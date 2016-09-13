@@ -78,7 +78,7 @@ momentjs:moment@2.13.1
 mongo@1.1.7
 mongo-id@1.0.4
 mongo-livedata@1.0.12
-npm-bcrypt@0.8.7
+npm-bcrypt@0.8.5
 npm-mongo@1.4.43
 numtel:template-from-string@0.1.0
 oauth@1.1.10
