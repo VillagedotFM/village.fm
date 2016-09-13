@@ -27,13 +27,6 @@ Posts.schema = new SimpleSchema({
     max: 20                   //Ids of villages the post was posted in
   },
 
-  villageObjects:
-  {
-    type: [Object],
-    label: "Villages",
-    defaultValue: []
-  },
-
   villageName:
   {
     type: String,
