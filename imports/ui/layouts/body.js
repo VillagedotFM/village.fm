@@ -69,6 +69,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
+  appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
 
@@ -104,7 +105,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
-  $('.sr-playlist').perfectScrollbar();
+  $('.sr-playlist, .onboarding-popup__terms, .onboarding-popup__policy').perfectScrollbar();
   $('.wrapper').scrollTop(0);
   $('.sr-playlist').scrollTop(0);
 
@@ -147,6 +148,7 @@ Template.app_body.onRendered(function() {
     });
   });
 
+
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();
@@ -161,5 +163,4 @@ Template.app_body.onRendered(function() {
 
     appBodyRef.mobile.set(true);
   }
-
 });

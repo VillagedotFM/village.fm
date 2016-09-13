@@ -8,5 +8,8 @@ Template.app_body.helpers({
   village() {
 		const villageSlug = FlowRouter.getParam('villageSlug');
 		return Villages.findOne({slug: villageSlug});
-	}
+	},
+  showTermsOrPolicy: function() {
+    return appBodyRef.showTermsOrPolicy.get();
+  }
 });
