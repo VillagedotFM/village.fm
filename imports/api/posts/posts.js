@@ -18,6 +18,36 @@ Posts.allow({
   remove() { return true; },
 });
 
+
+Posts.publicFields = {
+  'villages': 1,
+  'villageName': 1,
+  'villageSlug': 1,
+  'link': 1,
+  'type': 1,
+  'thumbnail': 1,
+  'vidId': 1,
+  'artist': 1,
+  'title': 1,
+  'description': 1,
+  'duration': 1,
+  'taggedUsers': 1,
+  'tags': 1,
+  'related': 1,
+  'genre': 1,
+  'creator': 1,
+  'upvotes': 1,
+  'upvotedBy': 1,
+  'upvoteObjects': 1,
+  'comments': 1,
+  'lastUpvote': 1,
+  'listens': 1,
+  'listenedBy': 1,
+  'createdAt': 1,
+  'createdBy': 1,
+  'profile': 1
+}
+
 Posts.schema = new SimpleSchema({
 
   villages:

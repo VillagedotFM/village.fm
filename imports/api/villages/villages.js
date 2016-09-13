@@ -19,6 +19,21 @@ Villages.allow({
 // Add slugs to new Villages
 Villages.friendlySlugs();
 
+Villages.publicFields = {
+  'name': 1,
+  'slug': 1,
+  'image': 1,
+  'description': 1,
+  //'posts': 1,
+  'admins': 1,
+  'users': 1,
+  //'profiles': 1,
+  'related': 1,
+  'genres': 1,
+  'createdAt': 1,
+  'createdBy': 1
+}
+
 
 Villages.schema = new SimpleSchema({
   name:
