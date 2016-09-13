@@ -25,10 +25,41 @@ Comments.schema = new SimpleSchema({
     min: 1,
     max: 1000
   },
+
   postId:
   {
     type: String,
-    label: "Post",
+    label: "Post Id",
+  },
+
+  postArtist:
+  {
+    type: String,
+    label: "Post Artist",
+    optional: true
+  },
+
+  postTitle:
+  {
+    type: String,
+    label: "Post Title",
+    optional: true
+  },
+
+  villageName:
+  {
+    type: String,
+    label: "Village Name",
+    max: 50,
+    optional: true
+  },
+
+  villageSlug:
+  {
+    type: String,
+    label: "Village Slug",
+    max: 200,
+    optional: true
   },
 
   replies: {
@@ -93,9 +124,34 @@ Comments.schema = new SimpleSchema({
 
   createdBy: {
     type: String,
+    label: "Created by Id",
     autoValue: function() {
       if( this.isInsert ) {
         return this.userId;
+      }
+    }
+  },
+
+  createdByName:
+  {
+    type: String,
+    label: "Created by Name",
+    autoValue: function() {
+      if( this.isInsert ) {
+        var user = Meteor.users.findOne({ _id: this.userId });
+        return ( user ? user.profile.name : '' )
+      }
+    }
+  },
+
+  createdByImage:
+  {
+    type: String,
+    label: "Created by Image",
+    autoValue: function() {
+      if( this.isInsert ) {
+        var user = Meteor.users.findOne({ _id: this.userId });
+        return ( user ? user.profile.picture : '' )
       }
     }
   }
