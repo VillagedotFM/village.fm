@@ -62,6 +62,14 @@ Villages.schema = new SimpleSchema({
   //   defaultValue: []
   // },
 
+  posts:
+  {
+    type: [Object],
+    label: "Posts",
+    blackbox: true,
+    defaultValue: []
+  },
+
   admins:
   {                           //Admins or Moderators or whatever
     type: [String],
