@@ -167,6 +167,32 @@ Posts.schema = new SimpleSchema({
     }
   },
 
+  upvoteObjects:
+  {
+    type: [Object],
+    label: "Upvotes",
+    blackbox: true,
+    autoValue: function(){
+      if( this.isInsert ) {
+        var user = Meteor.users.findOne({ _id: this.userId });
+        return [{
+          createdBy: this.userId,
+          createdByName: ( user ? user.profile.name : '' ),
+          createdByImage: ( user ? user.profile.picture : '' )
+        }];
+      }
+    }
+  },
+
+
+  comments:
+  {
+    type: [Object],
+    label: "Comments",
+    optional: true,
+    blackbox: true
+  },
+
   lastUpvote:
   {
     type: Date,
@@ -207,9 +233,34 @@ Posts.schema = new SimpleSchema({
 
   createdBy: {
     type: String,
+    label: "Created by Id",
     autoValue: function() {
       if( this.isInsert ) {
         return this.userId;
+      }
+    }
+  },
+
+  createdByName:
+  {
+    type: String,
+    label: "Created by Name",
+    autoValue: function() {
+      if( this.isInsert ) {
+        var user = Meteor.users.findOne({ _id: this.userId });
+        return ( user ? user.profile.name : '' )
+      }
+    }
+  },
+
+  createdByImage:
+  {
+    type: String,
+    label: "Created by Image",
+    autoValue: function() {
+      if( this.isInsert ) {
+        var user = Meteor.users.findOne({ _id: this.userId });
+        return ( user ? user.profile.picture : '' )
       }
     }
   }

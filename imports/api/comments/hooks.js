@@ -6,6 +6,23 @@ import { Posts } from '../posts/posts.js';
 import { Emails } from '../emails/emails.js';
 
 if(Meteor.isServer){
+
+  Comments.after.insert(function (userId, comment){
+    Posts.update(comment.postId, {
+      $addToSet: {
+        comments: comment
+      }
+    })
+  });
+
+  Comments.after.update(function (userId, comment, fieldNames, modifier, options) {
+    Posts.update({ _id: comment.postId, 'comments._id': comment._id}, {
+      $set: {
+        'comments.$': comment
+      }
+    });
+  });
+
   Comments.after.insert(function (userId, comment) {
     var post = Posts.findOne({_id:comment.postId});
     var username = Meteor.users.findOne(userId).profile.name;

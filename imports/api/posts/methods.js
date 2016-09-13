@@ -10,12 +10,19 @@ Meteor.methods({
 
     upvotePost: function (postId) {
 
+        var user = Meteor.users.findOne({ _id: this.userId });
+
         let affected = Posts.update({
             _id: postId,
             upvotedBy: {$ne: this.userId},
         }, {
             $addToSet: {
-                upvotedBy: this.userId
+                upvotedBy: this.userId,
+                upvoteObjects: {
+                  createdBy: this.userId,
+                  createdByName: user.profile.name,
+                  createdByImage: user.profile.picture
+                }
             },
             $inc: {
                 upvotes: 1
@@ -26,11 +33,28 @@ Meteor.methods({
         });
 
         if (!affected) {
+            // TODO: Can we do this a simpler way?
+            upvoteObjects = [];
+            var post = Posts.findOne({ _id: postId });
+
+            if(post && post.upvoteObjects){
+              post.upvoteObjects.forEach(function(upvote){
+                if(upvote.createdBy != this.userId){
+                  upvoteObjects.push(upvote);
+                }
+              });
+            }
+
             Posts.update(
                 postId
                 , {
                     $pull: {
-                        upvotedBy: this.userId
+                        upvotedBy: this.userId,
+                        upvoteObjects: {
+                          createdBy: this.userId,
+                          createdByName: user.profile.name,
+                          createdByImage: user.profile.picture
+                        }
                     },
                     $inc: {
                         upvotes: -1
@@ -72,13 +96,20 @@ Meteor.methods({
 
         _.each(fakeUsersIds, function (fakeUserId) {
 
+            var user = Meteor.users.findOne({ _id: fakeUserId });
+
             if (fakeUserId && fakeUserId != "") {
                 let affected = Posts.update({
                     _id: postId,
                     upvotedBy: {$ne: fakeUserId},
                 }, {
                     $addToSet: {
-                        upvotedBy: fakeUserId
+                        upvotedBy: fakeUserId,
+                        upvoteObjects: {
+                          createdBy: this.userId,
+                          createdByName: user.profile.name,
+                          createdByImage: user.profile.picture
+                        }
                     },
                     $inc: {
                         upvotes: 1
