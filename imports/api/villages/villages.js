@@ -90,6 +90,14 @@ Villages.schema = new SimpleSchema({
     defaultValue: []
   },
 
+  profiles:
+  {
+    type: [Object],
+    label: "Profiles",
+    blackbox: true,
+    defaultValue: []
+  },
+
   related:
   {                           //Similar villages based on similar posts
     type: [String],

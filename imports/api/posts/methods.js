@@ -4,13 +4,14 @@ import  moment  from 'moment';
 
 import { Posts } from './posts.js';
 import { Notifications } from '../notifications/notifications.js';
+import { Profiles } from '../profiles/profiles.js';
 
 //TODO: this stops video
 Meteor.methods({
 
     upvotePost: function (postId) {
 
-        var user = Meteor.users.findOne({ _id: this.userId });
+        var profile = Profiles.findOne({ createdBy: this.userId });
 
         let affected = Posts.update({
             _id: postId,
@@ -20,8 +21,7 @@ Meteor.methods({
                 upvotedBy: this.userId,
                 upvoteObjects: {
                   createdBy: this.userId,
-                  createdByName: user.profile.name,
-                  createdByImage: user.profile.picture
+                  profile: profile
                 }
             },
             $inc: {
@@ -33,18 +33,6 @@ Meteor.methods({
         });
 
         if (!affected) {
-            // TODO: Can we do this a simpler way?
-            upvoteObjects = [];
-            var post = Posts.findOne({ _id: postId });
-
-            if(post && post.upvoteObjects){
-              post.upvoteObjects.forEach(function(upvote){
-                if(upvote.createdBy != this.userId){
-                  upvoteObjects.push(upvote);
-                }
-              });
-            }
-
             Posts.update(
                 postId
                 , {
@@ -52,8 +40,7 @@ Meteor.methods({
                         upvotedBy: this.userId,
                         upvoteObjects: {
                           createdBy: this.userId,
-                          createdByName: user.profile.name,
-                          createdByImage: user.profile.picture
+                          profile: profile
                         }
                     },
                     $inc: {
@@ -96,7 +83,7 @@ Meteor.methods({
 
         _.each(fakeUsersIds, function (fakeUserId) {
 
-            var user = Meteor.users.findOne({ _id: fakeUserId });
+            var profile = Profiles.findOne({ createdBy: fakeUserId });
 
             if (fakeUserId && fakeUserId != "") {
                 let affected = Posts.update({
@@ -107,8 +94,7 @@ Meteor.methods({
                         upvotedBy: fakeUserId,
                         upvoteObjects: {
                           createdBy: this.userId,
-                          createdByName: user.profile.name,
-                          createdByImage: user.profile.picture
+                          profile: profile
                         }
                     },
                     $inc: {
@@ -124,7 +110,11 @@ Meteor.methods({
                         postId
                         , {
                             $pull: {
-                                upvotedBy: fakeUserId
+                                upvotedBy: fakeUserId,
+                                upvoteObjects: {
+                                  createdBy: this.userId,
+                                  profile: profile
+                                }
                             },
                             $inc: {
                                 upvotes: -1

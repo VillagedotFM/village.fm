@@ -16,8 +16,7 @@ if(Meteor.isServer){
       comment.postTitle = ( post.title ? post.title : '' );
       comment.villageName = ( post.villageName ? post.villageName : '' );
       comment.villageSlug = ( post.villageSlug ? post.villageSlug : '' );
-      comment.createdByName = ( user ? user.profile.name : '' );
-      comment.createdByImage = ( user ? user.profile.picture : '' );
+      comment.profile = ( post.profile ? post.profile : {});
     }
   });
 
@@ -31,8 +30,7 @@ if(Meteor.isServer){
         modifier.$push.replies.postTitle = ( post.title ? post.title : '' );
         modifier.$push.replies.villageName = ( post.villageName ? post.villageName : '' );
         modifier.$push.replies.villageSlug = ( post.villageSlug ? post.villageSlug : '' );
-        modifier.$push.replies.createdByName = ( user ? user.profile.name : '' );
-        modifier.$push.replies.createdByImage = ( user ? user.profile.picture : '' );
+        modifier.$push.replies.profile = ( post.profile ? post.profile : {} );
       }
     }
   });

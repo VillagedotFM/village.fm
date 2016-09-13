@@ -132,28 +132,11 @@ Comments.schema = new SimpleSchema({
     }
   },
 
-  createdByName:
-  {
-    type: String,
-    label: "Created by Name",
-    autoValue: function() {
-      if( this.isInsert ) {
-        var user = Meteor.users.findOne({ _id: this.userId });
-        return ( user ? user.profile.name : '' )
-      }
-    }
-  },
-
-  createdByImage:
-  {
-    type: String,
-    label: "Created by Image",
-    autoValue: function() {
-      if( this.isInsert ) {
-        var user = Meteor.users.findOne({ _id: this.userId });
-        return ( user ? user.profile.picture : '' )
-      }
-    }
+  profile: {
+    type: Object,
+    label: "Profile",
+    blackbox: true,
+    optional: true
   }
 
 });

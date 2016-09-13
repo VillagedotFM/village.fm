@@ -1,6 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+import { Profiles } from '../profiles/profiles.js';
+
 export const Posts = new Mongo.Collection('posts');
 
 //TODO: Remove Allow's and uncomment Deny's + add methods for post insert
@@ -45,7 +47,7 @@ Posts.schema = new SimpleSchema({
     type: String,
     label: "Primary Village Slug",
     max: 200,
-    optional: true              
+    optional: true
   },
 
   link:
@@ -181,11 +183,11 @@ Posts.schema = new SimpleSchema({
     blackbox: true,
     autoValue: function(){
       if( this.isInsert ) {
-        var user = Meteor.users.findOne({ _id: this.userId });
+        var profile = Profiles.findOne({ createdBy: this.userId });
+
         return [{
           createdBy: this.userId,
-          createdByName: ( user ? user.profile.name : '' ),
-          createdByImage: ( user ? user.profile.picture : '' )
+          profile: profile
         }];
       }
     }
@@ -248,26 +250,14 @@ Posts.schema = new SimpleSchema({
     }
   },
 
-  createdByName:
-  {
-    type: String,
-    label: "Created by Name",
-    autoValue: function() {
+  profile: {
+    type: Object,
+    label: "Profile",
+    blackbox: true,
+    autoValue: function(){
       if( this.isInsert ) {
-        var user = Meteor.users.findOne({ _id: this.userId });
-        return ( user ? user.profile.name : '' )
-      }
-    }
-  },
-
-  createdByImage:
-  {
-    type: String,
-    label: "Created by Image",
-    autoValue: function() {
-      if( this.isInsert ) {
-        var user = Meteor.users.findOne({ _id: this.userId });
-        return ( user ? user.profile.picture : '' )
+        var profile = Profiles.findOne({ createdBy: this.userId });
+        return profile;
       }
     }
   }
