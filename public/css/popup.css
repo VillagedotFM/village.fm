@@ -323,6 +323,13 @@
   -webkit-backface-visibility: hidden;
 }
 
+.onboarding-popup__content > h3{
+    font-size: 24px;
+    color: #6d6b6b;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
 .onboarding-popup__content p {
   font-size: 18px;
   line-height: 1.56;
@@ -335,15 +342,15 @@
 
 .onboarding-popup__content strong {
   display: block;
-  margin: 30px 0 20px;
-  font-size: 20px;
+  font-size: 19px;
   color: #2e2f2f;
+  margin-top: 20px;
 }
 
 .onboarding-popup__content small {
   display: inline-block;
   font-size: 12px;
-  margin-top: 10px;
+  color: #757979;
 }
 
 .onboarding-popup__content.expanded {
@@ -356,8 +363,8 @@
   left: 30px;
   right: 30px;
   max-height: 224px;
-  margin-top: 15px;
-  padding: 15px;
+  margin-top: 16px;
+  padding: 14px;
   border: solid 1px #f4f6f8;
   border-radius: 4px;
   background: #fff;
@@ -394,9 +401,10 @@
     display: inline-block;
     border: 2px solid #3b5998;
     color: #3b5998 !important;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 0;
     padding: 7px 30px;
     font-weight: 600;
     vertical-align: middle;
@@ -405,11 +413,15 @@
   text-decoration: none;
 }
 .onboarding-popup__button img{
-    vertical-align: text-top;
+    vertical-align: middle;
     margin-right: 12px;
 }
 .onboarding-popup__button span{
     vertical-align: middle;
+}
+
+.onboarding-popup__color{
+    color: #ff7260;
 }
 @media (max-width: 668px){
     .onboarding-popup__panel {
@@ -569,38 +581,28 @@
     }
 }
 /*====================================unlogin Style===========================================*/
-.header__unloged {
-  display: inline-block;
-  border: 2px solid #3b5998;
-  color: #3b5998 !important;
-  margin-top: -5px;
-  border-radius: 20px;
-  font-size: 17px;
-  padding: 7px 30px;
-  font-weight: 600;
-  vertical-align: middle;
-  cursor: pointer;
+.header__unloged{
+    display: none;
+    font-size: 12px;
+    color: #2e2f2f;
+    padding-right: 15px;
+    cursor: pointer;
 }
-.header__unloged:hover {
-  text-decoration: none;
+.header__unloged.active{
+    display: inline-block;
+}
+.header__unloged a{
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
 }
 .header__unloged img{
-    vertical-align: text-top;
-    margin-right: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 9px;
 }
 .header__unloged span{
     vertical-align: middle;
-}
-@media screen and (max-width: 767px) {
-  .header__unloged {
-    margin-top: -10px;
-    margin-right: 0px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .header__unloged img {
-    display: none;
-  }
 }
 
 /*====================================Song switcher Style===========================================*/

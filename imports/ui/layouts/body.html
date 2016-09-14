@@ -6,10 +6,24 @@
       <div class="onboarding-popup__panel">
         <div class="onboarding-popup__header">LOGIN FIRST :)</div>
         <div class="onboarding-popup__content {{#if showTermsOrPolicy}}expanded {{showTermsOrPolicy}}{{/if}}">
-          <p>Before Follow the <a href="#">Awesome Village</a> <br> we need you to click on that button below.</p>
-          <strong>Thank You!</strong>
+
+          {{#if signUp}}
+            <h3>Welcome to the <span class="onboarding-popup__color">Village Beta!</span></h3>
+            {{#if village}}
+              <p>{{village.name}} Village is a community playlist where your taste matters.</p>
+            {{else}}
+              <p>Village is one big playlist made up of community playlists where your taste matters.</p>
+            {{/if}}
+            <strong>Thanks for building it with us!</strong>
+          {{/if}}
+
+          {{#if guestAction}}
+          <h3>Sign in to upvote!</h3>
+          <p>Just sign in to vote on the best music in all of the Villages.</p>
+          {{/if}}
+
           <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with Facebook</span></a>
-          <small>By signing up, you agree to our <a href="#Terms-of-Services">Terms of Services</a> and <a href="#Privacy-Policy">Privacy Policy</a>.</small>
+          <p><small>By signing up, you agree to our <a href="#Terms-of-Services">Terms of Services</a> and <a href="#Privacy-Policy">Privacy Policy</a>.</small></p>
 
           <div class="onboarding-popup__terms">
             <!-- It would be good to create separate template for this and policy and just include it here, to make file look more cleaner and concise -->
