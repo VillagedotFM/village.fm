@@ -49,10 +49,10 @@ Template.app_body.events({
       }
     });
   },
-  'click a[href="#Terms-of-Services"]': () => {
+  'click .onboarding-popup__terms-link': () => {
     appBodyRef.showTermsOrPolicy.set('terms');
   },
-  'click a[href="#Privacy-Policy"]': () => {
+  'click .onboarding-popup__policy-link': () => {
     appBodyRef.showTermsOrPolicy.set('policy');
   },
   'click .onboarding-popup__overlay': () => {
