@@ -49,6 +49,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         });
       }
     }});
+    this.subscribe('comments.all');
     this.subscribe('villages.all', { slug: this.getVillageSlug() });
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');

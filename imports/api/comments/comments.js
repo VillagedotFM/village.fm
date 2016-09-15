@@ -15,6 +15,19 @@ Comments.allow({
   remove() { return true; },
 });
 
+Comments.publicFields = {
+  content: 1,
+  postId: 1,
+  postArtist: 1,
+  postTitle: 1,
+  villageName: 1,
+  villageSlug: 1,
+  replies: 1,
+  likes: 1,
+  createdAt: 1,
+  createdBy: 1,
+  profile: 1
+}
 
 Comments.schema = new SimpleSchema({
 
