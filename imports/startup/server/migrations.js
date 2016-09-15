@@ -29,7 +29,7 @@ Migrations.add({
 
     const comments = Comments.find();
     for(let i = 0; i < comments.length; i++){
-      let comments = comments[i];
+      let comment = comments[i];
       const post = Posts.findOne({ _id: comment.postId });
       const profile = Profiles.findOne({ createdBy: comment.createdBy });
 
