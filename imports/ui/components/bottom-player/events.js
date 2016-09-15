@@ -46,11 +46,22 @@ Template.bottom_player.events({
             mixpanel.people.increment({
                 'totalPostsUpvoted': -1
             });
-          } 
+          }
         }
       });
     } else {
       appBodyRef.guestAction.set('upvotePost');
+    }
+  },
+  "change #bottom-slider": function(){
+    let duration = '00:' + this.duration; //5:08 -> 00:05:08 for moment weirdness
+    let seek = ($('#bottom-slider').val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
+    if (this.type === 'youtube') {
+      window['ytplayer'].seekTo(seek, true);
+      appBodyRef.completed.set(seek);
+    } else {
+      window['scplayer-'+this._id].seek(seek*1000);
+      appBodyRef.completed.set(seek*1000);
     }
   },
 });

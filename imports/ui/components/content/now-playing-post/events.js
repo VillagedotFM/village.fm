@@ -1,4 +1,4 @@
-Template.feed.events({
+Template.nowPlayingPost.events({ 
   "click .post__comments": function(event, template){
     let id = this._id;
     let comment = $('.comments-block[data-id="' + id +'"]');

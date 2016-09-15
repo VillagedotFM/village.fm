@@ -29,9 +29,8 @@
                   <span class="bottom-progress-bar__time-start hidden-mobile">{{completed}}</span>
                   <span class="bottom-progress-bar__time-finish hidden-mobile">{{duration}}</span>
                   <div class="bottom-progress-bar__line">
-                    <input type="range" class="bottom-progress-bar__range" id="bottom-slider"
-                    value="{{completedPercentage}}">
-                      <span class="bottom-progress-bar__range" style="width: {{completedPercentage}}%"></span>
+                    <input type="range" class="bottom-progress-bar__range" id="bottom-slider">
+                    <span class="bottom-progress-bar__range" id="bottom-line" style="width: {{completedPercentage}}%"></span>
                   </div>
               </div>
           </div>

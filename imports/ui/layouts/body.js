@@ -29,6 +29,27 @@ import '../components/mobile-content/mobile-content.js';
 
 
 Template.app_body.onCreated(function appBodyOnCreated() {
+
+  //configure spinner
+  Meteor.Spinner.options = {
+    lines: 13, // The number of lines to draw
+    length: 8, // The length of each line
+    width: 3, // The line thickness
+    radius: 10, // The radius of the inner circle
+    corners: 0.7, // Corner roundness (0..1)
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#fff', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: true, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: 'auto', // Top position relative to parent in px
+    left: 'auto' // Left position relative to parent in px
+  };
+
   //TODO: remove (for testing purposes only)
   this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
@@ -74,12 +95,14 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.postSuccess = new ReactiveVar(null);
 
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
-  appBodyRef.isPlaying = new ReactiveVar(null);
+
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
-  appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
+  appBodyRef.notInFeed = new ReactiveVar(null);    
+
+  // appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
   appBodyRef.prevPost = new ReactiveVar(null);
   appBodyRef.nextPost = new ReactiveVar(null);
@@ -110,43 +133,28 @@ Template.app_body.onRendered(function() {
   $('.sr-playlist').scrollTop(0);
 
 
-  Tracker.autorun(function(comp) {
-    let order = appBodyRef.postOrder.get();
-    if (order[0]) {
-      appBodyRef.nowPlaying.set(order[0]);
-      comp.stop();
-    }
-  });
-
-  Tracker.autorun(function(){
-    let order = appBodyRef.postOrder.get();
-
-    if (appBodyRef.nowPlaying.get() !== null) {
-      let indexes = $.map(order, function(post, index) {
-        if(post._id === appBodyRef.nowPlaying.get()._id) {
-          return index;
-        }
-      });
-      if (typeof indexes[0] === 'undefined') {
-        appBodyRef.nowPlaying.set(order[0]);
-      }
-    }
-  });
-
-  Tracker.autorun(function() {
-    let post = appBodyRef.nowPlaying.get();
-    var scrubber = document.getElementById('bottom-slider');
-    $(scrubber).on("input change", function() {
-      let completed = appBodyRef.completed.get();
-      let duration = '00:' + post.duration; //5:08 -> 00:05:08 for moment weirdness
-      let seek = ($(scrubber).val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
-      if (post.type === 'youtube') {
-        window['ytplayer-'+post._id].seekTo(seek, true);
-      } else {
-        window['scplayer-'+post._id].seek(seek*1000);
-      }
-    });
-  });
+  // Tracker.autorun(function(comp) {
+  //   let order = appBodyRef.postOrder.get();
+  //   if (order[0]) {
+  //     appBodyRef.nowPlaying.set(order[0]);
+  //     comp.stop();
+  //   }
+  // });
+  //
+  // Tracker.autorun(function(){
+  //   let order = appBodyRef.postOrder.get();
+  //
+  //   if (appBodyRef.nowPlaying.get() !== null) {
+  //     let indexes = $.map(order, function(post, index) {
+  //       if(post._id === appBodyRef.nowPlaying.get()._id) {
+  //         return index;
+  //       }
+  //     });
+  //     if (typeof indexes[0] === 'undefined') {
+  //       appBodyRef.nowPlaying.set(order[0]);
+  //     }
+  //   }
+  // });
 
 
   //TODO: use reactive-var instead of show/hide

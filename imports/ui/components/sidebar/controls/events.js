@@ -1,36 +1,41 @@
 Template.controls.events({
-  "click .sr-controls__play--play": function(event, template){
-    var currentPost;
+  "click .sr-controls__play": function(event, template){
+    let currentPost;
+    let state = appBodyRef.state.get();
+    let nowPlaying = appBodyRef.nowPlaying.get();
     //If no post is current selected, play the first
-    if (appBodyRef.nowPlaying.get()) {
-      currentPost = appBodyRef.nowPlaying.get();
+    if (nowPlaying) {
+      currentPost = nowPlaying;
     } else {
-      currentPost = appBodyRef.displayPosts.get()[0];
+      currentPost = appBodyRef.postOrder.get()[0];
     }
 
     if (currentPost.type === 'youtube') {
-      if (window['ytplayer-'+currentPost._id]) {
-        window['ytplayer-'+currentPost._id].playVideo();
+      if (nowPlaying && window['ytplayer']) {
+        if (state === 1) {
+          appBodyRef.state.set(2);
+          window['ytplayer'].pauseVideo();
+        } else {
+          appBodyRef.state.set(1);
+          window['ytplayer'].playVideo();
+        }
       } else {
-        appBodyRef.loadIframe.push(currentPost);
         appBodyRef.nowPlaying.set(currentPost);
       }
     } else {
-      window['scplayer-' + currentPost._id].play();
+      if (state === 1) {
+        appBodyRef.state.set(2);
+        window['scplayer-' + currentPost._id].pause();
+      } else {
+        appBodyRef.nowPlaying.set(currentPost);
+        appBodyRef.state.set(1);
+        window['scplayer-' + currentPost._id].play();
+      }
     }
 
     mixpanel.track('Clicked play button', {
       area: 'Controls'
     });
-  },
-  "click .sr-controls__play--paused": function(event, template){
-    let currentPost = appBodyRef.nowPlaying.get();
-    if (currentPost.type === 'youtube') {
-      window['ytplayer-' + currentPost._id].pauseVideo();
-    } else {
-      window['scplayer-' + currentPost._id].pause();
-    }
-    appBodyRef.isPlaying.set(false);
   },
   "click .sr-controls__prev": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
@@ -61,7 +66,7 @@ Template.controls.events({
           if (window['ytplayer-'+prevPost._id]) {
             window['ytplayer-'+prevPost._id].playVideo();
           } else {
-            appBodyRef.loadIframe.push(prevPost);
+            // appBodyRef.loadIframe.push(prevPost);
             appBodyRef.nowPlaying.set(prevPost);
           }
         } else {
@@ -71,7 +76,7 @@ Template.controls.events({
               if (window['ytplayer-'+prevPrev._id]) {
                 window['ytplayer-'+prevPrev._id].playVideo();
               } else {
-                appBodyRef.loadIframe.push(prevPrev);
+                // appBodyRef.loadIframe.push(prevPrev);
                 appBodyRef.nowPlaying.set(prevPrev);
               }
             } else {
@@ -101,26 +106,20 @@ Template.controls.events({
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        if (window['ytplayer-'+nextPost._id]) {
-          window['ytplayer-'+nextPost._id].playVideo();
-        } else {
-          appBodyRef.loadIframe.push(nextPost);
-          appBodyRef.nowPlaying.set(nextPost);
-        }
+        appBodyRef.nowPlaying.set(nextPost);
       } else {
         if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
           let nextNext = order[index[0] + 2];
           if (nextNext.type === 'youtube') {
-            if (window['ytplayer-'+nextNext._id]) {
-              window['ytplayer-'+nextNext._id].playVideo();
-            } else {
-              appBodyRef.loadIframe.push(nextNext);
-              appBodyRef.nowPlaying.set(nextNext);
-            }
+            appBodyRef.nowPlaying.set(nextNext);
           } else {
+            appBodyRef.nowPlaying.set(nextNext);
+            appBodyRef.state.set(1);
             window['scplayer-' + nextNext._id].play();
           }
         } else {
+          appBodyRef.nowPlaying.set(nextPost);
+          appBodyRef.state.set(1);
           window['scplayer-' + nextPost._id].play();
         }
       }
