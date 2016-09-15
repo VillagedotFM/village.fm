@@ -106,26 +106,20 @@ Template.controls.events({
 
     if (nextPost) {
       if (nextPost.type === 'youtube') {
-        if (window['ytplayer-'+nextPost._id]) {
-          window['ytplayer-'+nextPost._id].playVideo();
-        } else {
-          // appBodyRef.loadIframe.push(nextPost);
-          appBodyRef.nowPlaying.set(nextPost);
-        }
+        appBodyRef.nowPlaying.set(nextPost);
       } else {
         if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
           let nextNext = order[index[0] + 2];
           if (nextNext.type === 'youtube') {
-            if (window['ytplayer-'+nextNext._id]) {
-              window['ytplayer-'+nextNext._id].playVideo();
-            } else {
-              // appBodyRef.loadIframe.push(nextNext);
-              appBodyRef.nowPlaying.set(nextNext);
-            }
+            appBodyRef.nowPlaying.set(nextNext);
           } else {
+            appBodyRef.nowPlaying.set(nextNext);
+            appBodyRef.state.set(1);
             window['scplayer-' + nextNext._id].play();
           }
         } else {
+          appBodyRef.nowPlaying.set(nextPost);
+          appBodyRef.state.set(1);
           window['scplayer-' + nextPost._id].play();
         }
       }

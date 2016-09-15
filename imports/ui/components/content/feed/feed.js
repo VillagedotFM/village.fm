@@ -23,13 +23,8 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
 
     appBodyRef.videosReady.push(indexes[0]);
 
-    window['scplayer-'+post._id].on('state-change', function(event){
-      // console.log(event);
-    });
-
     //Pause other posts, set this as nowPlaying, set state to playing, and set prev/next posts
     window['scplayer-'+post._id].on('play', function(event){
-      // appBodyRef.state.set(1);
       pauseEverythingElse(post._id);
 
       Meteor.call('listenPost', post._id, function(err, data) {
@@ -72,60 +67,42 @@ createSCPlayer = function(post) {  //Initialize all Soundcloud players
           }
         }
       }, 1000);
-
-
-      /*
-       mixpanel.register({
-          'totalMinutesListened': appBodyRef.totalMinutesListened
-      });
-
-      mixpanel.people.increment({
-          'totalMinutesListened': 1
-      });
-      */
-
-      // appBodyRef.prevPost.set(allPosts[index - 1]);
-      // appBodyRef.nextPost.set(allPosts[index + 1]);
-    });
-
-    window['scplayer-'+post._id].on('pause', function(event){
-      let nowPlaying = appBodyRef.nowPlaying.get();
-      if (nowPlaying && nowPlaying._id === post._id) {
-        // appBodyRef.state.set(2);
-      }
     });
 
     window['scplayer-'+post._id].on('finish', function(event){
       window['scplayer-'+post._id].seek(0);     //Reset to 0 incase user wants to replay
 
-      // let nextPost = appBodyRef.nextPost.get();
+      let currentPost = appBodyRef.nowPlaying.get();
+      let order = appBodyRef.postOrder.get();
+      let index = $.map(order, function(post, index) {
+        if(post._id === currentPost._id) {
+          return index;
+        }
+      });
 
-      if (nextPost) { //Play next post if it exists
+      let nextPost = order[index[0]+1];
+      console.log(nextPost);
+      console.log(index[0]);
+
+      if (nextPost) {
         if (nextPost.type === 'youtube') {
-          if (window['ytplayer-'+nextPost._id]) {
-            window['ytplayer-'+nextPost._id].playVideo();
-          } else {
-            // appBodyRef.loadIframe.push(nextPost);
-            appBodyRef.nowPlaying.set(nextPost);
-          }
+          appBodyRef.nowPlaying.set(nextPost);
         } else {
           if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
-            let nextNext = allPosts[index[0] + 2];
+            let nextNext = order[index[0] + 2];
             if (nextNext.type === 'youtube') {
-              if (window['ytplayer-'+nextNext._id]) {
-                window['ytplayer-'+nextNext._id].playVideo();
-              } else {
-                // appBodyRef.loadIframe.push(nextNext);
-                appBodyRef.nowPlaying.set(nextNext);
-              }
+              appBodyRef.nowPlaying.set(nextNext);
             } else {
+              appBodyRef.nowPlaying.set(nextNext);
+              appBodyRef.state.set(1);
               window['scplayer-' + nextNext._id].play();
             }
           } else {
+            appBodyRef.nowPlaying.set(nextPost);
+            appBodyRef.state.set(1);
             window['scplayer-' + nextPost._id].play();
           }
         }
-        appBodyRef.nowPlaying.set(nextPost);
       }
     });
   });
@@ -135,19 +112,6 @@ createYTPlayer = function(p) {     //Initialize the yt player
   let post = appBodyRef.nowPlaying.get();
   let yt_id = post.vidId;
   let name = 'ytplayer';
-
-
-  // window['state'] = 0;
-  // let allPosts = appBodyRef.postOrder.get();
-  // let indexes = $.map(allPosts, function(obj, idx) {
-  //   if(obj._id === post._id) {
-  //     return idx;
-  //   }
-  // });
-  //
-  // let nextPost = allPosts[indexes[0]+1];
-  // let prevPost = allPosts[indexes[0]-1];
-
 
   onPlayerReady = function(event) {
     console.log('ready');
@@ -166,38 +130,40 @@ createYTPlayer = function(p) {     //Initialize the yt player
         appBodyRef.state.set(event.data);           //Keep track of player state
 
         if(event.data === 0){           //ENDED
-          // window['state-'+post._id] = 2;
 
-          // let nextPost = appBodyRef.nextPost.get();
+          let currentPost = appBodyRef.nowPlaying.get();
+          let order = appBodyRef.postOrder.get();
+          let index = $.map(order, function(post, index) {
+            if(post._id === currentPost._id) {
+              return index;
+            }
+          });
 
-          // if (nextPost) { //Play next post if it exists
-          //   window['state-'+nextPost._id] = 2;
-          //   if (nextPost.type === 'youtube') {
-          //     if (window['ytplayer-'+nextPost._id]) {
-          //       window['ytplayer-'+nextPost._id].playVideo();
-          //     } else {
-          //       appBodyRef.loadIframe.push(nextPost);
-          //       appBodyRef.nowPlaying.set(nextPost);
-          //     }
-          //   } else {
-          //     if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
-          //       let nextNext = allPosts[index[0] + 2];
-          //       if (nextNext.type === 'youtube') {
-          //         if (window['ytplayer-'+nextNext._id]) {
-          //           window['ytplayer-'+nextNext._id].playVideo();
-          //         } else {
-          //           appBodyRef.loadIframe.push(nextNext);
-          //           appBodyRef.nowPlaying.set(nextNext);
-          //         }
-          //       } else {
-          //         window['scplayer-' + nextNext._id].play();
-          //       }
-          //     } else {
-          //       window['scplayer-' + nextPost._id].play();
-          //     }
-          //   }
-          //   // appBodyRef.nowPlaying.set(nextPost);
-          // }
+          let nextPost = order[index[0]+1];
+          console.log(nextPost);
+          console.log(index[0]);
+
+          if (nextPost) {
+            if (nextPost.type === 'youtube') {
+              appBodyRef.nowPlaying.set(nextPost);
+            } else {
+              if (typeof window['scplayer-' + nextPost._id] === 'undefined') {
+                let nextNext = order[index[0] + 2];
+                if (nextNext.type === 'youtube') {
+                  appBodyRef.nowPlaying.set(nextNext);
+                } else {
+                  appBodyRef.nowPlaying.set(nextNext);
+                  appBodyRef.state.set(1);
+                  window['scplayer-' + nextNext._id].play();
+                }
+              } else {
+                appBodyRef.nowPlaying.set(nextPost);
+                appBodyRef.state.set(1);
+                window['scplayer-' + nextPost._id].play();
+              }
+            }
+          }
+
         } else if(event.data === 1){    //PLAYING
           if (post.type === 'youtube') {
             pauseEverythingElse(post._id);
@@ -244,16 +210,6 @@ createYTPlayer = function(p) {     //Initialize the yt player
               }
             }, 1000);
           }
-
-          // debugger;
-          // appBodyRef.prevPost.set(allPosts[index - 1]);
-          // appBodyRef.nextPost.set(allPosts[index + 1]);
-          // appBodyRef.nowPlaying.set(post);
-        } else if (event.data === 2) {  //PAUSED
-          // window['state-'+post._id] = 2;
-          // if (appBodyRef.nowPlaying.get() !== post) {
-          //   window['ytplayer-' + post._id].seekTo(0);
-          // }
         }
       }
     });
