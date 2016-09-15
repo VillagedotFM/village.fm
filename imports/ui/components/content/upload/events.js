@@ -223,10 +223,8 @@ Template.upload.events({
         let link = $("input[name=post-link]").val();
 
         const villageSlug = FlowRouter.getParam('villageSlug') || '/';
-        var villageId = Villages.findOne({slug: villageSlug})._id;
 
         let post = {
-            villages: [villageId],
             link: link,
             vidId: vidId,
             type: type,
@@ -244,7 +242,7 @@ Template.upload.events({
 
         if (type === 'youtube') {
           //Grab duration and insert post
-          Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
+          Meteor.call('insertPostWithDuration', post, villageSlug, fakeUserId, function (error, data) {
             if (error) {
             } else if (data) {
               if(!fakeUserId){
@@ -294,7 +292,7 @@ Template.upload.events({
                 }
 
                 //Grab duration and insert post
-                Meteor.call('insertPostWithDuration', post, fakeUserId, function (error, data) {
+                Meteor.call('insertPostWithDuration', post, villageSlug, fakeUserId, function (error, data) {
                     if (error) {
                         console.log(error);
                     } else if (data) {

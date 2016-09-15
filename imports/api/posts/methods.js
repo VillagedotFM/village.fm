@@ -5,6 +5,7 @@ import  moment  from 'moment';
 import { Posts } from './posts.js';
 import { Notifications } from '../notifications/notifications.js';
 import { Profiles } from '../profiles/profiles.js';
+import { Villages } from '../villages/villages.js';
 
 //TODO: this stops video
 Meteor.methods({
@@ -269,7 +270,10 @@ Meteor.methods({
 
     },
 
-    insertPostWithDuration: function (post, fakeUserId) {
+    insertPostWithDuration: function (post, villageSlug, fakeUserId) {
+        var village = Villages.findOne({slug: villageSlug});
+        post.villages = [village._id];
+
         //Grab duration, insert post
         if (post.type === 'youtube') {
             let result = HTTP.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=" + post.vidId + "&key=" + Meteor.settings.public.youtube.key);
