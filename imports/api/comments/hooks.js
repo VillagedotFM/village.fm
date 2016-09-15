@@ -6,6 +6,51 @@ import { Posts } from '../posts/posts.js';
 import { Emails } from '../emails/emails.js';
 
 if(Meteor.isServer){
+
+  Comments.before.insert(function(userId, comment){
+    var post = Posts.findOne({ _id: comment.postId });
+    var user = Meteor.users.findOne({ _id: userId });
+
+    if(post){
+      comment.postArtist = ( post.artist ? post.artist : '' );
+      comment.postTitle = ( post.title ? post.title : '' );
+      comment.villageName = ( post.villageName ? post.villageName : '' );
+      comment.villageSlug = ( post.villageSlug ? post.villageSlug : '' );
+      comment.profile = ( post.profile ? post.profile : {});
+    }
+  });
+
+  Comments.before.update(function (userId, comment, fieldNames, modifier, options) {
+    if(modifier && modifier.$push && modifier.$push.replies){
+      var post = Posts.findOne({ _id: comment.postId });
+      var user = Meteor.users.findOne({ _id: userId });
+
+      if(post){
+        modifier.$push.replies.postArtist = ( post.artist ? post.artist : '' );
+        modifier.$push.replies.postTitle = ( post.title ? post.title : '' );
+        modifier.$push.replies.villageName = ( post.villageName ? post.villageName : '' );
+        modifier.$push.replies.villageSlug = ( post.villageSlug ? post.villageSlug : '' );
+        modifier.$push.replies.profile = ( post.profile ? post.profile : {} );
+      }
+    }
+  });
+
+  Comments.after.insert(function (userId, comment){
+    Posts.update(comment.postId, {
+      $addToSet: {
+        comments: comment
+      }
+    })
+  });
+
+  Comments.after.update(function (userId, comment, fieldNames, modifier, options) {
+    Posts.update({ _id: comment.postId, 'comments._id': comment._id}, {
+      $set: {
+        'comments.$': comment
+      }
+    });
+  });
+
   Comments.after.insert(function (userId, comment) {
     var post = Posts.findOne({_id:comment.postId});
     var username = Meteor.users.findOne(userId).profile.name;

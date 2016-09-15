@@ -22,9 +22,6 @@ Template.feed.helpers({
   //   });
   //   return inboxItems;
   // },
-  comments: function() {
-    return Comments.find({postId: this._id}).fetch();
-  },
   isPlaying: function() {
     let state = appBodyRef.state.get();
     return window['state-'+this._id] === 1 ? true : false;

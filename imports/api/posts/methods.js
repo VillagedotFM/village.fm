@@ -4,18 +4,25 @@ import  moment  from 'moment';
 
 import { Posts } from './posts.js';
 import { Notifications } from '../notifications/notifications.js';
+import { Profiles } from '../profiles/profiles.js';
 
 //TODO: this stops video
 Meteor.methods({
 
     upvotePost: function (postId) {
 
+        var profile = Profiles.findOne({ createdBy: this.userId });
+
         let affected = Posts.update({
             _id: postId,
             upvotedBy: {$ne: this.userId},
         }, {
             $addToSet: {
-                upvotedBy: this.userId
+                upvotedBy: this.userId,
+                upvoteObjects: {
+                  createdBy: this.userId,
+                  profile: profile
+                }
             },
             $inc: {
                 upvotes: 1
@@ -30,7 +37,11 @@ Meteor.methods({
                 postId
                 , {
                     $pull: {
-                        upvotedBy: this.userId
+                        upvotedBy: this.userId,
+                        upvoteObjects: {
+                          createdBy: this.userId,
+                          profile: profile
+                        }
                     },
                     $inc: {
                         upvotes: -1
@@ -72,13 +83,19 @@ Meteor.methods({
 
         _.each(fakeUsersIds, function (fakeUserId) {
 
+            var profile = Profiles.findOne({ createdBy: fakeUserId });
+
             if (fakeUserId && fakeUserId != "") {
                 let affected = Posts.update({
                     _id: postId,
                     upvotedBy: {$ne: fakeUserId},
                 }, {
                     $addToSet: {
-                        upvotedBy: fakeUserId
+                        upvotedBy: fakeUserId,
+                        upvoteObjects: {
+                          createdBy: this.userId,
+                          profile: profile
+                        }
                     },
                     $inc: {
                         upvotes: 1
@@ -93,7 +110,11 @@ Meteor.methods({
                         postId
                         , {
                             $pull: {
-                                upvotedBy: fakeUserId
+                                upvotedBy: fakeUserId,
+                                upvoteObjects: {
+                                  createdBy: this.userId,
+                                  profile: profile
+                                }
                             },
                             $inc: {
                                 upvotes: -1

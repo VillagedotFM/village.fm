@@ -37,13 +37,13 @@
                             <br>
                         <span class="sr-playlist__posted-by">
                         posted by
-                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{getUserName createdBy}}</span></a>
+                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{profile.niceName}}</span></a>
                         </span>
                         {{#if villageName}}
                             {{#unless isMainVillage villageSlug}}
                                 {{#unless isSubVillage }}
                                     <span class="sr-playlist__posted-in">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
-                                {{/unless}}   
+                                {{/unless}}
                             {{/unless}}
                         {{/if}}
                     </div>
@@ -65,8 +65,8 @@
                 <div class="modal-body">
                     <h4>Upvoted by:</h4>
                     <div>
-                        {{#each postToVote.upvotedBy}}
-                            <small>{{getUserName this}},</small>
+                        {{#each postToVote.upvoteObjects}}
+                            <small>{{createByName}},</small>
                         {{/each}}
                     </div>
                     <div class="margin-top-15">
