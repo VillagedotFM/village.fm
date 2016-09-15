@@ -1,6 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+import { Profiles } from '../profiles/profiles.js';
+
 export const Posts = new Mongo.Collection('posts');
 
 //TODO: Remove Allow's and uncomment Deny's + add methods for post insert
@@ -16,6 +18,36 @@ Posts.allow({
   remove() { return true; },
 });
 
+
+Posts.publicFields = {
+  'villages': 1,
+  'villageName': 1,
+  'villageSlug': 1,
+  'link': 1,
+  'type': 1,
+  'thumbnail': 1,
+  'vidId': 1,
+  'artist': 1,
+  'title': 1,
+  'description': 1,
+  'duration': 1,
+  'taggedUsers': 1,
+  'tags': 1,
+  'related': 1,
+  'genre': 1,
+  'creator': 1,
+  'upvotes': 1,
+  'upvotedBy': 1,
+  'upvoteObjects': 1,
+  'comments': 1,
+  'lastUpvote': 1,
+  'listens': 1,
+  'listenedBy': 1,
+  'createdAt': 1,
+  'createdBy': 1,
+  'profile': 1
+}
+
 Posts.schema = new SimpleSchema({
 
   villages:
@@ -30,7 +62,7 @@ Posts.schema = new SimpleSchema({
     type: String,
     label: "Primary Village Name",
     max: 50,
-    optional: true                
+    optional: true
   },
 
   villageSlug:
@@ -38,7 +70,7 @@ Posts.schema = new SimpleSchema({
     type: String,
     label: "Primary Village Slug",
     max: 200,
-    optional: true              
+    optional: true
   },
 
   link:
@@ -167,6 +199,32 @@ Posts.schema = new SimpleSchema({
     }
   },
 
+  upvoteObjects:
+  {
+    type: [Object],
+    label: "Upvotes",
+    blackbox: true,
+    autoValue: function(){
+      if( this.isInsert ) {
+        var profile = Profiles.findOne({ createdBy: this.userId });
+
+        return [{
+          createdBy: this.userId,
+          profile: profile
+        }];
+      }
+    }
+  },
+
+
+  comments:
+  {
+    type: [Object],
+    label: "Comments",
+    optional: true,
+    blackbox: true
+  },
+
   lastUpvote:
   {
     type: Date,
@@ -207,9 +265,22 @@ Posts.schema = new SimpleSchema({
 
   createdBy: {
     type: String,
+    label: "Created by Id",
     autoValue: function() {
       if( this.isInsert ) {
         return this.userId;
+      }
+    }
+  },
+
+  profile: {
+    type: Object,
+    label: "Profile",
+    blackbox: true,
+    autoValue: function(){
+      if( this.isInsert ) {
+        var profile = Profiles.findOne({ createdBy: this.userId });
+        return profile;
       }
     }
   }

@@ -53,7 +53,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   //TODO: remove (for testing purposes only)
   this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
-    this.subscribe('posts.all', this.getVillageSlug(), {onReady: function() {
+    this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
       if (FlowRouter.current().params.postId) {
         const _id = FlowRouter.getParam('postId');
         const post = Posts.findOne({_id});
@@ -70,8 +70,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         });
       }
     }});
-    this.subscribe('villages.all', this.getVillageSlug());
     this.subscribe('comments.all');
+    this.subscribe('villages.all', { slug: this.getVillageSlug() });
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });
@@ -90,6 +90,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
+  appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
 
@@ -127,7 +128,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
-  $('.sr-playlist').perfectScrollbar();
+  $('.sr-playlist, .onboarding-popup__terms, .onboarding-popup__policy').perfectScrollbar();
   $('.wrapper').scrollTop(0);
   $('.sr-playlist').scrollTop(0);
 
@@ -155,6 +156,7 @@ Template.app_body.onRendered(function() {
   //   }
   // });
 
+
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
   $('.uploaded-item').hide();
@@ -169,5 +171,4 @@ Template.app_body.onRendered(function() {
 
     appBodyRef.mobile.set(true);
   }
-
 });

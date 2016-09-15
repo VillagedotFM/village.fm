@@ -1,10 +1,27 @@
 import { Villages } from '../../api/villages/villages.js';
+import { Profiles } from '../../api/profiles/profiles.js';
 
 var nodemailer = require('nodemailer');
 var smtpapi    = require('smtpapi');
 
 Accounts.onCreateUser(function (options, user) {
     if (user.services.facebook) {
+
+        var villagerNum = 1;
+        var profileWithHighestNum = Profiles.findOne({}, { sort: { 'villagerNum': 1 } });
+
+        if(profileWithHighestNum){
+          villagerNum = profileWithHighestNum.villagerNum + 1;
+        }
+
+        Profiles.insert({
+          firstName: user.services.facebook.first_name,
+          lastName: user.services.facebook.last_name,
+          niceName: user.services.facebook.first_name + " " + user.services.facebook.last_name.charAt(0),
+          villagerNum: villagerNum,
+          picture: "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large",
+          createdBy: user._id
+        });
 
         if (options.profile) {  //Add facebook profile picture and tweak name
             options.profile.picture = "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
@@ -86,7 +103,7 @@ Accounts.onCreateUser(function (options, user) {
         smtpTransport.sendMail(mailOptions, function(error, response) {
             smtpTransport.close();
 
-            console.log( error || "Message sent");
+            console.log( error || "Welcome Email to: "+ user.services.facebook.email +" - Message sent");
         });
     }
 

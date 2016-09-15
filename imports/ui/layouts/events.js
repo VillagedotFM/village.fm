@@ -2,8 +2,6 @@ Template.app_body.events({
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
      hideMenu();
-     appBodyRef.signUp.set(null);
-     appBodyRef.guestAction.set(null);
   },
   "click .onboarding-popup__button": function(event, template){
     Meteor.loginWithFacebook({}, function(err){
@@ -50,5 +48,15 @@ Template.app_body.events({
         }, 500);
       }
     });
+  },
+  'click a[href="#Terms-of-Services"]': () => {
+    appBodyRef.showTermsOrPolicy.set('terms');
+  },
+  'click a[href="#Privacy-Policy"]': () => {
+    appBodyRef.showTermsOrPolicy.set('policy');
+  },
+  'click .onboarding-popup__overlay': () => {
+    appBodyRef.signUp.set(null);
+    appBodyRef.guestAction.set(null);
   }
 });
