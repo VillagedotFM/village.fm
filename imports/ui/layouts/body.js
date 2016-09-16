@@ -26,6 +26,8 @@ import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
+import '../components/terms-and-policy/terms.js';
+import '../components/terms-and-policy/policy.js';
 
 
 Template.app_body.onCreated(function appBodyOnCreated() {

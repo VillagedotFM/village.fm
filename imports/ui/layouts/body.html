@@ -1,92 +1,63 @@
 <template name="app_body">
 
   <div class="wrapper">
-    <div class="onboarding-popup {{#if signUp}}active{{/if}} {{#if guestAction}}active{{/if}}">
-      <div class="onboarding-popup__overlay"></div>
-      <div class="onboarding-popup__panel">
-        <div class="onboarding-popup__header">LOGIN FIRST :)</div>
-        <div class="onboarding-popup__content {{#if showTermsOrPolicy}}expanded {{showTermsOrPolicy}}{{/if}}">
-          <p>Before Follow the <a href="#">Awesome Village</a> <br> we need you to click on that button below.</p>
-          <strong>Thank You!</strong>
-          <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with Facebook</span></a>
-          <small>By signing up, you agree to our <a href="#Terms-of-Services">Terms of Services</a> and <a href="#Privacy-Policy">Privacy Policy</a>.</small>
+      <div class="onboarding-popup {{#if signUp}}active{{/if}} {{#if guestAction}}active{{/if}}">
+        <div class="onboarding-popup__overlay"></div>
+        <div class="onboarding-popup__panel">
+          <div class="onboarding-popup__header">
+            {{#if signUp}}
+            <h3>Welcome to the Village Beta!</h3>
+            {{/if}}
 
-          <div class="onboarding-popup__terms">
-            <!-- It would be good to create separate template for this and policy and just include it here, to make file look more cleaner and concise -->
-            <h3>Terms</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            {{#if guestAction}}
+            <h3>Sign in to upvote!</h3>
+            {{/if}}
           </div>
+          <div class="onboarding-popup__content {{#if showTermsOrPolicy}}expanded {{showTermsOrPolicy}}{{/if}}">
 
-          <div class="onboarding-popup__policy">
-            <h3>Privacy policy</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            {{#if signUp}}
+              {{#if village}}
+                <p>{{village.name}} Village is a community playlist where your taste matters.</p>
+              {{else}}
+                <p>Village is one big playlist made up of community playlists where your taste matters.</p>
+              {{/if}}
+            <strong>Thanks for building it with us!</strong>
+            {{/if}}
+
+            {{#if guestAction}}
+            <p>Just sign in to vote on the best music in all of the Villages.</p>
+            {{/if}}
+
+            <a href="" class="onboarding-popup__button"><img src="images/popup/onboarding-facebook-icon.png" alt=""><span>Login with Facebook</span></a>
+            <p><small>By signing up, you agree to our <a class="onboarding-popup__terms-link">Terms of Services</a> and <a class="onboarding-popup__policy-link">Privacy Policy</a>.</small></p>
+
+            <div class="onboarding-popup__terms">
+              {{> terms}}
+            </div>
+
+            <div class="onboarding-popup__policy">
+              {{> policy}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    {{> mobile_menu}}
+      {{> mobile_menu}}
 
-    {{> header}}
+      {{> header}}
 
-    <div class="main">
-      {{> Template.dynamic template=profile}}
-      {{> sidebar}}
-      <div class="container hidden-mobile container{{profilePadding}}">
-          {{> content}}
+      <div class="main">
+        {{> Template.dynamic template=profile}}
+        {{> sidebar}}
+        <div class="container hidden-mobile container{{profilePadding}}">
+            {{> content}}
+        </div>
       </div>
-    </div>
 
-    {{> mobile_content}}
-    {{> bottom_player}}
-    {{> now_playing_popup}}
-    {{> sign_up}}
+      {{> mobile_content}}
+      {{> bottom_player}}
+      {{> now_playing_popup}}
+      {{> sign_up}}
 
   </div>
 

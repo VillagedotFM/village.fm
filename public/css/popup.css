@@ -311,7 +311,8 @@
   padding: 18px;
   background: #ff7260;
   color: #fff;
-  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .onboarding-popup__content {
@@ -331,19 +332,20 @@
 
 .onboarding-popup__content a {
   color: #ff7260;
+  cursor: pointer;
 }
 
-.onboarding-popup__content strong {
+.onboarding-popup__content > strong {
   display: block;
-  margin: 30px 0 20px;
-  font-size: 20px;
+  font-size: 19px;
   color: #2e2f2f;
+  margin-top: 20px;
 }
 
 .onboarding-popup__content small {
   display: inline-block;
   font-size: 12px;
-  margin-top: 10px;
+  color: #757979;
 }
 
 .onboarding-popup__content.expanded {
@@ -356,8 +358,8 @@
   left: 30px;
   right: 30px;
   max-height: 224px;
-  margin-top: 15px;
-  padding: 15px;
+  margin-top: 16px;
+  padding: 14px;
   border: solid 1px #f4f6f8;
   border-radius: 4px;
   background: #fff;
@@ -373,57 +375,96 @@
   z-index: 0;
   -webkit-backface-visibility: hidden;
 }
+
 .onboarding-popup__terms h3,
 .onboarding-popup__policy h3 {
   font-size: 14px;
   color: #ff7260;
   margin-bottom: .75em;
 }
+
 .onboarding-popup__terms p,
 .onboarding-popup__policy p {
   font-size: 12px;
   font-weight: 300;
   margin-bottom: .75em;
 }
+
+.onboarding-popup__terms strong,
+.onboarding-popup__policy strong {
+  font-weight: 500;
+  color: #2e2f2f;
+}
+
+.onboarding-popup__terms em,
+.onboarding-popup__policy em {
+  font-weight: 500;
+}
+
+.onboarding-popup__terms ol,
+.onboarding-popup__policy ol {
+  list-style-type: upper-alpha;
+  padding-left: 14px;
+}
+
+.onboarding-popup__terms ul,
+.onboarding-popup__policy ul {
+  list-style-type: disc;
+  padding-left: 14px;
+}
+
 .onboarding-popup__content.expanded.terms .onboarding-popup__terms,
 .onboarding-popup__content.expanded.policy .onboarding-popup__policy {
   opacity: 1;
   z-index: 1;
 }
+
 .onboarding-popup__button {
     display: inline-block;
     border: 2px solid #3b5998;
     color: #3b5998 !important;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 0;
     padding: 7px 30px;
     font-weight: 600;
     vertical-align: middle;
 }
+
 .onboarding-popup__button:hover {
   text-decoration: none;
 }
+
 .onboarding-popup__button img{
-    vertical-align: text-top;
+    vertical-align: middle;
     margin-right: 12px;
 }
+
 .onboarding-popup__button span{
     vertical-align: middle;
+}
+
+.onboarding-popup__color{
+    color: #ff7260;
 }
 @media (max-width: 668px){
     .onboarding-popup__panel {
         width: 300px;
     }
+
     .onboarding-popup__content {
       padding: 15px;
     }
+
     .onboarding-popup__content strong {
       margin: 20px 0 10px;
     }
+
     .onboarding-popup__content.expanded {
       padding: 15px 15px 186px;
     }
+
     .onboarding-popup__terms,
     .onboarding-popup__policy {
       left: 15px;
@@ -569,38 +610,28 @@
     }
 }
 /*====================================unlogin Style===========================================*/
-.header__unloged {
-  display: inline-block;
-  border: 2px solid #3b5998;
-  color: #3b5998 !important;
-  margin-top: -5px;
-  border-radius: 20px;
-  font-size: 17px;
-  padding: 7px 30px;
-  font-weight: 600;
-  vertical-align: middle;
-  cursor: pointer;
+.header__unloged{
+    display: none;
+    font-size: 12px;
+    color: #2e2f2f;
+    padding-right: 15px;
+    cursor: pointer;
 }
-.header__unloged:hover {
-  text-decoration: none;
+.header__unloged.active{
+    display: inline-block;
+}
+.header__unloged a{
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
 }
 .header__unloged img{
-    vertical-align: text-top;
-    margin-right: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 9px;
 }
 .header__unloged span{
     vertical-align: middle;
-}
-@media screen and (max-width: 767px) {
-  .header__unloged {
-    margin-top: -10px;
-    margin-right: 0px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .header__unloged img {
-    display: none;
-  }
 }
 
 /*====================================Song switcher Style===========================================*/
