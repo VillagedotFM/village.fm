@@ -58,5 +58,6 @@ Template.app_body.events({
   'click .onboarding-popup__overlay': () => {
     appBodyRef.signUp.set(null);
     appBodyRef.guestAction.set(null);
+    appBodyRef.showTermsOrPolicy.set(null);
   }
 });
