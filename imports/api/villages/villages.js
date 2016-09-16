@@ -31,7 +31,8 @@ Villages.publicFields = {
   'related': 1,
   'genres': 1,
   'createdAt': 1,
-  'createdBy': 1
+  'createdBy': 1,
+  'friendlySlugs': 1
 }
 
 

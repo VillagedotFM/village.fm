@@ -6,7 +6,7 @@ import { Villages } from '../villages.js';
 Meteor.publish('villages.all', function villagesAll(request) {
 
   const selector = {
-		slug: request.slug
+		'friendlySlugs.slug.base': request.slug
 	};
 
 	const options = {

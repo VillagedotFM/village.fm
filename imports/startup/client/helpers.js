@@ -148,6 +148,5 @@ UI.registerHelper("nowPlaying", function () {
 });
 
 UI.registerHelper("getVillage", function () {
-  const villageSlug = FlowRouter.getParam('villageSlug');
-  return Villages.findOne({slug: villageSlug});
+  return Villages.findOne();
 });
