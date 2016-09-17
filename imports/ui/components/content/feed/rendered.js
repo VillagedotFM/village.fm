@@ -11,6 +11,16 @@ Template.feed.rendered = () => {
 		let profileTab = appBodyRef.profileTab.get();
 		let time = appBodyRef.timeFilter.get();
 
+		if(nowPlaying && postOrder && postOrder.length){
+			postOrder.forEach(function(post, index){
+				if(post._id === nowPlaying._id){
+					if(index > appBodyRef.postsLoaded.get() - 3){
+						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+					}
+				}
+			});
+		}
+
 		let inPlaylist = null;
 
 		if (nowPlaying) {
