@@ -54,35 +54,28 @@ Template.controls.events({
     if (completed > 5) {
       //seek to 0 if more than 5 seconds have passed
       if (currentPost.type === 'youtube') {
-        window['ytplayer-' + currentPost._id].seekTo(0);
+        window['ytplayer'].seekTo(0);
       } else {
         window['scplayer-'+currentPost._id].seek(0);
       }
     } else {
       //go back a post if there is a prevPost
       if (prevPost) {
-
         if (prevPost.type === 'youtube') {
-          if (window['ytplayer-'+prevPost._id]) {
-            window['ytplayer-'+prevPost._id].playVideo();
-          } else {
-            // appBodyRef.loadIframe.push(prevPost);
-            appBodyRef.nowPlaying.set(prevPost);
-          }
+          appBodyRef.nowPlaying.set(prevPost);
         } else {
           if (typeof window['scplayer-' + prevPost._id] === 'undefined') {
             let prevPrev = order[index[0] - 2];
             if (prevPrev.type === 'youtube') {
-              if (window['ytplayer-'+prevPrev._id]) {
-                window['ytplayer-'+prevPrev._id].playVideo();
-              } else {
-                // appBodyRef.loadIframe.push(prevPrev);
-                appBodyRef.nowPlaying.set(prevPrev);
-              }
+              appBodyRef.nowPlaying.set(prevPrev);
             } else {
+              appBodyRef.nowPlaying.set(prevPrev);
+              appBodyRef.state.set(1);
               window['scplayer-' + prevPrev._id].play();
             }
           } else {
+            appBodyRef.nowPlaying.set(prevPost);
+            appBodyRef.state.set(1);
             window['scplayer-' + prevPost._id].play();
           }
         }

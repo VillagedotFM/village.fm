@@ -3,22 +3,22 @@ Template.upload.helpers({
       return Template.instance().chars.get();
     },
     showError() {
-      return (Template.instance().notFound.get() || Template.instance().duplicate.get());
+      return (appBodyRef.notFound.get() || appBodyRef.duplicate.get());
     },
     notFound() {
-        return Template.instance().notFound.get();
+        return appBodyRef.notFound.get();
     },
     duplicate() {
-        return Template.instance().duplicate.get();
+        return appBodyRef.duplicate.get();
     },
     postSuccess() {
-        return Template.instance().postSuccess.get();
+        return app.postSuccess.get();
     },
     postError() {
         return Template.instance().postError.get();
     },
     showForm() {
-        return Template.instance().showForm.get();
+        return appBodyRef.showForm.get();
     },
     uploadedThumbnail() {
         return Template.instance().uploadedThumbnail.get();

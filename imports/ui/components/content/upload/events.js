@@ -6,7 +6,7 @@ let resetForm = () => {
     $('.postLinkBtn').prop('disabled', true);
     Tags.set('taggedUsers', []);
 
-    uploadRef.showForm.set(false);
+    appBodyRef.showForm.set(false);
 };
 
 //TODO: make attributes (link, type, vidId) reactive vars instead of data on the DOM
@@ -22,8 +22,8 @@ Template.upload.events({
     'input input[name=post-link]'(event, instance) {
       $('.upload-section__upload').removeClass('after-onboarding');
       $('.after-onboarding__overlay').hide();
-      uploadRef.duplicate.set(false);
-      uploadRef.notFound.set(false);
+      appBodyRef.duplicate.set(false);
+      appBodyRef.notFound.set(false);
       let potentialLink = $("input[name=post-link]").val();
 
         Meteor.call('getTypeAndId', potentialLink, function (error, data) {
@@ -80,7 +80,7 @@ Template.upload.events({
                     type: data.type
                   });
 
-                  uploadRef.duplicate.set(duplicate);
+                  appBodyRef.duplicate.set(duplicate);
                   return;
               }
 
@@ -99,7 +99,7 @@ Template.upload.events({
                           //TODO: Handle reporting link not working (NEED DESIGN)
                           if (data === 'Song not found') {
                             console.log('not found');
-                              uploadRef.notFound.set(true);
+                              appBodyRef.notFound.set(true);
                               resetForm();
                               return;
                           } else {
@@ -108,7 +108,7 @@ Template.upload.events({
                               uploadRef.uploadedArtist.set(data.artist);
                               uploadRef.uploadedTitle.set(data.title);
 
-                              uploadRef.showForm.set(true);
+                              appBodyRef.showForm.set(true);
 
                               $('input[name=post-author]').focus();
 
@@ -146,7 +146,7 @@ Template.upload.events({
                               }
                               uploadRef.uploadedTitle.set(data.title);
 
-                              uploadRef.showForm.set(true);
+                              appBodyRef.showForm.set(true);
 
                               $('input[name=post-author]').focus();
 
