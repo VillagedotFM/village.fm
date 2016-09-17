@@ -10,14 +10,9 @@ Template.upload.onCreated(function uploadOnCreated() {
 
     uploadRef = this;
 
-    //TODO: use these once we have designs
-    uploadRef.notFound = new ReactiveVar(false);
-    uploadRef.duplicate = new ReactiveVar(null);
-    
     uploadRef.postError = new ReactiveVar(false);
 
     uploadRef.missingData = new ReactiveVar(false);
-    uploadRef.showForm = new ReactiveVar(false);
 
     //Reactive elements to display in form after link is submitted
     uploadRef.uploadedThumbnail = new ReactiveVar(null);

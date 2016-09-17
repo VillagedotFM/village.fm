@@ -5,15 +5,17 @@ Template.feed.rendered = () => {
 		let order = appBodyRef.displayPosts.get();
 		let nowPlaying = appBodyRef.nowPlaying.get();
 		let postForm = appBodyRef.showForm.get();
+		let notFound = appBodyRef.notFound.get();
+		let duplicate = appBodyRef.duplicate.get();
 
 		let profileTab = appBodyRef.profileTab.get();
 		let time = appBodyRef.timeFilter.get();
 
 		let inPlaylist = null;
+		console.log("RUNNNNN");
 
 		if (nowPlaying) {
 			inPlaylist = _.findWhere(order, {_id: nowPlaying._id});
-
 			if (inPlaylist) {
 				appBodyRef.notInFeed.set(false);
 				if (nowPlaying.type === 'youtube') {

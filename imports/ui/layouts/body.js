@@ -95,6 +95,9 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
+  appBodyRef.showForm = new ReactiveVar(false);
+  appBodyRef.notFound = new ReactiveVar(false);
+  appBodyRef.duplicate = new ReactiveVar(null);
 
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
 
@@ -102,7 +105,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
-  appBodyRef.notInFeed = new ReactiveVar(null);    
+  appBodyRef.notInFeed = new ReactiveVar(null);
 
   // appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
