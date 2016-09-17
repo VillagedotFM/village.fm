@@ -327,5 +327,12 @@ Template.upload.events({
                 });
             });
         }
+    },
+    "click .upload-section"(event, template){
+      if (Meteor.userId()) {
+        return;
+      } else {
+        appBodyRef.guestAction.set(true);
+      }
     }
 });

@@ -1,7 +1,5 @@
 <template name='content'>
-  {{#if currentUser}}
-    {{> Template.dynamic template=upload}}
-  {{/if}}
+  {{> Template.dynamic template=upload}}
   <div class="content">
       {{#unless ifVillageSlug}}
         {{> Template.dynamic template=invite}}

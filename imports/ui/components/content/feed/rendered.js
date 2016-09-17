@@ -12,7 +12,6 @@ Template.feed.rendered = () => {
 		let time = appBodyRef.timeFilter.get();
 
 		let inPlaylist = null;
-		console.log("RUNNNNN");
 
 		if (nowPlaying) {
 			inPlaylist = _.findWhere(order, {_id: nowPlaying._id});
