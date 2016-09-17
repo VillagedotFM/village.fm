@@ -4,6 +4,7 @@ Template.feed.rendered = () => {
 		let postOrder = appBodyRef.postOrder.get();
 		let order = appBodyRef.displayPosts.get();
 		let nowPlaying = appBodyRef.nowPlaying.get();
+		let postForm = appBodyRef.showForm.get();
 
 		let profileTab = appBodyRef.profileTab.get();
 		let time = appBodyRef.timeFilter.get();
