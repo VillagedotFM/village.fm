@@ -1,5 +1,5 @@
 <template name='feed'>
-  <div class="posts-wrapper posts-wrapper{{profilePadding}}">
+  <div class="posts-wrapper posts-wrapper{{profilePadding}} {{#unless posts}}skeleton{{/unless}}">
     {{#each posts}}
 
       <article id="{{_id}}" class="post">
