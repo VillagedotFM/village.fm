@@ -47,6 +47,7 @@ momentjs:moment
 reactive-var
 reactive-dict
 sacha:spin
+erasaur:notification-badge
 
 # routing
 kadira:blaze-layout

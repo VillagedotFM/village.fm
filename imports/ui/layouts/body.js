@@ -54,6 +54,23 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
+    this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
+      if (FlowRouter.current().params.postId) {
+        const _id = FlowRouter.getParam('postId');
+        const post = Posts.findOne({_id});
+        SEO.set({
+          title: post.artist+' - '+post.title,
+          description: 'Check out this song on Village.fm',
+          meta: {
+            'property="og:image"': post.thumbnail,
+            'name="twitter:image"': post.thumbnail,
+            'property="og:type"': 'website',
+            'property="og:site_name"': 'Village.fm',
+            'name="twitter:card"': 'summary',
+          }
+        });
+      }
+    }});
     this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
       if (FlowRouter.current().params.villageSlug) {
         const villageSlug = FlowRouter.getParam('villageSlug');
@@ -71,23 +88,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             }
           });
         }
-      }
-    }});
-    this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
-      if (FlowRouter.current().params.postId) {
-        const _id = FlowRouter.getParam('postId');
-        const post = Posts.findOne({_id});
-        SEO.set({
-          title: post.artist+' - '+post.title,
-          description: 'Check out this song on Village.fm',
-          meta: {
-            'property="og:image"': post.thumbnail,
-            'name="twitter:image"': post.thumbnail,
-            'property="og:type"': 'website',
-            'property="og:site_name"': 'Village.fm',
-            'name="twitter:card"': 'summary',
-          }
-        });
       }
     }});
     this.subscribe('comments.all');
