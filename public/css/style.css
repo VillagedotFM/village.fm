@@ -300,6 +300,10 @@ iframe {
     margin-right: 30px;
     position: relative;
 }
+.ntf-dropdown__list-wrapper {
+  max-height: 400px;
+  overflow: auto;
+}
 .ntf-dropdown {
     position: absolute;
     top: 100%;
@@ -355,6 +359,9 @@ iframe {
 .ntf-dropdown__item {
     padding: 10px;
     margin-bottom: 1px;
+}
+.ntf-dropdown__item:hover {
+    background: #e5fffe;
 }
 .ntf-dropdown__item--unread {
     background: #fff3f3;
