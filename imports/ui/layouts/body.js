@@ -52,9 +52,27 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     left: 'auto' // Left position relative to parent in px
   };
 
-  //TODO: remove (for testing purposes only)
   this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
+    this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
+      if (FlowRouter.current().params.villageSlug) {
+        const villageSlug = FlowRouter.getParam('villageSlug');
+        if (villageSlug !== '/') {
+          const village = Villages.findOne({slug: villageSlug});
+          SEO.set({
+            title: village.name,
+            description: "The Best Music chosen by the "+ village.name +" Community",
+            meta: {
+              'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'property="og:type"': 'website',
+              'property="og:site_name"': 'Village.fm',
+              'name="twitter:card"': 'summary',
+            }
+          });
+        }
+      }
+    }});
     this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
       if (FlowRouter.current().params.postId) {
         const _id = FlowRouter.getParam('postId');
@@ -73,7 +91,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('comments.all');
-    this.subscribe('villages.all', { slug: this.getVillageSlug() });
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });

@@ -264,7 +264,12 @@ Template.feed.events({
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
-    $temp.val(window.location.origin+'/post/'+this._id).select();
+    let base = window.location.href;
+    if (base.charAt(base.length-1) !== '/') {
+      $temp.val(base+'/post/'+this._id).select();
+    } else {
+      $temp.val(base+'post/'+this._id).select();
+    }
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');
