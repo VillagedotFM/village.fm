@@ -1530,6 +1530,62 @@ iframe {
     background: #ffffff;
 }
 
+.post.skeleton {
+  pointer-events: none;
+}
+.post.skeleton .post__rating {
+  height: 46px;
+}
+.post.skeleton .post__left-block span {
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+  margin-top: 6px;
+}
+.post.skeleton .post__author-placeholder {
+  background: #e7eff4;
+  border-radius: 8px;
+  color: #afafaf;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding: 6px 0;
+}
+.post.skeleton .post__share {
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+}
+.post.skeleton .post__share::before {
+  display: none;
+}
+.post.skeleton .post__artist {
+  width: 40%;
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+}
+.post.skeleton .post__song {
+  width: 30%;
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+  margin-left: 10px;
+}
+.post.skeleton .post__posted-by {
+  width: 65%;
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+}
+.post.skeleton .post__video {
+  background: #afafaf;
+}
 .sc-thumbnail {
   height: 175px;
   width: 175px;

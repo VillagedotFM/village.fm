@@ -1,5 +1,43 @@
 <template name='feed'>
   <div class="posts-wrapper posts-wrapper{{profilePadding}} {{#unless posts}}skeleton{{/unless}}">
+    {{#unless posts}}
+        {{#each skeletonPosts}}
+            <article class="post skeleton">
+                <div class="post__inner">
+                    <div class="post__rating bg-color-content">
+                        <i class="fa fa-caret-up"></i>
+                    </div>
+                    <div class="post__left-block color-secondary-text">
+                        <span>1st</span> <br>
+                        <span>place</span>
+                    </div>
+                    <div class="post__top clearfix">
+                        <div class="post__top-upvote upvote-block visible-mobile">
+                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                        </div>
+                        <a href="/profile/{{createdBy}}" class="post__top-left">
+                            <i class="fa fa-user post__author-placeholder fa-3x"></i>
+                        </a>
+                        <div class="post__top-right">
+                            <span class="post__share color-secondary-text">
+                                <span class="post__share-text">Share</span>
+                            </span>
+                        </div>
+                        <div class="post__top-middle">
+                            <h1 class="post__title"><span class="post__artist">-</span> <span class="post__song">-</span></h1>
+                            <div class="post__posted-by">-</div>
+                        </div>
+                    </div>
+                    <div class="post__video-wrapper">
+                      <div class="post__video" id="video-{{_id}}" style="background-image: url({{thumbnail}})">
+                          <button class="post__video-play" id={{_id}}></button>
+                      </div>
+                    </div>
+                </div>
+            </article>
+        {{/each}}
+    {{/unless}}
+
     {{#each posts}}
 
       <article id="{{_id}}" class="post">
