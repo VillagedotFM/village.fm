@@ -44,7 +44,7 @@
                               <!-- <div class="user-dropdown">
                                   <div class="user-dropdown__inner">
                                     <a href="/profile/{{createdBy}}">
-                                        <img src="{{profile.picture}}" class="more-users-dropdown__img">
+                                        <img src="{{getUserImage this}}" class="more-users-dropdown__img">
                                       <div class="more-users-dropdown__name-wrap">
                                         <span class="more-users-dropdown__name">{{getUserName createdBy}}</span>
                                       </div>
@@ -89,19 +89,19 @@
                     <div>
                       <span class="color-secondary-text">Upvoted by:</span>
                         <span>
-                          {{#each upvoteObjects}}
-                            <a href="/profile/{{createdBy}}" class="color-main upvoter">{{profile.niceName}}</a>
+                          {{#each upvotedBy}}
+                            <a href="/profile/{{this}}" class="color-main upvoter">{{getUserName this}}</a>
                           {{/each}}
                         <a href="" class="color-main upvoterOthers">{{upvoterOthers}}
                             <div class="tooltiptext more-users-dropdown">
                                 <div class="more-users-dropdown__wrap">
                                     <ul class="more-users-dropdown__inner">
-                                      {{#each upvoteObjects}}
+                                      {{#each upvotedBy}}
                                           <li class="more-users-dropdown__user">
-                                              <a href="/profile/{{createdBy}}">
-                                                  <img src="{{profile.picture}}" class="more-users-dropdown__img">
+                                              <a href="/profile/{{this}}">
+                                                  <img src="{{getUserImage this}}" class="more-users-dropdown__img">
                                                 <div class="more-users-dropdown__name-wrap">
-                                                  <span class="more-users-dropdown__name">{{profile.niceName}}</span>
+                                                  <span class="more-users-dropdown__name">{{getUserName this}}</span>
                                                 </div>
                                               </a>
                                           </li>
@@ -139,7 +139,7 @@
                               </div>
                               <div class="posted-comment__comment-cell clearfix">
                                   <div class="posted-comment__img-wrap">
-                                      <a href="/profile/{{createdBy}}"><img src="{{profile.picture}}" alt=""></a>
+                                      <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
                                   </div>
                                   <div class="posted-comment__text-wrap">
                                       <span class="posted-comment__author-wrap">
@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="posted-comment__comment-cell clearfix">
                                         <div class="posted-comment__img-wrap">
-                                            <a href="/profile/{{createdBy}}"><img src="{{profile.picture}}" alt=""></a>
+                                            <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
                                         </div>
                                         <div class="posted-comment__text-wrap">
                                             <span class="posted-comment__author-wrap">
