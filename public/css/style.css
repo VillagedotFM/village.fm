@@ -312,11 +312,11 @@ iframe {
     -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     z-index: 999;
-    display: none;
-}
-.header__notifications:hover .ntf-dropdown {
     display: block;
 }
+/*.header__notifications:hover .ntf-dropdown {
+    display: block;
+}*/
 .ntf-dropdown:after,
 .ntf-dropdown:before {
     bottom: 100%;
@@ -397,13 +397,12 @@ iframe {
 }
 .ntf-dropdown__caption {
     margin-left: 50px;
-    height: 40px;
+    height: 100%;
     font-size: 12px;
     line-height: 1.2;
 }
 .ntf-dropdown__text {
-    overflow: hidden;
-    height: 27px;
+    height: 100%;
     margin-bottom: 2px;
 }
 .header__notifications:hover {

@@ -181,6 +181,7 @@ Template.app_body.onRendered(function() {
 
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
+  $('.ntf-dropdown').hide();
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');

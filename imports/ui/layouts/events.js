@@ -1,6 +1,6 @@
 Template.app_body.events({
   "click": function(event, template){
-     $('.send-to-friend__list, .sign-up, .invite-dropdown').hide();
+     $('.send-to-friend__list, .sign-up, .invite-dropdown, .ntf-dropdown').hide();
      hideMenu();
   },
   "click .onboarding-popup__button": function(event, template){
