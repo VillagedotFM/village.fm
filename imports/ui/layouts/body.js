@@ -52,7 +52,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     left: 'auto' // Left position relative to parent in px
   };
 
-  this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
+  this.getVillageSlug = () => FlowRouter.getParam('villageSlug') || 'main';
   this.autorun(() => {
     this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
       if (FlowRouter.current().params.postId) {
