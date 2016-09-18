@@ -129,4 +129,7 @@ Template.feed.helpers({
   // loadIframe: function() {
   //   return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
   // }
+  profileFeed: function(){
+    return (typeof(FlowRouter.getParam('_id')) === 'undefined');
+  },
 });
