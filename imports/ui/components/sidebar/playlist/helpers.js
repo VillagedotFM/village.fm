@@ -77,6 +77,9 @@ Template.playlist.helpers({
       return posts;
     }
   },
+  skeletonPosts(postLength){
+    return [0, 1, 2, 3, 4, 5, 6, 7];
+  },
   // showInbox() {
   //     return appBodyRef.inboxOpen.get();
   // },

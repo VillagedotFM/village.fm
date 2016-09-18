@@ -975,6 +975,43 @@ iframe {
 .sr-playlist__item:hover .sr-playlist__remove {
     display: block;
 }
+.sr-playlist__item.skeleton {
+  pointer-events: none;
+}
+.sr-playlist__item.skeleton .sr-playlist__artist {
+  width: 60%;
+  background: #ffffff;
+}
+.sr-playlist__item.skeleton .sr-playlist__artist {
+  width: 40%;
+  background: #ffffff;
+  display: inline-block;
+  border-radius: 6px;
+  color: #ffffff;
+}
+.sr-playlist__item.skeleton .sr-playlist__song {
+  width: 30%;
+  background: #ffffff;
+  display: inline-block;
+  border-radius: 6px;
+  color: #ffffff;
+  margin-left: 10px;
+}
+.sr-playlist__item.skeleton .sr-playlist__time {
+  width: 20px;
+  background: #afafaf;
+  display: inline-block;
+  border-radius: 4px;
+  color: #afafaf;
+}
+.sr-playlist__item.skeleton .sr-playlist__posted-by {
+  width: 100%;
+  background: #afafaf;
+  display: inline-block;
+  border-radius: 6px;
+  color: #afafaf;
+  margin-top: 6px;
+}
 .sr-playlist__spinner {
     position: absolute;
     top: 2px;
