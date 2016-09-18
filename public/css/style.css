@@ -2382,6 +2382,40 @@ input[type="range"] {
     width: 1020px;
     z-index: 99999;
 }
+
+.profile.skeleton {
+  pointer-events: none;
+}
+
+.profile.skeleton .profile__placeholder {
+  background: #e7eff4;
+  border-radius: 10px;
+  color: #afafaf;
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  padding: 18px 0;
+  float:left;
+}
+
+.profile.skeleton .profile__name {
+    width: 150px;
+    background: #e7eff4;
+    display: inline-block;
+    border-radius: 6px;
+    color: #e7eff4;
+    margin-left: 10px;
+}
+
+.profile.skeleton .profile__total-upvotes {
+  width: 100px;
+  background: #e7eff4;
+  display: inline-block;
+  border-radius: 6px;
+  color: #e7eff4;
+  margin-left: 10px;
+}
+
 .profile__inner {
     position: relative;
 }
