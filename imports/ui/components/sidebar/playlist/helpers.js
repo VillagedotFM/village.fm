@@ -62,26 +62,26 @@ Template.playlist.helpers({
       return posts;
     }
   },
-  showInbox() {
-      return appBodyRef.inboxOpen.get();
-  },
-  inboxItems() {
-    var inboxItems = [];
-    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-      const post = Posts.findOne(inboxItem.postId);
-      if(FlowRouter.getParam('villageSlug')){
-        if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
-           inboxItems.push(post);
-        }
-      } else {
-        inboxItems.push(post);
-      }
-    });
-    return inboxItems;
-  },
-  inboxPost: function () {
-      return Posts.findOne(this.postId);
-  },
+  // showInbox() {
+  //     return appBodyRef.inboxOpen.get();
+  // },
+  // inboxItems() {
+  //   var inboxItems = [];
+  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+  //     const post = Posts.findOne(inboxItem.postId);
+  //     if(FlowRouter.getParam('villageSlug')){
+  //       if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
+  //          inboxItems.push(post);
+  //       }
+  //     } else {
+  //       inboxItems.push(post);
+  //     }
+  //   });
+  //   return inboxItems;
+  // },
+  // inboxPost: function () {
+  //     return Posts.findOne(this.postId);
+  // },
   sentAgo: function (createdAt) {
       return moment(createdAt).fromNow();
   },
@@ -93,17 +93,45 @@ Template.playlist.helpers({
   },
   playOrPause: function () {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+      } else {
+        return 'sr-playlist__play--play';
+      }
+    } else {
+      return 'sr-playlist__play--play';
+    }
   },
   showEqualizer: function () {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? true : false;
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? true : false;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   },
   showSpinner: function () {
-      if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))
-          return 'display';
-      else
-          return 'hidden';
+    let state = appBodyRef.state.get();
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying && nowPlaying.type === 'youtube') {
+      if (this._id === nowPlaying._id) {
+        return (state === 1 || state === 2) ? 'hidden' : 'display';
+      } else {
+        return 'hidden';
+      }
+    } else {
+      return 'hidden';
+    }
   },
 
   postToVote: function () {

@@ -1,4 +1,4 @@
-Template.feed.events({
+Template.nowPlayingPost.events({ 
   "click .post__comments": function(event, template){
     let id = this._id;
     let comment = $('.comments-block[data-id="' + id +'"]');
@@ -264,12 +264,7 @@ Template.feed.events({
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
-    let base = window.location.href;
-    if (base.charAt(base.length-1) !== '/') {
-      $temp.val(base+'/post/'+this._id).select();
-    } else {
-      $temp.val(base+'post/'+this._id).select();
-    }
+    $temp.val(window.location.origin+'/post/'+this._id).select();
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');

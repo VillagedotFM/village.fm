@@ -300,6 +300,10 @@ iframe {
     margin-right: 30px;
     position: relative;
 }
+.ntf-dropdown__list-wrapper {
+  max-height: 400px;
+  overflow: auto;
+}
 .ntf-dropdown {
     position: absolute;
     top: 100%;
@@ -312,11 +316,11 @@ iframe {
     -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     z-index: 999;
-    display: none;
-}
-.header__notifications:hover .ntf-dropdown {
     display: block;
 }
+/*.header__notifications:hover .ntf-dropdown {
+    display: block;
+}*/
 .ntf-dropdown:after,
 .ntf-dropdown:before {
     bottom: 100%;
@@ -355,6 +359,9 @@ iframe {
 .ntf-dropdown__item {
     padding: 10px;
     margin-bottom: 1px;
+}
+.ntf-dropdown__item:hover {
+    background: #e5fffe;
 }
 .ntf-dropdown__item--unread {
     background: #fff3f3;
@@ -397,13 +404,12 @@ iframe {
 }
 .ntf-dropdown__caption {
     margin-left: 50px;
-    height: 40px;
+    height: 100%;
     font-size: 12px;
     line-height: 1.2;
 }
 .ntf-dropdown__text {
-    overflow: hidden;
-    height: 27px;
+    height: 100%;
     margin-bottom: 2px;
 }
 .header__notifications:hover {
@@ -1508,6 +1514,12 @@ iframe {
   width: 100%;
 }
 
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 .post__inner {
     border-left: 1px solid #f4f6f8;
     padding: 15px 30px 15px 60px;
@@ -1672,6 +1684,17 @@ iframe {
     border-radius: 5px;
     margin-bottom: 20px;
 }
+#ytplayer {
+  position: absolute;
+  top: 267px;
+  left: 511px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index: 2;
+}
+#ytplayer:hover {
+  cursor: pointer;
+}
 .post__video {
     width: 100%;
     height: 270px;
@@ -1684,6 +1707,10 @@ iframe {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+.post__video:hover {
+  cursor: pointer;
 }
 .post__video--1 {
     background-image: url(../images/video-1.png);
@@ -1704,34 +1731,46 @@ iframe {
 .post__video-play {
     position: absolute;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 37px;
+    height: 37px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    background: url(../images/other-icons-sprite.png) 0 -100px no-repeat;
+    background: url(../images/icons-sprite.png) 0 -100px no-repeat;
     cursor: pointer;
+    z-index: 100;
 }
 .post__video-play:hover {
+    background-position: -150px -100px;
+}
+.post__video:hover .post__video-play {
+    background-position: -150px -100px;
+}
+
+#ytplayer:hover .post__video-play {
     background-position: -150px -100px;
 }
 .post__video-pause {
   position: absolute;
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 37px;
+  height: 37px;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  background: url(../images/icons-sprite.png) 0 -350px no-repeat;
+  background: url(../images/icons-sprite.png) 0 -150px no-repeat;
   cursor: pointer;
 }
 .post__video-pause:hover {
-background-position: -150px -350px;
+  background-position: -150px -150px;
+}
+
+.post__video:hover .post__video-pause {
+  background-position: -150px -150px;
 }
 .post__upvoted {
     font-size: 12px;

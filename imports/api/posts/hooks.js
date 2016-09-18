@@ -17,7 +17,27 @@ if(Meteor.isServer){
         post.villageName = village.name;
         post.villageSlug = village.slug;
       }
-      
+
+    }
+  });
+
+  Posts.after.insert(function (userId, post) {
+    if(post.villages.length){
+      Villages.update(post.villages[0], {
+        $addToSet: {
+          posts: post
+        }
+      });
+    }
+  });
+
+  Posts.after.update(function (userId, post, fieldNames, modifier, options) {
+    if(post.villages.length){
+      Villages.update({ _id: post.villages[0], 'posts._id': post._id }, {
+        $set: {
+          'posts.$': post
+        }
+      });
     }
   });
 

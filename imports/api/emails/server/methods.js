@@ -16,7 +16,7 @@ Meteor.methods({
     smtpTransport.sendMail(mailOptions, function(error, response) {
       smtpTransport.close();
 
-      console.log( error || "Message sent - Feedback");
+      console.log( error || "Message sent - Feedback send from: "+submitterEmail);
     });
   }
 });

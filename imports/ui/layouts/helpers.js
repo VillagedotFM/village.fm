@@ -6,7 +6,9 @@ Template.app_body.helpers({
     return appBodyRef.guestAction.get();
   },
   village() {
-		const villageSlug = FlowRouter.getParam('villageSlug');
-		return Villages.findOne({slug: villageSlug});
-	}
+		return Villages.findOne();
+	},
+  showTermsOrPolicy: function() {
+    return appBodyRef.showTermsOrPolicy.get();
+  }
 });

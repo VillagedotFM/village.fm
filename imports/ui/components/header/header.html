@@ -19,12 +19,15 @@
             </div>
             <div class="header__right-block">
                 {{#if currentUser}}
+                    <!-- {{#if notificationCount}}
+                      {{> notificationBadge count=notificationCount}}
+                    {{/if}} -->
                     {{> notifications}}
                     {{> header_profile}}
                 {{else}}
                   <div class="header__unloged active">
-                      <img src="images/popup/unloged-icon.png" alt="">
-                      <a>Login</a> <span>/</span> <a>Sign Up</a>
+                    <img src="images/popup/unloged-icon.png" alt="">
+                    <a>Login</a> <span>/</span> <a>Sign Up</a>
                   </div>
                 {{/if}}
             </div>

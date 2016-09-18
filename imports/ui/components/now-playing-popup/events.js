@@ -24,7 +24,7 @@ Template.now_playing_popup.events({
     }
 
     if (currentPost.type === 'youtube') {
-      window['ytplayer-' + currentPost._id].playVideo();
+      window['ytplayer'].playVideo();
     } else {
       window['scplayer-' + currentPost._id].play();
     }
@@ -32,7 +32,7 @@ Template.now_playing_popup.events({
   "click .player__controls__play--paused": function(event, template){
     let currentPost = appBodyRef.nowPlaying.get();
     if (currentPost.type === 'youtube') {
-      window['ytplayer-' + currentPost._id].pauseVideo();
+      window['ytplayer'].pauseVideo();
     } else {
       window['scplayer-' + currentPost._id].pause();
     }
@@ -45,7 +45,7 @@ Template.now_playing_popup.events({
     if (completed > 5) {
       //seek to 0 if more than 5 seconds have passed
       if (currentPost.type === 'youtube') {
-        window['ytplayer-' + currentPost._id].seekTo(0);
+        window['ytplayer'].seekTo(0);
       } else {
         window['scplayer-'+currentPost._id].seek(0);
       }
@@ -54,7 +54,7 @@ Template.now_playing_popup.events({
       if (prevPost) {
 
         if (prevPost.type === 'youtube') {
-          window['ytplayer-' + prevPost._id].playVideo();
+          window['ytplayer'].playVideo();
         } else {
           window['scplayer-' + prevPost._id].play();
         }
@@ -69,7 +69,7 @@ Template.now_playing_popup.events({
 
       $('.post__video-play#'+nextPost._id).hide();
       if (nextPost.type === 'youtube') {
-        window['ytplayer-' + nextPost._id].playVideo();
+        window['ytplayer'].playVideo();
       } else {
         window['scplayer-' + nextPost._id].play();
       }

@@ -1,27 +1,7 @@
-Template.feed.helpers({
-  posts() {
-    // if (appBodyRef.inboxOpen.get()) {
-    //   let inboxCount = Inbox.find({to: Meteor.userId()}).fetch().length;
-    //   let displayPosts = appBodyRef.displayPosts.get();
-    //   displayPosts.splice(0, inboxCount);
-    //   return displayPosts;
-    // } else {
-      return appBodyRef.displayPosts.get();
-    // }
+Template.nowPlayingPost.helpers({
+  comments: function() {
+    return Comments.find({postId: this._id}).fetch();
   },
-  // showInbox() {
-  //   return appBodyRef.inboxOpen.get();
-  // },
-  selectedPost() {
-    return FlowRouter.current().params.postId;
-  },
-  // inboxItems() {
-  //   var inboxItems = [];
-  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-  //     inboxItems.push(Posts.findOne(inboxItem.postId));
-  //   });
-  //   return inboxItems;
-  // },
   isPlaying: function() {
     let state = appBodyRef.state.get();
     let nowPlaying = appBodyRef.nowPlaying.get();
@@ -126,10 +106,7 @@ Template.feed.helpers({
   isSubVillage() {
     return FlowRouter.getParam('villageSlug');
   },
-  // loadIframe: function() {
-  //   return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
-  // }
-  profileFeed: function(){
-    return (typeof(FlowRouter.getParam('_id')) === 'undefined');
+  notInFeed() {
+    return appBodyRef.notInFeed.get();
   },
 });

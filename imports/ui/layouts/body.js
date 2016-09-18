@@ -26,13 +26,35 @@ import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
+import '../components/terms-and-policy/terms.js';
+import '../components/terms-and-policy/policy.js';
 
 
 Template.app_body.onCreated(function appBodyOnCreated() {
-  //TODO: remove (for testing purposes only)
+
+  //configure spinner
+  Meteor.Spinner.options = {
+    lines: 13, // The number of lines to draw
+    length: 8, // The length of each line
+    width: 3, // The line thickness
+    radius: 10, // The radius of the inner circle
+    corners: 0.7, // Corner roundness (0..1)
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#fff', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: true, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: 'auto', // Top position relative to parent in px
+    left: 'auto' // Left position relative to parent in px
+  };
+
   this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
   this.autorun(() => {
-    this.subscribe('posts.all', this.getVillageSlug(), {onReady: function() {
+    this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
       if (FlowRouter.current().params.postId) {
         const _id = FlowRouter.getParam('postId');
         const post = Posts.findOne({_id});
@@ -49,7 +71,25 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         });
       }
     }});
-    this.subscribe('villages.all', this.getVillageSlug());
+    this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
+      if (FlowRouter.current().params.villageSlug) {
+        const villageSlug = FlowRouter.getParam('villageSlug');
+        if (villageSlug !== '/') {
+          const village = Villages.findOne({slug: villageSlug});
+          SEO.set({
+            title: village.name,
+            description: "The Best Music chosen by the "+ village.name +" Community",
+            meta: {
+              'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'property="og:type"': 'website',
+              'property="og:site_name"': 'Village.fm',
+              'name="twitter:card"': 'summary',
+            }
+          });
+        }
+      }
+    }});
     this.subscribe('comments.all');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
@@ -69,16 +109,22 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
+  appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
+  appBodyRef.showForm = new ReactiveVar(false);
+  appBodyRef.notFound = new ReactiveVar(false);
+  appBodyRef.duplicate = new ReactiveVar(null);
 
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
-  appBodyRef.isPlaying = new ReactiveVar(null);
+
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
-  appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
+  appBodyRef.notInFeed = new ReactiveVar(null);
+
+  // appBodyRef.loadIframe = new ReactiveArray();    //1+ posts to load
 
   appBodyRef.prevPost = new ReactiveVar(null);
   appBodyRef.nextPost = new ReactiveVar(null);
@@ -104,51 +150,38 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 });
 
 Template.app_body.onRendered(function() {
-  $('.sr-playlist').perfectScrollbar();
+  $('.sr-playlist, .onboarding-popup__terms, .onboarding-popup__policy').perfectScrollbar();
   $('.wrapper').scrollTop(0);
   $('.sr-playlist').scrollTop(0);
 
 
-  Tracker.autorun(function(comp) {
-    let order = appBodyRef.postOrder.get();
-    if (order[0]) {
-      appBodyRef.nowPlaying.set(order[0]);
-      comp.stop();
-    }
-  });
+  // Tracker.autorun(function(comp) {
+  //   let order = appBodyRef.postOrder.get();
+  //   if (order[0]) {
+  //     appBodyRef.nowPlaying.set(order[0]);
+  //     comp.stop();
+  //   }
+  // });
+  //
+  // Tracker.autorun(function(){
+  //   let order = appBodyRef.postOrder.get();
+  //
+  //   if (appBodyRef.nowPlaying.get() !== null) {
+  //     let indexes = $.map(order, function(post, index) {
+  //       if(post._id === appBodyRef.nowPlaying.get()._id) {
+  //         return index;
+  //       }
+  //     });
+  //     if (typeof indexes[0] === 'undefined') {
+  //       appBodyRef.nowPlaying.set(order[0]);
+  //     }
+  //   }
+  // });
 
-  Tracker.autorun(function(){
-    let order = appBodyRef.postOrder.get();
-
-    if (appBodyRef.nowPlaying.get() !== null) {
-      let indexes = $.map(order, function(post, index) {
-        if(post._id === appBodyRef.nowPlaying.get()._id) {
-          return index;
-        }
-      });
-      if (typeof indexes[0] === 'undefined') {
-        appBodyRef.nowPlaying.set(order[0]);
-      }
-    }
-  });
-
-  Tracker.autorun(function() {
-    let post = appBodyRef.nowPlaying.get();
-    var scrubber = document.getElementById('bottom-slider');
-    $(scrubber).on("input change", function() {
-      let completed = appBodyRef.completed.get();
-      let duration = '00:' + post.duration; //5:08 -> 00:05:08 for moment weirdness
-      let seek = ($(scrubber).val()/100)*(moment.duration(duration, "mm:ss").asSeconds());
-      if (post.type === 'youtube') {
-        window['ytplayer-'+post._id].seekTo(seek, true);
-      } else {
-        window['scplayer-'+post._id].seek(seek*1000);
-      }
-    });
-  });
 
   //TODO: use reactive-var instead of show/hide
   Tags.set('taggedUsers', []);
+  $('.ntf-dropdown').hide();
   $('.uploaded-item').hide();
   $('.sr-playlist__item--inbox').hide();
   $('.sr-inbox__arrow').removeClass('fa-caret-up');
@@ -161,5 +194,4 @@ Template.app_body.onRendered(function() {
 
     appBodyRef.mobile.set(true);
   }
-
 });

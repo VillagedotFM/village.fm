@@ -1,5 +1,43 @@
 Template.feed.rendered = () => {
 
+	Tracker.autorun(function(){
+		let postOrder = appBodyRef.postOrder.get();
+		let order = appBodyRef.displayPosts.get();
+		let nowPlaying = appBodyRef.nowPlaying.get();
+		let postForm = appBodyRef.showForm.get();
+		let notFound = appBodyRef.notFound.get();
+		let duplicate = appBodyRef.duplicate.get();
+
+		let profileTab = appBodyRef.profileTab.get();
+		let time = appBodyRef.timeFilter.get();
+
+		let inPlaylist = null;
+
+		if (nowPlaying) {
+			inPlaylist = _.findWhere(order, {_id: nowPlaying._id});
+			if (inPlaylist) {
+				appBodyRef.notInFeed.set(false);
+				if (nowPlaying.type === 'youtube') {
+					Meteor.setTimeout(function() {
+						let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
+						$('#ytplayer').css({top: topy});
+						$('#ytplayer').show();
+					}, 100);
+				}
+			} else {
+				appBodyRef.notInFeed.set(true);
+				if (nowPlaying.type === 'youtube') {
+					Meteor.setTimeout(function() {
+						let topy2 = $('#video-' + nowPlaying._id).offset().top + 'px';
+						$('#ytplayer').css({top: topy2});
+						$('#ytplayer').show();
+			    }, 100);
+				}
+			}
+		}
+
+	});
+
 	$('.wrapper').scroll(function(e) {
         $('.post').each(function(){
             if(isElementInViewport($(this))){
