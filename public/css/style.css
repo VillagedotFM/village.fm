@@ -967,6 +967,10 @@ iframe {
 .sr-playlist__list li:hover .sr-playlist__time{
     display: none;
 }
+.sr-playlist__list.skeleton {
+  height: 100%;
+  width: 100%;
+}
 .sr-playlist__item:hover .sr-playlist__play,
 .sr-playlist__item:hover .sr-playlist__remove {
     display: block;

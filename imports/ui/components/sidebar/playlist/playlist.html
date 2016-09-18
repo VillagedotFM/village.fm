@@ -7,7 +7,7 @@
           <p>&nbsp;Thanks for adding to the playlist!</p>
       </div>
     <div class="sr-playlist sr-playlist{{profilePadding}}">
-        <ul class="sr-playlist__list bg-color-playlist">
+        <ul class="sr-playlist__list bg-color-playlist {{#unless posts}}skeleton{{/unless}}">
             {{#each posts}}
                 <li class="sr-playlist__item" id="playlist-{{_id}}">
                     <div class="sr-playlist__left">
