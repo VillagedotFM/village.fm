@@ -7,7 +7,7 @@
           <p>&nbsp;Thanks for adding to the playlist!</p>
       </div>
     <div class="sr-playlist sr-playlist{{profilePadding}}">
-        <ul class="sr-playlist__list bg-color-playlist">
+        <ul class="sr-playlist__list bg-color-playlist {{#unless posts}}skeleton{{/unless}}">
             {{#each posts}}
                 <li class="sr-playlist__item" id="playlist-{{_id}}">
                     <div class="sr-playlist__left">
@@ -46,6 +46,28 @@
                     </div>
                 </li>
             {{/each}}
+            {{#unless posts}}
+              {{#each skeletonPosts}}
+                <li class="sr-playlist__item skeleton">
+                    <div class="sr-playlist__left">
+                        <div class="upvote-block">
+                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                        </div>
+                    </div>
+                    <div class="sr-playlist__right-btn"></div>
+                    <div class="sr-playlist__right">
+                        <span class="sr-playlist__time">-</span>
+                    </div>
+                    <div class="sr-playlist__middle">
+                        <span class="sr-playlist__title">
+                            <span class="sr-playlist__artist">-</span>
+                            <span class="sr-playlist__song">-</span>
+                        </span><br>
+                        <span class="sr-playlist__posted-by">-</span>
+                    </div>
+                </li>
+              {{/each}}
+            {{/unless}}
         </ul>
     </div>
 

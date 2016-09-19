@@ -119,6 +119,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
 
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
+  appBodyRef.postsLoaded = new ReactiveVar(8);
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
