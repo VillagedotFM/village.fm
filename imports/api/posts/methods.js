@@ -271,7 +271,9 @@ Meteor.methods({
     },
 
     insertPostWithDuration: function (post, villageSlug, fakeUserId) {
-        var village = Villages.findOne({slug: villageSlug});
+        console.log(villageSlug);
+        villageSlug = villageSlug || 'main';
+        var village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
         post.villages = [village._id];
 
         //Grab duration, insert post

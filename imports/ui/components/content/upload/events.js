@@ -222,7 +222,7 @@ Template.upload.events({
         let type = $("input[name=post-link]").data('type');
         let link = $("input[name=post-link]").val();
 
-        const villageSlug = FlowRouter.getParam('villageSlug') || '/';
+        const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
 
         let post = {
             link: link,
