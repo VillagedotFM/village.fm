@@ -15,7 +15,7 @@ if(Meteor.isServer){
 
       if(village){
         post.villageName = village.name;
-        post.villageSlug = village.slug;
+        post.villageSlug = village.friendlySlugs.slug.base;
       }
 
     }
