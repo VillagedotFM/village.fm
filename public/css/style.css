@@ -986,39 +986,55 @@ iframe {
 }
 .sr-playlist__item.skeleton {
   pointer-events: none;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+}
+@keyframes placeHolderShimmer{
+    0%{
+        opacity: 1
+    }
+    50%{
+        opacity: 0.5
+    }
+    100%{
+        opacity: 1
+    }
+}
+.sr-playlist__item.skeleton .upvote-block {
+  background: #EEF5F9;
+  border-radius: 6px;
 }
 .sr-playlist__item.skeleton .sr-playlist__artist {
   width: 60%;
-  background: #ffffff;
+  background: #EEF5F9;
 }
 .sr-playlist__item.skeleton .sr-playlist__artist {
   width: 40%;
-  background: #ffffff;
+  background: #EEF5F9;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #ffffff;
+  color: #EEF5F9;
 }
 .sr-playlist__item.skeleton .sr-playlist__song {
   width: 30%;
-  background: #ffffff;
+  background: #EEF5F9;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #ffffff;
+  color: #EEF5F9;
   margin-left: 10px;
-}
-.sr-playlist__item.skeleton .sr-playlist__time {
-  width: 20px;
-  background: #afafaf;
-  display: inline-block;
-  border-radius: 4px;
-  color: #afafaf;
 }
 .sr-playlist__item.skeleton .sr-playlist__posted-by {
   width: 100%;
-  background: #afafaf;
+  background: #DFEAF1;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #afafaf;
+  color: #DFEAF1;
   margin-top: 6px;
 }
 .sr-playlist__spinner {
@@ -1538,59 +1554,77 @@ iframe {
 
 .post.skeleton {
   pointer-events: none;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+}
+@keyframes placeHolderShimmer{
+    0%{
+        opacity: 1
+    }
+    50%{
+        opacity: 0.3
+    }
+    100%{
+        opacity: 1
+    }
 }
 .post.skeleton .post__rating {
   height: 46px;
 }
+.post.skeleton .post__rating {
+  background: #F4F6F8;
+}
 .post.skeleton .post__left-block span {
-  background: #e7eff4;
+  background: #F4F6F8;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #e7eff4;
+  color: transparent;
   margin-top: 6px;
 }
 .post.skeleton .post__author-placeholder {
-  background: #e7eff4;
+  background: #F4F6F8;
   border-radius: 8px;
-  color: #afafaf;
+  color: #E5E8EB;
   width: 50px;
   height: 50px;
   text-align: center;
   padding: 6px 0;
-}
-.post.skeleton .post__share {
-  background: #e7eff4;
-  display: inline-block;
   border-radius: 6px;
-  color: #e7eff4;
 }
 .post.skeleton .post__share::before {
   display: none;
 }
 .post.skeleton .post__artist {
   width: 40%;
-  background: #e7eff4;
+  background: #F4F6F8;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #e7eff4;
+  color: transparent;
 }
 .post.skeleton .post__song {
   width: 30%;
-  background: #e7eff4;
+  background: #F4F6F8;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #e7eff4;
+  color: transparent;
   margin-left: 10px;
 }
 .post.skeleton .post__posted-by {
   width: 65%;
-  background: #e7eff4;
+  background: #F4F6F8;
   display: inline-block;
+  line-height: 0.5rem;
   border-radius: 6px;
-  color: #e7eff4;
+  color: transparent;
 }
 .post.skeleton .post__video {
-  background: #afafaf;
+  background: #F4F6F8;
 }
 .sc-thumbnail {
   height: 175px;
@@ -2394,9 +2428,9 @@ input[type="range"] {
 }
 
 .profile.skeleton .profile__placeholder {
-  background: #e7eff4;
+  background: #F4F6F8;
   border-radius: 10px;
-  color: #afafaf;
+  color: #E5E8EB;
   width: 90px;
   height: 90px;
   text-align: center;
@@ -2406,19 +2440,19 @@ input[type="range"] {
 
 .profile.skeleton .profile__name {
     width: 150px;
-    background: #e7eff4;
+    background: #F4F6F8;
     display: inline-block;
     border-radius: 6px;
-    color: #e7eff4;
+    color: transparent;
     margin-left: 10px;
 }
 
 .profile.skeleton .profile__total-upvotes {
   width: 100px;
-  background: #e7eff4;
+  background: #F4F6F8;
   display: inline-block;
   border-radius: 6px;
-  color: #e7eff4;
+  color: transparent;
   margin-left: 10px;
 }
 
