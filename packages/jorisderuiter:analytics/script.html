@@ -7,6 +7,7 @@ for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElemen
 	window.analytics = {
 		distinctId: '',
 		totalVillagesVisited: 0,
+		totalPagesVisited: 0,
 		totalUsersTagged: 0,
 		totalPostsUpvoted: 0,
 		totalSongsPosted: 0,
@@ -24,6 +25,7 @@ for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElemen
 	mixpanel.init(mixpanelKey, {'loaded':function(mixpanel) {
 			window.analytics.distinctId = mixpanel.get_distinct_id();
 			window.analytics.totalVillagesVisited = mixpanel.get_property('totalVillagesVisited');
+			window.analytics.totalPagesVisited = mixpanel.get_property('totalPagesVisited');
 			window.analytics.totalUsersTagged = mixpanel.get_property('totalUsersTagged');
 			window.analytics.totalPostsUpvoted = mixpanel.get_property('totalPostsUpvoted');
 			window.analytics.totalSongsPosted = mixpanel.get_property('totalSongsPosted');
