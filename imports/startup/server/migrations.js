@@ -10,6 +10,27 @@ Meteor.startup(function() {
 });
 
 Migrations.add({
+  version: 5,
+  name: 'Add gender and age range profiles',
+  up: function() {
+    Meteor.users.find().forEach(function(user){
+      const profile = Profiles.findOne({ createdBy: user._id });
+      if(profile){
+        Profiles.update(profile._id, {
+          $set: {
+            gender: user.services.facebook.gender,
+            ageRange: user.services.facebook.age_range
+          }
+        });
+      }
+    });
+  },
+  down: function() {
+    Profiles.remove({});
+  }
+});
+
+Migrations.add({
   version: 4,
   name: 'Add data to villages',
   up: function() {
