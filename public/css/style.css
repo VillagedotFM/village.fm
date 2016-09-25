@@ -303,6 +303,11 @@ iframe {
     margin-right: 30px;
     position: relative;
 }
+.notification-container {
+  top: -10px;
+  left: 15px;
+  z-index: 1000;
+}
 .ntf-dropdown__list-wrapper {
   max-height: 400px;
   overflow: auto;

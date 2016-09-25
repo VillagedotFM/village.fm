@@ -22,5 +22,8 @@ Template.notifications.events({
   },
   'click .ntf-dropdown__mark-all': function(event, template){
     Meteor.call('allRead');
+  },
+  'click .ntf-dropdown__item': function(event, template){
+    Meteor.call('readNotification', this._id);
   }
 });
