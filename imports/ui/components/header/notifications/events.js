@@ -7,9 +7,13 @@ Template.notifications.events({
   },
   'click .header__notifications': function(event){
     event.stopPropagation();
-    $('.ntf-dropdown').show();
-    $('html, body').addClass('overflow-hidden');
-    mixpanel.track('Viewed Notifications');
+    if ($('.ntf-dropdown').css('display') === 'none') {
+      $('.ntf-dropdown').show();
+      $('html, body').addClass('overflow-hidden');
+      mixpanel.track('Viewed Notifications');
+    } else {
+      $('.ntf-dropdown').hide();
+    }
   },
   'click .ntf-dropdown__back': function(event, template){
     event.stopPropagation();
