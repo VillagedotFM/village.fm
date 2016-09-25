@@ -133,6 +133,10 @@ FlowRouter.route('/profile/:_id', {
 FlowRouter.triggers.enter(function() {
     if(Meteor.userId()){
         mixpanel.identify(Meteor.userId());
+        window.analytics.totalPagesVisited = window.analytics.totalPagesVisited + 1;
+        mixpanel.register({
+            'totalPagesVisited': window.analytics.totalPagesVisited
+        });
     }
 });
 

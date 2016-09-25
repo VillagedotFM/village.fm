@@ -1,4 +1,5 @@
 import { Posts } from '../../api/posts/posts.js';
+import { Profiles } from '../../api/profiles/profiles.js';
 import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
@@ -91,6 +92,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('comments.all');
+    this.subscribe('profiles.self');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });

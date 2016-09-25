@@ -23,6 +23,21 @@ Profiles.schema = new SimpleSchema({
     label: "Last name"
   },
 
+  gender:
+  {
+    type: String,
+    label: "Gender",
+    optional: true
+  },
+
+  ageRange:
+  {
+    type: Object,
+    label: "Age range",
+    blackbox: true,
+    optional: true
+  },
+
   niceName:
   {
     type: String,
