@@ -50,6 +50,7 @@ Template.bottom_player.events({
         }
       });
     } else {
+      mixpanel.track('Upvote attempted');
       appBodyRef.guestAction.set('upvotePost');
     }
   },

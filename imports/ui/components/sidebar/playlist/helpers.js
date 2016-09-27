@@ -8,15 +8,28 @@ Template.playlist.helpers({
         var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
         var posts;
 
+        let selector = {};
+        let options = {};
+
+
         if (user) {
+            options = {
+              sort: {createdAt: -1},
+              limit: appBodyRef.postsLoaded.get()
+            };
             let profileTab = appBodyRef.profileTab.get();
-            if (profileTab === 'mutual')
-                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}}).fetch();
-            else if (profileTab === 'upvotes')
-                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}}).fetch();
-            else if (profileTab === 'posts')
-                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}}).fetch();
+            if (profileTab === 'mutual'){
+                selector = {"upvotedBy": {$all: [user._id, Meteor.userId()]}};
+            } else if (profileTab === 'upvotes'){
+                selector = {"upvotedBy": user._id};
+            } else if (profileTab === 'posts'){
+                selector = {"createdBy": user._id};
+            }
         } else {  //Time Filters
+            options = {
+              sort: {upvotes: -1, lastUpvote: 1},
+              limit: appBodyRef.postsLoaded.get()
+            };
             let time = appBodyRef.timeFilter.get();
 
             let date = new Date();
@@ -32,12 +45,14 @@ Template.playlist.helpers({
             const villageSlug = FlowRouter.getParam('villageSlug');
             const village = Villages.findOne({slug: villageSlug});
             if(village){
-              posts = Posts.find({"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: 1}}).fetch();
+              selector = {"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}};
             } else {
-              posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: 1}}).fetch();
+              selector = {"createdAt": {$gte: time_filter}};
             }
 
         }
+
+        posts = Posts.find(selector, options).fetch();
 
     //Inbox
     if (appBodyRef.inboxOpen.get()) {
@@ -59,8 +74,22 @@ Template.playlist.helpers({
       GlobalClient.checkAndMoveSelectedPost(posts);
 
       appBodyRef.postOrder.set(posts);
+
+      if(posts && posts.length > 0 ){
+        appBodyRef.postsLoadedDone.set(true);
+      }
+
       return posts;
     }
+  },
+  postsLoadedDone() {
+    return appBodyRef.postsLoadedDone.get();
+  },
+  skeletonPosts(postLength){
+    if(!appBodyRef.postsLoadedDone.get()){
+      return [0, 1, 2, 3, 4, 5, 6, 7];
+    }
+
   },
   // showInbox() {
   //     return appBodyRef.inboxOpen.get();

@@ -332,6 +332,7 @@ Template.upload.events({
       if (Meteor.userId()) {
         return;
       } else {
+        mixpanel.track('Post attempted');
         appBodyRef.guestAction.set(true);
       }
     }

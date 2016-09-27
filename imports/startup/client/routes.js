@@ -134,6 +134,15 @@ FlowRouter.triggers.enter(function() {
     if(Meteor.userId()){
         mixpanel.identify(Meteor.userId());
     }
+
+    mixpanel.people.increment({
+        'totalPagesVisited': 1
+    });
+
+    window.analytics.totalPagesVisited = window.analytics.totalPagesVisited + 1;
+    mixpanel.register({
+        'totalPagesVisited': window.analytics.totalPagesVisited
+    });
 });
 
 // ADMIN ROUTES

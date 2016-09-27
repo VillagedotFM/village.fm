@@ -1,4 +1,5 @@
 import { Posts } from '../../api/posts/posts.js';
+import { Profiles } from '../../api/profiles/profiles.js';
 import { Villages } from '../../api/villages/villages.js';
 import { Notifications } from '../../api/notifications/notifications.js';
 import { Comments } from '../../api/comments/comments.js';
@@ -52,9 +53,11 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     left: 'auto' // Left position relative to parent in px
   };
 
-  this.getVillageSlug = () => FlowRouter.getParam('villageSlug');
+  this.getVillageSlug = () => FlowRouter.getParam('villageSlug') || 'main';
   this.autorun(() => {
     this.subscribe('posts.all', { villageSlug: this.getVillageSlug() }, {onReady: function() {
+      appBodyRef.postsLoadedDone.set(true);
+
       if (FlowRouter.current().params.postId) {
         const _id = FlowRouter.getParam('postId');
         const post = Posts.findOne({_id});
@@ -91,6 +94,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('comments.all');
+    this.subscribe('profiles.self');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });
@@ -119,6 +123,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
 
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
+  appBodyRef.postsLoaded = new ReactiveVar(8);
+  appBodyRef.postsLoadedDone = new ReactiveVar(false);
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
