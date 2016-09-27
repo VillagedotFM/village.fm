@@ -17,6 +17,8 @@ Accounts.onCreateUser(function (options, user) {
         Profiles.insert({
           firstName: user.services.facebook.first_name,
           lastName: user.services.facebook.last_name,
+          gender: user.services.facebook.gender,
+          ageRange: user.services.facebook.age_range,
           niceName: user.services.facebook.first_name + " " + user.services.facebook.last_name.charAt(0),
           villagerNum: villagerNum,
           picture: "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large",

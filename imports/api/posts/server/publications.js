@@ -7,7 +7,7 @@ Meteor.publish('posts.all', function postsAll(request) {
 
 	const selector = {};
 
-	if(request.villageSlug){
+	if(request.villageSlug && request.villageSlug != 'main'){
 		selector.villageSlug = request.villageSlug;
 	}
 

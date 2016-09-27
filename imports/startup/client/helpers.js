@@ -4,7 +4,7 @@ Meteor.subscribe("users.allData");
 
 
 UI.registerHelper("isMainVillage", function (slug) {
-    return (slug === '/');
+    return (slug === '/' || slug === 'main');
 });
 
 UI.registerHelper("getUserImage", function (userId) {

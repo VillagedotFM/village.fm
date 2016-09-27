@@ -10,6 +10,22 @@ import { Villages } from '/imports/api/villages/villages.js';
 
 // options: profile, tabs (tabs/profile_tabs), inbox, upload, invite
 
+FlowRouter.triggers.enter(function() {
+    if(Meteor.userId()){
+        mixpanel.identify(Meteor.userId());
+    }
+
+    mixpanel.people.increment({
+        'totalPagesVisited': 1
+    });
+
+    window.analytics.totalPagesVisited = window.analytics.totalPagesVisited + 1;
+    console.log(window.analytics.totalPagesVisited);
+    mixpanel.register({
+        'totalPagesVisited': window.analytics.totalPagesVisited
+    });
+});
+
 FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
@@ -127,12 +143,6 @@ FlowRouter.route('/profile/:_id', {
         mixpanel.track('Page Visit', {
             type: ( Meteor.userId() == params._id ? 'Own Profile' : 'Other Profile')
         });
-    }
-});
-
-FlowRouter.triggers.enter(function() {
-    if(Meteor.userId()){
-        mixpanel.identify(Meteor.userId());
     }
 });
 
