@@ -15,7 +15,10 @@ Template.feed.rendered = () => {
 			postOrder.forEach(function(post, index){
 				if(post._id === nowPlaying._id){
 					if(index > appBodyRef.postsLoaded.get() - 3){
-						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						if(appBodyRef.postsLoadedDone.get()){
+							appBodyRef.postsLoadedDone.set(false);
+							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						}
 					}
 				}
 			});
@@ -50,7 +53,10 @@ Template.feed.rendered = () => {
 
 	$(window).scroll(function(e) {
 				if($(window).scrollTop() == $(document).height() - $(window).height()){
-					appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+					if(appBodyRef.postsLoadedDone.get()){
+						appBodyRef.postsLoadedDone.set(false);
+						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+					}
 				}
 				$('.post').each(function(){
 						if(isElementInViewport($(this))){
