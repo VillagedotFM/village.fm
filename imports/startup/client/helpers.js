@@ -8,12 +8,10 @@ UI.registerHelper("isMainVillage", function (slug) {
 });
 
 UI.registerHelper("postsLoadedDone", function () {
-  console.log(appBodyRef.postsLoadedDone.get());
   return appBodyRef.postsLoadedDone.get();
 });
 
 UI.registerHelper("skeletonPosts", function () {
-  console.log(appBodyRef.postsLoaded.get());
   return [0, 1];
 });
 

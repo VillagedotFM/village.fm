@@ -3,7 +3,10 @@ Template.playlist.rendered = () => {
 		if ($('.sr-playlist')[0].scrollHeight - $('.sr-playlist').scrollTop() == $('.sr-playlist').outerHeight()) {
 			if(appBodyRef.postsLoadedDone.get()){
 				appBodyRef.postsLoadedDone.set(false);
-				appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+				Tracker.flush();
+				window.setTimeout(function(){
+					appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+				}, 100);
 			}
 		}
 	});

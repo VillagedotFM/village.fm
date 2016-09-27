@@ -55,10 +55,13 @@ Template.feed.rendered = () => {
 				if($(window).scrollTop() == $(document).height() - $(window).height()){
 					if(appBodyRef.postsLoadedDone.get()){
 						appBodyRef.postsLoadedDone.set(false);
-						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						Tracker.flush();
+						window.setTimeout(function(){
+							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						}, 100);
 					}
 				}
-				$('.post').each(function(){
+				$('.post:not(.skeleton)').each(function(){
 						if(isElementInViewport($(this))){
 								const user = Meteor.user();
 								if(user && !user.profile.postsViewed){
