@@ -54,6 +54,27 @@ Template.playlist.helpers({
 
         posts = Posts.find(selector, options).fetch();
 
+        //Just created post
+        if(Meteor.userId()){
+          let date = new Date();
+          let time_filter = new Date();
+          time_filter.setMinutes(date.getMinutes() - 1);
+
+          const justCreated = Posts.findOne({
+            createdBy: Meteor.userId(),
+            createdAt: {$gte: time_filter},
+          }, {
+            sort: {createdAt: -1}
+          });
+
+          if(justCreated){
+            let inPlaylist = false;
+            if(!posts.find((post) => post._id === justCreated._id)){
+              posts.push(justCreated);
+            }
+          }
+        }
+
     //Inbox
     if (appBodyRef.inboxOpen.get()) {
       var inboxItems = [];
