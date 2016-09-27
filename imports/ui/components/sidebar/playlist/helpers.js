@@ -78,7 +78,10 @@ Template.playlist.helpers({
     }
   },
   skeletonPosts(postLength){
-    return [0, 1, 2, 3, 4, 5, 6, 7];
+    if(!appBodyRef.postsLoadedDone.get()){
+      return [0, 1, 2, 3, 4, 5, 6, 7];
+    }
+
   },
   // showInbox() {
   //     return appBodyRef.inboxOpen.get();
