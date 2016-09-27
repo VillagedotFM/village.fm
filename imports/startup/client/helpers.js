@@ -7,6 +7,16 @@ UI.registerHelper("isMainVillage", function (slug) {
     return (slug === '/' || slug === 'main');
 });
 
+UI.registerHelper("postsLoadedDone", function () {
+  console.log(appBodyRef.postsLoadedDone.get());
+  return appBodyRef.postsLoadedDone.get();
+});
+
+UI.registerHelper("skeletonPosts", function () {
+  console.log(appBodyRef.postsLoaded.get());
+  return [0, 1];
+});
+
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
     if (user)

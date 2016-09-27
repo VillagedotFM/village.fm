@@ -103,15 +103,6 @@ Template.playlist.helpers({
       return posts;
     }
   },
-  postsLoadedDone() {
-    return appBodyRef.postsLoadedDone.get();
-  },
-  skeletonPosts(postLength){
-    if(!appBodyRef.postsLoadedDone.get()){
-      return [0, 1, 2, 3, 4, 5, 6, 7];
-    }
-
-  },
   // showInbox() {
   //     return appBodyRef.inboxOpen.get();
   // },
