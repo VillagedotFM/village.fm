@@ -74,8 +74,16 @@ Template.playlist.helpers({
       GlobalClient.checkAndMoveSelectedPost(posts);
 
       appBodyRef.postOrder.set(posts);
+
+      if(posts && posts.length > 0 ){
+        appBodyRef.postsLoadedDone.set(true);
+      }
+
       return posts;
     }
+  },
+  postsLoadedDone() {
+    return appBodyRef.postsLoadedDone.get();
   },
   skeletonPosts(postLength){
     if(!appBodyRef.postsLoadedDone.get()){
