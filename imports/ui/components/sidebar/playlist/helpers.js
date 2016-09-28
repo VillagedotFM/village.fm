@@ -100,6 +100,10 @@ Template.playlist.helpers({
         appBodyRef.postsLoadedDone.set(true);
       }
 
+      if(posts && posts.length > 0 && posts.length < appBodyRef.postsLoaded.get()){
+        appBodyRef.allPostsLoadedDone.set(true);
+      }
+
       return posts;
     }
   },
