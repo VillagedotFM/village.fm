@@ -7,6 +7,14 @@ UI.registerHelper("isMainVillage", function (slug) {
     return (slug === '/' || slug === 'main');
 });
 
+UI.registerHelper("postsLoadedDone", function () {
+  return appBodyRef.postsLoadedDone.get();
+});
+
+UI.registerHelper("skeletonPosts", function () {
+  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+});
+
 UI.registerHelper("getUserImage", function (userId) {
     let user = Meteor.users.findOne({_id: userId});
     if (user)

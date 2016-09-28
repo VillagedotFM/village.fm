@@ -9,14 +9,6 @@ Template.feed.helpers({
       return appBodyRef.displayPosts.get();
     // }
   },
-  postsLoadedDone() {
-    return appBodyRef.postsLoadedDone.get();
-  },
-  skeletonPosts(){
-    if(!appBodyRef.postsLoadedDone.get()){
-      return [0, 1, 2, 3, 4, 5, 6, 7];
-    }
-  },
   // showInbox() {
   //   return appBodyRef.inboxOpen.get();
   // },
