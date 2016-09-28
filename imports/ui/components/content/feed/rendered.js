@@ -17,7 +17,7 @@ Template.feed.rendered = () => {
 					if(index > appBodyRef.postsLoaded.get() - 3){
 						if(appBodyRef.postsLoadedDone.get() && !appBodyRef.allPostsLoadedDone.get()){
 							appBodyRef.postsLoadedDone.set(false);
-							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 20);
 						}
 					}
 				}
@@ -61,7 +61,7 @@ Template.feed.rendered = () => {
 					appBodyRef.postsLoadedDone.set(false);
 					Tracker.flush();
 					window.setTimeout(function(){
-						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 20);
 					}, 100);
 				}
 			}

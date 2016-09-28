@@ -9,7 +9,7 @@ Template.playlist.rendered = () => {
 					appBodyRef.postsLoadedDone.set(false);
 					Tracker.flush();
 					window.setTimeout(function(){
-						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 20);
 					}, 100);
 
 				}
