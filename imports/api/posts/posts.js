@@ -45,6 +45,7 @@ Posts.publicFields = {
   'listenedBy': 1,
   'createdAt': 1,
   'createdBy': 1,
+  'updatedAt': 1,
   'profile': 1
 }
 
@@ -271,6 +272,10 @@ Posts.schema = new SimpleSchema({
         return this.userId;
       }
     }
+  },
+
+  updatedAt: {
+    type: Date
   },
 
   profile: {

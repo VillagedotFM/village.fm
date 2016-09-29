@@ -88,18 +88,20 @@ Template.playlist.events({
       console.log(this);
       $('.wrapper').scrollTop(0);
       appBodyRef.editingPost.set(this._id);
-      appBodyRef.upload.showForm.set(true);
+      appBodyRef.showForm.set(true);
       appBodyRef.upload.uploadedArtist.set(this.artist);
       appBodyRef.upload.uploadedTitle.set(this.title);
       appBodyRef.upload.uploadedThumbnail.set(this.thumbnail);
+      $('input[name=post-link]').val(this.link);
       $('textarea[name=post-caption]').val(this.description);
-      appBodyRef.upload.chars.set(this.description.length);
+      appBodyRef.upload.chars.set($('textarea[name=post-caption]').val().length);
+      console.log(appBodyRef.upload);
     },
     "click .post__edit-save": function(event, template){
       // This is where you will call the update method as well as set the reactive-var back to null to reset the ui
     },
     "click .post__delete": function(event, template){
-      console.log('CHECKPOINT 02');
+      console.log('DELETING');
       appBodyRef.deletingPost.set(this._id);
     },
     "click .sr-playlist__play--play": function (event, template) {

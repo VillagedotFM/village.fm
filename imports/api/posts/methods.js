@@ -325,6 +325,35 @@ Meteor.methods({
         return insertedPost;
     },
 
+    updatePost: function (post) {
+        //Grab duration, insert post
+        let tempTaggedUsers = [];
+        _.each(post.taggedUsers, function (user) {
+            tempTaggedUsers.push(user._id);
+        });
+        post.taggedUsers = tempTaggedUsers;
+
+        let updatedPost = Posts.update({
+          _id: post._id,
+          createdBy: this.userId
+        }, {
+          $set: {
+            artist: post.artist,
+            thumbnail: post.thumbnail,
+            title: post.title,
+            description: post.description,
+            updatedAt: new Date()
+          },
+          $push: {
+            taggedUsers: {
+              $each: post.taggedUsers
+            }
+          }
+        });
+
+        return updatedPost;
+    },
+
     tagUsers: function (post, taggedUsers) {
         _.each(taggedUsers, function (user) {
             let affected = Posts.update({

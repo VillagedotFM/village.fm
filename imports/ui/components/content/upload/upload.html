@@ -47,7 +47,7 @@
         {{/if}}
         {{#if showForm}}
             <div class="uploaded-item {{showUploadForm}} clearfix">
-                <form class="postUpload">
+                <form class="{{#if editingPost}}savePost{{else}}postUpload{{/if}}">
                     <div class="uploaded-item__img-wrap">
                         <div class="uploaded-item__img-background">
                             <img src="{{uploadedThumbnail}}" class="uploadedThumbnail" alt="">

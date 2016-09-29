@@ -142,7 +142,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     duplicate: new ReactiveVar(null),
     postError: new ReactiveVar(false),
     missingData: new ReactiveVar(false),
-    showForm: new ReactiveVar(false),
     //Reactive elements to display in form after link is submitted
     uploadedThumbnail: new ReactiveVar(null),
     uploadedArtist: new ReactiveVar(null),

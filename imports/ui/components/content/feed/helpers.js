@@ -132,11 +132,11 @@ Template.feed.helpers({
   },
   deletingPost: function() {
     return (this._id === appBodyRef.deletingPost.get());
-  }
+  },
   // loadIframe: function() {
   //   return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
   // }
-  profileFeed: function(){
+  profileFeed: function() {
     return (typeof(FlowRouter.getParam('_id')) === 'undefined');
   },
 });

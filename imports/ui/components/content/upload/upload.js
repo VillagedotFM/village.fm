@@ -17,7 +17,7 @@ Template.upload.onCreated(function uploadOnCreated() {
     uploadRef.postError = appBodyRef.upload.postError;
 
     uploadRef.missingData = appBodyRef.upload.missingData;
-    uploadRef.showForm = appBodyRef.upload.showForm;
+    uploadRef.showForm = appBodyRef.showForm;
 
     //Reactive elements to display in form after link is submitted
     uploadRef.uploadedThumbnail = appBodyRef.upload.uploadedThumbnail;

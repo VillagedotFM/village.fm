@@ -202,7 +202,6 @@ Template.upload.events({
     //TODO: Tagged users, tags, related, genre (SC only)
     'submit .postUpload'(event, instance) {
         event.preventDefault();
-
         if ($.trim($('input[name=post-author]').val()).length < 1) {
           uploadRef.missingData.set(true);
           $('.postUploadBtn').prop('disabled', true);
@@ -327,6 +326,37 @@ Template.upload.events({
                 });
             });
         }
+    },
+    'submit .savePost'(event, instance) {
+      event.preventDefault();
+      if ($.trim($('input[name=post-author]').val()).length < 1) {
+        uploadRef.missingData.set(true);
+        $('.postUploadBtn').prop('disabled', true);
+        $('input[name=post-author]').addClass('formError');
+      }
+      if ($.trim($('input[name=post-name]').val()).length < 1) {
+        uploadRef.missingData.set(true);
+        $('.postUploadBtn').prop('disabled', true);
+        $('input[name=post-name]').addClass('formError');
+      }
+
+      if (uploadRef.missingData.get()) //Don't allow submit
+          return;
+
+      let post = {
+          _id: appBodyRef.editingPost.curValue,
+          thumbnail: $('.uploadedThumbnail').prop("src"),
+          artist: $('input[name=post-author]').val(),
+          title: $('input[name=post-name]').val(),
+          description: $('textarea[name=post-caption]').val(),
+          taggedUsers: Tags.get('taggedUsers')
+      };
+      Meteor.call('updatePost', post, function (error, data) {
+        console.log('CHECKPOINT 03');
+        console.log(error, data);
+        appBodyRef.editingPost.set(null);
+        resetForm();
+      });
     },
     "click .upload-section"(event, template){
       if (Meteor.userId()) {
