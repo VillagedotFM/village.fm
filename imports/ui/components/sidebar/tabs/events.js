@@ -4,6 +4,10 @@ Template.tabs.events({
     $('.wrapper').scrollTop(0);
     appBodyRef.timeFilter.set($(event.target).data('time'));
 
+    appBodyRef.postsLoaded.set(20);
+    appBodyRef.allPostsLoadedDone.set(false);
+    Tracker.flush();
+
     mixpanel.track('Clicked Time Filter', {
     	timeframe: $(event.target).data('time')
     });
