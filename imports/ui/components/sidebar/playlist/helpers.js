@@ -117,5 +117,8 @@ Template.playlist.helpers({
   },
   isSubVillage: function() {
     return FlowRouter.getParam('villageSlug');
+  },
+  isPostCurrentUsers: function () {
+    return (Meteor.userId() === this.createdBy);
   }
 });

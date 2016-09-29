@@ -29,6 +29,9 @@ Template.upload.helpers({
     uploadedTitle() {
         return Template.instance().uploadedTitle.get();
     },
+    editingPost() {
+      return appBodyRef.editingPost.get();
+    },
     settings() {
         return {
             position: "below",

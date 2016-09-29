@@ -80,6 +80,25 @@ Template.playlist.events({
           appBodyRef.guestAction.set('upvotePost');
         }
     },
+    "click .post__edit": function(event, template){
+      console.log('CHECKPOINT 01');
+      console.log(this);
+      $('.wrapper').scrollTop(0);
+      appBodyRef.editingPost.set(this._id);
+      appBodyRef.upload.showForm.set(true);
+      appBodyRef.upload.uploadedArtist.set(this.artist);
+      appBodyRef.upload.uploadedTitle.set(this.title);
+      appBodyRef.upload.uploadedThumbnail.set(this.thumbnail);
+      $('textarea[name=post-caption]').val(this.description);
+      appBodyRef.upload.chars.set(this.description.length);
+    },
+    "click .post__edit-save": function(event, template){
+      // This is where you will call the update method as well as set the reactive-var back to null to reset the ui
+    },
+    "click .post__delete": function(event, template){
+      console.log('CHECKPOINT 02');
+      appBodyRef.deletingPost.set(this._id);
+    },
     "click .sr-playlist__play--play": function (event, template) {
         let selectedId = event.currentTarget.id;
         let selectedPost = Posts.findOne(selectedId);
@@ -143,12 +162,12 @@ Template.playlist.events({
         }
     },
 
-  'click .sr-playlist__right-btn': function(event, template) {
-    $('.us-mobile').hide();
-    $('.sidebar').hide();
-    $('.container').show();
-  },
-  'click .after-post--overlay': function(event, template) {
+    'click .sr-playlist__right-btn': function(event, template) {
+      $('.us-mobile').hide();
+      $('.sidebar').hide();
+      $('.container').show();
+    },
+    'click .after-post--overlay': function(event, template) {
     $('.after-post--overlay').hide();
     $('.after-post--bg').hide();
     $('.after-post--text').hide();

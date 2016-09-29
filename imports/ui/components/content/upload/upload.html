@@ -81,7 +81,11 @@
                     </div>
                     <div class="uploaded-item__btns">
                         <button type="reset" class="btn btn--inverse uploaded-item__cancel">Cancel</button>
-                        <button type="submit" name="post" class="btn postUploadBtn">Post</button>
+                        {{#if editingPost}}
+                          <button type="submit" name="save" class="btn postUploadBtn">Save</button>
+                        {{else}}
+                          <button type="submit" name="post" class="btn postUploadBtn">Post</button>
+                        {{/if}}
                     </div>
                 </form>
             </div>

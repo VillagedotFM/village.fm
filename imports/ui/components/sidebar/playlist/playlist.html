@@ -43,10 +43,18 @@
                             {{#unless isMainVillage villageSlug}}
                                 {{#unless isSubVillage }}
                                     <span class="sr-playlist__posted-in">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
-                                {{/unless}}   
+                                {{/unless}}
                             {{/unless}}
                         {{/if}}
                     </div>
+                    {{#if isPostCurrentUsers}}
+                      <div class="post__delete">
+                        <i class="fa fa-close" style="font-size: 10px; color: #c4cacf;"></i>
+                      </div>
+                      <div class="post__edit">
+                        <i class="fa fa-pencil" style="font-size: 10px; color: #c4cacf;"></i>
+                      </div>
+                    {{/if}}
                 </li>
             {{/each}}
         </ul>

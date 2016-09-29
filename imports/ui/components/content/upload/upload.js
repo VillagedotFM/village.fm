@@ -11,17 +11,17 @@ Template.upload.onCreated(function uploadOnCreated() {
     uploadRef = this;
 
     //TODO: use these once we have designs
-    uploadRef.notFound = new ReactiveVar(false);
-    uploadRef.duplicate = new ReactiveVar(null);
-    
-    uploadRef.postError = new ReactiveVar(false);
+    uploadRef.notFound = appBodyRef.upload.notFound;
+    uploadRef.duplicate = appBodyRef.upload.duplicate;
 
-    uploadRef.missingData = new ReactiveVar(false);
-    uploadRef.showForm = new ReactiveVar(false);
+    uploadRef.postError = appBodyRef.upload.postError;
+
+    uploadRef.missingData = appBodyRef.upload.missingData;
+    uploadRef.showForm = appBodyRef.upload.showForm;
 
     //Reactive elements to display in form after link is submitted
-    uploadRef.uploadedThumbnail = new ReactiveVar(null);
-    uploadRef.uploadedArtist = new ReactiveVar(null);
-    uploadRef.uploadedTitle = new ReactiveVar(null);
-    uploadRef.chars = new ReactiveVar(0);
+    uploadRef.uploadedThumbnail = appBodyRef.upload.uploadedThumbnail;
+    uploadRef.uploadedArtist = appBodyRef.upload.uploadedArtist;
+    uploadRef.uploadedTitle = appBodyRef.upload.uploadedTitle;
+    uploadRef.chars = appBodyRef.upload.chars;
 });

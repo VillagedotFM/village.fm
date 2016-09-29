@@ -110,5 +110,12 @@ Template.feed.helpers({
   },
   loadIframe: function() {
     return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
+  },
+  editingPost: function() {
+    console.log('CHECKPOINT 03');
+    return (this._id === appBodyRef.editingPost.get());
+  },
+  deletingPost: function() {
+    return (this._id === appBodyRef.deletingPost.get());
   }
 });
