@@ -18,5 +18,21 @@ Meteor.methods({
 
       console.log( error || "Message sent - Feedback send from: "+submitterEmail);
     });
+  },
+  requestVillage: function(submitterEmail, category) {
+    var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+
+    var mailOptions = {
+      from:     submitterEmail,
+      to:       "yourfriends@village.fm",
+      subject:  "New Village Request",
+      text:     `${submitterEmail} has requested a Village for their ${category}. Awesome!`,
+    }
+
+    smtpTransport.sendMail(mailOptions, function(error, response) {
+      smtpTransport.close();
+
+      console.log( error || "Message sent - New Village Request from: "+submitterEmail);
+    });
   }
 });

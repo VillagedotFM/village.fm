@@ -1,0 +1,40 @@
+.hero-panel {
+  position: relative;
+  background-image: url(../../images/home-page/web_img_hero_area.png);
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+
+  h1 {
+    color: #fff;
+    font-size: 2.441rem;
+    margin-top: 4rem;
+  }
+
+  p {
+    color: #fff;
+    font-size: 1.15rem;
+  }
+
+  .scroll-down {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+
+  @media screen and (max-width: 1440px) {
+    h1 {
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 2rem 0;
+  }
+}

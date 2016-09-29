@@ -1,0 +1,44 @@
+$social-icons:
+	(
+   'youtube': #cd201f,
+	 'facebook': #3b5999,
+	 'twitter': #55acee,
+	 'linkedin': #0077b5,
+	 'instagram': #262626
+	);
+
+.social-icons {
+  margin: 1rem 0;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: .5rem;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.4rem;
+  line-height: 2.5rem;
+  transition: .2s ease;
+
+	@media screen and (max-width: 325px) {
+		width: 2rem;
+		height: 2rem;
+		line-height: 2rem;
+	}
+}
+
+@each $name, $value in $social-icons {
+  .social-icon-#{$name} {
+  	color: $value;
+    border-color: $value;
+
+  	&:hover, &:active, &:focus, &:active:focus {
+			background-color: $value;
+      color: #fff;
+  	}
+  }
+}
