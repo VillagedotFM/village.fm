@@ -1,0 +1,245 @@
+<template name="nowPlayingPost">
+  {{#with nowPlaying}}
+    <div id="ytplayer" style="top: {{topy}}"></div>
+
+    {{#if notInFeed}}
+      <article id="{{_id}}" class="post">
+          <div class="post__inner">
+              <div class="post__rating {{isUpvoted}} bg-color-content">
+                  <i class="fa fa-caret-up"></i>
+                  <span>{{upvotes}}</span>
+              </div>
+              <div class="post__left-block color-secondary-text">
+                  Now <br>
+                  Playing
+              </div>
+              <div class="post__top clearfix">
+                  <div class="post__top-upvote upvote-block {{mobileUpvoted}} visible-mobile">
+                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                      <span class="upvote-block__number">{{upvotes}}</span>
+                  </div>
+                  <a href="/profile/{{createdBy}}" class="post__top-left">
+                      <img src="{{getUserImage createdBy}}" alt="" class="post__author-img">
+                  </a>
+                  <div class="post__top-right">
+                      <span class="post__share color-secondary-text">
+                          <span class="post__share-text">Share</span>
+                          <div class="share-dropdown">
+                              <ul class="share-dropdown__list">
+                                  <li><a data-href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}{{postUrl _id}}" class="share-dropdown__social share-dropdown__fb">Facebook</a></li>
+                                  <li><a data-href="http://twitter.com/share?text=Check out {{artist}} - {{title}} on Village.fm&url={{currentUrl}}{{postUrl _id}}" class="share-dropdown__social share-dropdown__twitter">Twitter</a></li>
+                                  <li><a href="" class="share-dropdown__copy" id="share-{{_id}}">Copy Link</a></li>
+                              </ul>
+                          </div>
+                      </span>
+                  </div>
+                  <div class="post__top-middle">
+                      <h1 class="post__title">{{artist}} - {{title}}</h1>
+                      <div class="post__posted-by">
+                          <div class="post__author color-main user-dropdown-handle">
+                              <a href="/profile/{{createdBy}}"><span>{{getUserName createdBy}}</span></a>
+                              <!-- <div class="user-dropdown">
+                                  <div class="user-dropdown__inner">
+                                    <a href="/profile/{{createdBy}}">
+                                        <img src="{{getUserImage createdBy}}" class="more-users-dropdown__img">
+                                      <div class="more-users-dropdown__name-wrap">
+                                        <span class="more-users-dropdown__name">{{getUserName createdBy}}</span>
+                                      </div>
+                                    </a>
+                                  </div>
+                              </div> -->
+                          </div>
+                          <span class="post__date color-secondary-text">posted {{postedAgo}}</span>
+                          {{#if villageSlug}}
+                            {{#unless isMainVillage villageSlug}}
+                              {{#unless isSubVillage }}
+                                <span class="color-secondary-text">in <a href="/{{villageSlug}}" class="color-main">{{villageName}}</a></span>
+                              {{/unless}}
+                            {{/unless}}
+                          {{/if}}
+                      </div>
+                  </div>
+              </div>
+              <div class="post__video-wrapper">
+                <div class="post__video" id="video-{{_id}}" style="background-image: url({{thumbnail}})">
+                    {{#if vidReady}}
+                      {{#if isPlaying}}
+                        {{#unless isYoutube}}
+                          <button class="post__video-pause" id={{_id}}></button>
+                        {{/unless}}
+                      {{else}}
+                        <button class="post__video-play" id={{_id}}></button>
+                      {{/if}}
+                    {{else}}
+                      {{> spinner}}
+                    {{/if}}
+                  </div>
+                  <h3 class="post__video-title">
+                    {{description}}
+                    {{#each taggedUsers}}
+                      &nbsp;@{{getUserName this}}&nbsp;
+                    {{/each}}
+                  </h3>
+              </div>
+              <div class="post__upvoted clearfix">
+                  <div class="post__upvoted-left">
+                    <div>
+                      <span class="color-secondary-text">Upvoted by:</span>
+                        <span>
+                          {{#each upvotedBy}}
+                            <a href="/profile/{{this}}" class="color-main upvoter">{{getUserName this}}</a>
+                          {{/each}}
+                        <a href="" class="color-main upvoterOthers">{{upvoterOthers}}
+                            <div class="tooltiptext more-users-dropdown">
+                                <div class="more-users-dropdown__wrap">
+                                    <ul class="more-users-dropdown__inner">
+                                      {{#each upvotedBy}}
+                                          <li class="more-users-dropdown__user">
+                                              <a href="/profile/{{this}}">
+                                                  <img src="{{getUserImage this}}" class="more-users-dropdown__img">
+                                                <div class="more-users-dropdown__name-wrap">
+                                                  <span class="more-users-dropdown__name">{{getUserName this}}</span>
+                                                </div>
+                                              </a>
+                                          </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </a>
+                        </span>
+                      </div>
+                  </div>
+                  <div class="post__upvoted-right align-right">
+                      <span class="color-secondary-text">{{listens}} listens</span>
+                  </div>
+              </div>
+              <div class="post__comments-send clearfix">
+                  <span class="post__comments color-secondary-text active" data-id={{_id}}>
+                      <span class="hidden-mobile-inline">Comments ({{comments.length}})</span>
+                      <span class="visible-mobile-inline">{{comments.length}}</span>
+                  </span>
+                  <!-- {{#if currentUser}}
+                    <span class="post__send color-secondary-text" data-id={{_id}}>Send to Friend</span>
+                  {{/if}} -->
+              </div>
+              <div class="comments-block" data-id={{_id}}>
+                  <div class="comments-block__posted">
+                    {{#each comments}}
+                      <div class="posted-comment">
+                          <div class="posted-comment__inner">
+                              <div class="posted-comment__upvote-cell">
+                                  <div class="upvote-block {{commentUpvoted}}">
+                                      <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                      <span class="upvote-block__number">{{likes.length}}</span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__comment-cell clearfix">
+                                  <div class="posted-comment__img-wrap">
+                                      <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                  </div>
+                                  <div class="posted-comment__text-wrap">
+                                      <span class="posted-comment__author-wrap">
+                                          <a href="/profile/{{createdBy}}" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
+                                      </span>
+                                      <span class="posted-comment__comment">
+                                          {{content}}
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="posted-comment__date-cell">
+                                  <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
+                                  {{#if currentUser}}
+                                    <span class="posted-comment__reply color-main">Reply</span>
+                                  {{/if}}
+                              </div>
+                          </div>
+                          {{#if replyTo _id}}
+                            <div class="user-comment user-comment--reply">
+                                <div class="user-comment__inner">
+                                    <div class="user-comment__img-cell">
+                                        <img src="{{getUserImage currentUser._id}}" alt="">
+                                    </div>
+                                    <div class="user-comment__comment-cell">
+                                        <input type="text" name="post-comment" class="user-comment__comment" placeholder="Reply to this comment">
+                                    </div>
+                                    <div class="user-reply__submit-cell">
+                                        <button class="user-comment__reply"></button>
+                                    </div>
+                                </div>
+                            </div>
+                          {{/if}}
+                          {{#each replies}}
+                            <div class="posted-comment posted-comment--reply">
+                                <div class="posted-comment__inner">
+                                    <div class="posted-comment-reply__upvote-cell" data-value="{{@index}}" data-parent="{{../_id}}">
+                                        <div class="upvote-block {{commentUpvoted}}">
+                                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                                            <span class="upvote-block__number">{{likes.length}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="posted-comment__comment-cell clearfix">
+                                        <div class="posted-comment__img-wrap">
+                                            <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                        </div>
+                                        <div class="posted-comment__text-wrap">
+                                            <span class="posted-comment__author-wrap">
+                                                <a href="/profile/{{createdBy}}" class="posted-comment__author color-main">{{getUserName createdBy}}</a>
+                                            </span>
+                                            <span class="posted-comment__comment">
+                                                {{content}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="posted-comment__date-cell">
+                                        <span class="posted-comment__time-ago color-secondary-text">{{postedAgo}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                          {{/each}}
+                      </div>
+                    {{/each}}
+                      {{#if moreComments}}
+                        <div class="comments-block__more-link-wrap">
+                            <a href="#" class="comments-block__more-link color-secondary-text">
+                                More ({{moreComments}})
+                            </a>
+                        </div>
+                      {{/if}}
+                  </div>
+                  {{#if currentUser}}
+                    <div class="user-comment">
+                      <div class="user-comment__inner">
+                        <div class="user-comment__img-cell">
+                          <img src="{{getUserImage currentUser._id}}" alt="">
+                        </div>
+                        <div class="user-comment__comment-cell">
+                          {{#if comments}}
+                            <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="Add comment...">
+                          {{else}}
+                            <input type="text" name="post-comment-{{_id}}" class="user-comment__comment" placeholder="Be the first to comment on this post...">
+                          {{/if}}
+                        </div>
+                        <div class="user-comment__submit-cell">
+                          <button class="user-comment__submit"></button>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
+              </div>
+
+              <div class="send-to-friend" data-id='{{_id}}' style="display: none;">
+                  <div class="send-to-friend__inner">
+                      <div class="send-to-friend__name-wrap">
+                        {{> tagsinput autocompleteSettings=settings tagField='profile.name' tagsVar='profile.name' id='taggedUsers' name='post-caption' placeholder='Enter your thoughts or Tag some friends by using @ symbol(optional)'}}
+                      </div>
+                      <div class="send-to-friend__send-wrap">
+                          <button class="send-to-friend__send-btn"></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </article>
+    {{/if}}
+  {{/with}}
+</template>

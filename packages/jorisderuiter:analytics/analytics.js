@@ -1,3 +1,4 @@
+/*
 if(!Meteor.userId()){
 	var anonymousUserId = localStorage.getItem('anonymousUserId');
 	if (!anonymousUserId){
@@ -9,3 +10,4 @@ if(!Meteor.userId()){
 	mixpanel.people.set_once('$first_name', anonymousUserId);
 	mixpanel.people.set_once('anonymous', true);
 }
+*/

@@ -1,6 +1,7 @@
 import './playlist.html';
 import './events.js';
 import './helpers.js';
+import './rendered.js';
 
 let postToVote = new ReactiveVar();
 

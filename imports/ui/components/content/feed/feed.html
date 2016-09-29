@@ -1,5 +1,5 @@
 <template name='feed'>
-  <div class="posts-wrapper posts-wrapper{{profilePadding}}">
+  <div class="posts-wrapper posts-wrapper{{profilePadding}} {{#unless posts}}skeleton{{/unless}}">
     {{#each posts}}
 
       <article id="{{_id}}" class="post">
@@ -8,12 +8,14 @@
                   <i class="fa fa-caret-up"></i>
                   <span>{{upvotes}}</span>
               </div>
-              {{#unless notSelectedPost @index}}
-                <div class="post__left-block color-secondary-text">
-                    {{rank @index}}{{getNumberEnd (rank @index)}} <br>
-                    place
-                </div>
-              {{/unless}}
+              {{#if profileFeed}}
+                {{#unless notSelectedPost @index}}
+                  <div class="post__left-block color-secondary-text">
+                      {{rank @index}}{{getNumberEnd (rank @index)}} <br>
+                      place
+                  </div>
+                {{/unless}}
+              {{/if}}
               <div class="post__top clearfix">
                   <div class="post__top-upvote upvote-block {{mobileUpvoted}} visible-mobile">
                       <i class="fa fa-caret-up upvote-block__arrow"></i>
@@ -42,7 +44,7 @@
                               <!-- <div class="user-dropdown">
                                   <div class="user-dropdown__inner">
                                     <a href="/profile/{{createdBy}}">
-                                        <img src="{{getUserImage createdBy}}" class="more-users-dropdown__img">
+                                        <img src="{{profile.picture}}" class="more-users-dropdown__img">
                                       <div class="more-users-dropdown__name-wrap">
                                         <span class="more-users-dropdown__name">{{getUserName createdBy}}</span>
                                       </div>
@@ -62,16 +64,8 @@
                   </div>
               </div>
               <div class="post__video-wrapper">
-                <div class="post__video" style="background-image: url({{thumbnail}})">
-                    {{#if isYoutube}}
-                      {{#if loadIframe}}
-                        <iframe id="ytplayer-{{_id}}" type="text/html" width="464" height="270"
-                          src="https://www.youtube.com/embed/{{vidId}}?enablejsapi=1"
-                          frameborder="0"></iframe>
-                      {{/if}}
-                    {{/if}}
-
-                    {{#if videoReady @index}}
+                <div class="post__video" id="video-{{_id}}" style="background-image: url({{thumbnail}})">
+                    {{#if vidReady}}
                       {{#if isPlaying}}
                         {{#unless isYoutube}}
                           <button class="post__video-pause" id={{_id}}></button>
@@ -95,19 +89,19 @@
                     <div>
                       <span class="color-secondary-text">Upvoted by:</span>
                         <span>
-                          {{#each upvotedBy}}
-                            <a href="/profile/{{this}}" class="color-main upvoter">{{getUserName this}}</a>
+                          {{#each upvoteObjects}}
+                            <a href="/profile/{{createdBy}}" class="color-main upvoter">{{profile.niceName}}</a>
                           {{/each}}
                         <a href="" class="color-main upvoterOthers">{{upvoterOthers}}
                             <div class="tooltiptext more-users-dropdown">
                                 <div class="more-users-dropdown__wrap">
                                     <ul class="more-users-dropdown__inner">
-                                      {{#each upvotedBy}}
+                                      {{#each upvoteObjects}}
                                           <li class="more-users-dropdown__user">
-                                              <a href="/profile/{{this}}">
-                                                  <img src="{{getUserImage this}}" class="more-users-dropdown__img">
+                                              <a href="/profile/{{createdBy}}">
+                                                  <img src="{{profile.picture}}" class="more-users-dropdown__img">
                                                 <div class="more-users-dropdown__name-wrap">
-                                                  <span class="more-users-dropdown__name">{{getUserName this}}</span>
+                                                  <span class="more-users-dropdown__name">{{profile.niceName}}</span>
                                                 </div>
                                               </a>
                                           </li>
@@ -145,7 +139,7 @@
                               </div>
                               <div class="posted-comment__comment-cell clearfix">
                                   <div class="posted-comment__img-wrap">
-                                      <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                      <a href="/profile/{{createdBy}}"><img src="{{profile.picture}}" alt=""></a>
                                   </div>
                                   <div class="posted-comment__text-wrap">
                                       <span class="posted-comment__author-wrap">
@@ -189,7 +183,7 @@
                                     </div>
                                     <div class="posted-comment__comment-cell clearfix">
                                         <div class="posted-comment__img-wrap">
-                                            <a href="/profile/{{createdBy}}"><img src="{{getUserImage createdBy}}" alt=""></a>
+                                            <a href="/profile/{{createdBy}}"><img src="{{profile.picture}}" alt=""></a>
                                         </div>
                                         <div class="posted-comment__text-wrap">
                                             <span class="posted-comment__author-wrap">
@@ -250,5 +244,37 @@
           </div>
       </article>
     {{/each}}
+
+    {{#unless postsLoadedDone}}
+        {{#each skeletonPosts}}
+            <article class="post skeleton">
+                <div class="post__inner">
+                    <div class="post__rating">
+                    </div>
+                    <div class="post__left-block color-secondary-text">
+                        <span>1st</span> <br>
+                        <span>place</span>
+                    </div>
+                    <div class="post__top clearfix">
+                        <div class="post__top-upvote upvote-block visible-mobile">
+                            <i class="fa fa-caret-up upvote-block__arrow"></i>
+                        </div>
+                        <a href="/profile/{{createdBy}}" class="post__top-left">
+                            <i class="fa fa-user post__author-placeholder fa-3x"></i>
+                        </a>
+                        <div class="post__top-middle">
+                            <h1 class="post__title"><span class="post__artist">-</span> <span class="post__song">-</span></h1>
+                            <div class="post__posted-by">-</div>
+                        </div>
+                    </div>
+                    <div class="post__video-wrapper">
+                      <div class="post__video" id="video-{{_id}}" style="background-image: url({{thumbnail}})">
+                          <button class="post__video-play" id={{_id}}></button>
+                      </div>
+                    </div>
+                </div>
+            </article>
+        {{/each}}
+    {{/unless}}
   </div>
 </template>

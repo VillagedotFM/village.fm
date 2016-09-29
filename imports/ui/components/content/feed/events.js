@@ -109,6 +109,7 @@ Template.feed.events({
         }
       });
     } else {
+      mixpanel.track('Upvote attempted');
       appBodyRef.guestAction.set('upvotePost');
     }
   },
@@ -200,35 +201,50 @@ Template.feed.events({
     $('input[name=post-comment]').val('');
     appBodyRef.replyTo.set(commentId);
   },
-  "click .post__video-play": function(event, template){
-    let selectedId = event.currentTarget.id;
+  "click .post__video-pause": function(event, template){
+    event.stopPropagation();
+    appBodyRef.state.set(2);
+    let selectedId = this._id;
+    window['scplayer-' + selectedId].pause();
+  },
+  "click .post__video": function(event, template){
+    let selectedId = this._id;
+    let selectedType = this.type;
     let selectedPost = Posts.findOne(selectedId);
+    let nowPlaying = appBodyRef.nowPlaying.get();
+    let state = appBodyRef.state.get();
 
-    if (selectedPost.type === 'youtube') {
-      if (window['ytplayer-'+selectedId]) {
-        window['ytplayer-'+selectedId].playVideo();
+    if (selectedType === 'youtube') {
+      if (nowPlaying && nowPlaying._id === selectedId) {
+        if (state === 1) {
+          appBodyRef.state.set(2);
+          window['ytplayer'].pauseVideo();
+        } else {
+          appBodyRef.state.set(1);
+          window['ytplayer'].playVideo();
+        }
       } else {
-        appBodyRef.loadIframe.push(selectedPost);
         appBodyRef.nowPlaying.set(selectedPost);
       }
     } else {
-      window['scplayer-' + selectedId].play();
+      if (nowPlaying && nowPlaying._id === selectedId) {
+        if (state === 1) {
+          appBodyRef.state.set(2);
+          window['scplayer-' + selectedId].pause();
+        } else {
+          appBodyRef.state.set(1);
+          window['scplayer-' + selectedId].play();
+        }
+      } else {
+        appBodyRef.nowPlaying.set(selectedPost);
+        appBodyRef.state.set(1);
+        window['scplayer-' + selectedId].play();
+      }
     }
 
     mixpanel.track('Clicked play button', {
       area: 'Feed'
     });
-  },
-  "click .post__video-pause": function(event, template){
-    let selectedId = event.currentTarget.id;
-    let selectedPost = Posts.findOne(selectedId);
-    window['state-'+selectedPost._id] = 2;
-    if (selectedPost.type === 'youtube') {
-      window['ytplayer-' + selectedId].pauseVideo();
-    } else {
-      window['scplayer-' + selectedId].pause();
-    }
-    appBodyRef.isPlaying.set(false);
   },
   "click .share-dropdown__social": function(event, template){
     window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');
@@ -249,7 +265,12 @@ Template.feed.events({
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
-    $temp.val(window.location.origin+'/post/'+this._id).select();
+    let base = window.location.href;
+    if (base.charAt(base.length-1) !== '/') {
+      $temp.val(base+'/post/'+this._id).select();
+    } else {
+      $temp.val(base+'post/'+this._id).select();
+    }
     document.execCommand("copy");
     $temp.remove();
     $('.share-dropdown__copy#share-'+this._id).addClass('share-dropdown__copy--active');

@@ -7,7 +7,7 @@
           <p>&nbsp;Thanks for adding to the playlist!</p>
       </div>
     <div class="sr-playlist sr-playlist{{profilePadding}}">
-        <ul class="sr-playlist__list bg-color-playlist">
+        <ul class="sr-playlist__list bg-color-playlist {{#unless posts}}skeleton{{/unless}}">
             {{#each posts}}
                 <li class="sr-playlist__item" id="playlist-{{_id}}">
                     <div class="sr-playlist__left">
@@ -18,11 +18,8 @@
                     </div>
                     <div class="sr-playlist__right-btn"></div>
                     <div class="sr-playlist__right">
-                        {{#if videoReady @index}}
-                            <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
-                        {{else}}
-                            <span class="sr-playlist__spinner {{showSpinner}}"></span>
-                        {{/if}}
+                        <span class="sr-playlist__play {{playOrPause}}" id={{_id}}></span>
+                        <span class="sr-playlist__spinner {{showSpinner}}"></span>
                         {{#if showEqualizer}}
                             <span class="sr-playlist__equalizer"></span>
                         {{else}}
@@ -37,7 +34,7 @@
                             <br>
                         <span class="sr-playlist__posted-by">
                         posted by
-                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{getUserName createdBy}}</span></a>
+                            <a href="/profile/{{createdBy}}" class="color-main"><span class="sr-playlist__author">{{profile.niceName}}</span></a>
                         </span>
                         {{#if villageName}}
                             {{#unless isMainVillage villageSlug}}
@@ -57,6 +54,24 @@
                     {{/if}}
                 </li>
             {{/each}}
+            {{#unless postsLoadedDone}}
+              {{#each skeletonPosts}}
+                <li class="sr-playlist__item skeleton">
+                    <div class="sr-playlist__left">
+                        <div class="upvote-block">
+                        </div>
+                    </div>
+                    <div class="sr-playlist__right-btn"></div>
+                    <div class="sr-playlist__middle">
+                        <span class="sr-playlist__title">
+                            <span class="sr-playlist__artist">-</span>
+                            <span class="sr-playlist__song">-</span>
+                        </span><br>
+                        <span class="sr-playlist__posted-by">-</span>
+                    </div>
+                </li>
+              {{/each}}
+            {{/unless}}
         </ul>
     </div>
 
@@ -73,8 +88,8 @@
                 <div class="modal-body">
                     <h4>Upvoted by:</h4>
                     <div>
-                        {{#each postToVote.upvotedBy}}
-                            <small>{{getUserName this}},</small>
+                        {{#each postToVote.upvoteObjects}}
+                            <small>{{createByName}},</small>
                         {{/each}}
                     </div>
                     <div class="margin-top-15">

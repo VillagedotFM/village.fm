@@ -1,12 +1,25 @@
 <template name="profile">
-  <div class="profile">
+  <div class="profile {{#unless user}}skeleton{{/unless}}">
       <div class="profile__inner">
+        {{#unless user}}
+          <i class="fa fa-user profile__placeholder fa-4x"></i>
+          <div class="profile__block">
+              <h2 class="profile__name">-</h2>
+              <br>
+              <div class="profile__total-upvotes">
+                  -
+              </div>
+          </div>
+        {{/unless}}
+
         {{#with user}}
           <img class="profile__img" src="{{getUserImage _id}}">
           <div class="profile__block">
               <h2 class="profile__name">{{getUserName _id}}  <span class="color-main"># {{getUserVillagerNum _id}}</span></h2>
               <div class="profile__total-upvotes">
-                  <span class="color-secondary-text profile__upvotes">{{getUpvotesNum _id}} upvotes</span>
+                  <i class="cup profile__cup"></i>
+                  <span class="color-main profile__upvotes-place">{{getUserUpvoteRank _id}}<!--{{getNumberEnd (getUserUpvoteRank _id)}}--></span>
+                  <span class="color-secondary-text profile__upvotes">- {{getUpvotesNum _id}} upvotes</span>
               </div>
               <div class="last-listens">
                   <span class="last-listens__title">Last Upvotes:</span>

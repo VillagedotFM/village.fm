@@ -3,12 +3,16 @@ import {Posts} from "../../api/posts/posts.js";
 Meteor.subscribe("users.allData");
 
 
-UI.registerHelper("videoReady", function (index) {
-    return (_.contains(appBodyRef.videosReady.list(), index));
+UI.registerHelper("isMainVillage", function (slug) {
+    return (slug === '/' || slug === 'main');
 });
 
-UI.registerHelper("isMainVillage", function (slug) {
-    return (slug === '/');
+UI.registerHelper("postsLoadedDone", function () {
+  return appBodyRef.postsLoadedDone.get();
+});
+
+UI.registerHelper("skeletonPosts", function () {
+  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 });
 
 UI.registerHelper("getUserImage", function (userId) {
@@ -116,4 +120,41 @@ UI.registerHelper("getNumberEnd", function (num) {
         default:
             return ''
     }
+});
+
+UI.registerHelper("completed", function () {
+  let completed = appBodyRef.completed.get();   //Get current time of video
+  var minutes, seconds;
+
+  if (('' + moment.duration(completed, 'seconds')._data.seconds).length === 1) {  //0:1 -> 0:01
+    seconds = '0' + moment.duration(completed, 'seconds')._data.seconds;
+  } else {
+    seconds = moment.duration(completed, 'seconds')._data.seconds;  //Leave 0:25 as is
+  }
+
+  minutes = moment.duration(completed, 'seconds')._data.minutes;
+
+  return (minutes + ':' + seconds);
+});
+
+UI.registerHelper("completedPercentage", function () {
+  let completed = appBodyRef.completed.get();
+  let duration = '00:' + this.duration; //5:08 -> 00:05:08 for moment weirdness
+
+  //Divide current time in seconds by duration in seconds to get 0.XXXXXXX percentage
+  let completedPercentage = ''+(moment.duration(completed, 'seconds').asSeconds())/(moment.duration(duration, "mm:ss").asSeconds());
+
+  //Only take first 5 characters (including decimal) so 0.XXX, multiple by 100 and add % -> "XX.X%"
+  return (completedPercentage.substring(0,5) * 100);
+});
+
+UI.registerHelper("nowPlaying", function () {
+  let nowPlayingPost = appBodyRef.nowPlaying.get();
+  if (nowPlayingPost) {
+    return nowPlayingPost;
+  }
+});
+
+UI.registerHelper("getVillage", function () {
+  return Villages.findOne();
 });

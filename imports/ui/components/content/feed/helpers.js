@@ -22,12 +22,19 @@ Template.feed.helpers({
   //   });
   //   return inboxItems;
   // },
-  comments: function() {
-    return Comments.find({postId: this._id}).fetch();
-  },
   isPlaying: function() {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? true : false;
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? true : false;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   },
   isUpvoted: function() {
     if(_.contains(this.upvotedBy, Meteor.userId()))
@@ -46,8 +53,19 @@ Template.feed.helpers({
       return ' and ' + (this.upvotes - 3) + ' others';
     }
   },
-  videoReady: function(index) {          //Redundant of General helper but necessary because of weirdness
-    return (_.contains(appBodyRef.videosReady.list(), index));
+  vidReady: function(index) {
+    let nowPlaying = appBodyRef.nowPlaying.get();
+    let state = appBodyRef.state.get();
+
+    if (nowPlaying && nowPlaying.type === 'youtube') {
+      if (this._id === nowPlaying._id) {
+        return (state === 1 || state === 2) ? true : false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   },
   isYoutube() {
     if (this.type === 'youtube') {
@@ -108,9 +126,6 @@ Template.feed.helpers({
   isSubVillage() {
     return FlowRouter.getParam('villageSlug');
   },
-  loadIframe: function() {
-    return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
-  },
   editingPost: function() {
     console.log('CHECKPOINT 03');
     return (this._id === appBodyRef.editingPost.get());
@@ -118,4 +133,10 @@ Template.feed.helpers({
   deletingPost: function() {
     return (this._id === appBodyRef.deletingPost.get());
   }
+  // loadIframe: function() {
+  //   return (_.findWhere(appBodyRef.loadIframe.list(), {'_id':this._id}));
+  // }
+  profileFeed: function(){
+    return (typeof(FlowRouter.getParam('_id')) === 'undefined');
+  },
 });

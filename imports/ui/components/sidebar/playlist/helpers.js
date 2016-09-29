@@ -8,15 +8,28 @@ Template.playlist.helpers({
         var user = _.findWhere(Meteor.users.find().fetch(), {_id: id});
         var posts;
 
+        let selector = {};
+        let options = {};
+
+
         if (user) {
+            options = {
+              sort: {createdAt: -1},
+              limit: appBodyRef.postsLoaded.get()
+            };
             let profileTab = appBodyRef.profileTab.get();
-            if (profileTab === 'mutual')
-                posts = Posts.find({"upvotedBy": {$all: [user._id, Meteor.userId()]}}, {sort: {createdAt: -1}}).fetch();
-            else if (profileTab === 'upvotes')
-                posts = Posts.find({"upvotedBy": user._id}, {sort: {createdAt: -1}}).fetch();
-            else if (profileTab === 'posts')
-                posts = Posts.find({"createdBy": user._id}, {sort: {createdAt: -1}}).fetch();
+            if (profileTab === 'mutual'){
+                selector = {"upvotedBy": {$all: [user._id, Meteor.userId()]}};
+            } else if (profileTab === 'upvotes'){
+                selector = {"upvotedBy": user._id};
+            } else if (profileTab === 'posts'){
+                selector = {"createdBy": user._id};
+            }
         } else {  //Time Filters
+            options = {
+              sort: {upvotes: -1, lastUpvote: 1},
+              limit: appBodyRef.postsLoaded.get()
+            };
             let time = appBodyRef.timeFilter.get();
 
             let date = new Date();
@@ -32,11 +45,34 @@ Template.playlist.helpers({
             const villageSlug = FlowRouter.getParam('villageSlug');
             const village = Villages.findOne({slug: villageSlug});
             if(village){
-              posts = Posts.find({"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: 1}}).fetch();
+              selector = {"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}};
             } else {
-              posts = Posts.find({"createdAt": {$gte: time_filter}}, {sort: {upvotes: -1, lastUpvote: 1}}).fetch();
+              selector = {"createdAt": {$gte: time_filter}};
             }
 
+        }
+
+        posts = Posts.find(selector, options).fetch();
+
+        //Just created post
+        if(Meteor.userId()){
+          let date = new Date();
+          let time_filter = new Date();
+          time_filter.setMinutes(date.getMinutes() - 1);
+
+          const justCreated = Posts.findOne({
+            createdBy: Meteor.userId(),
+            createdAt: {$gte: time_filter},
+          }, {
+            sort: {createdAt: -1}
+          });
+
+          if(justCreated){
+            let inPlaylist = false;
+            if(!posts.find((post) => post._id === justCreated._id)){
+              posts.push(justCreated);
+            }
+          }
         }
 
     //Inbox
@@ -59,29 +95,38 @@ Template.playlist.helpers({
       GlobalClient.checkAndMoveSelectedPost(posts);
 
       appBodyRef.postOrder.set(posts);
+
+      if(posts && posts.length > 0 ){
+        appBodyRef.postsLoadedDone.set(true);
+      }
+
+      if(posts && posts.length > 0 && posts.length < appBodyRef.postsLoaded.get()){
+        appBodyRef.allPostsLoadedDone.set(true);
+      }
+
       return posts;
     }
   },
-  showInbox() {
-      return appBodyRef.inboxOpen.get();
-  },
-  inboxItems() {
-    var inboxItems = [];
-    _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
-      const post = Posts.findOne(inboxItem.postId);
-      if(FlowRouter.getParam('villageSlug')){
-        if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
-           inboxItems.push(post);
-        }
-      } else {
-        inboxItems.push(post);
-      }
-    });
-    return inboxItems;
-  },
-  inboxPost: function () {
-      return Posts.findOne(this.postId);
-  },
+  // showInbox() {
+  //     return appBodyRef.inboxOpen.get();
+  // },
+  // inboxItems() {
+  //   var inboxItems = [];
+  //   _.each(Inbox.find({to: Meteor.userId()}).fetch(), function(inboxItem) {
+  //     const post = Posts.findOne(inboxItem.postId);
+  //     if(FlowRouter.getParam('villageSlug')){
+  //       if(post.villageSlug && post.villageSlug == FlowRouter.getParam('villageSlug')){
+  //          inboxItems.push(post);
+  //       }
+  //     } else {
+  //       inboxItems.push(post);
+  //     }
+  //   });
+  //   return inboxItems;
+  // },
+  // inboxPost: function () {
+  //     return Posts.findOne(this.postId);
+  // },
   sentAgo: function (createdAt) {
       return moment(createdAt).fromNow();
   },
@@ -93,17 +138,45 @@ Template.playlist.helpers({
   },
   playOrPause: function () {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? 'sr-playlist__play--paused' : 'sr-playlist__play--play';
+      } else {
+        return 'sr-playlist__play--play';
+      }
+    } else {
+      return 'sr-playlist__play--play';
+    }
   },
   showEqualizer: function () {
     let state = appBodyRef.state.get();
-    return window['state-'+this._id] === 1 ? true : false;
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying) {
+      if (this._id === nowPlaying._id) {
+        return state === 1 ? true : false;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   },
   showSpinner: function () {
-      if (_.findWhere(appBodyRef.displayPosts.get(), {_id: this._id}))
-          return 'display';
-      else
-          return 'hidden';
+    let state = appBodyRef.state.get();
+    let nowPlaying = appBodyRef.nowPlaying.get();
+
+    if (nowPlaying && nowPlaying.type === 'youtube') {
+      if (this._id === nowPlaying._id) {
+        return (state === 1 || state === 2) ? 'hidden' : 'display';
+      } else {
+        return 'hidden';
+      }
+    } else {
+      return 'hidden';
+    }
   },
 
   postToVote: function () {

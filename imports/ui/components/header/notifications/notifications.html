@@ -10,22 +10,24 @@
               <ul class="ntf-dropdown__list">
 
                 {{#each notifications}}
-                  <li class="ntf-dropdown__item ntf-dropdown__item{{isRead}}">
-                      <div class="ntf-dropdown__item-inner">
-                          <div class="ntf-dropdown__img-wrap">
-                              <a href='/{{userId}}' ><img src="{{getUserImage userId}}" alt=""></a>
-                          </div>
-                          <div class="ntf-dropdown__caption">
-                              <p class="ntf-dropdown__text">
-                                  {{message}}
-                              </p>
-                              <span class="ntf-dropdown__date color-secondary-text">
-                                  <i class="ntf-dropdown__icon {{type}}-xs"></i>
-                                  <span class="ntf-dropdown__hours-ago">{{howLong}}</span>
-                              </span>
-                          </div>
-                      </div>
-                  </li>
+                  <a href="/post/{{postId}}">
+                    <li class="ntf-dropdown__item ntf-dropdown__item{{isRead}}">
+                        <div class="ntf-dropdown__item-inner">
+                            <div class="ntf-dropdown__img-wrap">
+                                <a href='/{{userId}}' ><img src="{{getUserImage userId}}" alt=""></a>
+                            </div>
+                            <div class="ntf-dropdown__caption">
+                                <p class="ntf-dropdown__text">
+                                    {{message}}
+                                </p>
+                                <span class="ntf-dropdown__date color-secondary-text">
+                                    <i class="ntf-dropdown__icon {{type}}-xs"></i>
+                                    <span class="ntf-dropdown__hours-ago">{{howLong}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                  </a>
                 {{/each}}
                   <!-- <li class="ntf-dropdown__item ntf-dropdown__item((DASH DASH))place">
                       <div class="ntf-dropdown__item-inner">
