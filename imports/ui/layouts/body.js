@@ -75,23 +75,24 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
-      // if (FlowRouter.current().params.villageSlug) {
-      //   const villageSlug = FlowRouter.getParam('villageSlug');
-      //   if (villageSlug !== '/') {
-      //     const village = Villages.findOne({slug: villageSlug});
-      //     SEO.set({
-      //       title: village.name,
-      //       description: "The Best Music chosen by the "+ village.name +" Community",
-      //       meta: {
-      //         'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
-      //         'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
-      //         'property="og:type"': 'website',
-      //         'property="og:site_name"': 'Village.fm',
-      //         'name="twitter:card"': 'summary',
-      //       }
-      //     });
-      //   }
-      // }
+      if ((FlowRouter.current().params.villageSlug) || (!FlowRouter.current().params.postId)) {
+        const villageSlug = FlowRouter.getParam('villageSlug');
+        if (villageSlug !== '/') {
+          const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+          console.log(village);
+          SEO.set({
+            title: village.name,
+            description: "The Best Music chosen by the "+ village.name +" Community",
+            meta: {
+              'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'property="og:type"': 'website',
+              'property="og:site_name"': 'Village.fm',
+              'name="twitter:card"': 'summary',
+            }
+          });
+        }
+      }
     }});
     this.subscribe('comments.all');
     this.subscribe('profiles.self');
