@@ -1,6 +1,7 @@
 /*****  Typography *****/
 html {
     height: 100%;
+    /*overflow: hidden;*/
 }
 body {
     font-size: 14px;
@@ -8,6 +9,7 @@ body {
     color: #2e2f2f;
     background: #f4f6f8;
     height: 100%;
+    /*overflow: hidden;*/
 }
 h1 {
     font-size: 22px;

@@ -54,6 +54,27 @@ Template.playlist.helpers({
 
         posts = Posts.find(selector, options).fetch();
 
+        //Just created post
+        if(Meteor.userId()){
+          let date = new Date();
+          let time_filter = new Date();
+          time_filter.setMinutes(date.getMinutes() - 1);
+
+          const justCreated = Posts.findOne({
+            createdBy: Meteor.userId(),
+            createdAt: {$gte: time_filter},
+          }, {
+            sort: {createdAt: -1}
+          });
+
+          if(justCreated){
+            let inPlaylist = false;
+            if(!posts.find((post) => post._id === justCreated._id)){
+              posts.push(justCreated);
+            }
+          }
+        }
+
     //Inbox
     if (appBodyRef.inboxOpen.get()) {
       var inboxItems = [];
@@ -79,17 +100,12 @@ Template.playlist.helpers({
         appBodyRef.postsLoadedDone.set(true);
       }
 
+      if(posts && posts.length > 0 && posts.length < appBodyRef.postsLoaded.get()){
+        appBodyRef.allPostsLoadedDone.set(true);
+      }
+
       return posts;
     }
-  },
-  postsLoadedDone() {
-    return appBodyRef.postsLoadedDone.get();
-  },
-  skeletonPosts(postLength){
-    if(!appBodyRef.postsLoadedDone.get()){
-      return [0, 1, 2, 3, 4, 5, 6, 7];
-    }
-
   },
   // showInbox() {
   //     return appBodyRef.inboxOpen.get();

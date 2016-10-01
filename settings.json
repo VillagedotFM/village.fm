@@ -17,7 +17,7 @@
       "client_id": "aee8647bad94cb6e201efcf6bee4224d"
     },
     "analyticsSettings": {
-      "Mixpanel": { "token": "19e98e02856c3c5a6dee92088fdcd7f3", "people": true }
+      "Mixpanel": { "token": "a26a02df998bd2a5d702611a5b2cdffc", "people": true }
     }
   }
 }

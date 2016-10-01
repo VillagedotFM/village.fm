@@ -15,9 +15,9 @@ Template.feed.rendered = () => {
 			postOrder.forEach(function(post, index){
 				if(post._id === nowPlaying._id){
 					if(index > appBodyRef.postsLoaded.get() - 3){
-						if(appBodyRef.postsLoadedDone.get()){
+						if(appBodyRef.postsLoadedDone.get() && !appBodyRef.allPostsLoadedDone.get()){
 							appBodyRef.postsLoadedDone.set(false);
-							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
+							appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 20);
 						}
 					}
 				}
@@ -51,14 +51,24 @@ Template.feed.rendered = () => {
 
 	});
 
-	$(window).scroll(function(e) {
-				if($(window).scrollTop() == $(document).height() - $(window).height()){
-					if(appBodyRef.postsLoadedDone.get()){
-						appBodyRef.postsLoadedDone.set(false);
-						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 8);
-					}
+	var lastScrollTop = 0;
+
+	$('.wrapper').scroll(function(e) {
+		var st = $(this).scrollTop();
+		if($('.wrapper')[0].scrollHeight - $('.wrapper').scrollTop() == $('.wrapper').outerHeight()) {
+			if (st > lastScrollTop){
+				if(appBodyRef.postsLoadedDone.get() && !appBodyRef.allPostsLoadedDone.get()){
+					appBodyRef.postsLoadedDone.set(false);
+					Tracker.flush();
+					window.setTimeout(function(){
+						appBodyRef.postsLoaded.set(appBodyRef.postsLoaded.get() + 20);
+					}, 100);
 				}
-				$('.post').each(function(){
+			}
+		}
+		lastScrollTop = st;
+
+				$('.post:not(.skeleton)').each(function(){
 						if(isElementInViewport($(this))){
 								const user = Meteor.user();
 								if(user && !user.profile.postsViewed){

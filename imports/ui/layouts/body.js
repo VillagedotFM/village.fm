@@ -75,10 +75,11 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
-      if (FlowRouter.current().params.villageSlug) {
+      if ((FlowRouter.current().params.villageSlug) || (!FlowRouter.current().params.postId)) {
         const villageSlug = FlowRouter.getParam('villageSlug');
         if (villageSlug !== '/') {
-          const village = Villages.findOne({slug: villageSlug});
+          const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+          console.log(village);
           SEO.set({
             title: village.name,
             description: "The Best Music chosen by the "+ village.name +" Community",
@@ -123,8 +124,9 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.nowPlaying = new ReactiveVar(null);    //1 currently playing post
 
   appBodyRef.displayPosts = new ReactiveVar(null);  //1+ posts shown in the feed
-  appBodyRef.postsLoaded = new ReactiveVar(8);
+  appBodyRef.postsLoaded = new ReactiveVar(20);
   appBodyRef.postsLoadedDone = new ReactiveVar(false);
+  appBodyRef.allPostsLoadedDone = new ReactiveVar(false);
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 
