@@ -75,7 +75,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
-      if ((FlowRouter.current().params.villageSlug) || (!FlowRouter.current().params.postId)) {
+      if ((FlowRouter.current().params.villageSlug) && (!FlowRouter.current().params.postId)) {
         const villageSlug = FlowRouter.getParam('villageSlug');
         if (villageSlug !== '/') {
           const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
