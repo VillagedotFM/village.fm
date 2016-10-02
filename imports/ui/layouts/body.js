@@ -162,6 +162,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 Template.app_body.onRendered(function() {
   $('.sr-playlist, .onboarding-popup__terms, .onboarding-popup__policy').perfectScrollbar();
   $('.wrapper').scrollTop(0);
+  $('body').scrollTop(0);
   $('.sr-playlist').scrollTop(0);
 
 

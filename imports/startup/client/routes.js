@@ -41,6 +41,7 @@ FlowRouter.route('/all', {
 
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
@@ -68,6 +69,7 @@ FlowRouter.route('/:villageSlug', {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
@@ -96,6 +98,7 @@ FlowRouter.route('/post/:postId', {  //Permalink
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
@@ -120,6 +123,7 @@ FlowRouter.route('/:villageSlug/post/:postId', {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         window.analytics.totalVillagesVisited = window.analytics.totalVillagesVisited + 1;
         mixpanel.register({
@@ -147,6 +151,7 @@ FlowRouter.route('/profile/:_id', {
         BlazeLayout.render('app_body', {profile: 'profile', tabs: 'profile_tabs'});
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         mixpanel.track('Page Visit', {
             type: ( Meteor.userId() == params._id ? 'Own Profile' : 'Other Profile')

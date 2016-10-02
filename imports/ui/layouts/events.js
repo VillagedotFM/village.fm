@@ -49,6 +49,7 @@ Template.app_body.events({
         appBodyRef.guestAction.set(null);
 
         $('.wrapper').scrollTop(0);
+        $('body').scrollTop(0);
 
         setTimeout(function () {
           $('.upload-section__upload').addClass('after-onboarding');
