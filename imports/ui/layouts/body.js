@@ -85,6 +85,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             description: "The Best Music chosen by the "+ village.name +" Community",
             meta: {
               'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
+              'property="og:image:width"': '200',
+              'property="og:image:height"': '200',
               'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
               'property="og:type"': 'website',
               'property="og:site_name"': 'Village.fm',

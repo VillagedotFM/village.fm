@@ -36,9 +36,9 @@ Template.app_body.events({
             '$first_name': profile.firstName,
             '$last_name': profile.lastName,
             '$name': profile.firstName + " " + profile.lastName,
-            'gender': profile.gender,
-            'minAge': profile.ageRange.min,
-            'maxAge': profile.ageRange.max
+            'gender': profile.gender
+            // 'minAge': profile.ageRange.min,
+            // 'maxAge': profile.ageRange.max
           });
         }
 
