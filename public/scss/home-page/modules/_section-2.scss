@@ -1,0 +1,11 @@
+.section-2 {
+  @extend .section-gray;
+
+  img:not(.icon-wave) {
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0px 3px 12px 0 rgba(40, 50, 54, 0.12);
+  }
+}

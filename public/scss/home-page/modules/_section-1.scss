@@ -1,0 +1,33 @@
+//Social media is too noisy for music discovery
+
+.section-1 {
+  padding-top: 6rem;
+
+  .wide-img-right,
+  .wide-img-left {
+    position: relative;
+    width: 100%;
+    top: -2rem;
+
+    @media screen and (max-width: 1300px ) {
+      top: 0;
+    }
+
+    @media screen and (min-width: 92px) {
+      width: 50vw;
+    }
+  }
+
+  .wide-img-right {
+    margin-bottom: 2rem;
+  }
+
+  .wide-img-left {
+    float: right;
+    margin-bottom: -2rem;
+
+    @media screen and (max-width: 1300px ) {
+      margin-bottom: 2rem;
+    }
+  }
+}

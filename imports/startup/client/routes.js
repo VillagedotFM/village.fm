@@ -2,6 +2,7 @@ import {FlowRouter} from "meteor/kadira:flow-router";
 import {BlazeLayout} from "meteor/kadira:blaze-layout";
 import "../../ui/layouts/body.js";
 import "../../ui/layouts/adminLayout.js";
+import "../../ui/layouts/home-page/home-page.js";
 import "../../ui/components/profile/profile.js";
 
 import { Posts } from '/imports/api/posts/posts.js';
@@ -28,6 +29,13 @@ FlowRouter.triggers.enter(function() {
 
 FlowRouter.route('/', {
     name: 'Home',
+    action(params, queryParams) {
+        BlazeLayout.render('home_page');
+    }
+});
+
+FlowRouter.route('/all', {
+    name: 'All',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
 

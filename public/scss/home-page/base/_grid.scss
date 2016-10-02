@@ -1,0 +1,48 @@
+$number-of-columns: 6;
+$column-padding: 20px;
+$row-width: 58.333%;
+
+.vf-row {
+  position: relative;
+  width: $row-width;
+  margin: auto;
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .vf-row {
+    width: 100% !important;
+  }
+
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    width: ($row-width + 100%) / 2;
+  }
+
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
+}
+
+[class^="vf-col-"] {
+  box-sizing: border-box;
+  display: inline-block;
+  float: left;
+  padding: 0 $column-padding;
+}
+
+@for $i from 1 through $number-of-columns {
+  @for $j from 1 through $i {
+    .vf-col-#{$j}-#{$i} {
+      width: percentage($j/$i);
+    }
+
+    @media screen and (max-width: 768px) {
+      .vf-col-xs-#{$j}-#{$i} {
+        width: percentage($j/$i) !important;
+      }
+    }
+  }
+}
