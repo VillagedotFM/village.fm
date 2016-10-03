@@ -265,11 +265,11 @@ Template.feed.events({
   "click .share-dropdown__copy": function(event, template){
     var $temp = $("<input>");
     $("body").append($temp);
-    let base = window.location.href;
-    if (base.charAt(base.length-1) !== '/') {
-      $temp.val(base+'/post/'+this._id).select();
+    let base = window.location.origin;
+    if (this.villageSlug !== 'main') {
+      $temp.val(base+'/'+this.villageSlug+'/post/'+this._id).select();
     } else {
-      $temp.val(base+'post/'+this._id).select();
+      $temp.val(base+'/post/'+this._id).select();
     }
     document.execCommand("copy");
     $temp.remove();
