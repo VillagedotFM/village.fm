@@ -1,15 +1,10 @@
 Template.notifications.events({
-  'mouseenter .header__notifications': function(event) {
-    if(!appBodyRef.mobile.get()){
-      event.stopPropagation();
-      mixpanel.track('Viewed Notifications');
-    }
-  },
   'click .header__notifications': function(event){
     event.stopPropagation();
     if ($('.ntf-dropdown').css('display') === 'none') {
       $('.ntf-dropdown').show();
       $('html, body').addClass('overflow-hidden');
+      $('.notification-container').hide();
       mixpanel.track('Viewed Notifications');
     } else {
       $('.ntf-dropdown').hide();

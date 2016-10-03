@@ -54,6 +54,12 @@ Meteor.methods({
           var post = Posts.findOne({_id:postId});
           var userId = Meteor.userId();
           var username = Meteor.users.findOne(userId).profile.name;
+
+          let vSlug = '';
+          if (post.villageSlug !== 'main') {
+            vSlug = '/' + post.villageSlug;
+          }
+
           if (userId !== post.createdBy) {
             var message;
             var others = post.upvotedBy.length - 1; //Minus one for current upvoter
@@ -70,6 +76,7 @@ Meteor.methods({
               intendedFor: post.createdBy,
               message: message,
               userId: userId,
+              villageSlug: vSlug,
               postId: post._id,
               thumbnail: post.thumbnail,
               type: 'upvote'

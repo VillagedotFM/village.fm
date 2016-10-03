@@ -28,6 +28,12 @@ Notifications.schema = new SimpleSchema({
     label: "user",
     max: 50
   },
+  villageSlug:
+  {
+    type: String,
+    label: "village",
+    max: 50
+  },
   postId:
   {
     type: String,
