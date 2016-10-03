@@ -60,6 +60,11 @@ if(Meteor.isServer){
     var commentors = _.uniq(comments, function(comment) { return comment.createdBy; });
     commentors = _.pluck(commentors, 'createdBy');
 
+    let vSlug = '';
+    if (post.villageSlug !== 'main') {
+      vSlug = '/' + post.villageSlug;
+    }
+
     //Notify poster of comment
     if (userId !== post.createdBy) {      //if not their comment
       var message;
@@ -76,6 +81,7 @@ if(Meteor.isServer){
         intendedFor: post.createdBy,
         message: message,
         userId: userId,
+        villageSlug: vSlug,
         postId: post._id,
         thumbnail: post.thumbnail,
         type: 'comment'
@@ -102,6 +108,7 @@ if(Meteor.isServer){
           intendedFor: intendedFor[0],
           message: message,
           userId: userId,
+          villageSlug: vSlug,
           postId: post._id,
           thumbnail: post.thumbnail,
           type: 'comment'
@@ -114,6 +121,7 @@ if(Meteor.isServer){
             intendedFor: commentor,
             message: message,
             userId: userId,
+            villageSlug: vSlug,
             postId: post._id,
             thumbnail: post.thumbnail,
             type: 'comment'
@@ -125,6 +133,10 @@ if(Meteor.isServer){
 
   Comments.after.update(function (userId, comment, fieldNames, modifier, options) {
     var post = Posts.findOne({_id:comment.postId});
+    let vSlug = '';
+    if (post.villageSlug !== 'main') {
+      vSlug = '/' + post.villageSlug;
+    }
 
     //Replies
     if (_.contains(fieldNames, 'replies') && this.previous.replies.length < comment.replies.length) {
@@ -155,6 +167,7 @@ if(Meteor.isServer){
           intendedFor: comment.createdBy,
           message: message,
           userId: userId,
+          villageSlug: vSlug,
           postId: post._id,
           thumbnail: post.thumbnail,
           type: 'reply'
@@ -188,6 +201,7 @@ if(Meteor.isServer){
           intendedFor: comment.createdBy,
           message: message,
           userId: userId,
+          villageSlug: vSlug,
           postId: post._id,
           thumbnail: post.thumbnail,
           type: 'upvote'
