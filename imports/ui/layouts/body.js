@@ -83,12 +83,12 @@ Template.app_body.onCreated(function appBodyOnCreated() {
           const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
           console.log(village);
           SEO.set({
-            title: village.name,
+            title: village.name + ' Village',
             description: "The Best Music chosen by the "+ village.name +" Community",
             meta: {
               'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
-              'property="og:image:width"': '475',
-              'property="og:image:height"': '250',
+              'property="og:image:width"': '1440',
+              'property="og:image:height"': '180',
               'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
               'property="og:type"': 'website',
               'property="og:site_name"': 'Village.fm',
