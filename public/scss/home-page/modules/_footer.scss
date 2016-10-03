@@ -43,10 +43,15 @@ footer {
 }
 
 .footer-copyright {
-  display: inline-block;
-  padding: 1rem;
+  position: relative;
   font-size: .9rem;
-  background: #fff;
+  padding: 1rem 0;
+
+
+  span {
+    padding: 0 1rem;
+    background: #fff;
+  }
 
   &:after {
     content: "";
@@ -55,7 +60,13 @@ footer {
     height: 2px;
     left: 0;
     background-color: #e0eaeb;
-    bottom: 3.6rem;
+    bottom: 1.6rem;
     z-index: -1;
+  }
+}
+
+.footer-mixpanel {
+  img {
+    margin: 1rem 0 0;
   }
 }

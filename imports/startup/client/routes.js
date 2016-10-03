@@ -31,6 +31,8 @@ FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
         BlazeLayout.render('home_page');
+
+        mixpanel.track('Landing Page Visit');
     }
 });
 

@@ -1,15 +1,16 @@
 .main-navigation {
   .logo {
-    height: 3.55rem;
+    img {
+      height: 3.55rem;
 
-    @media screen and (max-width: 1440px) {
-      height: 2.5rem;
+      @media screen and (max-width: 1440px) {
+        height: 2.5rem;
+      }
+
+      @media screen and (min-width: 992px) {
+        transform: translateX(-50%);
+      }
     }
-
-    @media screen and (min-width: 992px) {
-      transform: translateX(-50%);
-    }
-
   }
 
   .enter-village {

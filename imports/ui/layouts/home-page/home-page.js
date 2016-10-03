@@ -87,12 +87,16 @@ Template.home_page.events({
   'click .thank-you-modal button': () => {
     homePageRef.thankYouModalActive.set(false);
   },
-  'click .get-village-modal .selection-carousel-item, .get-village-modal .selection-carousel-item button': (event) => {
+  'click .get-village-modal .selection-carousel-item, click .get-village-modal .selection-carousel-item button': (event) => {
     let item = $(event.target).closest('.selection-carousel-item');
     let category = item.data('category');
     homePageRef.requestCategory.set(category);
     $('.selection-carousel-item').removeClass('selected');
     item.addClass('selected');
+
+    mixpanel.track('Selected Category', {
+      'category': category
+    });
   },
   'keyup .get-village-modal form input[type="email"]': (event) => {
     let pattern =  /^[A-Z0-9\._%+-]+@[A-Z0-9\.-]+\.[A-Z]{2,}$/i;
@@ -104,11 +108,32 @@ Template.home_page.events({
     }
   },
   'submit .get-village-modal form': () => {
-    Meteor.call('requestVillage', homePageRef.requestEmail.get(), homePageRef.requestCategory.get(), () => {
+    const email = homePageRef.requestEmail.get();
+    const category = homePageRef.requestCategory.get();
+    
+    Meteor.call('requestVillage', email , category, () => {
       homePageRef.getVillageModalActive.set(false);
       homePageRef.thankYouModalActive.set(true);
+
+      mixpanel.track('Requested Village', {
+        'category': category
+      })
     });
     return false;
+  },
+  'click .logo, click .enter-village, click .villages-carousel-item a, click .footer-navigation a[data-mixpanel-button-name="Home"]': (event) => {
+    event.preventDefault();
+    mixpanel.track('Entered Village.fm', {
+      'buttonName': event.currentTarget.dataset.mixpanelButtonName
+    });
+    setTimeout(() => {
+      window.location = event.currentTarget.href;
+    }, 500);
+  },
+  'click .get-village-btn': (event) => {
+    mixpanel.track('Clicked Get a Village', {
+      'panelNumber': event.currentTarget.dataset.mixpanelPanelNumber
+    });
   }
 });
 
