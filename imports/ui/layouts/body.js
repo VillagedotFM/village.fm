@@ -20,6 +20,7 @@ import './helpers.js';
 import './events.js';
 import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
+import '../components/side-menu/side-menu.js';
 import '../components/profile/profile.js';
 import '../components/bottom-player/bottom-player.js';
 import '../components/now-playing-popup/now-playing-popup.js';
@@ -123,6 +124,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
   appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
+  appBodyRef.showSideMenu = new ReactiveVar(false);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
   appBodyRef.showForm = new ReactiveVar(false);

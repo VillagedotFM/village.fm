@@ -46,7 +46,9 @@
 
       {{> header}}
 
-      <div class="main">
+      {{> side_menu}}
+
+      <div class="main {{#if showSideMenu}}side-menu-is-active{{/if}}">
         {{> Template.dynamic template=profile}}
         {{> sidebar}}
         <div class="container hidden-mobile container{{profilePadding}} {{#if bannerShown}}bannerPadding{{/if}}">

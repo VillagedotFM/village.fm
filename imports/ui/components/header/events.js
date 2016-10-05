@@ -33,5 +33,8 @@ Template.header.events({
   },
   'click .tune-in-link': function(event, template) {
     mixpanel.track('Clicked Buy Tickets Link');
+  },
+  'click .header__logo, click .header__logo-mobile': () => {
+    appBodyRef.showSideMenu.set(!appBodyRef.showSideMenu.get());
   }
 });

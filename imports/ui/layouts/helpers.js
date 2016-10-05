@@ -12,5 +12,8 @@ Template.app_body.helpers({
 	},
   showTermsOrPolicy: function() {
     return appBodyRef.showTermsOrPolicy.get();
+  },
+  showSideMenu: function() {
+    return appBodyRef.showSideMenu.get();
   }
 });
