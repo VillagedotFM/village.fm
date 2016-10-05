@@ -116,6 +116,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.upvotedSuccess = new ReactiveVar(null);
   appBodyRef.upvotedError = new ReactiveVar(null);
 
+  appBodyRef.tuneInBanner = new ReactiveVar(true);
+
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
   appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
