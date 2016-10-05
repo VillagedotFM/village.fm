@@ -18,6 +18,7 @@ import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 import './body.html';
 import './helpers.js';
 import './events.js';
+import '../components/onboarding-popup/onboarding-popup.js';
 import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
 import '../components/side-menu/side-menu.js';
@@ -28,8 +29,6 @@ import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
-import '../components/terms-and-policy/terms.js';
-import '../components/terms-and-policy/policy.js';
 
 
 Template.app_body.onCreated(function appBodyOnCreated() {
@@ -123,7 +122,6 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
-  appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
   appBodyRef.showSideMenu = new ReactiveVar(false);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
