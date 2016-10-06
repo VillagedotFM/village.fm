@@ -6,6 +6,7 @@ Template.tabs.events({
     appBodyRef.timeFilter.set($(event.target).data('time'));
 
     appBodyRef.postsLoaded.set(20);
+    appBodyRef.postsLoadedDone.set(false);
     appBodyRef.allPostsLoadedDone.set(false);
     Tracker.flush();
 
