@@ -72,8 +72,12 @@ Template.home_page.events({
   'click .villages-carousel-links a': (event) => {
     homePageRef.activeVillage.set(event.target.dataset.item);
   },
-  'click .get-village-btn': () => {
-    homePageRef.getVillageModalActive.set(true)
+  'click .get-village-btn': (event) => {
+    homePageRef.getVillageModalActive.set(true);
+
+    mixpanel.track('Clicked Get a Village', {
+      'panelNumber': event.currentTarget.dataset.mixpanelPanelNumber
+    });
   },
   'click .vf-modal.active': () => {
     if($(event.target).is('.vf-modal.active')) {
@@ -110,7 +114,7 @@ Template.home_page.events({
   'submit .get-village-modal form': () => {
     const email = homePageRef.requestEmail.get();
     const category = homePageRef.requestCategory.get();
-    
+
     Meteor.call('requestVillage', email , category, () => {
       homePageRef.getVillageModalActive.set(false);
       homePageRef.thankYouModalActive.set(true);
@@ -129,11 +133,6 @@ Template.home_page.events({
     setTimeout(() => {
       window.location = event.currentTarget.href;
     }, 500);
-  },
-  'click .get-village-btn': (event) => {
-    mixpanel.track('Clicked Get a Village', {
-      'panelNumber': event.currentTarget.dataset.mixpanelPanelNumber
-    });
   }
 });
 
