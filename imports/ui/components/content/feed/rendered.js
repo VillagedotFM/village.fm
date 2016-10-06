@@ -49,6 +49,14 @@ Template.feed.rendered = () => {
 			}
 		}
 
+		if(appBodyRef.scrollToPost.get() && appBodyRef.postsLoadedDone.get()){
+			Meteor.setTimeout(function(){
+				var el = $('.post#' + FlowRouter.current().params.postId);
+				$('html, body').scrollTop(el.position().top - 60);
+				appBodyRef.scrollToPost.set(false);
+			}, 100);
+    }
+
 	});
 
 	var lastScrollTop = 0;
