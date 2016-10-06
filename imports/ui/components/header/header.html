@@ -19,7 +19,7 @@
             </div>
             <div class="header__right-block">
                 {{#if currentUser}}
-                    {{#if notificationCount}}
+                    {{#if showNotificationBadge}}
                       {{> notificationBadge count=notificationCount}}
                     {{/if}}
                     {{> notifications}}

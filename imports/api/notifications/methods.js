@@ -25,4 +25,14 @@ Meteor.methods({
         {multi:true
     });
   },
+  allSeen: function(){
+    Notifications.update({
+        intendedFor: Meteor.userId(),
+        },{
+        $set: {
+          isSeen: true
+        }},
+        {multi:true
+    });
+  },
 });

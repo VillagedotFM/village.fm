@@ -4,7 +4,7 @@ Template.notifications.events({
     if ($('.ntf-dropdown').css('display') === 'none') {
       $('.ntf-dropdown').show();
       $('html, body').addClass('overflow-hidden');
-      $('.notification-container').hide();
+      Meteor.call('allSeen');
       mixpanel.track('Viewed Notifications');
     } else {
       $('.ntf-dropdown').hide();

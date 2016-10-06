@@ -62,6 +62,15 @@ Notifications.schema = new SimpleSchema({
       }
     }
   },
+  isSeen:
+  {
+    type: Boolean,
+    autoValue: function() {
+      if( this.isInsert ) {
+          return false;
+      }
+    }
+  },
   createdAt: {
     type: Date,
     autoValue: function() {
