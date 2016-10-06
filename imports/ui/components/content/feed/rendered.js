@@ -49,12 +49,15 @@ Template.feed.rendered = () => {
 			}
 		}
 
-		if(appBodyRef.scrollToPost.get() && appBodyRef.postsLoadedDone.get()){
+		if(FlowRouter.current().params.postId && appBodyRef.postsLoadedDone.get()){
 			Meteor.setTimeout(function(){
 				var el = $('.post#' + FlowRouter.current().params.postId);
-				$('html, body').scrollTop(el.position().top - 60);
-				appBodyRef.scrollToPost.set(false);
-			}, 500);
+				console.log(el.length);
+				if(el.length){
+					$('html, body').scrollTop(el.position().top - 60);
+					appBodyRef.scrollToPost.set(false);
+				}
+			}, 2000);
     }
 
 	});
