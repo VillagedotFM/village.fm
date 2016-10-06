@@ -86,6 +86,44 @@ Template.nowPlayingPost.helpers({
       ]
     };
   },
+  commentSettings: function() {
+    return {
+      position: "bottom",
+      limit: 5,
+      rules: [
+        {
+          token: '@',
+          collection: Meteor.users,
+          field: "profile.name",
+          template: Template.userPill
+        }
+      ]
+    };
+  },
+  fixedContent: function() {
+    if (typeof this.tags !== 'undefined' && this.tags.length > 0) {
+      let content = this.content;
+      let tags = this.tags;
+      let users = {};
+
+      //Get names from tag ids
+      _.each(tags, function(tag, index) {
+        let name = Meteor.users.findOne({_id: tag}).profile.name;
+        users[index] = {"name": name, "id": tag};
+      });
+
+      //Replace names in content with links
+      _.each(users, function(user) {
+        let sub = '@'+user.name;
+        let link = '<a href="/profile/'+user.id+'" class="color-main">'+sub+'</a>';
+        content = content.replace(sub, link);
+      });
+
+      return content;
+    } else {
+      return this.content;
+    }
+  },
   // Get current window location
   currentUrl() {
     return window.location.origin;

@@ -1,5 +1,5 @@
 <template name='sidebar'>
-  <aside class="sidebar sidebar{{profilePadding}}">
+  <aside class="sidebar sidebar{{profilePadding}} {{#if bannerShown}}bannerPadding{{/if}}">
       <div class="sidebar__inner">
         <div class="popup-upvote__wrapper">
           {{#with upvotedSuccess}}

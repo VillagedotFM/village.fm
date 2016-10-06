@@ -312,6 +312,9 @@ iframe {
   text-decoration: underline;
   cursor: pointer;
 }
+.bannerPadding {
+  padding-top: 100px !important;
+}
 .tune-in-close {
   position: absolute;
   top: 12px;

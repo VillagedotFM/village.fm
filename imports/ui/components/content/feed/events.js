@@ -2,63 +2,63 @@ Template.feed.events({
   "click .post__comments": function(event, template){
     let id = this._id;
     let comment = $('.comments-block[data-id="' + id +'"]');
-    let send = $('.send-to-friend[data-id="' + id +'"]');
+    // let send = $('.send-to-friend[data-id="' + id +'"]');
 
-    $('.post__send[data-id="' + id +'"]').removeClass('active');
+    // $('.post__send[data-id="' + id +'"]').removeClass('active');
     $('.post__comments[data-id="' + id +'"]').addClass('active');
-    send.hide();
+    // send.hide();
     comment.show();
   },
-  "click .post__send": function(event, template){
-    let id = this._id;
-    let comment = $('.comments-block[data-id="' + id +'"]');
-    let send = $('.send-to-friend[data-id="' + id +'"]');
-
-    $('.post__comments[data-id="' + id +'"]').removeClass('active');
-    $('.post__send[data-id="' + id +'"]').addClass('active');
-    comment.hide();
-    send.show();
-  },
-  "click .send-to-friend__send-btn": function(event, template){
-    let id = this._id;
-    let comment = $('.comments-block[data-id="' + id +'"]');
-    let send = $('.send-to-friend[data-id="' + id +'"]');
-
-    let post = Posts.findOne(id);
-    let taggedUsers = [];
-    _.each(Tags.get('taggedUsers'), function(user) {
-      taggedUsers.push(user._id);
-      console.log(user._id);
-    });
-    if (!taggedUsers)
-      return;
-
-    Meteor.call('tagUsers', post, taggedUsers, function(err, result){
-      if(!err){
-        mixpanel.track('Tagged a User', {
-          postId: post._id,
-          taggedUserCount: taggedUsers.length
-        });
-
-        window.analytics.totalUsersTagged = window.analytics.totalUsersTagged + taggedUsers.length;
-        mixpanel.register({
-            'totalUsersTagged': window.analytics.totalUsersTagged
-        });
-
-        mixpanel.people.increment({
-            'totalUsersTagged': taggedUsers.length
-        });
-      }
-    });
-    Tags.set('taggedUsers', []);
-    $('.post__send[data-id="' + id +'"]').removeClass('active');
-    $('.post__comments[data-id="' + id +'"]').addClass('active');
-    send.hide();
-    comment.show();
-
-
-
-  },
+  // "click .post__send": function(event, template){
+  //   let id = this._id;
+  //   let comment = $('.comments-block[data-id="' + id +'"]');
+  //   let send = $('.send-to-friend[data-id="' + id +'"]');
+  //
+  //   $('.post__comments[data-id="' + id +'"]').removeClass('active');
+  //   $('.post__send[data-id="' + id +'"]').addClass('active');
+  //   comment.hide();
+  //   send.show();
+  // },
+  // "click .send-to-friend__send-btn": function(event, template){
+  //   let id = this._id;
+  //   let comment = $('.comments-block[data-id="' + id +'"]');
+  //   let send = $('.send-to-friend[data-id="' + id +'"]');
+  //
+  //   let post = Posts.findOne(id);
+  //   let taggedUsers = [];
+  //   _.each(Tags.get('taggedUsers'), function(user) {
+  //     taggedUsers.push(user._id);
+  //     console.log(user._id);
+  //   });
+  //   if (!taggedUsers)
+  //     return;
+  //
+  //   Meteor.call('tagUsers', post, taggedUsers, function(err, result){
+  //     if(!err){
+  //       mixpanel.track('Tagged a User', {
+  //         postId: post._id,
+  //         taggedUserCount: taggedUsers.length
+  //       });
+  //
+  //       window.analytics.totalUsersTagged = window.analytics.totalUsersTagged + taggedUsers.length;
+  //       mixpanel.register({
+  //           'totalUsersTagged': window.analytics.totalUsersTagged
+  //       });
+  //
+  //       mixpanel.people.increment({
+  //           'totalUsersTagged': taggedUsers.length
+  //       });
+  //     }
+  //   });
+  //   Tags.set('taggedUsers', []);
+  //   $('.post__send[data-id="' + id +'"]').removeClass('active');
+  //   $('.post__comments[data-id="' + id +'"]').addClass('active');
+  //   send.hide();
+  //   comment.show();
+  //
+  //
+  //
+  // },
   "click .post__rating": function(event, template){
     event.stopPropagation();
     if(Meteor.userId()) {
@@ -138,12 +138,14 @@ Template.feed.events({
   },
   "click .user-comment__submit-cell": function(event, template){
     let postId = this._id;
-    let name = 'post-comment-' + postId;
-    let content = $('input[name='+name+']').val();
+    let name = 'post-comment-'+postId;
+    let content = $('#'+name+ ' input').val();
+    let tags = ( appBodyRef.commentTags.array() ? appBodyRef.commentTags.array() : [] );
 
     if (content) {
       Comments.insert({
         postId: postId,
+        tags: tags,
         content: content
       });
 
@@ -164,17 +166,20 @@ Template.feed.events({
       }
     }
 
-    $('input[name='+name+']').val('');
+    $('#'+name+ ' input').val('');
+    appBodyRef.commentTags.clear();
   },
   "click .user-reply__submit-cell": function(event, template){
     let commentId = this._id;
-    let content = $('input[name=post-comment]').val();
+    let content = $('input[id=post-reply]').val();
+    let tags = ( appBodyRef.commentTags.array() ? appBodyRef.commentTags.array() : [] );
 
     if (content) {
       Comments.update({_id:commentId}, {$push:{
         replies: {
           content: content,
           likes: [Meteor.userId()],
+          tags: tags,
           createdAt: new Date(),
           createdBy: Meteor.userId()
         }
@@ -192,14 +197,19 @@ Template.feed.events({
       });
     }
 
-    $('input[name=post-comment]').val('');
+    $('input[id=post-reply]').val('');
     appBodyRef.replyTo.set(null);
+    appBodyRef.commentTags.clear();
+  },
+  "autocompleteselect input": function(event, template, doc) {
+    appBodyRef.commentTags.push(doc._id);
   },
   "click .posted-comment__reply": function(event, template){
     let commentId = this._id;
 
-    $('input[name=post-comment]').val('');
+    $('input[id=post-reply]').val('');
     appBodyRef.replyTo.set(commentId);
+    appBodyRef.commentTags.clear();
   },
   "click .post__video-pause": function(event, template){
     event.stopPropagation();

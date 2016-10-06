@@ -1,4 +1,4 @@
-Template.nowPlayingPost.events({ 
+Template.nowPlayingPost.events({
   "click .post__comments": function(event, template){
     let id = this._id;
     let comment = $('.comments-block[data-id="' + id +'"]');
@@ -137,12 +137,14 @@ Template.nowPlayingPost.events({
   },
   "click .user-comment__submit-cell": function(event, template){
     let postId = this._id;
-    let name = 'post-comment-' + postId;
-    let content = $('input[name='+name+']').val();
+    let name = 'post-comment-'+postId;
+    let content = $('#'+name+ ' input').val();
+    let tags = ( appBodyRef.commentTags.array() ? appBodyRef.commentTags.array() : [] );
 
     if (content) {
       Comments.insert({
         postId: postId,
+        tags: tags,
         content: content
       });
 
@@ -163,21 +165,25 @@ Template.nowPlayingPost.events({
       }
     }
 
-    $('input[name='+name+']').val('');
+    $('#'+name+ ' input').val('');
+    appBodyRef.commentTags.clear();
   },
   "click .user-reply__submit-cell": function(event, template){
     let commentId = this._id;
-    let content = $('input[name=post-comment]').val();
+    let content = $('input[id=post-reply]').val();
+    let tags = ( appBodyRef.commentTags.array() ? appBodyRef.commentTags.array() : [] );
 
     if (content) {
       Comments.update({_id:commentId}, {$push:{
         replies: {
           content: content,
           likes: [Meteor.userId()],
+          tags: tags,
           createdAt: new Date(),
           createdBy: Meteor.userId()
         }
       }});
+
 
       const comment = Comments.findOne({ _id: commentId });
       mixpanel.track('Commened on a Post', {
@@ -191,14 +197,19 @@ Template.nowPlayingPost.events({
       });
     }
 
-    $('input[name=post-comment]').val('');
+    $('input[id=post-reply]').val('');
     appBodyRef.replyTo.set(null);
+    appBodyRef.commentTags.clear();
+  },
+  "autocompleteselect input": function(event, template, doc) {
+    appBodyRef.commentTags.push(doc._id);
   },
   "click .posted-comment__reply": function(event, template){
     let commentId = this._id;
 
-    $('input[name=post-comment]').val('');
+    $('input[id=post-reply]').val('');
     appBodyRef.replyTo.set(commentId);
+    appBodyRef.commentTags.clear();
   },
   "click .post__video-pause": function(event, template){
     event.stopPropagation();

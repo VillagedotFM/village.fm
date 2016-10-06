@@ -146,6 +146,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.bottomHits = new ReactiveVar(0);       //Keep track of how many times a user scrolls to the bottom
 
   appBodyRef.replyTo = new ReactiveVar(null);       //Comment to reply to
+  appBodyRef.commentTags = new ReactiveArray();       //Comment tags
 
   appBodyRef.inboxOpen = new ReactiveVar(false);
 
