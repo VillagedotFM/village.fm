@@ -55,7 +55,7 @@ Template.feed.helpers({
   },
   lastUpvoteObjects: function() {
     if (this.upvoteObjects.length > 3) {
-      return this.upvoteObjects.slice(2);
+      return this.upvoteObjects.slice(3);
     }
   },
   vidReady: function(index) {

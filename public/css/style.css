@@ -1343,7 +1343,7 @@ iframe {
     margin-right: -2px;
 }
 .more-users-dropdown__wrap {
-    height: 190px;
+    max-height: 190px;
     overflow: auto;
     position: relative;
 }
