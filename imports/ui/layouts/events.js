@@ -1,8 +1,8 @@
 import { Profiles } from '/imports/api/profiles/profiles.js';
 
 Template.app_body.events({
-  "click .sr-playlist__title": function(event, template){
-    var postId = template.$(event.currentTarget).closest('.sr-playlist__item').attr('id').replace('playlist-', '');
+  "click .post-navigation": function(event, template){
+    var postId = template.$(event.currentTarget).data('post-id');
     // Scroll to Place of post minus 60px for the topbar
     $('html, body').animate({scrollTop: template.$('.post#' + postId).offset().top - 60}, 750, 'swing');
   },

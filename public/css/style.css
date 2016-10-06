@@ -972,7 +972,7 @@ iframe {
     font-size: 14px;
     line-height: 1.2;
 }
-.sr-playlist__title:hover, .sr-playlist__title:active {
+.post-navigation:hover, .post-navigation:active {
   text-decoration: underline;
   cursor:pointer;
 }
