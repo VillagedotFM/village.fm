@@ -58,11 +58,28 @@ if(Meteor.isServer){
     var receiver = Meteor.users.findOne(userId).services.facebook.email;
     var comments = Comments.find({postId: comment.postId}).fetch();
     var commentors = _.uniq(comments, function(comment) { return comment.createdBy; });
+    var tags = comment.tags;
     commentors = _.pluck(commentors, 'createdBy');
 
     let vSlug = '';
     if (post.villageSlug !== 'main') {
       vSlug = '/' + post.villageSlug;
+    }
+
+    if (tags.length > 0) {
+      var message = username + " tagged you in the post " + post.artist + "-" + post.title;
+
+      _.each(tags, function(tag) {
+        Notifications.insert({
+          intendedFor: tag,
+          message: message,
+          userId: userId,
+          villageSlug: vSlug,
+          postId: post._id,
+          thumbnail: post.thumbnail,
+          type: 'comment'
+        });
+      });
     }
 
     //Notify poster of comment
@@ -141,11 +158,28 @@ if(Meteor.isServer){
     //Replies
     if (_.contains(fieldNames, 'replies') && this.previous.replies.length < comment.replies.length) {
       var username = Meteor.users.findOne(modifier.$push.replies.createdBy).profile.name;
+      var tags = modifier.$push.replies.tags;
       var content;
       if(comment.content.length < 20)
         content = comment.content;
       else {
         content = comment.content.substr(0,20) + '...'
+      }
+
+      if (tags.length > 0) {
+        var message = username + " tagged you in the post " + post.artist + "-" + post.title;
+
+        _.each(tags, function(tag) {
+          Notifications.insert({
+            intendedFor: tag,
+            message: message,
+            userId: userId,
+            villageSlug: vSlug,
+            postId: post._id,
+            thumbnail: post.thumbnail,
+            type: 'comment'
+          });
+        });
       }
 
 

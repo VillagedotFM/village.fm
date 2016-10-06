@@ -158,3 +158,11 @@ UI.registerHelper("nowPlaying", function () {
 UI.registerHelper("getVillage", function () {
   return Villages.findOne();
 });
+
+UI.registerHelper("bannerShown", function () {
+  if (FlowRouter.getParam('villageSlug') === 'tuneintelaviv') {
+    return (appBodyRef.tuneInBanner.get()) ? true : false;
+  } else {
+    return false;
+  }
+});

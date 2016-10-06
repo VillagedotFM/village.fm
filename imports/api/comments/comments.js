@@ -24,6 +24,7 @@ Comments.publicFields = {
   villageSlug: 1,
   replies: 1,
   likes: 1,
+  tags: 1,
   createdAt: 1,
   createdBy: 1,
   profile: 1
@@ -99,6 +100,9 @@ Comments.schema = new SimpleSchema({
       }
     }
   },
+  "replies.$.tags": {
+    type: [String]
+  },
   "replies.$.createdAt": {
     type: Date,
     autoValue: function() {
@@ -123,6 +127,11 @@ Comments.schema = new SimpleSchema({
         return [this.userId];
       }
     },
+    optional: true
+  },
+
+  tags: {
+    type: [String],
     optional: true
   },
 
