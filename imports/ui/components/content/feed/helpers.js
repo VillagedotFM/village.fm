@@ -53,6 +53,11 @@ Template.feed.helpers({
       return ' and ' + (this.upvotes - 3) + ' others';
     }
   },
+  lastUpvoteObjects: function() {
+    if (this.upvoteObjects.length > 3) {
+      return this.upvoteObjects.slice(2);
+    }
+  },
   vidReady: function(index) {
     let nowPlaying = appBodyRef.nowPlaying.get();
     let state = appBodyRef.state.get();
