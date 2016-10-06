@@ -53,10 +53,19 @@ Template.feed.rendered = () => {
 
 	var lastScrollTop = 0;
 
-	$('.wrapper').scroll(function(e) {
+	/**
+	* TODO: We want to attach the scroll event to the .wrapper class
+	* and remove bounce on scroll with http://stackoverflow.com/a/21247262.
+	* See lines that are commented out
+	**/
+	
+	//$('.wrapper').scroll(function(e) {
+	$(window).scroll(function(e) {
 		var st = $(this).scrollTop();
-		if($('.wrapper')[0].scrollHeight - $('.wrapper').scrollTop() == $('.wrapper').outerHeight()) {
+		//if($('.wrapper')[0].scrollHeight - $('.wrapper').scrollTop() == $('.wrapper').outerHeight()) {
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			if (st > lastScrollTop){
+
 				if(appBodyRef.postsLoadedDone.get() && !appBodyRef.allPostsLoadedDone.get()){
 					appBodyRef.postsLoadedDone.set(false);
 					Tracker.flush();

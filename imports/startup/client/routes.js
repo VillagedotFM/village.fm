@@ -27,6 +27,15 @@ FlowRouter.triggers.enter(function() {
     });
 });
 
+FlowRouter.triggers.exit(function() {
+  if(appBodyRef){
+    appBodyRef.postsLoadedDone.set(false);
+    appBodyRef.postsLoaded.set(20);
+    appBodyRef.allPostsLoadedDone.set(false);
+    Tracker.flush();
+  }
+});
+
 FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
