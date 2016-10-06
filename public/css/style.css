@@ -972,6 +972,10 @@ iframe {
     font-size: 14px;
     line-height: 1.2;
 }
+.sr-playlist__title:hover, .sr-playlist__title:active {
+  text-decoration: underline;
+  cursor:pointer;
+}
 .sr-playlist__artist {
     font-weight: 700;
 }
