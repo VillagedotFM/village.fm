@@ -67,7 +67,7 @@ if(Meteor.isServer){
     }
 
     if (tags.length > 0) {
-      var message = username + " tagged you in the post " + post.artist + "-" + post.title;
+      var message = username + " tagged you in the post " + post.artist + " - " + post.title;
 
       _.each(tags, function(tag) {
         Notifications.insert({
@@ -89,9 +89,9 @@ if(Meteor.isServer){
       if(_.contains(commentors, post.createdBy))
         others = others - 1;              //Subtract another one for own comments
       if (others === 0) {
-        message = "Your post, " + post.artist + "-" + post.title + ", was commented on by " + username;
+        message = "Your post, " + post.artist + " - " + post.title + ", was commented on by " + username;
       } else {
-        message = "Your post, " + post.artist + "-" + post.title + ", was commented on by " + username + " and " + others + " others";
+        message = "Your post, " + post.artist + " - " + post.title + ", was commented on by " + username + " and " + others + " others";
       }
 
       Notifications.insert({
@@ -120,7 +120,7 @@ if(Meteor.isServer){
     });
     if(commentors.length !== 1) {
       if(intendedFor.length === 1) {
-        var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username;
+        var message = "The post you commented on, " + post.artist + " - " + post.title + ", was also commented on by " + username;
         Notifications.insert({
           intendedFor: intendedFor[0],
           message: message,
@@ -132,7 +132,7 @@ if(Meteor.isServer){
         });
       } else {
         _.each(intendedFor, function(commentor) {
-          var message = "The post you commented on, " + post.artist + "-" + post.title + ", was also commented on by " + username+ " and " + (intendedFor.length-1) + " others";
+          var message = "The post you commented on, " + post.artist + " - " + post.title + ", was also commented on by " + username+ " and " + (intendedFor.length-1) + " others";
 
           Notifications.insert({
             intendedFor: commentor,
@@ -167,7 +167,7 @@ if(Meteor.isServer){
       }
 
       if (tags.length > 0) {
-        var message = username + " tagged you in the post " + post.artist + "-" + post.title;
+        var message = username + " tagged you in the post " + post.artist + " - " + post.title;
 
         _.each(tags, function(tag) {
           Notifications.insert({
@@ -192,9 +192,9 @@ if(Meteor.isServer){
       if(comment.createdBy !== userId) {
         var message;
         if (others > 1) {
-          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was replied to by " + username + " and " + (others - 1) + " others";
+          message = "Your comment on " + post.artist + " - " + post.title + ", \""+content+"\", was replied to by " + username + " and " + (others - 1) + " others";
         } else {
-          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was replied to by " + username;
+          message = "Your comment on " + post.artist + " - " + post.title + ", \""+content+"\", was replied to by " + username;
         }
 
         Notifications.insert({
@@ -226,9 +226,9 @@ if(Meteor.isServer){
       if(comment.createdBy !== userId) {
         var message;
         if (others > 0) {
-          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username + " and " + (others) + " others";
+          message = "Your comment on " + post.artist + " - " + post.title + ", \""+content+"\", was upvoted by " + username + " and " + (others) + " others";
         } else {
-          message = "Your comment on " + post.artist + "-" + post.title + ", \""+content+"\", was upvoted by " + username;
+          message = "Your comment on " + post.artist + " - " + post.title + ", \""+content+"\", was upvoted by " + username;
         }
 
         Notifications.insert({

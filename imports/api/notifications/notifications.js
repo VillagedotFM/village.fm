@@ -32,7 +32,8 @@ Notifications.schema = new SimpleSchema({
   {
     type: String,
     label: "village",
-    max: 50
+    max: 50,
+    optional: true
   },
   postId:
   {
