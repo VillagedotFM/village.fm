@@ -54,7 +54,7 @@ Template.feed.rendered = () => {
 				var el = $('.post#' + FlowRouter.current().params.postId);
 				$('html, body').scrollTop(el.position().top - 60);
 				appBodyRef.scrollToPost.set(false);
-			}, 100);
+			}, 500);
     }
 
 	});
