@@ -7,7 +7,7 @@ UI.registerHelper("isMainVillage", function (slug) {
     return (slug === '/' || slug === 'main');
 });
 
-UI.registerHelper("sSubVillage", function () {
+UI.registerHelper("isSubVillage", function () {
     return FlowRouter.getParam('villageSlug');
 });
 
