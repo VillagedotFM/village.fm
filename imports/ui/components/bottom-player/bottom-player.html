@@ -18,7 +18,19 @@
                       <img src="{{thumbnail}}" style="width: 36px; height: 36px;">
                   </div>
                   <div class="bottom-player__song-descr">
-                      <span class="bottom-player__song-title"><span class="bold">{{artist}}</span> - {{title}}</span>
+                      <span
+                        class="bottom-player__song-title post-navigation"
+                        data-post-id="{{_id}}"
+                        data-village-slug="{{#if villageName}}
+                            {{#unless isMainVillage villageSlug}}
+                                {{#unless isSubVillage }}
+                                    {{villageSlug}}
+                                {{/unless}}
+                            {{/unless}}
+                        {{/if}}"
+                        >
+                        <span class="bold">{{artist}}</span> - {{title}}
+                      </span>
                       <br>
                       <span class="bottom-player__song-posted-by color-secondary-text">posted by {{profile.niceName}}</span>
                   </div>

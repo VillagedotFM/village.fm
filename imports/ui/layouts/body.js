@@ -59,6 +59,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       appBodyRef.postsLoadedDone.set(true);
 
       if (FlowRouter.current().params.postId) {
+        appBodyRef.scrollToPost.set(true);
+
         const _id = FlowRouter.getParam('postId');
         const post = Posts.findOne({_id});
         SEO.set({
@@ -135,6 +137,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.allPostsLoadedDone = new ReactiveVar(false);
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
+
+  appBodyRef.scrollToPost = new ReactiveVar(false);
 
   appBodyRef.notInFeed = new ReactiveVar(null);
 

@@ -1,4 +1,5 @@
 Template.feed.rendered = () => {
+	instance = this;
 
 	Tracker.autorun(function(){
 		let postOrder = appBodyRef.postOrder.get();
@@ -49,6 +50,16 @@ Template.feed.rendered = () => {
 			}
 		}
 
+		if(FlowRouter.current().params.postId && appBodyRef.scrollToPost.get() && appBodyRef.postsLoadedDone.get()){
+			Meteor.setTimeout(function(){
+				var el = instance.$('.post#' + FlowRouter.current().params.postId);
+				if(el.length){
+					$('html, body').scrollTop(el.position().top - 60);
+					appBodyRef.scrollToPost.set(false);
+				}
+			}, 500);
+    }
+
 	});
 
 	var lastScrollTop = 0;
@@ -58,7 +69,7 @@ Template.feed.rendered = () => {
 	* and remove bounce on scroll with http://stackoverflow.com/a/21247262.
 	* See lines that are commented out
 	**/
-	
+
 	//$('.wrapper').scroll(function(e) {
 	$(window).scroll(function(e) {
 		var st = $(this).scrollTop();

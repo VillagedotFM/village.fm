@@ -27,7 +27,17 @@
                         {{/if}}
                     </div>
                     <div class="sr-playlist__middle">
-                        <span class="sr-playlist__title">
+                        <span
+                          class="sr-playlist__title post-navigation"
+                          data-post-id="{{_id}}"
+                          data-village-slug="{{#if villageName}}
+                              {{#unless isMainVillage villageSlug}}
+                                  {{#unless isSubVillage }}
+                                      {{villageSlug}}
+                                  {{/unless}}
+                              {{/unless}}
+                          {{/if}}"
+                        >
                             <span class="sr-playlist__artist">{{artist}}</span>
                             - {{title}}
                         </span>

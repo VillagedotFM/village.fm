@@ -54,6 +54,13 @@ Template.playlist.helpers({
 
         posts = Posts.find(selector, options).fetch();
 
+        if(posts.length && FlowRouter.getParam('postId')){
+          const selectedPostIndex = posts.map(function(x) {return x._id; }).indexOf(FlowRouter.getParam('postId'));
+          if(selectedPostIndex === -1){
+            posts.push(Posts.findOne({_id: FlowRouter.getParam('postId')}));
+          }
+        }
+
         //Just created post
         if(Meteor.userId()){
           let date = new Date();

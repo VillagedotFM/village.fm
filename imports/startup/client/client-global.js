@@ -8,7 +8,7 @@ GlobalClient.checkAndMoveSelectedPost = function(posts) {
 	  // If selected post isn't already first in array
 	  if (selectedPostIndex > 0) {
 	    // Swap 0 post to the 1 place and selected to 0
-	    posts.move(selectedPostIndex,0);
+	    //posts.move(selectedPostIndex,0);
 	  }
 	}
   return posts;  
