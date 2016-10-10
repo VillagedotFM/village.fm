@@ -9,6 +9,11 @@ Template.home_page.onCreated(() => {
 
   homePageRef.requestCategory = new ReactiveVar(null);
   homePageRef.requestEmail = new ReactiveVar(null);
+
+  // When all stylesheets an assets are loaded, fade in the page content 
+  window.onload = () => {
+    $('.vf-loading-wrapper').addClass('loaded');
+  }
 });
 
 Template.home_page.onRendered(() => {

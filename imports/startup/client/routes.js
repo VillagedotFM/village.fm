@@ -40,14 +40,7 @@ FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
         BlazeLayout.render('home_page');
-
-        // Append custom stylesheet for home page
-        let link = document.createElement("link");
-        link.href = "/css/home-page/main.css";
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        document.head.appendChild(link);
-
+        
         mixpanel.track('Landing Page Visit');
     }
 });
