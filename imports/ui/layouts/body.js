@@ -81,7 +81,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
     this.subscribe('villages.all', { slug: this.getVillageSlug() }, {onReady: function() {
       if ((FlowRouter.current().params.villageSlug) && (!FlowRouter.current().params.postId)) {
         const villageSlug = FlowRouter.getParam('villageSlug');
-        if (villageSlug !== '/') {
+        if (villageSlug !== 'all') {
           const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
           console.log(village);
           SEO.set({
