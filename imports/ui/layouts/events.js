@@ -14,7 +14,6 @@ Template.app_body.events({
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown, .ntf-dropdown').hide();
      hideMenu();
-     console.log(appBodyRef.timeFilter.get());
   },
   "click .onboarding-popup__button": function(event, template){
     Meteor.loginWithFacebook({requestPermissions: ['email', 'public_profile']}, function(err){
