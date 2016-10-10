@@ -14,7 +14,9 @@
           {{/if}}
         </div>
           {{> controls}}
-          {{> Template.dynamic template=tabs}}
+          {{#unless isTuneIn}}
+            {{> Template.dynamic template=tabs}}
+          {{/unless}}
           <!-- {{> Template.dynamic template=inbox}} -->
           {{> playlist}}
       </div>

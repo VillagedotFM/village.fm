@@ -4,5 +4,8 @@ Template.sidebar.helpers({
   },
   upvotedError: function(){
     return appBodyRef.upvotedError.get();
+  },
+  isTuneIn() {
+    return FlowRouter.getParam('villageSlug') === 'tuneintelaviv';
   }
 });

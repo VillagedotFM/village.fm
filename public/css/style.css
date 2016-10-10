@@ -312,6 +312,9 @@ iframe {
   text-decoration: underline;
   cursor: pointer;
 }
+.tune-in-playlist {
+  top: 60px !important;
+}
 .bannerPadding {
   padding-top: 100px !important;
 }

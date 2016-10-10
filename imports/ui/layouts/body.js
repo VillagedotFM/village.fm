@@ -174,6 +174,14 @@ Template.app_body.onRendered(function() {
   $('body').scrollTop(0);
   $('.sr-playlist').scrollTop(0);
 
+  Tracker.autorun(function(){
+    if (FlowRouter.getParam('villageSlug') === 'tuneintelaviv') {
+      appBodyRef.timeFilter.set('year');
+    } else {
+      appBodyRef.timeFilter.set('week');
+    }
+  });
+
 
   // Tracker.autorun(function(comp) {
   //   let order = appBodyRef.postOrder.get();

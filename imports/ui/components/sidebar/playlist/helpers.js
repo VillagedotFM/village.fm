@@ -197,5 +197,8 @@ Template.playlist.helpers({
   },
   isSubVillage: function() {
     return FlowRouter.getParam('villageSlug');
+  },
+  tuneInPadding() {
+    return FlowRouter.getParam('villageSlug') === 'tuneintelaviv' ? 'tune-in-playlist' : '';
   }
 });
