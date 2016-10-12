@@ -90,7 +90,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
             meta: {
               'property="og:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
               'property="og:image:width"': '1440',
-              'property="og:image:height"': '180',
+              'property="og:image:height"': '250',
               'name="twitter:image"': 'http://village.fm/images/img-topbar-' + villageSlug + '@3x.png',
               'property="og:type"': 'website',
               'property="og:site_name"': 'Village.fm',
