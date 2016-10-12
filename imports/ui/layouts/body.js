@@ -135,6 +135,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.postsLoaded = new ReactiveVar(20);
   appBodyRef.postsLoadedDone = new ReactiveVar(false);
   appBodyRef.allPostsLoadedDone = new ReactiveVar(false);
+  appBodyRef.loading = new ReactiveVar(true);
   appBodyRef.videosReady = new ReactiveArray();  //1+ posts ready
   appBodyRef.postOrder = new ReactiveVar(null);    //1+ posts in master order (no pagination)\
 

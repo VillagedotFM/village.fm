@@ -11,6 +11,11 @@ UI.registerHelper("isSubVillage", function () {
     return FlowRouter.getParam('villageSlug');
 });
 
+
+UI.registerHelper("loading", function () {
+  return appBodyRef.loading.get();
+});
+
 UI.registerHelper("postsLoadedDone", function () {
   return appBodyRef.postsLoadedDone.get();
 });

@@ -29,6 +29,7 @@ FlowRouter.triggers.enter(function() {
 
 FlowRouter.triggers.exit(function() {
   if(appBodyRef){
+    appBodyRef.loading.set(true);
     appBodyRef.postsLoadedDone.set(false);
     appBodyRef.postsLoaded.set(20);
     appBodyRef.allPostsLoadedDone.set(false);
