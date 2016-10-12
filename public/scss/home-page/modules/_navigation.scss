@@ -8,6 +8,10 @@
       }
 
       @media screen and (min-width: 992px) {
+        transform: translateX(-80%);
+      }
+
+      @media screen and (min-width: 1440px) {
         transform: translateX(-50%);
       }
     }
@@ -20,6 +24,10 @@
     transform: translateY(-50%);
 
     @media screen and (min-width: 992px) {
+      transform: translate(80%, -50%);
+    }
+
+    @media screen and (min-width: 1440px) {
       transform: translate(50%, -50%);
     }
   }

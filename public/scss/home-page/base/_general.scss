@@ -7,3 +7,13 @@ body {
   background: #fff;
   overflow-x: hidden;
 }
+
+.vf-loading-wrapper {
+  transition: .2s ease .1s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  &.loaded {
+    opacity: 1 !important;
+  }
+}

@@ -544,6 +544,16 @@ body {
   overflow-x: hidden;
 }
 
+.vf-loading-wrapper {
+  transition: .2s ease .1s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.vf-loading-wrapper.loaded {
+  opacity: 1 !important;
+}
+
 .vf-row, .vf-modal .vf-modal-content {
   position: relative;
   width: 58.333%;
@@ -1249,6 +1259,14 @@ section {
 
 @media screen and (min-width: 992px) {
   .main-navigation .logo img {
+    -webkit-transform: translateX(-80%);
+        -ms-transform: translateX(-80%);
+            transform: translateX(-80%);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .main-navigation .logo img {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -1265,6 +1283,14 @@ section {
 }
 
 @media screen and (min-width: 992px) {
+  .main-navigation .enter-village {
+    -webkit-transform: translate(80%, -50%);
+        -ms-transform: translate(80%, -50%);
+            transform: translate(80%, -50%);
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .main-navigation .enter-village {
     -webkit-transform: translate(50%, -50%);
         -ms-transform: translate(50%, -50%);
