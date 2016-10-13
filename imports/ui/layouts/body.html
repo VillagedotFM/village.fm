@@ -1,6 +1,6 @@
 <template name="app_body">
 
-  <div class="wrapper">
+  <div class="wrapper {{#if showSideMenu}}side-menu-is-active{{/if}}">
 
       {{> onboarding_popup}}
 
@@ -10,7 +10,7 @@
 
       {{> side_menu}}
 
-      <div class="main {{#if showSideMenu}}side-menu-is-active{{/if}}">
+      <div class="main">
         {{> Template.dynamic template=profile}}
         {{> sidebar}}
         <div class="container hidden-mobile container{{profilePadding}} {{#if bannerShown}}bannerPadding{{/if}}">

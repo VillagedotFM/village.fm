@@ -13,5 +13,8 @@ Template.header.helpers({
     } else {
       return false;
     }
+  },
+  'showSideMenu': () => {
+    return appBodyRef.showSideMenu.get();
   }
 });
