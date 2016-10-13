@@ -5,6 +5,7 @@ Template.tabs.events({
     $('body').scrollTop(0);
     appBodyRef.timeFilter.set($(event.target).data('time'));
 
+    appBodyRef.loading.set(true);
     appBodyRef.postsLoaded.set(20);
     appBodyRef.postsLoadedDone.set(false);
     appBodyRef.allPostsLoadedDone.set(false);

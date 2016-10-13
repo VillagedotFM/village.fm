@@ -105,6 +105,10 @@ Template.playlist.helpers({
 
       if(posts && posts.length > 0 ){
         appBodyRef.postsLoadedDone.set(true);
+        Meteor.setTimeout(function(){
+          appBodyRef.loading.set(false);
+        })
+
       }
 
       if(posts && posts.length > 0 && posts.length < appBodyRef.postsLoaded.get()){

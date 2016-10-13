@@ -2,6 +2,7 @@ Template.profile_tabs.events({
   "click .profileTab"(event, instance){
     appBodyRef.profileTab.set($(event.target).data('tab'));
 
+    appBodyRef.loading.set(true);
     appBodyRef.postsLoadedDone.set(false);
     appBodyRef.postsLoaded.set(20);
     appBodyRef.allPostsLoadedDone.set(false);
