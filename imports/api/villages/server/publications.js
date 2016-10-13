@@ -15,3 +15,11 @@ Meteor.publish('villages.all', function villagesAll(request) {
 
   return Villages.find(selector, options);
 });
+
+Meteor.publish('villages.sideMenu', (request) => {
+	const options = {
+		fields: Villages.publicFields
+	}
+
+  return Villages.find({}, options);
+});

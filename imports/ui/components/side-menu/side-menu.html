@@ -1,5 +1,14 @@
 <template name="side_menu">
   <div class="side-menu">
-
+    <ul>
+      <li>
+        <img src="/images/sidebar/img-sidebar-villagefm@3x.png" alt="Village.fm" />
+      </li>
+      {{#each village in villages}}
+      <li>
+        <img src="/images/sidebar/img-sidebar-{{village.slug}}@3x.png" alt="{{village.name}}" />
+      </li>
+      {{/each}}
+    </ul>
   </div>
 </template>
