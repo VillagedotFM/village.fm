@@ -1,5 +1,4 @@
 Template.feed.rendered = () => {
-	instance = this;
 
 	Tracker.autorun(function(){
 		let postOrder = appBodyRef.postOrder.get();
@@ -49,16 +48,6 @@ Template.feed.rendered = () => {
 				}
 			}
 		}
-
-		if(FlowRouter.current().params.postId && appBodyRef.scrollToPost.get() && appBodyRef.postsLoadedDone.get()){
-			Meteor.setTimeout(function(){
-				var el = instance.$('.post#' + FlowRouter.current().params.postId);
-				if(el.length){
-					$('html, body').scrollTop(el.position().top - 60);
-					appBodyRef.scrollToPost.set(false);
-				}
-			}, 500);
-    }
 
 	});
 

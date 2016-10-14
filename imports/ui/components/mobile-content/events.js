@@ -7,8 +7,8 @@ let mobileResetForm = () => {
   Tags.set('taggedUsers', []);
 
   $('.us-mobile').hide();
-  $('.container').hide();
-  $('.sidebar').show();
+  $('.sidebar').hide();
+  $('.container').show();
 };
 
 Template.mobile_content.events({

@@ -2,6 +2,16 @@
   #__blaze-root{
     height: 100%;
   }
+  #ytplayer {
+    position: absolute;
+    top: 87px;
+    left: 12px;
+    width: 361px;
+    height: 203px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    z-index: 2;
+  }
     .wrapper {
         padding-top: 43px;
         position: relative;
@@ -260,7 +270,7 @@
     }
     .us-mobile {
         position: fixed;
-        top: 43px;
+        top: 60px;
         bottom: 0;
         left: 0;
         right: 0;
