@@ -976,9 +976,18 @@ iframe {
     line-height: 1.2;
 }
 .post-navigation:hover, .post-navigation:active {
-  text-decoration: underline;
   cursor:pointer;
 }
+
+.post-navigation--btn {
+  min-width: 0;
+  padding: 6px 10px;
+}
+
+.post-navigation--btn:hover, .post-navigation--btn:active {
+  color: #fff;
+}
+
 .sr-playlist__artist {
     font-weight: 700;
 }

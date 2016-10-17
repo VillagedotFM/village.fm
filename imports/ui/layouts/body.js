@@ -59,6 +59,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       appBodyRef.postsLoadedDone.set(true);
 
       if (FlowRouter.current().params.postId) {
+        appBodyRef.timeFilter.set('year');
         appBodyRef.scrollToPost.set(true);
 
         const _id = FlowRouter.getParam('postId');

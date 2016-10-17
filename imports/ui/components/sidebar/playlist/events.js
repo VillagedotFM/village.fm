@@ -84,6 +84,7 @@ Template.playlist.events({
         }
     },
     "click .sr-playlist__play--play": function (event, template) {
+        event.stopPropagation();
         let selectedId = this._id;
         let selectedType = this.type;
         let selectedPost = Posts.findOne(selectedId);
@@ -107,6 +108,7 @@ Template.playlist.events({
         });
     },
     "click .sr-playlist__play--paused": function (event, template) {
+        event.stopPropagation();
         let selectedId = this._id;
         let selectedType = this.type;
 
