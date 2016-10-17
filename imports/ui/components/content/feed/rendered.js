@@ -7,6 +7,7 @@ Template.feed.rendered = () => {
 		let postForm = appBodyRef.showForm.get();
 		let notFound = appBodyRef.notFound.get();
 		let duplicate = appBodyRef.duplicate.get();
+		let mobile = appBodyRef.mobile.get();
 
 		let profileTab = appBodyRef.profileTab.get();
 		let time = appBodyRef.timeFilter.get();
@@ -33,8 +34,13 @@ Template.feed.rendered = () => {
 				if (nowPlaying.type === 'youtube') {
 					Meteor.setTimeout(function() {
 						let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
-						$('#ytplayer').css({top: topy});
 						$('#ytplayer').show();
+						if (mobile) {
+			        let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+			        $('#ytplayer').css({top: mobileTopy});
+			      } else {
+			        $('#ytplayer').css({top: topy});
+			      }
 					}, 100);
 				}
 			} else {
@@ -42,8 +48,13 @@ Template.feed.rendered = () => {
 				if (nowPlaying.type === 'youtube') {
 					Meteor.setTimeout(function() {
 						let topy2 = $('#video-' + nowPlaying._id).offset().top + 'px';
-						$('#ytplayer').css({top: topy2});
 						$('#ytplayer').show();
+						if (mobile) {
+			        let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+			        $('#ytplayer').css({top: mobileTopy});
+			      } else {
+			        $('#ytplayer').css({top: topy2});
+			      }
 					}, 100);
 				}
 			}
