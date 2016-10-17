@@ -976,7 +976,6 @@ iframe {
     line-height: 1.2;
 }
 .post-navigation:hover, .post-navigation:active {
-  text-decoration: underline;
   cursor:pointer;
 }
 .sr-playlist__artist {
