@@ -83,6 +83,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         const villageSlug = FlowRouter.getParam('villageSlug');
         if (villageSlug !== 'all') {
           const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+          appBodyRef.activeVillage.set(village);
           console.log(village);
           SEO.set({
             title: village.name + ' Village',
@@ -123,6 +124,8 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
   appBodyRef.showSideMenu = new ReactiveVar(false);
+
+  appBodyRef.activeVillage = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
   appBodyRef.showForm = new ReactiveVar(false);

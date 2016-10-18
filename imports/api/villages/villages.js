@@ -24,7 +24,7 @@ Villages.publicFields = {
   'slug': 1,
   'image': 1,
   'description': 1,
-  //'posts': 1,
+  'posts': 1,
   'admins': 1,
   'users': 1,
   //'profiles': 1,

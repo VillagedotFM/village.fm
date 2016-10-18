@@ -1,12 +1,22 @@
 <template name="side_menu">
   <div class="side-menu">
-    <ul>
-      <li>
-        <img src="/images/sidebar/img-sidebar-villagefm@3x.png" alt="Village.fm" />
+    <ul class="side-menu__villages">
+      <li class="side-menu__village {{#unless activeVillage}}active{{/unless}}">
+        <a href="/all">
+          <img src="/images/sidebar/img-sidebar-villagefm@3x.png" alt="Village.fm" />
+        </a>
       </li>
       {{#each village in villages}}
-      <li>
-        <img src="/images/sidebar/img-sidebar-{{village.slug}}@3x.png" alt="{{village.name}}" />
+      <li class="side-menu__village {{#if village.active}}active{{/if}}">
+        <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
+          <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
+        </a>
+        <span class="side-menu__village__new-songs">{{village.newSongs}}</span>
+        <div class="side-menu__village__pop-over">
+          <h4 class="side-menu__village__pop-over__name">{{village.name}} </h4>
+          <p class="side-menu__village__pop-over__description">{{village.description}}</p>
+          <p class="side-menu__village__pop-over__new-songs"><span>{{village.newSongs}}</span> NEW SONGS POSTED</p>
+        </div>
       </li>
       {{/each}}
     </ul>
