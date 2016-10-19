@@ -21,6 +21,7 @@ import './events.js';
 import '../components/onboarding-popup/onboarding-popup.js';
 import '../components/header/header.js';
 import '../components/side-menu/side-menu.js';
+import '../components/request-village-popup/request-village-popup.js';
 import '../components/profile/profile.js';
 import '../components/bottom-player/bottom-player.js';
 import '../components/now-playing-popup/now-playing-popup.js';
@@ -123,6 +124,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
   appBodyRef.showSideMenu = new ReactiveVar(false);
+  appBodyRef.showRequestVillagePopup = new ReactiveVar(false);
 
   appBodyRef.activeVillage = new ReactiveVar(null);
 

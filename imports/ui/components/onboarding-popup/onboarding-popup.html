@@ -1,8 +1,8 @@
 <template name="onboarding_popup">
-  <div class="onboarding-popup {{#if signUp}}active{{/if}} {{#if guestAction}}active{{/if}}">
-    <div class="onboarding-popup__overlay"></div>
-    <div class="onboarding-popup__panel">
-      <div class="onboarding-popup__header">
+  <div class="onboarding-popup popup {{#if signUp}}active{{/if}} {{#if guestAction}}active{{/if}}">
+    <div class="onboarding-popup__overlay popup__overlay"></div>
+    <div class="onboarding-popup__panel popup__panel">
+      <div class="onboarding-popup__header popup__header">
         {{#if signUp}}
           <h3>Welcome to the Village Beta!</h3>
         {{/if}}
@@ -11,8 +11,8 @@
           <h3>Sign in to join the Village!</h3>
         {{/if}}
       </div>
-      
-      <div class="onboarding-popup__content {{#if showTermsOrPolicy}}expanded {{showTermsOrPolicy}}{{/if}}">
+
+      <div class="onboarding-popup__content popup__content {{#if showTermsOrPolicy}}expanded {{showTermsOrPolicy}}{{/if}}">
         {{#if signUp}}
           {{#if village}}
             <p>{{village.name}}
