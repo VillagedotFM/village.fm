@@ -5,8 +5,7 @@
   "env": {
     "ROOT_URL": {
       "required": true
-    },
-    "MONGODB_URI": "mongodb://heroku_jzgj6k3m:b4segne3keu0f71u1sd69qs4bt@ds017896.mlab.com:17896/heroku_jzgj6k3m"
+    }
   },
   "formation": {
   },
