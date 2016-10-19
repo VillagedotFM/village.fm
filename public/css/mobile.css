@@ -2,6 +2,9 @@
   #__blaze-root{
     height: 100%;
   }
+  .post-navigation--btn {
+    border-radius: 1000px;
+  }
     .wrapper {
         padding-top: 43px;
         position: relative;

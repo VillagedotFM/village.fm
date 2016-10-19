@@ -975,19 +975,28 @@ iframe {
     font-size: 14px;
     line-height: 1.2;
 }
-.post-navigation:hover, .post-navigation:active {
-  cursor:pointer;
-}
-
 .post-navigation--btn {
+  display: inline-block;
   min-width: 0;
   padding: 6px 10px;
+  background: none;
+  border: 1px solid #ffffff;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 300;
+  line-height: 1.1;
+  font-size: 12px;
+  color: #ffffff;
 }
-
+.post-navigation--btn:focus {
+  outline:0 !important;
+  color: #ffffff;
+}
 .post-navigation--btn:hover, .post-navigation--btn:active {
-  color: #fff;
+  color: #ff7260;
+  border: 1px solid #ff7260;
+  background: #ffffff;
 }
-
 .sr-playlist__artist {
     font-weight: 700;
 }
@@ -2357,7 +2366,7 @@ iframe {
     background-size: cover;
 }
 .bottom-player__left {
-    width: 375px;
+    width: 450px;
     padding: 0 15px;
     float: left;
     position: relative;
@@ -2367,7 +2376,7 @@ iframe {
     margin-top: 3px;
 }
 .bottom-player__song {
-    margin: 0 40px 0 40px;
+    margin: 0 60px 0 40px;
     position: relative;
 }
 .bottom-player__song-img {
