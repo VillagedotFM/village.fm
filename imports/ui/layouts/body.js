@@ -19,7 +19,6 @@ import './body.html';
 import './helpers.js';
 import './events.js';
 import '../components/onboarding-popup/onboarding-popup.js';
-import '../components/mobile-menu/mobile-menu.js';
 import '../components/header/header.js';
 import '../components/side-menu/side-menu.js';
 import '../components/profile/profile.js';

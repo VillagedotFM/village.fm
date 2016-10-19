@@ -618,67 +618,6 @@ iframe {
     display: block;
 }
 /***** /Header  *****/
-
-/*****  mobile-menu  *****/
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #ff7260;
-    overflow: auto;
-}
-.mobile-menu__top {
-    padding: 22px 65px;
-}
-.mobile-menu__logo {
-    display: block;
-    width: 135px;
-    height: 90px;
-    background: url(../images/other-icons-sprite.png) 0 -700px no-repeat;
-}
-.mobile-menu__item {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 15px;
-}
-.mobile-menu__item--active {
-    background: #cc5b4d;
-}
-.mobile-menu__item a,
-.mobile-menu__item span {
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    line-height: 1;
-}
-.mobile-menu__item a:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: -2px;
-    width: 19px;
-    height: 19px;
-    background-repeat: no-repeat;
-    background-image: url(../images/other-icons-sprite.png);
-}
-.mobile-menu__item--playlist a:before {
-    background-position: 0 -200px;
-}
-.mobile-menu__item--post a:before {
-    background-position: 0 -250px;
-}
-.mobile-menu__item--profile a:before {
-    background-position: 0 -300px;
-}
-.mobile-menu__item--log-out a:before {
-    background-position: 0 -350px;
-}
-/***** /mobile-menu  *****/
-
 /***** /Sidebar  *****/
 .sidebar {
     position: fixed;
