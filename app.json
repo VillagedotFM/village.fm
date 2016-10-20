@@ -8,6 +8,9 @@
     },
     "MONGODB_URI": {
       "required": true
+    },
+    "METEOR_SETTINGS": {
+      "required": true
     }
   },
   "formation": {
