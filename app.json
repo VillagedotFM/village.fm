@@ -4,7 +4,7 @@
   },
   "env": {
     "ROOT_URL": {
-      "required": true
+      "required": false
     },
     "MONGO_URL": {
       "required": true
