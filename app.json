@@ -6,7 +6,7 @@
     "ROOT_URL": {
       "required": true
     },
-    "MONGODB_URI": {
+    "MONGO_URL": {
       "required": true
     },
     "METEOR_SETTINGS": {
