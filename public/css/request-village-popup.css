@@ -1,3 +1,117 @@
-.request-village-popup__panel {
+.request-village-popup .popup__panel {
   width: 62%;
+  max-width: 840px;
+}
+
+.request-village-popup .popup__content {
+  padding: 1rem;
+}
+
+.request-village-popup__selection > div {
+  display: inline-block;
+  width: 33%;
+}
+
+.request-village-popup__selection__item {
+  position: relative;
+  padding: 1.25rem;
+  margin: 1.25rem;
+  border: solid 1px #f4f4f4;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.request-village-popup__selection__item img {
+  height: 7.5rem;
+  margin-bottom: 1rem;
+}
+
+.request-village-popup__selection__item h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: none;
+  line-height: 1.5;
+  color: #2e2f2f;
+  min-height: 3rem;
+}
+.request-village-popup__selection__item p {
+  font-size: .9rem;
+  font-weight: 300;
+  color: #929394;
+}
+
+.request-village-popup__selection__item button {
+  display: block;
+  margin: 1rem auto 0;
+  width: 70%;
+  background: #fff;
+  color: #ff7260;
+  border-color: #ff7260;
+}
+
+.request-village-popup__selection__item button span {
+  display: none;
+}
+
+.request-village-popup__selection__item.selected {
+  border-color: #ff7260;
+}
+
+.request-village-popup__selection__item.selected button {
+  background: #ff7260;
+  color: #fff;
+}
+
+.request-village-popup__selection__item.selected button span {
+  display: inline;
+}
+
+.request-village-popup__form {
+  display: block;
+  position: relative;
+}
+
+.request-village-popup__form input {
+  display: block;
+  min-width: 60%;
+  margin: auto;
+  padding: .75rem 1rem;
+  border-radius: 4px;
+  border: solid 1px #f4f6f8;
+  text-align: center;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+}
+
+.request-village-popup__form button {
+  margin: 1rem auto 0;
+}
+
+.request-village-popup__form p {
+  color: #ff7260;
+  text-align: center;
+  margin-top: 0;
+  opacity: 0;
+}
+
+.request-village-popup__form.invalid input {
+  border-color: #ff7260;
+}
+
+.request-village-success-popup .popup__panel {
+  width: 300px;
+}
+
+.request-village-success-popup .popup__content {
+  padding: 1rem;
+}
+
+.request-village-success-popup h2 {
+  color: #2e2f2f;
+}
+
+.request-village-success-popup p {
+    color: #929394;
+    margin-bottom: 1rem;
 }
