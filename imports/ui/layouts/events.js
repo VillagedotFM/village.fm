@@ -2,7 +2,7 @@ import { Profiles } from '/imports/api/profiles/profiles.js';
 
 Template.app_body.events({
   "click .post-navigation": function(event, template){
-    var postId = template.$(event.currentTarget).data('post-id');
+    var postId = $(event.currentTarget).attr('data-post-id');
     $('html, body').animate({scrollTop: template.$('.post#' + postId).offset().top - 60}, 750, 'swing');
   },
   "click": function(event, template){
