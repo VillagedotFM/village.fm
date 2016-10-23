@@ -18,8 +18,10 @@ import  perfectScrollbar  from 'meteor/keepnox:perfect-scrollbar';
 import './body.html';
 import './helpers.js';
 import './events.js';
-import '../components/mobile-menu/mobile-menu.js';
+import '../components/onboarding-popup/onboarding-popup.js';
 import '../components/header/header.js';
+import '../components/side-menu/side-menu.js';
+import '../components/request-village-popup/request-village-popup.js';
 import '../components/profile/profile.js';
 import '../components/bottom-player/bottom-player.js';
 import '../components/now-playing-popup/now-playing-popup.js';
@@ -27,8 +29,6 @@ import '../components/sign-up/sign-up.js';
 import '../components/sidebar/sidebar.js';
 import '../components/content/content.js';
 import '../components/mobile-content/mobile-content.js';
-import '../components/terms-and-policy/terms.js';
-import '../components/terms-and-policy/policy.js';
 
 
 Template.app_body.onCreated(function appBodyOnCreated() {
@@ -84,6 +84,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
         const villageSlug = FlowRouter.getParam('villageSlug');
         if (villageSlug !== 'all') {
           const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+          appBodyRef.activeVillage.set(village);
           console.log(village);
           SEO.set({
             title: village.name + ' Village',
@@ -123,7 +124,10 @@ Template.app_body.onCreated(function appBodyOnCreated() {
 
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
-  appBodyRef.showTermsOrPolicy = new ReactiveVar(null);
+  appBodyRef.showSideMenu = new ReactiveVar(false);
+  appBodyRef.showRequestVillagePopup = new ReactiveVar(false);
+
+  appBodyRef.activeVillage = new ReactiveVar(null);
 
   appBodyRef.postSuccess = new ReactiveVar(null);
   appBodyRef.showForm = new ReactiveVar(false);

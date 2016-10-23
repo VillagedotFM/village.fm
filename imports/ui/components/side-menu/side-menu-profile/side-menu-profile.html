@@ -1,0 +1,13 @@
+<template name="side_menu_profile">
+  <div class="side-menu__profile">
+    {{#if currentUser}}
+    <a href="/profile/{{currentUser._id}}">
+      <img class="side-menu__profile__thumbnail" src="{{getUserImage currentUser._id}}" alt="{{getUserName currentUser._id}}" />
+    </a>
+    <span class="side-menu__profile__details">
+      {{getUserName currentUser._id}}
+      <span class="side-menu__logout">Log out</span>
+    </span>
+    {{/if}}
+  </div>
+</template>

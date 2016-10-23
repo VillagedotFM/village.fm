@@ -9,11 +9,10 @@
           </div>
         </div>
         <div class="header__inner">
-            <div class="header__hum visible-mobile"></div>
-            <a href="/all" class="header__logo hidden-mobile">
-              <img src="/images/img_logo_small@3x.png" alt="">
-            </a>
-            <a href="/all" class="header__logo-mobile"></a>
+            <button class="header__logo {{#if showSideMenu}}active{{/if}}">
+              <img src="/images/img_menu_logo_normal@3x.png" alt="">
+              <img src="/images/img_menu_logo_pressed@3x.png" alt="">
+            </button>
             <div class="header__center-block hidden-mobile">
                  {{> header_village}}
             </div>
