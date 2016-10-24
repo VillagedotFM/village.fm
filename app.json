@@ -1,0 +1,26 @@
+{
+  "name": "village.fm",
+  "scripts": {
+  },
+  "env": {
+    "ROOT_URL": {
+      "required": false
+    },
+    "MONGO_URL": {
+      "required": true
+    },
+    "METEOR_SETTINGS": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/kevinseguin/heroku-buildpack-meteor.git"
+    }
+  ]
+}

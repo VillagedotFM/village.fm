@@ -222,10 +222,11 @@ Template.app_body.onRendered(function() {
 
   if(window.matchMedia("(max-width: 767px)").matches) {
     $('.us-mobile').hide();
-    $('.container').hide();
-    $('.sidebar').show();
+    $('.sidebar').hide();
+    $('.container').show();
     hideMenu();
 
+    appBodyRef.timeFilter.set('year');
     appBodyRef.mobile.set(true);
   }
 });

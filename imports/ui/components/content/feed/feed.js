@@ -116,10 +116,16 @@ createYTPlayer = function(p) {     //Initialize the yt player
   onPlayerReady = function(event) {
     console.log('ready');
     let post = appBodyRef.nowPlaying.get();
+    let mobile = appBodyRef.mobile.get();
     if (post.type === 'youtube') {
       let topy = $('#video-' + post._id).offset().top + 'px';
       $('#ytplayer').show();
-      $('#ytplayer').css({top: topy});
+      if (mobile) {
+        let mobileTopy = ($('#video-' + post._id).offset().top - 60) + 'px';
+        $('#ytplayer').css({top: mobileTopy});
+      } else {
+        $('#ytplayer').css({top: topy});
+      }
     } else {
       $('#ytplayer').hide();
     }
@@ -233,12 +239,18 @@ Template.feed.onCreated(function feedOnCreated() {
   //initialize youtube iframe when first play button is clicked on youtube post
   feedRef.autorun(function(comp){
     let nowPlaying = appBodyRef.nowPlaying.get();
+    let mobile = appBodyRef.mobile.get();
 
     if (nowPlaying) {
       if (nowPlaying.type === 'youtube') {    //Grab the post and make sure it's youtube
         let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
         $('#ytplayer').show();
-        $('#ytplayer').css({top: topy});
+        if (mobile) {
+          let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+          $('#ytplayer').css({top: mobileTopy});
+        } else {
+          $('#ytplayer').css({top: topy});
+        }
         //If there is no player, initialize with post; if there is, load post
         if (window['ytplayer'] && window['ytplayer'].l) {
           appBodyRef.state.set(-1);
