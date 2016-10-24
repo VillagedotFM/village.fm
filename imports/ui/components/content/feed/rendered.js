@@ -28,6 +28,7 @@ Template.feed.rendered = () => {
 		let inPlaylist = null;
 
 		if (nowPlaying) {
+			let postElem = document.getElementById('video-' + nowPlaying._id);
 			inPlaylist = _.findWhere(order, {_id: nowPlaying._id});
 			if (inPlaylist) {
 				appBodyRef.notInFeed.set(false);
@@ -36,7 +37,10 @@ Template.feed.rendered = () => {
 						let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
 						$('#ytplayer').show();
 						if (mobile) {
-			        let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+							let mobileTopy = cumulativeOffset(postElem).top;
+
+			        mobileTopy = (mobileTopy - 60) + 'px';
+
 			        $('#ytplayer').css({top: mobileTopy});
 			      } else {
 			        $('#ytplayer').css({top: topy});
@@ -50,7 +54,10 @@ Template.feed.rendered = () => {
 						let topy2 = $('#video-' + nowPlaying._id).offset().top + 'px';
 						$('#ytplayer').show();
 						if (mobile) {
-			        let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+							let mobileTopy = cumulativeOffset(postElem).top;
+			        
+			        mobileTopy = (mobileTopy - 60) + 'px';
+
 			        $('#ytplayer').css({top: mobileTopy});
 			      } else {
 			        $('#ytplayer').css({top: topy2});
