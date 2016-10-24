@@ -3,6 +3,20 @@ import './helpers.js';
 import './events.js';
 import './rendered.js';
 
+cumulativeOffset = function(element) {
+    var top = 0, left = 0;
+    do {
+        top += element.offsetTop  || 0;
+        left += element.offsetLeft || 0;
+        element = element.offsetParent;
+    } while(element);
+
+    return {
+        top: top,
+        left: left
+    };
+};
+
 createSCPlayer = function(post) {  //Initialize all Soundcloud players
 
   if(typeof window['scplayer-'+post._id] !== 'undefined'){
@@ -117,11 +131,15 @@ createYTPlayer = function(p) {     //Initialize the yt player
     console.log('ready');
     let post = appBodyRef.nowPlaying.get();
     let mobile = appBodyRef.mobile.get();
+    let postElem = document.getElementById('video-' + post._id);
     if (post.type === 'youtube') {
       let topy = $('#video-' + post._id).offset().top + 'px';
       $('#ytplayer').show();
       if (mobile) {
-        let mobileTopy = ($('#video-' + post._id).offset().top - 60) + 'px';
+        let mobileTopy = cumulativeOffset(postElem).top;
+
+        mobileTopy = (mobileTopy - 60) + 'px';
+        
         $('#ytplayer').css({top: mobileTopy});
       } else {
         $('#ytplayer').css({top: topy});
@@ -243,10 +261,14 @@ Template.feed.onCreated(function feedOnCreated() {
 
     if (nowPlaying) {
       if (nowPlaying.type === 'youtube') {    //Grab the post and make sure it's youtube
+        let postElem = document.getElementById('video-' + nowPlaying._id);
         let topy = $('#video-' + nowPlaying._id).offset().top + 'px';
         $('#ytplayer').show();
         if (mobile) {
-          let mobileTopy = ($('#video-' + nowPlaying._id).offset().top - 60) + 'px';
+          let mobileTopy = cumulativeOffset(postElem).top;
+
+          mobileTopy = (mobileTopy - 60) + 'px';
+
           $('#ytplayer').css({top: mobileTopy});
         } else {
           $('#ytplayer').css({top: topy});
