@@ -1,4 +1,3 @@
-
 hideMenu = function(){
     $('.main, .header, .bottom-player, .us-mobile').removeClass('menu-open');
     $('.header__hum').removeClass('header__hum--active');

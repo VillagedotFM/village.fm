@@ -1,0 +1,53 @@
+<template name="request_village_popup">
+  <div class="request-village-popup popup {{#if showRequestVillagePopup}}active{{/if}}">
+    <div class="popup__overlay"></div>
+    <div class=" popup__panel">
+      <div class="popup__header">
+        <h3>Want to let your community curate a playlist?</h3>
+      </div>
+      <div class="popup__content">
+        <div class="request-village-popup__selection">
+          <div>
+            <div class="request-village-popup__selection__item" data-category="Friends">
+              <img src="images/request-village-popup/img_village_for_friends@3x.png" alt="" />
+              <h4>For your Friends</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Donec vehicula augue id pretium condimentum.</p>
+              <button type="button" class="btn">Select<span>ed</span></button>
+            </div>
+          </div>
+          <div>
+            <div class="request-village-popup__selection__item" data-category="Blog">
+              <img src="images/request-village-popup/img_village_for_blog@3x.png" alt="" />
+              <h4>For Curators & Tastemakers</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Donec vehicula augue id pretium condimentum.</p>
+              <button type="button" class="btn">Select<span>ed</span></button>
+            </div>
+          </div>
+          <div>
+            <div class="request-village-popup__selection__item" data-category="Community">
+              <img src="images/request-village-popup/img_village_for_community@3x.png" alt="" />
+              <h4>For any Community</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Donec vehicula augue id pretium condimentum.</p>
+              <button type="button" class="btn">Select<span>ed</span></button>
+            </div>
+          </div>
+        </div>
+        <form class="request-village-popup__form {{#if invalidEmail}}invalid{{/if}}">
+          <input type="email" name="name" placeholder="Enter your email">
+          <button type="button" class="btn {{#if invalidRequest}}disabled{{/if}}">I want a Village</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="request-village-success-popup popup {{#if showSuccessPopup}}active{{/if}}">
+    <div class="popup__overlay"></div>
+    <div class="popup__panel">
+      <div class="popup__content">
+        <h2>Thanks!</h2>
+        <p>We will be in touch soon.</p>
+        <button class="btn">Got it</button>
+      </div>
+    </div>
+  </div>
+</template>

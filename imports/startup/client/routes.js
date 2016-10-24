@@ -41,7 +41,7 @@ FlowRouter.route('/', {
     name: 'Home',
     action(params, queryParams) {
         BlazeLayout.render('home_page');
-        
+
         mixpanel.track('Landing Page Visit');
     }
 });
@@ -50,6 +50,11 @@ FlowRouter.route('/all', {
     name: 'All',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
+
+        if(typeof appBodyRef !== 'undefined'){
+          appBodyRef.activeVillage.set(null);
+          Tracker.flush();
+        }
 
         $('.sr-playlist').scrollTop(0);
         $('.wrapper').scrollTop(0);

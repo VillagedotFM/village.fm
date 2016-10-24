@@ -1,3 +1,7 @@
 <template name='header_village'>
-	<img src="{{villageLogoUrl getVillage.friendlySlugs.slug.base}}" alt="{{getVillage.name}} logo on Village.fm">
+	{{#if activeVillage}}
+	<img src="/images/img-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
+	{{else}}
+	<img src="/images/img-topbar-main@3x.png" alt="Village.fm">
+	{{/if}}
 </template>

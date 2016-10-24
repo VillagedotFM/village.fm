@@ -12,6 +12,18 @@
               </div>
               <div class="bottom-player__song-btn">
                   <div class="bottom-player__play bottom-player__play--paused"></div>
+                  <button
+                    class="btn right post-navigation post-navigation--btn"
+                    data-post-id="{{_id}}"
+                    data-village-slug="{{#if villageName}}
+                        {{#unless isMainVillage villageSlug}}
+                            {{#unless isSubVillage }}
+                                {{villageSlug}}
+                            {{/unless}}
+                        {{/unless}}
+                    {{/if}}"
+                    title="View in feed"
+                  >View in <br class="hidden-mobile"/>Feed</button>
               </div>
               <div class="bottom-player__song">
                   <div class="bottom-player__song-img">
