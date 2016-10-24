@@ -224,7 +224,7 @@ Template.app_body.onRendered(function() {
     $('.us-mobile').hide();
     $('.sidebar').hide();
     $('.container').show();
-    hideMenu();
+    // hideMenu();
 
     appBodyRef.timeFilter.set('year');
     appBodyRef.mobile.set(true);
