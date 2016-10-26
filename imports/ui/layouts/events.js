@@ -7,5 +7,8 @@ Template.app_body.events({
   },
   "click": function(event, template){
      $('.send-to-friend__list, .sign-up, .invite-dropdown, .ntf-dropdown').hide();
+  },
+  "click .main": (event) => {
+     appBodyRef.showSideMenu.set(false);
   }
 });

@@ -6,7 +6,7 @@ Template.side_menu.helpers({
     // Logic for filtering villages
     let activeVillage = appBodyRef.activeVillage.get();
     let dateLimit = new Date() - 7; // 7 days ago
-    
+
     villages.forEach((village) => {
       // Check if village is active
       if(activeVillage) {
@@ -22,9 +22,9 @@ Template.side_menu.helpers({
       }, 0);
     });
 
-    // Filter villages to show only those which contains new songs for previous 7 days
+    // Filter villages to show only those which contains more than 5 new songs for previous 7 days
     villages = villages.filter((village) => {
-      return village.newSongs > 0 ? true : false;
+      return village.newSongs >= 5 ? true : false;
     });
 
     // Sort villages by the number of new songs (Descending)

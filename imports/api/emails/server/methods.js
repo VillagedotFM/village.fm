@@ -20,13 +20,15 @@ Meteor.methods({
     });
   },
   requestVillage: function(submitterEmail, category) {
-    var smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
+    let smtpTransport = nodemailer.createTransport(GlobalServer.emailSettings);
 
-    var mailOptions = {
+    let messageText = `${submitterEmail} has requested a Village` + (!!category ? ` for their ${category}` : "" ) + ". Awesome!";
+
+    let mailOptions = {
       from:     submitterEmail,
       to:       "yourfriends@village.fm",
       subject:  "New Village Request",
-      text:     `${submitterEmail} has requested a Village for their ${category}. Awesome!`,
+      text:     messageText,
     }
 
     smtpTransport.sendMail(mailOptions, function(error, response) {
