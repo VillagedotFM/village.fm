@@ -11,11 +11,15 @@
         <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
           <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
         </a>
+        {{#if village.showNotification}}
         <span class="side-menu__village__new-songs">{{village.newSongs}}</span>
+        {{/if}}
         <div class="side-menu__village__pop-over">
           <h4 class="side-menu__village__pop-over__name">{{village.name}} </h4>
           <p class="side-menu__village__pop-over__description">{{village.description}}</p>
+          {{#if village.showNotification}}
           <p class="side-menu__village__pop-over__new-songs"><span>{{village.newSongs}}</span> NEW SONGS POSTED</p>
+          {{/if}}
         </div>
       </li>
       {{/each}}

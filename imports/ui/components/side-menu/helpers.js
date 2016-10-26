@@ -3,9 +3,19 @@ Template.side_menu.helpers({
     let villages = Villages.find({ 'friendlySlugs.slug.base': { $ne: 'main' } }).fetch();
 
 
-    // Logic for filtering villages
     let activeVillage = appBodyRef.activeVillage.get();
+    let visitedVillages = sideMenuRef.visitedVillages.get();
+
+    // Add activeVillage to the list of visitedVillages
+    // TO DO: Implement a proper system for village notifications
+    if(activeVillage && visitedVillages[activeVillage._id] !== true) {
+      visitedVillages[activeVillage._id] = true;
+      sideMenuRef.visitedVillages.set(visitedVillages);
+    }
+
+    // Logic for filtering villages
     let dateLimit = new Date() - 7; // 7 days ago
+    let newSongsLimit = 5; // minimum 5 new songs
 
     villages.forEach((village) => {
       // Check if village is active
@@ -20,11 +30,16 @@ Template.side_menu.helpers({
         }
         return previous;
       }, 0);
+
+      // Show number of new songs for village (notification),
+      // or hide if village is already visited in this session
+      village['showNotification'] = visitedVillages[village._id] ? false : true;
+
     });
 
     // Filter villages to show only those which contains more than 5 new songs for previous 7 days
     villages = villages.filter((village) => {
-      return village.newSongs >= 5 ? true : false;
+      return village.newSongs >= newSongsLimit ? true : false;
     });
 
     // Sort villages by the number of new songs (Descending)
