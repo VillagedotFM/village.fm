@@ -1,10 +1,17 @@
 .side-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: fixed;
   left: -250px;
   top: 0;
   height: 100%;
   width: 250px;
-  padding-top: 60px;
+  padding-top: 76px;
   background-color: #333435;
   box-shadow: 0px 16px 48px 0 rgba(40, 43, 45, 0.3);
   -webkit-transition: .3s ease;
@@ -12,10 +19,32 @@
   z-index: 10000;
 }
 
+.side-menu__villages {
+  padding-top: 1rem;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  flex: 1;
+  width: 200%;
+  pointer-events: none;
+}
+
+.side-menu header {
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+}
+
+.side-menu header.scrolled {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
 .side-menu__village {
   position: relative;
+  width: 50%;
   border-left: 5px solid transparent;
   border-top: 1px solid rgba(0,0,0,0.1);
+  pointer-events: auto;
 }
 
 .side-menu__village img {
@@ -33,7 +62,8 @@
   position: absolute;
   top: 50%;
   right: 1rem;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   color: #fff;
   border-radius: 7px;
   background: #3d3e3f;
@@ -46,17 +76,17 @@
   user-select: none;
 }
 
-.side-menu__village:first-child {
-  margin: 1rem 0;
+header.side-menu__village {
+  width: 100%;
   border-top: none;
+}
+
+header.side-menu__village img {
+  max-width: 100%;
 }
 
 .side-menu__village:last-child {
   border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.side-menu__village:first-child img {
-  max-width: 100%;
 }
 
 .side-menu__village:hover {
@@ -75,9 +105,9 @@
 
 .side-menu__village__pop-over {
   position: absolute;
-  width: 250px;
-  left: 100%;
+  width: 240px;
   top: 50%;
+  left: 100%;
   padding: 15px;
   background: #fff;
   border-radius: 4px;
@@ -90,7 +120,8 @@
   -webkit-transition: .2s ease;
   transition: .2s ease;
   -webkit-bacface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .side-menu__village__pop-over::before {
@@ -98,7 +129,8 @@
   position: absolute;
   left: -10px;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -136,9 +168,6 @@
 }
 
 .side-menu__bottom {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
   padding: 1rem;
   background: #333435;
   box-shadow: 0px -2px 6px 0 rgba(54, 59, 44, 0.12);

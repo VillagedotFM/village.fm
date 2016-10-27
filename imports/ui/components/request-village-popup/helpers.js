@@ -5,10 +5,7 @@ Template.request_village_popup.helpers({
   'invalidEmail': () => {
     return (requestVillageRef.email.get() === false);
   },
-  invalidRequest: () => {
-    return !(requestVillageRef.category.get() && requestVillageRef.email.get());
-  },
-  "showSuccessPopup": () => {
+  'showSuccessPopup': () => {
     return requestVillageRef.showSuccessPopup.get();
   }
 })

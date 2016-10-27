@@ -105,6 +105,9 @@ iframe {
     left: 0;
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
+    -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+    will-change: left, right;
 }
 .menu-open {
     -webkit-transform: translateX(260px);
@@ -2305,6 +2308,9 @@ iframe {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26292d', endColorstr='#83352c', GradientType=1 );
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
+    -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+    will-change: left, right;
 }
 .bottom-player__video {
     width: 172px;
