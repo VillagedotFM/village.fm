@@ -77,7 +77,7 @@ Posts.schema = new SimpleSchema({
   {
     type: String,
     label: "Link",            //User Entered
-    max: 100                  //"https://www.youtube.com/watch?v=xUq1rZ7mmns"     "xUq1rZ7mmns"
+    max: 500                  //"https://www.youtube.com/watch?v=xUq1rZ7mmns"     "xUq1rZ7mmns"
                               //"http://img.youtube.com/vi/xUq1rZ7mmns/hqdefault.jpg"
   },
 
@@ -93,7 +93,8 @@ Posts.schema = new SimpleSchema({
   {
     type: String,             //SC artwork_url
     label: "Thumbnail Url",       //"http://img.youtube.com/vi/" + vidId + "/hqdefault.jpg"
-    max: 400
+    max: 400,
+    optional: true
   },
 
   vidId:                      //v=XXXXXXXXXX
