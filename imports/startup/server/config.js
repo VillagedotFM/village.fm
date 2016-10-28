@@ -2,7 +2,7 @@ import { SEO } from '../../api/seo/seo.js';
 
 SEO.routes.upsert({routeName: 'Home'}, {$set: {
   title: 'Village.fm',
-  description: 'Check out this song on Village.fm',
+  description: 'Democratic playlists, built and voted on by groups of music lovers.',
   meta: {
   	'property="og:url"': 'http://village.fm',
     'property="og:image"': 'http://village.fm/images/FBCoverphoto.png',
@@ -16,7 +16,7 @@ SEO.routes.upsert({routeName: 'Home'}, {$set: {
 
 SEO.routes.upsert({routeName: 'All'}, {$set: {
   title: 'Village.fm',
-  description: 'Check out this song on Village.fm',
+  description: 'Democratic playlists, built and voted on by groups of music lovers.',
   meta: {
   	'property="og:url"': 'http://village.fm',
     'property="og:image"': 'http://village.fm/images/FBCoverphoto.png',
@@ -30,7 +30,7 @@ SEO.routes.upsert({routeName: 'All'}, {$set: {
 
 SEO.routes.upsert({routeName: 'Village'}, {$set: {
   title: 'Village.fm',
-  description: 'Check out this song on Village.fm',
+  description: 'Check out this Village',
   meta: {
   	'property="og:url"': 'http://village.fm',
     'property="og:image"': 'http://village.fm/images/FBCoverphoto.png',
