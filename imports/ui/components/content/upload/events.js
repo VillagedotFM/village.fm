@@ -3,6 +3,8 @@ import {Roles} from "meteor/alanning:roles";
 let resetForm = () => {
     $("input[name=post-link]").val('');
     $('input[name=post-link]').prop('disabled', false);
+    $("input[name=post-link]").data('type', '');
+    $("input[name=post-link]").data('vidId', '');
     $('.postLinkBtn').prop('disabled', true);
     Tags.set('taggedUsers', []);
 
