@@ -1,3 +1,5 @@
+import { Profiles } from '/imports/api/profiles/profiles.js';
+
 Template.onboarding_popup.events({
   "click .onboarding-popup__button": function(event, template){
     Meteor.loginWithFacebook({requestPermissions: ['email', 'public_profile']}, function(err){
