@@ -72,6 +72,9 @@
     .header__notifications {
         margin-right: 0;
     }
+    .header_village--mobile {
+      height: 50px !important;
+    }
     .header__logo-mobile {
         width: 31px;
         height: 33px;

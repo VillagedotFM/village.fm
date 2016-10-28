@@ -1,7 +1,17 @@
 <template name='header_village'>
-	{{#if activeVillage}}
-	<img src="/images/img-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
+	{{#if isMobile}}
+		{{#if currentUser}}
+			{{#if activeVillage}}
+			<img class="header_village--mobile" src="/images/img-mobile-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
+			{{else}}
+			<img class="header_village--mobile" src="/images/img-mobile-topbar-main@3x.png" alt="Village.fm">
+			{{/if}}
+		{{/if}}
 	{{else}}
-	<img src="/images/img-topbar-main@3x.png" alt="Village.fm">
+		{{#if activeVillage}}
+		<img src="/images/img-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
+		{{else}}
+		<img src="/images/img-topbar-main@3x.png" alt="Village.fm">
+		{{/if}}
 	{{/if}}
 </template>
