@@ -945,6 +945,12 @@ iframe {
   border: 1px solid #ff7260;
   background: #ffffff;
 }
+.post-navigation:hover, .post-navigation:active {
+  cursor: pointer;
+}
+.post-navigation:hover .sr-playlist__title {
+  text-decoration: underline;
+}
 .sr-playlist__artist {
     font-weight: 700;
 }
