@@ -6,7 +6,7 @@ Template.content.helpers({
     if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       return false;
     } else {
-      return FlowRouter.getParam('villageSlug') === 'tuneintelaviv';      
+      return FlowRouter.getParam('villageSlug') === 'tuneintelaviv';
     }
   }
 });

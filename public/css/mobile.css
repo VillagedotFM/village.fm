@@ -211,7 +211,10 @@
     }
     .container {
         padding-left: 0;
-        padding-top: 0;
+        padding-top: 34px;
+    }
+    .sr-top.clearfix {
+        background: inherit;
     }
     .post {
         padding-left: 12px;

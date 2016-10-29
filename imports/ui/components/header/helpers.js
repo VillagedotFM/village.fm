@@ -16,5 +16,8 @@ Template.header.helpers({
   },
   'showSideMenu': () => {
     return appBodyRef.showSideMenu.get();
-  }
+  },
+  isMobile: function() {
+		return appBodyRef.mobile.get();
+	}
 });
