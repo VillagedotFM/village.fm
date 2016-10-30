@@ -261,7 +261,7 @@
 }
 
 /*====================================General Popup Style===========================================*/
-.popup {
+.pop-up {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -278,21 +278,21 @@
   opacity: 0;
 }
 
-.popup.active {
+.pop-up.active {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   opacity: 1;
 }
 
-.popup__overlay {
+.pop-up__overlay {
   width: 100%;
   height: 100%;
   opacity: 0.7;
   background-color: #202d2d;
 }
 
-.popup__panel {
+.pop-up__panel {
   position: fixed;
   width: 460px;
   left: 50%;
@@ -307,7 +307,7 @@
   overflow: hidden;
 }
 
-.popup__header {
+.pop-up__header {
   padding: 18px;
   background: #ff7260;
   color: #fff;
@@ -315,7 +315,7 @@
   text-transform: uppercase;
 }
 
-.popup__content {
+.pop-up__content {
   position: relative;
   -webkit-transition: .25s ease;
   -ms-transition: .25s ease;
@@ -325,11 +325,11 @@
 }
 
 @media (max-width: 668px){
-    .popup__panel {
+    .pop-up__panel {
         width: 300px;
     }
 
-    .popup__content {
+    .pop-up__content {
       padding: 15px;
     }
 }
