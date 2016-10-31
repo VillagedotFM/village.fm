@@ -105,8 +105,8 @@ iframe {
     left: 0;
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
-    -webkit-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     will-change: left, right;
 }
 .menu-open {
