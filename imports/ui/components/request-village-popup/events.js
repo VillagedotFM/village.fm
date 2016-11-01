@@ -1,5 +1,5 @@
 Template.request_village_popup.events({
-  'click .request-village-popup .popup__overlay': () => {
+  'click .request-village-popup .pop-up__overlay': () => {
     appBodyRef.showRequestVillagePopup.set(false);
   },
   'keyup .request-village-popup__form input[type="email"]': (event) => {
@@ -23,7 +23,7 @@ Template.request_village_popup.events({
 
     return false;
   },
-  'click .request-village-success-popup button, click .request-village-success-popup .popup__overlay': () => {
+  'click .request-village-success-popup button, click .request-village-success-popup .pop-up__overlay': () => {
     requestVillageRef.showSuccessPopup.set(false);
   }
 })
