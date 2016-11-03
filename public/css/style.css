@@ -316,6 +316,12 @@ iframe {
     float: right;
     margin-top: 15px;
 }
+.header .sr-top {
+  position: relative;
+  left: 0;
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+}
 .tune-in-banner {
   width: 100%;
   top: 60px;
