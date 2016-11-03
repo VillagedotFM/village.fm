@@ -46,7 +46,7 @@ Template.side_menu.helpers({
 
       // Show number of new songs for village (notification),
       // or hide if village is already visited in this session
-      village['showNotification'] = visitedVillages[village._id] ? false : true;
+      village['showNotification'] = (visitedVillages[village._id] || village['newSongs'] === 0) ? false : true;
 
     });
 
