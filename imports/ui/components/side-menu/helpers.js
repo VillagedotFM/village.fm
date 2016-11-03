@@ -16,6 +16,19 @@ Template.side_menu.helpers({
     // Logic for filtering villages
     let dateLimit = new Date() - 7; // 7 days ago
     let newSongsLimit = 5; // minimum 5 new songs
+    let villagesToShow = ['soulection', 'okayplayer', 'eclecticasfuck', 'indieheads', 'freshasfuck'];
+
+    // Show only villages stated in villagesToShow (respectively)
+    let totalNumberOfVillages = villages.length;
+    villagesToShow.forEach((village) => {
+      for(let i = 0; i < totalNumberOfVillages; i++) {
+        if(villages[i].friendlySlugs.slug.base === village) {
+          villages.push(villages[i]);
+        }
+      }
+    })
+    villages.splice(0, villages.length - villagesToShow.length);
+
 
     villages.forEach((village) => {
       // Check if village is active
@@ -38,14 +51,17 @@ Template.side_menu.helpers({
     });
 
     // Filter villages to show only those which contains more than 5 new songs for previous 7 days
-    villages = villages.filter((village) => {
-      return village.newSongs >= newSongsLimit ? true : false;
-    });
+    // villages = villages.filter((village) => {
+    //   return village.newSongs >= newSongsLimit ? true : false;
+    // });
 
     // Sort villages by the number of new songs (Descending)
-    villages.sort((village_1, village_2) => {
-      return village_1.newSongs < village_2.newSongs ? 1 : -1;
-    });
+    // villages.sort((village_1, village_2) => {
+    //   return village_1.newSongs < village_2.newSongs ? 1 : -1;
+    // });
+
+
+
 
     return villages;
   }
