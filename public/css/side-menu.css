@@ -231,6 +231,13 @@ header.side-menu__village img {
   right: -250px;
 }
 
+@media screen and (max-width: 768px) {
+  .side-menu-is-active .header .sr-top {
+    left: 250px;
+    right: -250px;
+  }
+}
+
 
 @media screen and (min-width: 1800px) {
   .side-menu {

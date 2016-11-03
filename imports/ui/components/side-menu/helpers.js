@@ -24,12 +24,12 @@ Template.side_menu.helpers({
       }
 
       // Count numbers of new songs in past week
-      village['newSongs'] = village.posts.reduce((previous, current ) => {
-        if(Date.parse(current.createdAt) < dateLimit) {
-          return previous + 1;
+      village['newSongs'] = 0;
+      village.posts.forEach( (post) => {
+        if(Date.parse(post.createdAt) < dateLimit) {
+          village['newSongs']++;
         }
-        return previous;
-      }, 0);
+      });
 
       // Show number of new songs for village (notification),
       // or hide if village is already visited in this session
