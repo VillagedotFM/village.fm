@@ -15,7 +15,7 @@ Template.side_menu.helpers({
 
     // Logic for filtering villages
     let dateLimit = new Date() - 7; // 7 days ago
-    let newSongsLimit = 5; // minimum 5 new songs
+    let newSongsLimit = 0; // minimum 5 new songs
 
     villages.forEach((village) => {
       // Check if village is active
