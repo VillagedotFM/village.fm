@@ -1104,6 +1104,12 @@ section {
   display: none;
 }
 
+@media screen and (min-width: 992px) and (max-width: 1400px) {
+  .vf-modal .vf-modal-content {
+    width: 79.1665%;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .vf-modal .vf-modal-content {
     max-width: 75%;
@@ -1257,14 +1263,6 @@ section {
   }
 }
 
-@media screen and (min-width: 992px) {
-  .main-navigation .logo img {
-    -webkit-transform: translateX(-80%);
-        -ms-transform: translateX(-80%);
-            transform: translateX(-80%);
-  }
-}
-
 @media screen and (min-width: 1440px) {
   .main-navigation .logo img {
     -webkit-transform: translateX(-50%);
@@ -1280,14 +1278,6 @@ section {
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
-}
-
-@media screen and (min-width: 992px) {
-  .main-navigation .enter-village {
-    -webkit-transform: translate(80%, -50%);
-        -ms-transform: translate(80%, -50%);
-            transform: translate(80%, -50%);
-  }
 }
 
 @media screen and (min-width: 1440px) {
