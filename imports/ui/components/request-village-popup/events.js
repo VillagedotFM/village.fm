@@ -2,7 +2,7 @@ Template.request_village_popup.events({
   'click .request-village-popup .pop-up__overlay': () => {
     appBodyRef.showRequestVillagePopup.set(false);
   },
-  'keyup .request-village-popup__form input[type="email"]': (event) => {
+  'keyup .request-village-popup__form input[type="email"], change .request-village-popup__form input[type="email"]': (event) => {
     let pattern =  /^[A-Z0-9\._%+-]+@[A-Z0-9\.-]+\.[A-Z]{2,}$/i;
     let email = event.target.value;
     if(pattern.test(email)) {
