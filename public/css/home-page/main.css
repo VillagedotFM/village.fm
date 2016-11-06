@@ -570,7 +570,7 @@ body {
   width: 100% !important;
 }
 
-@media screen and (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) and (max-width: 1600px) {
   .vf-row, .vf-modal .vf-modal-content {
     width: 79.1665%;
   }
