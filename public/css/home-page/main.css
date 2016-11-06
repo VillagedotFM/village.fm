@@ -1263,7 +1263,7 @@ section {
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 992px) {
   .main-navigation .logo img {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
@@ -1280,7 +1280,7 @@ section {
           transform: translateY(-50%);
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 992px) {
   .main-navigation .enter-village {
     -webkit-transform: translate(50%, -50%);
         -ms-transform: translate(50%, -50%);
