@@ -103,7 +103,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
       }
     }});
     this.subscribe('comments.all');
-    this.subscribe('profiles.self');
+    this.subscribe('profiles.all');
     this.subscribe('inbox.all');
     this.subscribe('notifications.all');
   });
@@ -113,6 +113,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   window.Comments = Comments;
   window.Inbox = Inbox;
   window.Notifications = Notifications;
+  window.Profiles = Profiles;
 
   //Set up reactive-vars
   appBodyRef = this;

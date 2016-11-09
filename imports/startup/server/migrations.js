@@ -6,7 +6,7 @@ import { Posts } from "../../api/posts/posts.js";
 import { Villages } from "../../api/villages/villages.js";
 
 Meteor.startup(function() {
-  Migrations.migrateTo('latest');
+  Migrations.migrateTo('latest,rerun');
 });
 
 Migrations.add({
