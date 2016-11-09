@@ -10,6 +10,43 @@ Meteor.startup(function() {
 });
 
 Migrations.add({
+  version: 6,
+  name: 'Add profiles again',
+  up: function() {
+    Meteor.users.find().forEach(function(user){
+      const profile = Profiles.findOne({ createdBy: user._id });
+
+      if(!profile){
+
+        if(!user.services || !user.services.facebook){
+          Profiles.direct.insert({
+            firstName: user.profile.name,
+            lastName: user.profile.name,
+            niceName: user.profile.name,
+            villagerNum: user.profile.villagerNum,
+            picture: user.profile.picture,
+            createdBy: user._id
+          });
+        } else {
+          Profiles.direct.insert({
+            firstName: user.services.facebook.first_name,
+            lastName: user.services.facebook.last_name,
+            niceName: user.services.facebook.first_name + " " + user.services.facebook.last_name.charAt(0),
+            villagerNum: user.profile.villagerNum,
+            picture: "https://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large",
+            createdBy: user._id
+          });
+        }
+
+      }
+    });
+  },
+  down: function() {
+    Profiles.remove({});
+  }
+});
+
+Migrations.add({
   version: 5,
   name: 'Add gender and age range profiles',
   up: function() {
