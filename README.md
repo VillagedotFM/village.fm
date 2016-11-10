@@ -26,7 +26,7 @@ You can SSH (or connect with a GUI like 3T MongoChef) into either 45.55.219.50 (
 ## Adding a new Village
 First, add the topbar image to ```public/images/```
 The naming convention is ```img-topbar-{{slug}}@3x.png```
-Next, add a new record in the villages collection using something like 3T MongoChef with a String id (not ObjectId). Edit the JSON and paste in this blank example:
+Next, add a new record in the villages collection using something like 3T MongoChef with a String id (not ObjectId) [NOTE: We get a weird error when you leave the default String id from MongoChef so you should paste in "LtfJqmKbvG2HEXXXX" replacing the X's with random letters for now or at least keep the id to 17 characters]. Edit the JSON and paste in this blank example:
 ```
 "name" : "VILLAGE NAME",
 "description" : "The VILLAGE NAME Village",
@@ -59,4 +59,3 @@ Next, add a new record in the villages collection using something like 3T MongoC
 ]
 ```
 Change the name, description, and friendlySlugs.slug.base (make the slug lowercase and one word).
-
