@@ -23,6 +23,25 @@ Then run ```mupx setup``` followed by ```mupx deploy```
 You can SSH (or connect with a GUI like 3T MongoChef) into either 45.55.219.50 (staging) or 159.203.72.180 (prod) the username/password combo for both is root/Pineapple15!
 
 
+## Taking a Backup of the Database
+There are 3 steps in taking a backup of the production database:
+(1) Using a terminal, SSH into the production server 159.203.72.180 (See Connect to MongoDB above)
+(2) Dump the db "villagefm" into the docker container that was formed with mupx  
+```docker exec mongodb mongodump -d villagefm -o /backup-MM-DD```
+the ```-d villagefm``` specifies the database to dump while the ```-o /backup-MM-DD``` creates a new directory to place the dump, change the MM-DD to the current month and day for clarity. You can ensure that the dump was successful and the new directory was created by running
+```docker exec -it mongodb ls``` and locating the directory in the container.
+(3) Transfer the new dump directory from the container to the server by running
+```docker cp mongodb:backup-MM-DD .```
+You should now see the folder in the root of the server by running ```ls```
+[OPTIONAL](4) Now that the backup is on the server you can copy it over to your local machine to restore to your local db (or staging). You can use scp or a GUI like CyberDuck. This isn't necessary as we'll have the backup on the server.
+
+
+## Restoring a Backup
+Depending on which db you're trying to restore (local, staging, or prod) You may need to use scp or CyberDuck to transfer the backup folder to the server. Once the backup folder is on the server, all you need to do is SSH into it and run
+```mongorestore /root/backup-MM-DD/ --drop```
+This will restore the db to the backup in the directory of your choosing (specified with the MM-DD) in the root of the server. The ```--drop``` flag just ensures that not corrupted data is left in the db after the restore.
+
+
 ## Adding a new Village
 First, add the topbar image to ```public/images/```
 The naming convention is ```img-topbar-{{slug}}@3x.png```
