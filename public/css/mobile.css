@@ -185,7 +185,6 @@
         overflow: hidden;
     }
     .ntf-dropdown__text {
-        float: left;
         width: 80%;
     }
     .ntf-dropdown__item--place {
@@ -195,7 +194,6 @@
         width: 100%;
     }
     .ntf-dropdown__date {
-        float: right;
     }
     .ntf-dropdown__top {
         height: 43px;
