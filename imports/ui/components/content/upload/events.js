@@ -52,6 +52,11 @@ Template.upload.events({
                   //Add attributes to input
                   $("input[name=post-link]").data('type', data);
                   $("input[name=post-link]").data('vidId', track.id);
+                }, function(error){
+                  console.log('not found');
+                  appBodyRef.notFound.set(true);
+                  resetForm();
+                  return;
                 });
               } else {
                 //Allow link to be submitted
