@@ -1,6 +1,7 @@
 Template.feed.rendered = () => {
 
 	Tracker.autorun(function(){
+		$('[data-toggle="tooltip"]').tooltip();
 		let postOrder = appBodyRef.postOrder.get();
 		let order = appBodyRef.displayPosts.get();
 		let nowPlaying = appBodyRef.nowPlaying.get();
@@ -55,7 +56,7 @@ Template.feed.rendered = () => {
 						$('#ytplayer').show();
 						if (mobile) {
 							let mobileTopy = cumulativeOffset(postElem).top;
-			        
+
 			        mobileTopy = (mobileTopy - 60) + 'px';
 
 			        $('#ytplayer').css({top: mobileTopy});
