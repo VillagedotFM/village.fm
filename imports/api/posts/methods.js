@@ -101,7 +101,7 @@ Meteor.methods({
                     $addToSet: {
                         upvotedBy: fakeUserId,
                         upvoteObjects: {
-                          createdBy: this.userId,
+                          createdBy: fakeUserId,
                           profile: profile
                         }
                     },
@@ -120,7 +120,7 @@ Meteor.methods({
                             $pull: {
                                 upvotedBy: fakeUserId,
                                 upvoteObjects: {
-                                  createdBy: this.userId,
+                                  createdBy: fakeUserId,
                                   profile: profile
                                 }
                             },
