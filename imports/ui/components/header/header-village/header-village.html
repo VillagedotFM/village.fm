@@ -1,17 +1,13 @@
 <template name='header_village'>
 	{{#if isMobile}}
 		{{#if currentUser}}
-			{{#if activeVillage}}
-			<img class="header_village--mobile" src="/images/img-mobile-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
-			{{else}}
-			<img class="header_village--mobile" src="/images/img-mobile-topbar-main@3x.png" alt="Village.fm">
+			{{#if villageTopBar}}
+			<img class="header_village--mobile" src="/images/img-mobile-topbar-{{villageTopBar}}@3x.png">
 			{{/if}}
 		{{/if}}
 	{{else}}
-		{{#if activeVillage}}
-		<img src="/images/img-topbar-{{activeVillage.friendlySlugs.slug.base}}@3x.png" alt="{{activeVillage.name}} logo on Village.fm">
-		{{else}}
-		<img src="/images/img-topbar-main@3x.png" alt="Village.fm">
+		{{#if villageTopBar}}
+			<img src="/images/img-topbar-{{villageTopBar}}@3x.png">
 		{{/if}}
 	{{/if}}
 </template>
