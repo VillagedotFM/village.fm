@@ -223,6 +223,7 @@ Template.feed.events({
     let selectedPost = Posts.findOne(selectedId);
     let nowPlaying = appBodyRef.nowPlaying.get();
     let state = appBodyRef.state.get();
+    let mobile = appBodyRef.mobile.get();
 
     if (selectedType === 'youtube') {
       if (nowPlaying && nowPlaying._id === selectedId) {
@@ -235,6 +236,11 @@ Template.feed.events({
         }
       } else {
         appBodyRef.nowPlaying.set(selectedPost);
+
+        if (mobile) {
+          console.log('mobile');
+          window['ytplayer'].playVideo();
+        }
       }
     } else {
       if (nowPlaying && nowPlaying._id === selectedId) {
