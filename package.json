@@ -2,7 +2,8 @@
   "name": "village.fm",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "deploy": "mupx setup && mupx deploy"
   },
   "dependencies": {
     "jquery": "^1.12.4",
