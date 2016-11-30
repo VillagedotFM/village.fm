@@ -1,5 +1,5 @@
 Template.side_menu.events({
-  'click .side-menu__request-village': () => {
-    appBodyRef.showRequestVillagePopup.set(true);
+  'click .side-menu__start-village': () => {
+    startVillageRef.step.set('signup');
   }
 })

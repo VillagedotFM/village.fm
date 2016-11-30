@@ -1,68 +1,9 @@
 .vf-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-  transform: scale(0);
-  opacity: 0;
-  transition: opacity .3s ease, transform 0s ease .3s;
-
-  &.active {
-    transform: scale(1);
-    opacity: 1;
-    transition: opacity .3s ease;
+  .vf-modal__heading {
+    font-size: 28px;
   }
 
-  &.vf-modal-sm {
-    .vf-modal-content {
-      max-width: 300px;
-
-      @media screen and (max-width: 400px) {
-        max-width: 100%;
-      }
-    }
-  }
-
-  .vf-modal-content {
-    @extend .vf-row;
-    position: relative;
-    top: 50%;
-    background: #fff;
-    transform: translateY(-50%);
-    border-radius: 6px;
-    box-shadow: 0px 4px 12px 0 rgba(51, 52, 53, 0.32);
-    padding: 40px 20px;
-    box-sizing: border-box;
-
-    .vf-modal-close-btn {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      z-index: 1;
-      display: none;
-    }
-
-    @media screen and (min-width: 992px) and (max-width: 1400px) {
-      width: ($row-width + 100%) / 2;
-    }
-
-    @media screen and (max-width: 767px) {
-      max-width: 75%;
-    }
-
-    @media screen and (max-width: 400px) {
-      max-width: 100%;
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      padding: 40px 0 20px;
-
-      .vf-modal-close-btn {
-        display: inline-block;
-      }
-    }
+  .vf-modal__content {
+    font-size: 12px;
   }
 }
