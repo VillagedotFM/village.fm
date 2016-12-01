@@ -1,0 +1,60 @@
+<template name="start_village">
+  <div class="start-village__signup vf-modal vf-modal--sm {{#if signUpModalActive}}active{{/if}}">
+    <div class="vf-modal__panel">
+      <div class="vf-modal__header">
+        <h2 class="vf-modal__heading text-center">Sign Up First</h2>
+      </div>
+      <div class="vf-modal__content text-center">
+        <p>
+          To start your own village you need to sign up first. <br>
+          Press button below, to sign up with Facebook.
+        </p>
+        <button class="vf-btn vf-btn--shadow"><span class="vf-social-icon vf-social-icon--facebook"><i class="fa fa-facebook" aria-hidden="true"></i></span> Sign up with Facebook</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="start-village__details vf-modal {{#if detailsModalActive}}active{{/if}}">
+    <form class="start-village__details__form vf-modal__panel">
+      <div class="vf-modal__header">
+        <label for="group-name" class="start-village__label">Group Name</label>
+        <span class="start-village__details__warning text-uppercase {{#unless validName}}invalid{{/unless}}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Enter your group name first</span>
+        <input type="text" class="start-village__details__group-name {{#unless validName}}invalid{{/unless}}" placeholder="Enter your group name">
+      </div>
+      <div class="vf-modal__content">
+        <label for="group-description" class="start-village__label text-primary">Group Name</label>
+        <textarea type="text" name="group-description" class="start-village__details__group-description" rows="4" placeholder="Enter your group description (optional)"></textarea>
+      </div>
+      <div class="vf-modal__footer text-center">
+        <button type="submit" class="vf-btn vf-btn--shadow">Start a Village</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="start-village__finish vf-modal {{#if finishModalActive}}active{{/if}}">
+    <div class="vf-modal__panel">
+      <div class="vf-modal__header">
+        <h2 class="vf-modal__heading text-center">Congratulations!</h2>
+      </div>
+      <div class="vf-modal__content text-center">
+        <p>
+          Your <span class="text-primary">The Awesome Group</span> has been created successfully. <br>
+          Share it with your friends!
+        </p>
+        <div class="start-village__finish__invite text-left">
+          <label for="village-link" class="start-village__label text-primary">Invite friends</label>
+          <div class="start-village__finish__invite__link">
+            <input type="text" name="village-link" readonly="true" value="http://village.fm/theawesomevillage/invite">
+            <button class="vf-btn vf-btn--secondary vf-btn--link"><i class="fa fa-clone" aria-hidden="true"></i> Copy link</button>
+          </div>
+        </div>
+        <div class="start-village__finish__share">
+          <label class="start-village__label text-primary">Share it:</label>
+          <a href="#" class="vf-social-icon vf-social-icon--facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <a href="#" class="vf-social-icon vf-social-icon--twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          <a href="#" class="vf-social-icon vf-social-icon--google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

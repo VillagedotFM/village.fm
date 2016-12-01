@@ -1,0 +1,85 @@
+.vf-btn {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  background-image: none;
+  border: 1px solid transparent;
+  transition: .2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 15px 30px;
+  font-size: 14px;
+  text-decoration: none !important;
+  letter-spacing: 0.7px;
+  color: $color-primary;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+.vf-btn--primary {
+  background-color: $color-primary;
+  border-color: $color-primary;
+  color: white;
+
+  &:hover, &:active, &:focus {
+    background-color: $color-primary-dark;
+  }
+}
+
+.vf-btn--primary-outline {
+  background-color: white;
+  border-color: $color-primary;
+  color: $color-primary;
+  text-transform: none !important;
+
+  &:hover, &:active, &:focus {
+    background-color: $color-primary;
+    color: white;
+  }
+}
+
+.vf-btn--secondary {
+  background-color: white;
+  border-color: $color-grey-primary;
+  color: $color-grey-primary;
+  text-transform: none !important;
+
+  &:hover, &:active, &:focus {
+    color: $color-primary;
+  }
+}
+
+.vf-btn--link {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  border-radius: 0 !important;
+  text-transform: none !important;
+
+  &.vf-btn--primary, &.vf-btn--primary-outline {
+    color: $color-primary;
+  }
+
+  &.vf-btn--secondary {
+    color: $color-grey-primary;
+  }
+
+  &:hover, &:active, &:focus {
+    &.vf-btn--primary, &.vf-btn--primary-outline, &.vf-btn--secondary {
+      color: $color-black;
+    }
+  }
+}
+
+.vf-btn--no-border {
+  border-color: transparent;
+}
+
+.vf-btn--shadow {
+  box-shadow: 0px 3px 12px 0 rgba(0, 0, 0, 0.12);
+}

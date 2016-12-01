@@ -8,7 +8,6 @@ meteor-base             # Packages every Meteor app needs to have
 
 # minifiers
 
-standard-minifier-css   # CSS minifier run for production mode
 standard-minifier-js    # JS minifier run for production mode
 
 # standard libraries
@@ -69,3 +68,5 @@ jazeee:spiderable-longer-timeout
 tomwasd:flow-router-seo
 jorisderuiter:analytics
 percolate:migrations
+juliancwirko:postcss
+fourseven:scss

@@ -1,0 +1,79 @@
+.vf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-overlay, 0.7);
+  z-index: 1000000; //TODO Create proper z-index scale
+  transform: scale(0);
+  opacity: 0;
+  transition: opacity .3s ease, transform 0s ease .3s;
+
+  &.active {
+    transform: scale(1);
+    opacity: 1;
+    transition: opacity .3s ease;
+  }
+
+  .vf-modal__panel {
+    position: relative;
+    width: auto;
+    margin: 0 10px;
+    top: 50%;
+    background: white;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    overflow: hidden;
+
+    @media screen and (min-width: 560px) {
+      margin: auto;
+      width: 540px;
+    }
+
+    @media screen and (max-width: 440px) {
+      .vf-modal__header, .vf-modal__content, .vf-modal__footer {
+        padding: 20px 10px;
+      }
+    }
+  }
+
+  .vf-modal__header {
+    background: $color-primary;
+    padding: 20px;
+    color: white;
+
+    .vf-modal__heading {
+      color: white;
+    }
+  }
+
+  .vf-modal__heading {
+    font-size: 32px;
+    margin: 0;
+  }
+
+  .vf-modal__content {
+    padding: 20px;
+    font-size: 14px;
+    background: white;
+    color: $color-black;
+  }
+
+  .vf-modal__footer {
+    border-top: 1px solid $color-grey-light;
+    padding: 20px;
+  }
+
+  // Modal variations
+  &.vf-modal--sm {
+    .vf-modal__panel {
+      @media screen and (min-width: 440px) {
+        margin: auto;
+        width: 420px;
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.text-primary {
+  color: $color-primary;
+}
+
+.image-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.visible-xs {
+  @media screen and (min-width: 768px) {
+    display: none !important;
+  }
+  @media screen and (max-width: 767px) {
+    display: block !important;
+  }
+}
+
+.hidden-xs {
+  @media screen and (min-width: 768px) {
+    display: block !important;
+  }
+  @media screen and (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.visible-sm {
+  @media screen and (min-width: 992px) {
+    display: none !important;
+  }
+  @media screen and (max-width: 991px) {
+    display: block !important;
+  }
+}
+
+.hidden-sm {
+  @media screen and (min-width: 992px) {
+    display: block !important;
+  }
+  @media screen and (max-width: 991px) {
+    display: none !important;
+  }
+}
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
