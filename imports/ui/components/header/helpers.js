@@ -1,4 +1,4 @@
-import { Villages } from '../../api/villages/villages.js';
+import { Villages } from '../../../api/villages/villages.js';
 
 Template.header.helpers({
   notificationCount() {
