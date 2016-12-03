@@ -39,7 +39,12 @@ Template.home_page.events({
     }, 500);
   },
   'click .get-village-btn': (event) => {
-    startVillageRef.step.set('signup');
+    if (Meteor.userId()) {
+      startVillageRef.step.set('details');
+    } else {
+      startVillageRef.step.set('signup');
+    }
+
 
     mixpanel.track('Clicked Get a Village', {
       'panelNumber': event.currentTarget.dataset.mixpanelPanelNumber

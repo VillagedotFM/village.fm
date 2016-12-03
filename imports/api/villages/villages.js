@@ -56,10 +56,13 @@ Villages.schema = new SimpleSchema({
 
   image:
   {
-    type: String,              //User Uploaded
-    label: "Image Url",
-    max: 400,
-    optional: true
+    type: Boolean,              //User Uploaded
+    label: "Topbar Image exists",
+    autoValue: function() {
+      if( this.isInsert ) {
+        return false;
+      }
+    }
   },
 
   description:
