@@ -1,3 +1,5 @@
+import { Villages } from '../../api/villages/villages.js';
+
 Template.start_village.helpers({
   'signUpModalActive': () => {
     return startVillageRef.step.get() === 'signup' ? true : false;
