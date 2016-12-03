@@ -1,10 +1,13 @@
 import './home-page.html';
 
+import { Villages } from '../../../api/villages/villages.js';
 import '../../components/start-village/start-village.js';
 
 Template.home_page.onCreated(() => {
   homePageRef = this;
   homePageRef.activeVillage = new ReactiveVar(1);
+
+  Meteor.subscribe("villages.sideMenu");
 });
 
 Template.home_page.onRendered(() => {
