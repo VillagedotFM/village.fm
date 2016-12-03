@@ -63,7 +63,7 @@ Template.start_village.events({
           console.error("Error creating Village: ", err);
         }
         else {
-          console.log("Village Created");
+          startVillageRef.newVillage.set(data);
           startVillageRef.step.set('finish');
         }
       });
@@ -77,5 +77,12 @@ Template.start_village.events({
     } else {
       startVillageRef.validName.set(true);
     }
-  }
+  },
+  'click .start-village__finish__copy': (event) => {
+    $('input[name=village-link]').select();
+    document.execCommand("copy");
+  },
+  'click .vf-social-icon': (event) => {
+    window.open($(event.currentTarget).data('href'), 'Title', 'width=800,height=500');
+  },
 })

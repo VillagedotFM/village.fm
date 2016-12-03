@@ -37,23 +37,25 @@
         <h2 class="vf-modal__heading text-center">Congratulations!</h2>
       </div>
       <div class="vf-modal__content text-center">
-        <p>
-          Your <span class="text-primary">The Awesome Group</span> has been created successfully. <br>
-          Share it with your friends!
-        </p>
-        <div class="start-village__finish__invite text-left">
-          <label for="village-link" class="start-village__label text-primary">Invite friends</label>
-          <div class="start-village__finish__invite__link">
-            <input type="text" name="village-link" readonly="true" value="http://village.fm/theawesomevillage/invite">
-            <button class="vf-btn vf-btn--secondary vf-btn--link"><i class="fa fa-clone" aria-hidden="true"></i> Copy link</button>
+        {{#with newVillage}}
+          <p>
+            <span class="text-primary">{{name}}</span> has been created successfully. <br>
+            Share it with your friends!
+          </p>
+          <div class="start-village__finish__invite text-left">
+            <label for="village-link" class="start-village__label text-primary">Invite friends</label>
+            <div class="start-village__finish__invite__link">
+              <input type="text" name="village-link" readonly="true" value="http://village.fm/{{friendlySlugs.slug.base}}">
+              <button class="vf-btn vf-btn--secondary vf-btn--link start-village__finish__copy"><i class="fa fa-clone" aria-hidden="true"></i> Copy link</button>
+            </div>
           </div>
-        </div>
-        <div class="start-village__finish__share">
-          <label class="start-village__label text-primary">Share it:</label>
-          <a href="#" class="vf-social-icon vf-social-icon--facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-          <a href="#" class="vf-social-icon vf-social-icon--twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-          <a href="#" class="vf-social-icon vf-social-icon--google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-        </div>
+          <div class="start-village__finish__share">
+            <label class="start-village__label text-primary">Share it:</label>
+            <a data-href="https://www.facebook.com/sharer/sharer.php?u=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a data-href="http://twitter.com/share?text=Check out {{name}} on Village.fm&url=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a data-href="https://plus.google.com/share?url=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+          </div>
+        {{/with}}
       </div>
     </div>
   </div>

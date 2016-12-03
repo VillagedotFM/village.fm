@@ -17,7 +17,11 @@ Villages.allow({
 });
 
 // Add slugs to new Villages
-Villages.friendlySlugs();
+Villages.friendlySlugs(
+  {
+    updateSlug: false,
+    createOnUpdate: false
+  });
 
 Villages.publicFields = {
   'name': 1,
@@ -143,10 +147,8 @@ Villages.schema = new SimpleSchema({
   createdBy: {
     type: String,
     autoValue: function() {
-      if( this.isInsert && this.userId) {
+      if( this.isInsert ) {
         return this.userId;
-      } else {
-        return '';
       }
     }
   }

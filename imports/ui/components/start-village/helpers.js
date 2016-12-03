@@ -10,5 +10,9 @@ Template.start_village.helpers({
   },
   'validName': () => {
     return startVillageRef.validName.get();
+  },
+  'newVillage': () => {
+    const newVillageId = startVillageRef.newVillage.get();
+    return Villages.findOne(newVillageId);
   }
 })

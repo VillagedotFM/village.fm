@@ -19,5 +19,17 @@ Template.header.helpers({
   },
   isMobile: function() {
 		return appBodyRef.mobile.get();
+	},
+  noImage: function() {
+		const villageSlug = FlowRouter.getParam('villageSlug');
+		const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+
+    if (village) {
+      if (village.image) {
+        return false;
+      } else {
+        return village.name;
+      }
+    }
 	}
 });
