@@ -14,7 +14,11 @@
               <img src="/images/img_menu_logo_pressed@3x.png" alt="">
             </button>
             <div class="header__center-block">
-                 {{> header_village}}
+              {{#if noImage}}
+          			<h1>{{noImage}}</h1>
+          		{{else}}
+                {{> header_village}}
+          		{{/if}}
             </div>
             <div class="header__right-block">
                 {{#if currentUser}}

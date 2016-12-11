@@ -1,3 +1,5 @@
+import { Villages } from '../../../api/villages/villages.js';
+
 Template.start_village.helpers({
   'signUpModalActive': () => {
     return startVillageRef.step.get() === 'signup' ? true : false;
@@ -10,5 +12,9 @@ Template.start_village.helpers({
   },
   'validName': () => {
     return startVillageRef.validName.get();
+  },
+  'newVillage': () => {
+    const newVillageId = startVillageRef.newVillage.get();
+    return Villages.findOne(newVillageId);
   }
 })

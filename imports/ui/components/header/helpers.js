@@ -1,3 +1,5 @@
+import { Villages } from '../../../api/villages/villages.js';
+
 Template.header.helpers({
   notificationCount() {
     if(Notifications.find({'isRead': false, 'intendedFor': Meteor.userId()}).count() > 0)
@@ -19,5 +21,17 @@ Template.header.helpers({
   },
   isMobile: function() {
 		return appBodyRef.mobile.get();
+	},
+  noImage: function() {
+		const villageSlug = FlowRouter.getParam('villageSlug');
+		const village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+
+    if (village) {
+      if (village.image) {
+        return false;
+      } else {
+        return village.name;
+      }
+    }
 	}
 });

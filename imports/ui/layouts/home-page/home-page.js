@@ -1,10 +1,13 @@
 import './home-page.html';
 
+import { Villages } from '../../../api/villages/villages.js';
 import '../../components/start-village/start-village.js';
 
 Template.home_page.onCreated(() => {
   homePageRef = this;
   homePageRef.activeVillage = new ReactiveVar(1);
+
+  Meteor.subscribe("villages.sideMenu");
 });
 
 Template.home_page.onRendered(() => {
@@ -39,7 +42,12 @@ Template.home_page.events({
     }, 500);
   },
   'click .get-village-btn': (event) => {
-    startVillageRef.step.set('signup');
+    if (Meteor.userId()) {
+      startVillageRef.step.set('details');
+    } else {
+      startVillageRef.step.set('signup');
+    }
+
 
     mixpanel.track('Clicked Get a Village', {
       'panelNumber': event.currentTarget.dataset.mixpanelPanelNumber

@@ -22,6 +22,7 @@ $social-icons-list:
   font-size: 14px;
   line-height: 26px;
   transition: .2s ease;
+	cursor: pointer;
 }
 
 @each $name, $value in $social-icons-list {
