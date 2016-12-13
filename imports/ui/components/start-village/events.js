@@ -1,4 +1,5 @@
 import { Profiles } from '/imports/api/profiles/profiles.js';
+import { Villages } from '/imports/api/villages/villages.js';
 
 Template.start_village.events({
   'click .vf-modal.active': () => {
@@ -50,7 +51,11 @@ Template.start_village.events({
       }
     });
   },
-  'submit .start-village__details__form': () => {
+  'submit .start-village__details__form': (e) => {
+    e.preventDefault();
+    if (!startVillageRef.validName.get()) {
+      return;
+    }
     let villageName = $('.start-village__details__group-name').val().trim();
     let villageSlug = villageName.replace(' ', '').toLowerCase();
     let villageDescription = $('.start-village__details__group-description').val().trim();
@@ -74,8 +79,17 @@ Template.start_village.events({
   },
   'keyup .start-village__details__group-name': (event) => {
     let villageName = event.target.value.trim();
+    let villageSlug = villageName.replace(' ', '').toLowerCase();
     if(villageName.length === 0) {
       startVillageRef.validName.set(false);
+    } else {
+      startVillageRef.validName.set(true);
+    }
+
+    let existingVillage = Villages.find({'friendlySlugs.slug.base': villageSlug}).count();
+    if (existingVillage) {
+      startVillageRef.validName.set(false);
+      console.log(existingVillage);
     } else {
       startVillageRef.validName.set(true);
     }
