@@ -52,6 +52,7 @@ Template.start_village.events({
   },
   'submit .start-village__details__form': () => {
     let villageName = $('.start-village__details__group-name').val().trim();
+    let villageSlug = villageName.replace(' ', '').toLowerCase();
     let villageDescription = $('.start-village__details__group-description').val().trim();
     if(villageName.length === 0) {
       startVillageRef.validName.set(false);
@@ -63,6 +64,7 @@ Template.start_village.events({
           console.error("Error creating Village: ", err);
         }
         else {
+          FlowRouter.go('/'+villageSlug);
           startVillageRef.newVillage.set(data);
           startVillageRef.step.set('finish');
         }
