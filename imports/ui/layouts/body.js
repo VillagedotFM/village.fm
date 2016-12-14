@@ -20,6 +20,7 @@ import './helpers.js';
 import './events.js';
 import '../components/onboarding-popup/onboarding-popup.js';
 import '../components/header/header.js';
+import '../components/community-area/community-area.js';
 import '../components/start-village/start-village.js';
 import '../components/side-menu/side-menu.js';
 import '../components/profile/profile.js';

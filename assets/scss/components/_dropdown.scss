@@ -1,8 +1,8 @@
 .vf-dropdown {
   position: absolute;
-  display: block;
+  display: none;
   top: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 15px;
   background-color: white;
   border-radius: 4px;
@@ -10,9 +10,8 @@
   letter-spacing: 0.6px;
   min-width: 150px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-  transform: scale(0);
   opacity: 0;
-  transition: opacity .2s ease;
+  transition: opacity .2s ease .2s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 
@@ -32,7 +31,7 @@
   }
 
   &.active {
-    transform: scale(1);
+    display: block;
     opacity: 1;
   }
 
@@ -59,10 +58,19 @@
       right: 27px;
     }
   }
+
+  hr {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
 
 
 //Dropdown triggers
 *:hover > .vf-dropdown--trigger-on-hover {
+  @extend .vf-dropdown.active;
+}
+
+*.active > .vf-dropdown {
   @extend .vf-dropdown.active;
 }

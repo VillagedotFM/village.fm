@@ -85,12 +85,13 @@ iframe {
   overflow: scroll;
 }
 .wrapper {
-    overflow: auto;
     position: relative;
+    /*
+    overflow: auto
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0;*/
 }
 .wrapper--mobile {
     padding-top: 43px;
