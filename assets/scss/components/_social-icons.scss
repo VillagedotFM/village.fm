@@ -1,0 +1,35 @@
+$social-icons-list:
+	(
+   'youtube': $color-social-youtube,
+	 'facebook': $color-social-facebook,
+	 'twitter': $color-social-twitter,
+	 'linkedin': $color-social-linkedin,
+	 'instagram': $color-social-instagram,
+   'google-plus': $color-social-google-plus
+	);
+
+
+.vf-social-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  border-radius: 100%;
+  border: 1px solid $color-grey-primary;
+  color: $color-grey-primary !important;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 26px;
+  transition: .2s ease;
+	cursor: pointer;
+}
+
+@each $name, $value in $social-icons-list {
+  .vf-social-icon--#{$name} {
+  	&:hover, &:active, &:focus, &:active:focus {
+      color: $value !important;
+      border-color: $value;
+  	}
+  }
+}

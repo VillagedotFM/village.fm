@@ -312,6 +312,13 @@ iframe {
     display: block;
     margin: 0 auto;
 }
+.header__center-block h1 {
+    height: 60px;
+    display: block;
+    width: 400px;
+    text-align: center;
+    margin: 15px auto;
+}
 .header__right-block {
     float: right;
     margin-top: 15px;

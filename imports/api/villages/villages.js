@@ -17,7 +17,11 @@ Villages.allow({
 });
 
 // Add slugs to new Villages
-Villages.friendlySlugs();
+Villages.friendlySlugs(
+  {
+    updateSlug: false,
+    createOnUpdate: false
+  });
 
 Villages.publicFields = {
   'name': 1,
@@ -56,10 +60,13 @@ Villages.schema = new SimpleSchema({
 
   image:
   {
-    type: String,              //User Uploaded
-    label: "Image Url",
-    max: 400,
-    optional: true
+    type: Boolean,              //User Uploaded
+    label: "Topbar Image exists",
+    autoValue: function() {
+      if( this.isInsert ) {
+        return false;
+      }
+    }
   },
 
   description:
@@ -140,10 +147,8 @@ Villages.schema = new SimpleSchema({
   createdBy: {
     type: String,
     autoValue: function() {
-      if( this.isInsert && this.userId) {
+      if( this.isInsert ) {
         return this.userId;
-      } else {
-        return '';
       }
     }
   }

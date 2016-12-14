@@ -1,0 +1,146 @@
+.start-village__signup {
+  p {
+    margin: 20px 0 40px;
+  }
+
+  .vf-btn {
+    color: $color-social-facebook;
+    padding-left: 7px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+
+    .vf-social-icon {
+      margin: 0 5px 0 0;
+      border-color: $color-social-facebook;
+      color: $color-social-facebook !important;
+    }
+  }
+}
+
+.start-village__details {
+  .start-village__details__warning {
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: normal;
+    color: red;
+    float: right;
+    border-radius: 20px;
+    background: white;
+    transition: .2s ease;
+    opacity: 0;
+
+    i {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    &.invalid {
+      opacity: 1;
+    }
+  }
+
+  input:focus::-webkit-input-placeholder{
+    color: transparent!important;
+  }
+  input:focus::-moz-placeholder{
+      color: transparent!important;
+  }
+  input:focus:-moz-placeholder{
+      color: transparent!important;
+  }
+
+  .start-village__details__group-name {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    border-bottom: 1px solid white;
+    transition: .2s ease;
+    color: white;
+    @include placeholder-color(rgba(255,255,255,0.5));
+
+    &.invalid {
+      border-bottom-color: red;
+    }
+  }
+
+  .start-village__details__group-description {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    box-shadow: none;
+    resize: none;
+    transition: .2s ease;
+    @include placeholder-color($color-grey-primary);
+  }
+}
+
+.start-village__finish {
+  p {
+    margin: 20px 0 40px;
+  }
+
+  .start-village__finish__invite {
+    margin: 20px;
+
+    @media screen and (max-width: 440px) {
+      margin: 20px 0;
+    }
+  }
+
+  .start-village__finish__invite__link {
+    display: flex;
+    height: 40px;
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    padding: 0 8px;
+    overflow: hidden;
+
+    input {
+      flex-grow: 1;
+      border: none;
+      box-shadow: none;
+      padding-right: 4px;
+    }
+
+    button {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -40px;
+        height: 100%;
+        width: 40px;
+        background: linear-gradient(to right, transparent, white);
+      }
+    }
+  }
+
+  .start-village__finish__share {
+    margin-top: 40px;
+
+    label {
+      display: block;
+    }
+  }
+}
+
+.start-village__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

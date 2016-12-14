@@ -1,4 +1,4 @@
 .idea/
 settings.json
 .DS_Store
-prepros.cfg
+node_modules/
