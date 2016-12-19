@@ -5,7 +5,8 @@ $social-icons-list:
 	 'twitter': $color-social-twitter,
 	 'linkedin': $color-social-linkedin,
 	 'instagram': $color-social-instagram,
-   'google-plus': $color-social-google-plus
+   'google-plus': $color-social-google-plus,
+	 'website': $color-primary
 	);
 
 
@@ -20,7 +21,7 @@ $social-icons-list:
   text-align: center;
   vertical-align: middle;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 28px;
   transition: .2s ease;
 	cursor: pointer;
 }

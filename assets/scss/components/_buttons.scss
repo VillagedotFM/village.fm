@@ -25,6 +25,10 @@ button {
   text-transform: uppercase;
 }
 
+.vf-btn--sm {
+  padding: 7px 15px;
+}
+
 .vf-btn--primary {
   background-color: $color-primary;
   border-color: $color-primary;

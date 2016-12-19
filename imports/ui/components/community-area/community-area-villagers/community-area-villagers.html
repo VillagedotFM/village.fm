@@ -1,20 +1,62 @@
 <template name="community_area_villagers">
-  <div class="vf-community-area__villagers-header">
+  <div class="vf-community-area__top-villagers-header">
     <span>Top villagers</span>
-    <button>View All</button>
+    <button class="vf-community-area__top-villagers-header__view-all">View All</button>
   </div>
-  <div class="vf-community-area__villagers">
-    <div class="vf-community-area__villager">
-      <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__thumbnail">
+  <div class="vf-community-area__top-villagers">
+    <div class="vf-community-area__top-villager">
+      <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__top-villager__thumbnail">
       <div class="vf-dropdown vf-dropdown--middle">
-        <div class="vf-community-area__villager__image">
+        <div class="vf-community-area__top-villager__image">
           <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="">
         </div>
-        <span class="vf-community-area__villager__name">David Fisher</span>
+        <span class="vf-community-area__top-villager__name">David Fisher</span>
         <p><span class="text-strong">86</span> <span class="text-muted">mutual upvotes</span></p>
         <p><span class="text-strong">912</span> <span class="text-muted">upvotes collected</span></p>
         <hr>
-        <button class="vf-btn vf-btn--link vf-community-area__villager__view-profile">View Profile</button>
+        <a href="#" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="vf-community-area__villagers vf-modal {{#if villagersModalActive}}active{{/if}}">
+    <div class="vf-modal__panel">
+      <div class="vf-modal__header">
+        <p class="vf-modal__subheading">168 villagers in group</p>
+      </div>
+      <div class="vf-modal__content text-center">
+        <div class="vf-community-area__villager">
+          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
+          <span class="vf-community-area__villager__badge vf-community-area__villager__badge--primary">Chief</span>
+          <span class="vf-community-area__villager__name">Joseph Grant</span>
+        </div>
+
+        <div class="vf-community-area__villager">
+          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
+          <span class="vf-community-area__villager__name">Joseph Grant</span>
+
+          <!--Display this only if user has admin priviledges-->
+          <div class="vf-community-area__villager__edit">
+            <hr>
+            <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link">Make Admin</button>
+          </div>
+        </div>
+
+        <div class="vf-community-area__villager">
+          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
+          <span class="vf-community-area__villager__badge vf-community-area__villager__badge--secondary">Admin</span>
+          <span class="vf-community-area__villager__name">Joseph Grant</span>
+        </div>
+
+        <div class="vf-community-area__villager">
+          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
+          <span class="vf-community-area__villager__name">Joseph Grant</span>
+
+          <!--Display this only if user has admin priviledges-->
+          <div class="vf-community-area__villager__edit">
+            <hr>
+            <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link">Make Admin</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

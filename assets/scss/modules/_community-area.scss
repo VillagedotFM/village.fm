@@ -1,6 +1,6 @@
 .vf-community-area {
   background: white;
-  padding: 20px 30px;
+  padding: 20px 30px 10px;
   box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.12);
 
   &:after {
@@ -14,6 +14,11 @@
   width: 100%;
   max-width: 1020px;
   margin: auto;
+
+  > hr {
+    float: left;
+    margin-top: 0;
+  }
 }
 
 .vf-community-area__details {
@@ -25,6 +30,7 @@
 .vf-community-area__village-name {
   font-size: 43px;
   color: $color-black-strong;
+  margin-top: 0;
 }
 
 .vf-community-area__village-description {
@@ -32,7 +38,7 @@
   font-weight: 300;
 }
 
-.vf-community-area__villagers-header {
+.vf-community-area__top-villagers-header {
   margin-top: 15px;
 
   span {
@@ -53,7 +59,7 @@
   }
 }
 
-.vf-community-area__villagers {
+.vf-community-area__top-villagers {
   margin-top: 7px;
   counter-reset: villagerNumber;
 
@@ -65,7 +71,7 @@
   }
 }
 
-.vf-community-area__villager {
+.vf-community-area__top-villager {
   position: relative;
   display: inline-block;
   margin-right: 22px;
@@ -98,29 +104,29 @@
   }
 
   &.active, &:active, &:focus {
-    .vf-community-area__villager__thumbnail, &:after {
+    .vf-community-area__top-villager__thumbnail, &:after {
       border-color: $color-primary;
     }
   }
 
-  &:nth-child(1) .vf-community-area__villager__image:after {
+  &:nth-child(1) .vf-community-area__top-villager__image:after {
     content: counter(villagerNumber)"st";
   }
 
-  &:nth-child(2) .vf-community-area__villager__image:after {
+  &:nth-child(2) .vf-community-area__top-villager__image:after {
     content: counter(villagerNumber)"nd";
   }
 
-  &:nth-child(3) .vf-community-area__villager__image:after {
+  &:nth-child(3) .vf-community-area__top-villager__image:after {
     content: counter(villagerNumber)"rd";
   }
 
-  &:nth-child(n+3) .vf-community-area__villager__image:after {
+  &:nth-child(n+3) .vf-community-area__top-villager__image:after {
     content: counter(villagerNumber)"th";
   }
 }
 
-.vf-community-area__villager__thumbnail {
+.vf-community-area__top-villager__thumbnail {
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -128,7 +134,7 @@
   transition: .2s ease;
 }
 
-.vf-community-area__villager__image {
+.vf-community-area__top-villager__image {
   position: relative;
   display: block;
   width: 70px;
@@ -162,7 +168,7 @@
 
 }
 
-.vf-community-area__villager__name {
+.vf-community-area__top-villager__name {
   display: block;
   margin: 15px 0;
   color: $color-black-strong;
@@ -172,15 +178,230 @@
   letter-spacing: 0.3px;
 }
 
-.vf-community-area__villager__view-profile {
+.vf-community-area__top-villager__view-profile {
   display: block;
   margin: auto;
   font-weight: normal;
   font-size: 12px;
 }
 
-.vf-community-area__join  {
+.vf-community-area__villagers {
+  .vf-modal__content {
+    max-height: 500px;
+    padding-bottom: 30px;
+  }
+}
+
+.vf-community-area__villager {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+
+  &:hover {
+    z-index: 2;
+
+    .vf-community-area__villager__edit {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.vf-community-area__villager__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.vf-community-area__villager__badge {
+  position: absolute;;
+  display: block;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 0 5px;
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 15px;
+  vertical-align: middle;
+  color: $color-primary;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: "Montserat", sans-serif;
+
+  &--primary {
+    background: $color-primary;
+    color: white
+  }
+
+  &--secondary {
+    background: white;
+    color: $color-primary;
+  }
+}
+
+.vf-community-area__villager__name {
+  display: block;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.vf-community-area__villager__edit {
+  position: absolute;
+  width: 100%;
+  padding-top: 130px;
+  padding-bottom: 10px;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0px 3px 12px 0 rgba(0, 0, 0, 0.12);
+  transform: scale(0);
+  opacity: 0;
+  transition: .2s ease;
+  z-index: -1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  hr {
+    margin: 10px 0;
+  }
+}
+
+.vf-community-area__villager__make-admin {
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.6px;
+}
+
+
+
+.vf-community-area__actions  {
   display: inline-block;
   width: 48%;
+  float: right;
+  text-align: right;
+
+  p {
+    text-transform: uppercase;
+    color: $color-grey-secondary;
+    margin: 8px 0 15px;
+  }
+}
+
+.vf-community-area__number-of-villagers {
+  font-size: 120px;
+  font-weight: 600;
+  font-family: "Montserat", sans-serif;
+  color: $color-grey-light;
+  line-height: 0.75;
+}
+
+.vf-community-area__invite {
+  position: relative;
+  display: inline-block;
+
+  button {
+    min-width: 80px;
+  }
+}
+
+.vf-community-area__copy-link {
+  span {
+    transition: .2s ease;
+
+    &:nth-child(1) {
+      display: block;
+      color: $color-grey-primary;
+
+      &:hover {
+        color: $color-black;
+
+        i {
+          color: $color-primary;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      display: none;
+      color: $color-black;
+
+      i {
+        color: $color-success;
+      }
+    }
+  }
+
+  &--copied {
+    span {
+      &:nth-child(1) {
+        display: none;
+      }
+
+      &:nth-child(2) {
+        display: block;
+      }
+    }
+  }
+}
+
+.vf-community-area__join {
+  min-width: 80px;
+  text-transform: none;
+  margin-left: 6px;
+
+  span {
+    display: none;
+  }
+
+  &--joined {
+    span {
+      display: inline;
+    }
+  }
+}
+
+.vf-community-area__edit {
+  min-width: 80px;
+  text-transform: none;
+  margin-left: 6px;
+}
+
+.vf-community-area__categories {
+  display: inline-block;
   float: left;
+  max-width: 75%;
+  list-style-type: none;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.vf-community-area__category {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  line-height: 28px;
+  margin-right: 30px;
+  color: $color-grey-primary;
+  transition: .2s ease;
+
+  &:hover, &.active {
+    cursor: pointer;
+    color: $color-black;
+  }
+}
+
+.vf-community-area__add-new-category {
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.vf-community-area__social-links {
+  display: inline-block;
+  margin-top: -5px;
+  float: right;
 }
