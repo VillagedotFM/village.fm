@@ -8,5 +8,11 @@ Template.community_area.events({
   },
   'click .vf-community-area__join': (event) => {
     communityAreaRef.joined.set(true);
+  },
+  'click .vf-community-area__edit': (event) => {
+    communityAreaEditRef.tab.set('general');
+  },
+  'click .vf-community-area__add-new-social-link': (event) => {
+    communityAreaEditRef.tab.set('social');
   }
 })

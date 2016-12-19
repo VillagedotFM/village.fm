@@ -3,6 +3,7 @@ import './events.js';
 import './helpers.js';
 import './community-area-villagers/community-area-villagers.js';
 import './community-area-categories/community-area-categories.js';
+import './community-area-edit/community-area-edit.js';
 
 
 Template.community_area.onCreated(function() {

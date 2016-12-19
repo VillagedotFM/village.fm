@@ -17,12 +17,12 @@
   <div class="start-village__details vf-modal {{#if detailsModalActive}}active{{/if}}">
     <form class="start-village__details__form vf-modal__panel">
       <div class="vf-modal__header">
-        <label for="group-name" class="start-village__label">Group Name</label>
+        <label for="group-name" class="vf-input-label vf-input-label--white">Group Name</label>
         <span class="start-village__details__warning text-uppercase {{#unless validName}}invalid{{/unless}}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Enter your group name first</span>
         <input type="text" class="start-village__details__group-name {{#unless validName}}invalid{{/unless}}" placeholder="Enter your group name">
       </div>
       <div class="vf-modal__content">
-        <label for="group-description" class="start-village__label text-primary">Group Name</label>
+        <label for="group-description" class="vf-input-label">Group Description</label>
         <textarea type="text" name="group-description" class="start-village__details__group-description" rows="4" placeholder="Enter your group description (optional)"></textarea>
       </div>
       <div class="vf-modal__footer text-center">
@@ -43,14 +43,14 @@
             Share it with your friends!
           </p>
           <div class="start-village__finish__invite text-left">
-            <label for="village-link" class="start-village__label text-primary">Invite friends</label>
+            <label for="village-link" class="vf-input-label">Invite friends</label>
             <div class="start-village__finish__invite__link">
               <input type="text" name="village-link" readonly="true" value="http://village.fm/{{friendlySlugs.slug.base}}">
               <button class="vf-btn vf-btn--secondary vf-btn--link start-village__finish__copy"><i class="fa fa-clone" aria-hidden="true"></i> Copy link</button>
             </div>
           </div>
           <div class="start-village__finish__share">
-            <label class="start-village__label text-primary">Share it:</label>
+            <label class="vf-input-label">Share it:</label>
             <a data-href="https://www.facebook.com/sharer/sharer.php?u=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
             <a data-href="http://twitter.com/share?text=Check out {{name}} on Village.fm&url=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             <a data-href="https://plus.google.com/share?url=http://village.fm/{{friendlySlugs.slug.base}}" class="vf-social-icon vf-social-icon--google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
