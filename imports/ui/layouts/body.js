@@ -189,6 +189,17 @@ Template.app_body.onRendered(function() {
     }
   });
 
+  // Stick sidebar (playlist) to the top on scroll
+  let sidebarOffset = $('.vf-community-area').outerHeight() - 60;
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > sidebarOffset) {
+        $('.sidebar').addClass('sidebar--fixed');
+    }
+    else {
+        $('.sidebar').removeClass('sidebar--fixed');
+    }
+  });
+
 
   // Tracker.autorun(function(comp) {
   //   let order = appBodyRef.postOrder.get();

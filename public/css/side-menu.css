@@ -225,6 +225,8 @@ header.side-menu__village img {
           transform: translate(250px);
 }
 
+.side-menu-is-active .vf-header,
+.side-menu-is-active .vf-community-area,
 .side-menu-is-active .main,
 .side-menu-is-active .bottom-player {
   left: 250px;
@@ -255,6 +257,8 @@ header.side-menu__village img {
             transform: translate(350px);
   }
 
+  .side-menu-is-active .vf-header,
+  .side-menu-is-active .vf-community-area,
   .side-menu-is-active .main,
   .side-menu-is-active .bottom-player {
     left: 350px;

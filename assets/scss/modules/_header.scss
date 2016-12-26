@@ -1,9 +1,13 @@
 .vf-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   height: $header-height;
   width: 100%;
   padding: 15px;
   background-color: white;
   z-index: 9999; //FIXME z-index scale
+  transition: .3s ease;
 
   button {
     padding: 0;
@@ -14,10 +18,7 @@
   }
 }
 
-.vf-header--fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
+.vf-header--scrolled {
   box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.12);
 }
 

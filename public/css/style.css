@@ -124,9 +124,10 @@ iframe {
     color: #ff7260;
 }
 .container {
-    width: 100%;
-    padding-left: 390px;
-    padding-top: 60px;
+    display: inline-block;
+    float: right;
+    max-width: 630px;
+    padding-right: 0;
 }
 .container--no-padding {
     width: 100%;
@@ -637,14 +638,18 @@ iframe {
 /***** /Header  *****/
 /***** /Sidebar  *****/
 .sidebar {
-    position: fixed;
-    top: 0;
-    height: 100%;
-    padding-top: 60px;
-    padding-bottom: 54px;
-    z-index: 9999;
-    width: 375px;
+  display: inline-block;
+  box-sizing: border-box;
+  -wekit-box-sizing: border-box;
+  padding-bottom: 114px;
+  height: 100vh;
+  width: 375px;
 }
+.sidebar--fixed {
+  position: fixed;
+  top: 60px;
+}
+
 .sidebar__inner {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     background: #ffffff;
