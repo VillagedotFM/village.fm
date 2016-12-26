@@ -60,6 +60,7 @@
 }
 
 .vf-community-area__top-villagers {
+  height: 45px;
   margin-top: 7px;
   counter-reset: villagerNumber;
 
@@ -76,6 +77,7 @@
   display: inline-block;
   margin-right: 22px;
   cursor: pointer;
+  padding-bottom: 15px;
   counter-increment: villagerNumber;
 
   &:last-of-type {
@@ -88,7 +90,7 @@
     position: absolute;
     width: 15px;
     height: 15px;
-    bottom: -1px;
+    bottom: 16px;
     right: -4px;
     background: $color-grey-primary;
     border: 1px solid white;
@@ -123,6 +125,10 @@
 
   &:nth-child(n+3) .vf-community-area__top-villager__image:after {
     content: counter(villagerNumber)"th";
+  }
+
+  .vf-dropdown {
+    margin-top: 0;
   }
 }
 
