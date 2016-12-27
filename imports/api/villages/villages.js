@@ -36,6 +36,10 @@ Villages.publicFields = {
   'genres': 1,
   'createdAt': 1,
   'createdBy': 1,
+  'website': 1,
+  'twitter': 1,
+  'facebook': 1,
+  'youtube': 1,
   'friendlySlugs': 1
 }
 
@@ -134,6 +138,36 @@ Villages.schema = new SimpleSchema({
     label: "Genres",
     defaultValue: []
   },
+
+  facebook:
+  {
+    type: String,
+    label: "Facebook Link",     //User Entered
+    max: 500,
+    optional: true
+  },
+  website:
+  {
+    type: String,
+    label: "Website Link",     //User Entered
+    max: 500,
+    optional: true
+  },
+  twitter:
+  {
+    type: String,
+    label: "Twitter Link",     //User Entered
+    max: 500,
+    optional: true
+  },
+  youtube:
+  {
+    type: String,
+    label: "Youtube Link",     //User Entered
+    max: 500,
+    optional: true
+  },
+
 
   createdAt: {
     type: Date,
