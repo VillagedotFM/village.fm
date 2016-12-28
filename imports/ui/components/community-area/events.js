@@ -4,6 +4,13 @@ Template.community_area.events({
     communityAreaRef.villageLinkCopied.set(false);
   },
   'click .vf-community-area__copy-link': (event) => {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    let base = window.location.href;
+    $temp.val(base).select();
+    document.execCommand("copy");
+    $temp.remove();
+
     communityAreaRef.villageLinkCopied.set(true);
   },
   'click .vf-community-area__join': (event) => {
