@@ -2,6 +2,7 @@
   display: none;
   position: absolute;
   padding: 14px 16px;
+  border-radius: 4px;
   background: white;
   box-shadow: 0px 3px 12px 0 rgba(42, 46, 47, 0.12);
   line-height: 1;
@@ -35,6 +36,14 @@
     top: 50%;
     right: -10px;
     transform: translate(100%, -50%);
+
+    &:after {
+      top: 50%;
+      left: -5px;
+      transform: translateY(-50%) rotate(45deg);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.055);
+      border-left: 1px solid rgba(0, 0, 0, 0.055);
+    }
   }
 
   &.active {
@@ -48,6 +57,6 @@
   @extend .vf-popover.active;
 }
 
-*.active > .vf-popover {
+*.active > .vf-popover--trigger-on-active {
   @extend .vf-popover.active;
 }

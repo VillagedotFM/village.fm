@@ -23,6 +23,7 @@ button {
   color: $color-primary;
   user-select: none;
   text-transform: uppercase;
+  pointer-events: auto;
 }
 
 .vf-btn--sm {

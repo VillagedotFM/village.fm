@@ -1,31 +1,65 @@
 <template name="side_menu">
-  <div class="side-menu">
-    <header class="side-menu__village {{#unless activeVillage}}active{{/unless}}">
+  <div class="vf-side-menu">
+    <header class="vf-side-menu__header {{#unless activeVillage}}active{{/unless}}">
       <a href="/all">
         <img src="/images/sidebar/img-sidebar-villagefm@3x.png" alt="Village.fm" />
       </a>
     </header>
-    <ul class="side-menu__villages">
+    <div class="vf-side-menu__villages">
+      <img class="vf-side-menu__villages__heading" src="/images/sidebar/img-sidebar-allvillages@3x.png" alt="Village.fm" />
+
+      <!-- Your Villages -->
+      <div class="vf-side-menu__villages__subheading">Your villages:</div>
+      <div class="vf-side-menu__villages__placeholder">
+        <img src="/images/img_logo_small@3x.png" alt="Village.fm">
+        <button class="vf-side-menu__villages__start-village">+</button>
+        <p>You don’t have any joined <br>villages yet!</p>
+      </div>
+      <!-- List of Your Villages...just for an example it's the same as the list of other villages -->
+      <ul>
       {{#each village in villages}}
-      <li class="side-menu__village {{#if village.active}}active{{/if}}">
-        <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
-          <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
-        </a>
-        {{#if village.showNotification}}
-        <span class="side-menu__village__new-songs">{{village.newSongs}}</span>
-        {{/if}}
-        <div class="side-menu__village__pop-over">
-          <h4 class="side-menu__village__pop-over__name">{{village.name}} </h4>
-          <p class="side-menu__village__pop-over__description">{{village.description}}</p>
+        <li class="vf-side-menu__village {{#if village.active}}active{{/if}}">
+          <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
+            <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
+          </a>
           {{#if village.showNotification}}
-          <p class="side-menu__village__pop-over__new-songs"><span>{{village.newSongs}}</span> NEW SONGS POSTED</p>
+          <span class="vf-side-menu__village__new-songs">{{village.newSongs}}</span>
           {{/if}}
-        </div>
-      </li>
+          <div class="vf-side-menu__village__popover vf-popover vf-popover--right vf-popover--trigger-on-hover">
+            <h4 class="vf-side-menu__village__popover__name">{{village.name}} </h4>
+            <p class="vf-side-menu__village__popover__description">{{village.description}}</p>
+            {{#if village.showNotification}}
+            <p class="vf-side-menu__village__popover__new-songs"><span class="text-primary">{{village.newSongs}}</span> NEW SONGS POSTED</p>
+            {{/if}}
+          </div>
+        </li>
       {{/each}}
-    </ul>
-    <footer class="side-menu__bottom">
-      <button class="side-menu__start-village btn" type="button" name="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Start a Village</button>
+      </ul>
+
+      <!-- Other Villages -->
+      <div class="vf-side-menu__villages__subheading">Other villages:</div>
+      <ul>
+      {{#each village in villages}}
+        <li class="vf-side-menu__village {{#if village.active}}active{{/if}}">
+          <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
+            <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
+          </a>
+          {{#if village.showNotification}}
+          <span class="vf-side-menu__village__new-songs">{{village.newSongs}}</span>
+          {{/if}}
+          <div class="vf-side-menu__village__popover vf-popover vf-popover--right vf-popover--trigger-on-hover">
+            <h4 class="vf-side-menu__village__popover__name">{{village.name}} </h4>
+            <p class="vf-side-menu__village__popover__description">{{village.description}}</p>
+            {{#if village.showNotification}}
+            <p class="vf-side-menu__village__popover__new-songs"><span class="text-primary">{{village.newSongs}}</span> NEW SONGS POSTED</p>
+            {{/if}}
+          </div>
+        </li>
+      {{/each}}
+      </ul>
+    </div>
+    <footer class="vf-side-menu__bottom">
+      <button class="vf-side-menu__start-village vf-btn vf-btn--primary vf-btn--sm" type="button" name="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Start a Village</button>
       {{> side_menu_profile}}
     </footer>
   </div>

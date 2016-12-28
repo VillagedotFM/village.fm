@@ -72,6 +72,6 @@
   @extend .vf-dropdown.active;
 }
 
-*.active > .vf-dropdown {
+*.active > .vf-dropdown--trigger-on-active {
   @extend .vf-dropdown.active;
 }

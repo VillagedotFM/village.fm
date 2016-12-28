@@ -13,14 +13,14 @@ Template.side_menu.onCreated(() => {
 
 
 Template.side_menu.onRendered(() => {
-  $('.side-menu__villages').perfectScrollbar({'suppressScrollX': true });
-  $('.side-menu__villages').scrollTop(0);
+  $('.vf-side-menu__villages').perfectScrollbar({'suppressScrollX': true });
+  $('.vf-side-menu__villages').scrollTop(0);
 
-  $('.side-menu__villages').on('ps-scroll-down', function() {
-    $('.side-menu header').addClass('scrolled');
+  $('.vf-side-menu__villages').on('ps-scroll-down', function() {
+    $('.vf-side-menu header').addClass('scrolled');
   });
 
-  $('.side-menu__villages').on('ps-y-reach-start', function() {
-    $('.side-menu header').removeClass('scrolled');
+  $('.vf-side-menu__villages').on('ps-y-reach-start', function() {
+    $('.vf-side-menu header').removeClass('scrolled');
   });
 })
