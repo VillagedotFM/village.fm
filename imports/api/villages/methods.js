@@ -12,5 +12,12 @@ Meteor.methods({
     });
 
     return newVillage;
+  },
+  joinVillage: function(villageId) {
+    Villages.update({_id: villageId}, {
+      $addToSet: {
+        users: Meteor.userId()
+      }
+    });
   }
 });

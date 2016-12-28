@@ -13,7 +13,14 @@ Template.community_area.events({
 
     communityAreaRef.villageLinkCopied.set(true);
   },
-  'click .vf-community-area__join': (event) => {
+  'click .vf-community-area__join': function(event) {
+    Meteor.call('joinVillage', this._id, function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Joined Village!");
+      }
+    });
     communityAreaRef.joined.set(true);
   },
   'click .vf-community-area__edit': (event) => {

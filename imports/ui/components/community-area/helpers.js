@@ -29,5 +29,9 @@ Template.community_area.helpers({
   },
   totalUsers: function() {
     return this.users.length + this.admins.length;
+  },
+  isMember: function() {
+    const allUsers = this.admins.concat(this.users);
+    return _.contains(allUsers, Meteor.userId());
   }
 })

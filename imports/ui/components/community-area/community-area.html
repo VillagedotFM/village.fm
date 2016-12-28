@@ -21,7 +21,10 @@
               </button>
             </span>
           </div>
-          <button class="vf-btn vf-btn--sm vf-community-area__join {{#if joined}}vf-community-area__join--joined vf-btn--primary{{else}} vf-btn--primary-outline{{/if}}">Join<span>ed</span></button>
+
+          {{#unless isMember}}
+            <button class="vf-btn vf-btn--sm vf-community-area__join {{#if joined}}vf-community-area__join--joined vf-btn--primary{{else}} vf-btn--primary-outline{{/if}}">Join<span>ed</span></button>
+          {{/unless}}
 
           <!--Display this only if user has admin priviledges-->
           {{#if isAdmin}}
