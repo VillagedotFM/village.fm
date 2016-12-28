@@ -34,5 +34,29 @@ Template.community_area_villagers.helpers({
   },
   totalUsers: function() {
     return this.users.length + this.admins.length;
+  },
+  allUsers: function() {
+    const allUsers = this.admins.concat(this.users);
+    let leaderboard = [];
+
+    allUsers.forEach(function(userId) {
+      let posts = Posts.find({"createdBy": userId}).fetch();
+      let upvotesCollected = 0;
+      posts.forEach(function (post) {
+        upvotesCollected += post.upvotes;
+      });
+
+      let object = {id: userId, votes: upvotesCollected};
+      leaderboard.push(object);
+    });
+
+    leaderboard.sort(function(a, b) {
+        var x = a.votes; var y = b.votes;
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+
+    leaderboard = leaderboard.reverse();
+
+    return leaderboard.slice(0,9);
   }
 })

@@ -5,19 +5,22 @@
   </div>
   {{#with currentVillage}}
     <div class="vf-community-area__top-villagers">
-      <div class="vf-community-area__top-villager">
-        <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__top-villager__thumbnail">
-        <div class="vf-dropdown vf-dropdown--middle vf-dropdown--trigger-on-hover">
-          <div class="vf-community-area__top-villager__image">
-            <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="">
+
+      {{#each allUsers}}
+        <div class="vf-community-area__top-villager">
+          <img src="{{getUserImage id}}" alt="" class="vf-community-area__top-villager__thumbnail">
+          <div class="vf-dropdown vf-dropdown--middle vf-dropdown--trigger-on-hover">
+            <div class="vf-community-area__top-villager__image">
+              <img src="{{getUserImage id}}" alt="">
+            </div>
+            <span class="vf-community-area__top-villager__name">{{getUserName id}}</span>
+            <p><span class="text-strong">{{getUpvotesNum id}}</span> <span class="text-muted">upvotes collected</span></p>
+            <hr>
+            <a href="/profile/{{id}}" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
           </div>
-          <span class="vf-community-area__top-villager__name">David Fisher</span>
-          <p><span class="text-strong">86</span> <span class="text-muted">mutual upvotes</span></p>
-          <p><span class="text-strong">912</span> <span class="text-muted">upvotes collected</span></p>
-          <hr>
-          <a href="#" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
         </div>
-      </div>
+      {{/each}}
+
     </div>
     <div class="vf-community-area__villagers vf-modal {{#if villagersModalActive}}active{{/if}}">
       <div class="vf-modal__panel">
