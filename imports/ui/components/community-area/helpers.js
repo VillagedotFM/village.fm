@@ -26,5 +26,8 @@ Template.community_area.helpers({
   },
   'joined': () => {
     return communityAreaRef.joined.get();
+  },
+  totalUsers: function() {
+    return this.users.length + this.admins.length;
   }
 })

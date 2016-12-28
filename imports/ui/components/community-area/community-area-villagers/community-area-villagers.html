@@ -3,61 +3,64 @@
     <span>Top villagers</span>
     <button class="vf-community-area__top-villagers-header__view-all">View All</button>
   </div>
-  <div class="vf-community-area__top-villagers">
-    <div class="vf-community-area__top-villager">
-      <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__top-villager__thumbnail">
-      <div class="vf-dropdown vf-dropdown--middle vf-dropdown--trigger-on-hover">
-        <div class="vf-community-area__top-villager__image">
-          <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="">
-        </div>
-        <span class="vf-community-area__top-villager__name">David Fisher</span>
-        <p><span class="text-strong">86</span> <span class="text-muted">mutual upvotes</span></p>
-        <p><span class="text-strong">912</span> <span class="text-muted">upvotes collected</span></p>
-        <hr>
-        <a href="#" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
-      </div>
-    </div>
-  </div>
-  <div class="vf-community-area__villagers vf-modal {{#if villagersModalActive}}active{{/if}}">
-    <div class="vf-modal__panel">
-      <div class="vf-modal__header">
-        <p class="vf-modal__subheading">168 villagers in group</p>
-      </div>
-      <div class="vf-modal__content text-center">
-        <div class="vf-community-area__villager">
-          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
-          <span class="vf-community-area__villager__badge vf-community-area__villager__badge--primary">Chief</span>
-          <span class="vf-community-area__villager__name">Joseph Grant</span>
-        </div>
-
-        <div class="vf-community-area__villager">
-          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
-          <span class="vf-community-area__villager__name">Joseph Grant</span>
-
-          <!--Display this only if user has admin priviledges-->
-          <div class="vf-community-area__villager__edit">
-            <hr>
-            <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link">Make Admin</button>
+  {{#with currentVillage}}
+    <div class="vf-community-area__top-villagers">
+      <div class="vf-community-area__top-villager">
+        <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__top-villager__thumbnail">
+        <div class="vf-dropdown vf-dropdown--middle vf-dropdown--trigger-on-hover">
+          <div class="vf-community-area__top-villager__image">
+            <img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="">
           </div>
-        </div>
-
-        <div class="vf-community-area__villager">
-          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
-          <span class="vf-community-area__villager__badge vf-community-area__villager__badge--secondary">Admin</span>
-          <span class="vf-community-area__villager__name">Joseph Grant</span>
-        </div>
-
-        <div class="vf-community-area__villager">
-          <a href="#"><img src="http://placehold.it/100x100/7fe5e3/ffffff" alt="" class="vf-community-area__villager__image"></a>
-          <span class="vf-community-area__villager__name">Joseph Grant</span>
-
-          <!--Display this only if user has admin priviledges-->
-          <div class="vf-community-area__villager__edit">
-            <hr>
-            <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link">Make Admin</button>
-          </div>
+          <span class="vf-community-area__top-villager__name">David Fisher</span>
+          <p><span class="text-strong">86</span> <span class="text-muted">mutual upvotes</span></p>
+          <p><span class="text-strong">912</span> <span class="text-muted">upvotes collected</span></p>
+          <hr>
+          <a href="#" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
         </div>
       </div>
     </div>
-  </div>
+    <div class="vf-community-area__villagers vf-modal {{#if villagersModalActive}}active{{/if}}">
+      <div class="vf-modal__panel">
+        <div class="vf-modal__header">
+          <p class="vf-modal__subheading">{{totalUsers}} villagers in group</p>
+        </div>
+        <div class="vf-modal__content text-center">
+
+          <!-- {{#with createdBy}}
+            <div class="vf-community-area__villager">
+              <a href="#"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__badge vf-community-area__villager__badge- -primary">Chief</span>
+              <span class="vf-community-area__villager__name">{{getUserImage this}}</span>
+            </div>
+          {{/with}} -->
+
+          {{#each admins}}
+            <div class="vf-community-area__villager">
+              <a href="/profile/{{this}}"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__badge vf-community-area__villager__badge--secondary">Admin</span>
+              <span class="vf-community-area__villager__name">{{getUserName this}}</span>
+            </div>
+          {{/each}}
+
+          {{#each users}}
+
+            <div class="vf-community-area__villager">
+              <a href="/profile/{{this}}"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__name">{{getUserName this}}</span>
+
+              <!--Display this only if user has admin priviledges-->
+              {{#if isAdmin}}
+                <div class="vf-community-area__villager__edit">
+                  <hr>
+                  <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link" data-user="{{this}}">Make Admin</button>
+                </div>
+              {{/if}}
+            </div>
+
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  {{/with}}
 </template>
