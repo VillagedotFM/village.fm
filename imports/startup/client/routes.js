@@ -53,7 +53,7 @@ FlowRouter.route('/all', {
 
         if(typeof appBodyRef !== 'undefined'){
           appBodyRef.activeVillage.set(null);
-          Tracker.flush();
+          // Tracker.flush();
         }
 
         $('.sr-playlist').scrollTop(0);
