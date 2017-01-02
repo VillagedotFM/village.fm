@@ -11,6 +11,10 @@ Meteor.methods({
       admins: [Meteor.userId()]
     });
 
+    mixpanel.track('Created Village', {
+      villageName: name,
+      createdBy: Meteor.userId()
+    });
     return newVillage;
   },
   joinVillage: function(villageId) {
@@ -18,6 +22,13 @@ Meteor.methods({
       $addToSet: {
         users: Meteor.userId()
       }
+    });
+
+    let village = Villages.findOne({villageId});
+
+    mixpanel.track('Joined Village', {
+      villageName: village.name,
+      user: Meteor.userId()
     });
   }
 });

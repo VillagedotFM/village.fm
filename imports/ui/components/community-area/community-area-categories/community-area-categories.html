@@ -1,12 +1,14 @@
 <template name="community_area_categories">
   {{#with currentVillage}}
     <ul class="vf-community-area__categories">
-      <li class="vf-community-area__category active">
+      <!-- <li class="vf-community-area__category active">
         Most Upvoted
-      </li>
-      <li class="vf-community-area__category">
-        New
-      </li>
+      </li> -->
+      {{#each categories}}
+        <li class="vf-community-area__category">
+          {{name}}
+        </li>
+      {{/each}}
 
       <!--Display this only if user has admin priviledges-->
       {{#if isAdmin}}
