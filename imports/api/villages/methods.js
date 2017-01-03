@@ -30,5 +30,21 @@ Meteor.methods({
       villageName: village.name,
       user: Meteor.userId()
     });
+  },
+  editVillage: function(villageId, changes) {
+
+    Villages.update({_id: villageId}, {
+      $set: {
+        'name': changes.name,
+        'description': changes.description,
+        'youtube': changes.youtube,
+        'website': changes.website,
+        'twitter': changes.twitter,
+        'facebook': changes.facebook,
+      },
+      $push: {
+        categories: { $each: changes.categories }
+      }
+    });
   }
 });
