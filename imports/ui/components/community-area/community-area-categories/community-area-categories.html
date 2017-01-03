@@ -8,11 +8,24 @@
         New
       </li>
 
+      <!--More categories dropdown-->
+      <li class="vf-community-area__categories__dropdown">
+        <button>More <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+        <ul>
+          <li class="vf-community-area__category">
+            Most Upvoted
+          </li>
+          <li class="vf-community-area__category">
+            New
+          </li>
+        </ul>
+      </li>
+
       <!--Display this only if user has admin priviledges-->
       {{#if isAdmin}}
-        <li class="vf-community-area__add-new-category">
-          <button class="vf-btn vf-btn--primary vf-btn--link">+ <span>ADD CATEGORY</span></button>
-        </li>
+      <li class="vf-community-area__add-new-category">
+        <button class="vf-btn vf-btn--primary vf-btn--link">+ <span>ADD CATEGORY</span></button>
+      </li>
       {{/if}}
     </ul>
   {{/with}}

@@ -4,6 +4,8 @@ import './helpers.js';
 import './notifications/notifications.js';
 import './header-profile/header-profile.js';
 import './header-village/header-village.js';
+import './header-village/header-village.js';
+import '../community-area/community-area-categories/community-area-categories.js';
 
 
 Template.header.onRendered(function() {
