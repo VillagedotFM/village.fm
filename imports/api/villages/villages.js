@@ -40,6 +40,7 @@ Villages.publicFields = {
   'twitter': 1,
   'facebook': 1,
   'youtube': 1,
+  'categories': 1,
   'friendlySlugs': 1
 }
 
@@ -168,6 +169,30 @@ Villages.schema = new SimpleSchema({
     optional: true
   },
 
+  categories: {
+    type: [Object],
+    autoValue: function () {
+      if (this.isInsert) {
+        return [
+          {name: "Most Upvoted", posts: []},
+          {name: "New", posts: []}
+        ];
+      }
+    }
+  },
+
+  "categories.$.name": {
+    type: String,
+    label: "Name",
+    min: 1,
+    max: 1000
+  },
+  "categories.$.posts": {
+    type: [Object],
+    label: "Posts",
+    blackbox: true,
+    defaultValue: []
+  },
 
   createdAt: {
     type: Date,

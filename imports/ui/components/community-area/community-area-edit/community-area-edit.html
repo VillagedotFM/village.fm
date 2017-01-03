@@ -14,11 +14,11 @@
           <div class="vf-input-group">
             <label for="group-name" class="vf-input-label vf-input-label--white">Group Name</label>
             <span class="vf-community-area__edit-village__warning text-uppercase {{#unless validName}}invalid{{/unless}}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Enter your group name</span>
-            <input type="text" class="vf-community-area__edit-village__group-name {{#unless validName}}invalid{{/unless}}" placeholder="Enter your group name">
+            <input type="text" name="group-name" class="vf-community-area__edit-village__group-name {{#unless validName}}invalid{{/unless}}" placeholder="Enter your group name" value="{{name}}">
           </div>
           <div class="vf-input-group">
             <label for="group-description" class="vf-input-label">Group Description</label>
-            <textarea type="text" name="group-description" class="vf-input" rows="4" placeholder="Enter your group description (optional)"></textarea>
+            <textarea type="text" name="group-description" class="vf-input" rows="4" placeholder="Enter your group description (optional)" value="{{description}}"></textarea>
           </div>
         </div>
         <div class="vf-community-area__edit-village__tab vf-community-area__edit-village__tab--categories">
@@ -58,19 +58,19 @@
         <div class="vf-community-area__edit-village__tab vf-community-area__edit-village__tab--social">
           <div class="vf-input-group">
             <label for="social-link-website" class="vf-input-label">Website</label>
-            <input type="text" class="vf-input" name="social-link-website" placeholder="Enter URL of your website">
+            <input type="text" class="vf-input" name="social-link-website" placeholder="Enter URL of your website" value="{{website}}">
           </div>
           <div class="vf-input-group">
             <label for="social-link-facebook" class="vf-input-label">Facebook</label>
-            <input type="text" class="vf-input" name="social-link-facebook" placeholder="Enter URL of your facebook page">
+            <input type="text" class="vf-input" name="social-link-facebook" placeholder="Enter URL of your facebook page" value="{{facebook}}">
           </div>
           <div class="vf-input-group">
             <label for="social-link-twitter" class="vf-input-label">Twitter</label>
-            <input type="text" class="vf-input" name="social-link-twitter" placeholder="Enter URL of your twitter page">
+            <input type="text" class="vf-input" name="social-link-twitter" placeholder="Enter URL of your twitter page" value="{{twitter}}">
           </div>
           <div class="vf-input-group">
             <label for="social-link-youtube" class="vf-input-label">Youtube</label>
-            <input type="text" class="vf-input" name="social-link-youtube" placeholder="Enter URL of your youtube page">
+            <input type="text" class="vf-input" name="social-link-youtube" placeholder="Enter URL of your youtube page" value="{{youtube}}">
           </div>
         </div>
       </div>
