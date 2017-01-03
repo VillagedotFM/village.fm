@@ -43,9 +43,8 @@ Template.community_area_categories.onRendered(function() {
   resizeCategoriesNav();
 
   // Show/hide categories in header on scroll
-  let offset = $('.main').offset().top;
   $(window).scroll(function() {
-    if ( $(window).scrollTop() >= offset ) {
+    if ( $(window).scrollTop() >= $('.main').offset().top ) {
       $('.vf-header').addClass('vf-header--show-categories');
     } else {
       $('.vf-header').removeClass('vf-header--show-categories');

@@ -9,13 +9,22 @@ import '../community-area/community-area-categories/community-area-categories.js
 
 
 Template.header.onRendered(function() {
-  // Show fixed header when community area is scrolled
+  // Header scroll event handlers
   $(window).scroll(function() {
-    if ($(window).scrollTop() > 0) {
+    let windowScrollPosition = $(window).scrollTop();
+    // Show / hide fixed header when community area is scrolled
+    if (windowScrollPosition > 0) {
         $('.vf-header').addClass('vf-header--scrolled');
     }
     else {
         $('.vf-header').removeClass('vf-header--scrolled');
+    }
+
+    // Show / hide village logo in header
+    if(windowScrollPosition > $('.vf-community-area__details').offset().top) {
+      $('.vf-header__village').addClass('vf-header__village--show-village-logo');
+    } else {
+      $('.vf-header__village').removeClass('vf-header__village--show-village-logo');
     }
   });
 });

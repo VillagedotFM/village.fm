@@ -1,7 +1,7 @@
 import { Email } from 'meteor/email';
 
 Template.header.events({
-  'click .vf-header__logo': () => {
+  'click .vf-header__menu-btn': () => {
     appBodyRef.showSideMenu.set(!appBodyRef.showSideMenu.get());
   },
   "click .vf-header__log-in": function(event, template){

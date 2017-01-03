@@ -22,14 +22,14 @@
   box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
-.vf-header__logo {
+.vf-header__menu-btn {
   position: relative;
   height: 35px;
   float: left;
   top: 50%;
   transform: translateY(-50%);
 
-  img {
+  .vf-header__logo {
     height: 35px;
     transition: .2s ease;
     -webkit-backface-visibility: hidden;
@@ -44,7 +44,7 @@
   }
 
   &:hover, &.active {
-    img {
+    .vf-header__logo {
       &:nth-child(1) {
         opacity: 0;
       }
@@ -54,6 +54,66 @@
       }
     }
   }
+}
+
+.vf-header__village {
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &--show-village-logo {
+    .vf-header__villagefm__text-logo {
+      opacity: 0;
+    }
+
+    .vf-header__village__logo,
+    .vf-header__village__name {
+      opacity: 1;
+    }
+  }
+}
+
+.vf-header__villagefm__text-logo {
+  height: 35px;
+  width: auto;
+  transition: .2s ease;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.vf-header__village__logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 35px;
+  width: auto;
+  max-width: 150px;
+  transition: .2s ease;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden
+}
+
+.vf-header__village__name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 35px;
+  margin: 0;
+  color: $color-black-strong;
+  font-size: 24px;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: .2s ease;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden
 }
 
 .vf-header__nav {
@@ -66,7 +126,7 @@
   color: $color-black-strong;
 
   &:hover {
-    color: $color-black;
+    color: $color-primary;
   }
 
   img {

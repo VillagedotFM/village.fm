@@ -1,13 +1,20 @@
 <template name='header'>
   <header class="vf-header">
-    <button class="vf-header__logo {{#if showSideMenu}}active{{/if}}">
-      <img src="/images/img_menu_logo_normal@3x.png" alt="Village.fm">
-      <img src="/images/img_menu_logo_pressed@3x.png" alt="Village.fm">
-
+    <button class="vf-header__menu-btn {{#if showSideMenu}}active{{/if}}">
+      <img src="/images/img_menu_logo_normal@3x.png" class="vf-header__logo" alt="Village.fm">
+      <img src="/images/img_menu_logo_pressed@3x.png" class="vf-header__logo" alt="Village.fm">
       <span class="vf-dropdown vf-dropdown--left vf-dropdown--trigger-on-hover">
         Discover other villages
       </span>
     </button>
+
+    <div class="vf-header__village">
+      <img src="/images/img_header_villagefm@3x.png" class="vf-header__villagefm__text-logo" alt="Village.fm">
+
+      <!-- Village logo or village name -->
+      <!--<img src="/images/img-mobile-topbar-psytrance@3x.png" class="vf-header__village__logo" alt="Village Name">-->
+      <h2 class="vf-header__village__name">Village Name</h2>
+    </div>
 
     {{> community_area_categories}}
 

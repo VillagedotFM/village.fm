@@ -45,9 +45,15 @@
   margin-top: 0;
 }
 
+.vf-community-area__village-logo {
+  height: 60px;
+  width: auto;
+}
+
 .vf-community-area__village-description {
   font-size: 16px;
   font-weight: 300;
+  min-height: 40px;
 }
 
 .vf-community-area__actions  {
@@ -146,4 +152,9 @@
   display: inline-block;
   margin-top: -5px;
   float: right;
+}
+
+.vf-community-area__add-new-social-link {
+  line-height: 28px;
+  margin: 5px 0;
 }

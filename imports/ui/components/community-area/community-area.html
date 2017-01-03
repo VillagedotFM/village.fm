@@ -3,6 +3,9 @@
     <div class="vf-community-area">
       <div class="vf-community-area__inner">
         <div class="vf-community-area__details">
+          <!-- If village needs to display logo in community area
+          <img src="/images/img-mobile-topbar-psytrance@3x.png" class="vf-community-area__village-logo" alt="{{name}}">
+          -->
           <h1 class="vf-community-area__village-name">{{name}}</h1>
           <p class="vf-community-area__village-description">
             {{description}}
@@ -55,8 +58,8 @@
           {{/if}}
         </div>
       </div>
-
-      {{> community_area_edit}}
     </div>
+
+    {{> community_area_edit}}
   {{/with}}
 </template>

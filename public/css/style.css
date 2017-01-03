@@ -86,6 +86,7 @@ iframe {
 }
 .wrapper {
     position: relative;
+    overflow: hidden;
     /*
     overflow: auto
     top: 0;
