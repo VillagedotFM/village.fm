@@ -14,12 +14,14 @@
       <li class="vf-community-area__categories__dropdown">
         <button>More <i class="fa fa-angle-down" aria-hidden="true"></i></button>
         <ul>
-          <li class="vf-community-area__category">
+          <!-- <li class="vf-community-area__category active">
             Most Upvoted
-          </li>
-          <li class="vf-community-area__category">
-            New
-          </li>
+          </li> -->
+          {{#each categories}}
+            <li class="vf-community-area__category">
+              {{name}}
+            </li>
+          {{/each}}
         </ul>
       </li>
 
