@@ -10,17 +10,24 @@
 
       <!-- Your Villages -->
       <div class="vf-side-menu__villages__subheading">Your villages:</div>
-      <div class="vf-side-menu__villages__placeholder">
-        <img src="/images/img_logo_dark@3x.png" alt="Village.fm">
-        <button class="vf-side-menu__villages__start-village">+</button>
-        <p>You don’t have any joined <br>villages yet!</p>
-      </div>
+      {{#unless yourVillages}}
+        <div class="vf-side-menu__villages__placeholder">
+          <img src="/images/img_logo_dark@3x.png" alt="Village.fm">
+          <button class="vf-side-menu__villages__start-village">+</button>
+          <p>You don’t have any joined <br>villages yet!</p>
+        </div>
+      {{/unless}}
+
       <!-- List of Your Villages...just for an example it's the same as the list of other villages -->
       <ul>
-      {{#each village in villages}}
+      {{#each village in yourVillages}}
         <li class="vf-side-menu__village {{#if village.active}}active{{/if}}">
           <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
-            <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
+            {{#if village.image}}
+              <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
+            {{else}}
+              <h2>{{village.name}}</h2>
+            {{/if}}
           </a>
           {{#if village.showNotification}}
           <span class="vf-side-menu__village__new-songs">{{village.newSongs}}</span>

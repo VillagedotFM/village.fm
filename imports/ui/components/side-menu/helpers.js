@@ -64,5 +64,20 @@ Template.side_menu.helpers({
 
 
     return villages;
+  },
+  'yourVillages': () => {
+    let villages = Villages.find({ 'friendlySlugs.slug.base': { $ne: 'main' } }).fetch();
+    let yourVillages = [];
+
+    villages.forEach((village) => {
+      if (_.contains(village.users, Meteor.userId())) {
+        yourVillages.push(village);
+      } else if (_.contains(village.admins, Meteor.userId())) {
+        yourVillages.push(village);
+      }
+    });
+
+    return yourVillages;
   }
+
 })
