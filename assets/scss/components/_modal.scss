@@ -19,30 +19,30 @@
   .vf-modal__panel {
     position: relative;
     width: auto;
-    margin: 0 10px;
+    margin: 0 1rem;
     top: 50%;
     background: white;
     transform: translateY(-50%);
-    border-radius: 4px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.4rem;
+    box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     overflow: hidden;
 
     @media screen and (min-width: 560px) {
       margin: auto;
-      width: 540px;
+      width: 54rem;
     }
 
     @media screen and (max-width: 440px) {
       .vf-modal__header, .vf-modal__content, .vf-modal__footer {
-        padding: 20px 10px;
+        padding: 2rem 1rem;
       }
     }
   }
 
   .vf-modal__header {
     background: $color-primary;
-    padding: 20px;
+    padding: 2rem;
     color: white;
 
     .vf-modal__heading {
@@ -51,32 +51,32 @@
   }
 
   .vf-modal__heading {
-    font-size: 32px;
+    font-size: 3.2rem;
     margin: 0;
     text-align: center;
   }
 
   .vf-modal__subheading {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
     margin: 0;
     line-height: 1.5;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.03rem;
     text-align: center;
     text-transform: uppercase;
   }
 
   .vf-modal__content {
     position: relative;
-    padding: 20px;
-    font-size: 14px;
+    padding: 2rem;
+    font-size: 1.4rem;
     background: white;
     color: $color-black;
   }
 
   .vf-modal__footer {
     border-top: 1px solid $color-grey-light;
-    padding: 20px;
+    padding: 2rem;
   }
 
   // Modal variations
@@ -84,7 +84,7 @@
     .vf-modal__panel {
       @media screen and (min-width: 440px) {
         margin: auto;
-        width: 420px;
+        width: 42rem;
       }
     }
   }

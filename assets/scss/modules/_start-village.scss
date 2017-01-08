@@ -1,16 +1,16 @@
 .start-village__signup {
   p {
-    margin: 20px 0 40px;
+    margin: 2rem 0 4rem;
   }
 
   .vf-btn {
     color: $color-social-facebook;
-    padding-left: 7px !important;
-    padding-top: 7px !important;
-    padding-bottom: 7px !important;
+    padding-left: 0.7rem !important;
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.7rem !important;
 
     .vf-social-icon {
-      margin: 0 5px 0 0;
+      margin: 0 0.5rem 0 0;
       border-color: $color-social-facebook;
       color: $color-social-facebook !important;
     }
@@ -19,18 +19,18 @@
 
 .start-village__details {
   .start-village__details__warning {
-    padding: 4px 8px;
-    font-size: 10px;
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
     font-weight: normal;
     color: red;
     float: right;
-    border-radius: 20px;
+    border-radius: 2rem;
     background: white;
     transition: .2s ease;
     opacity: 0;
 
     i {
-      font-size: 12px;
+      font-size: 1.2rem;
       vertical-align: middle;
     }
 
@@ -42,9 +42,9 @@
   .start-village__details__group-name {
     display: block;
     width: 100%;
-    padding: 14px;
-    margin-bottom: 20px;
-    font-size: 32px;
+    padding: 1.4rem;
+    margin-bottom: 2rem;
+    font-size: 3.2rem;
     text-align: center;
     border: none;
     box-shadow: none;
@@ -62,11 +62,11 @@
   .start-village__details__group-description {
     display: block;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    font-size: 14px;
+    padding: 0.8rem;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
     border: 1px solid $color-grey-light;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     box-shadow: none;
     resize: none;
     transition: .2s ease;
@@ -76,30 +76,30 @@
 
 .start-village__finish {
   p {
-    margin: 20px 0 40px;
+    margin: 2rem 0 4rem;
   }
 
   .start-village__finish__invite {
-    margin: 20px;
+    margin: 2rem;
 
     @media screen and (max-width: 440px) {
-      margin: 20px 0;
+      margin: 2rem 0;
     }
   }
 
   .start-village__finish__invite__link {
     display: flex;
-    height: 40px;
+    height: 4rem;
     border: 1px solid $color-grey-light;
-    border-radius: 4px;
-    padding: 0 8px;
+    border-radius: 0.4rem;
+    padding: 0 0.8rem;
     overflow: hidden;
 
     input {
       flex-grow: 1;
       border: none;
       box-shadow: none;
-      padding-right: 4px;
+      padding-right: 0.8rem;
     }
 
     button {
@@ -109,16 +109,16 @@
         content: "";
         position: absolute;
         top: 0;
-        left: -40px;
+        left: -4rem;
         height: 100%;
-        width: 40px;
+        width: 4rem;
         background: linear-gradient(to right, transparent, white);
       }
     }
   }
 
   .start-village__finish__share {
-    margin-top: 40px;
+    margin-top: 4rem;
 
     label {
       display: block;

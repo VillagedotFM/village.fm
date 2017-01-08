@@ -1,14 +1,14 @@
 .vf-community-area__villagers {
   .vf-modal__content {
-    max-height: 500px;
-    padding-bottom: 30px;
+    max-height: 50rem;
+    padding-bottom: 3rem;
   }
 }
 
 .vf-community-area__villager {
   position: relative;
   display: inline-block;
-  padding: 10px;
+  padding: 1rem;
 
   &:hover {
     z-index: 2;
@@ -21,25 +21,25 @@
 }
 
 .vf-community-area__villager__image {
-  width: 100px;
-  height: 100px;
+  width: 10rem;
+  height: 10rem;
   border-radius: 100%;
 }
 
 .vf-community-area__villager__badge {
   position: absolute;;
   display: block;
-  top: 100px;
+  top: 10rem;
   left: 50%;
   transform: translate(-50%);
-  padding: 0 5px;
+  padding: 0 0.5rem;
   border: 1px solid $color-primary;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   text-align: center;
-  line-height: 15px;
+  line-height: 1.5rem;
   vertical-align: middle;
   color: $color-primary;
-  font-size: 10px;
+  font-size: 1rem;
   font-weight: 600;
   font-family: "Montserat", sans-serif;
 
@@ -56,20 +56,20 @@
 
 .vf-community-area__villager__name {
   display: block;
-  margin: 10px 0;
-  font-size: 13px;
+  margin: 1rem 0;
+  font-size: 1.3rem;
 }
 
 .vf-community-area__villager__edit {
   position: absolute;
   width: 100%;
-  padding-top: 130px;
-  padding-bottom: 10px;
+  padding-top: 13rem;
+  padding-bottom: 1rem;
   top: 0;
   left: 0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   background: white;
-  box-shadow: 0px 3px 12px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0.3rem 1.2rem 0 rgba(0, 0, 0, 0.12);
   transform: scale(0);
   opacity: 0;
   transition: .2s ease;
@@ -78,12 +78,12 @@
   backface-visibility: hidden;
 
   hr {
-    margin: 10px 0;
+    margin: 1rem 0;
   }
 }
 
 .vf-community-area__villager__make-admin {
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: normal;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.06rem;
 }

@@ -1,17 +1,17 @@
 .vf-community-area__top-villagers-header {
-  margin-top: 15px;
+  margin-top: 1.5rem;
 
   span {
     color: $color-grey-secondary;
     font-weight: 300;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.07rem;
   }
 
   button {
     float: right;
     color: $color-grey-primary;
     font-weight: 600;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.07rem;
 
     &:hover {
       color: $color-black;
@@ -20,8 +20,8 @@
 }
 
 .vf-community-area__top-villagers {
-  height: 45px;
-  margin-top: 7px;
+  height: 4.5rem;
+  margin-top: 0.7rem;
   counter-reset: villagerNumber;
 
 
@@ -35,9 +35,9 @@
 .vf-community-area__top-villager {
   position: relative;
   display: inline-block;
-  margin-right: 22px;
+  margin-right: 2.2rem;
   cursor: pointer;
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
   counter-increment: villagerNumber;
 
   &:last-of-type {
@@ -48,18 +48,18 @@
     display: block;
     content: counter(villagerNumber);
     position: absolute;
-    width: 15px;
-    height: 15px;
-    bottom: 16px;
-    right: -4px;
+    width: 1.5rem;
+    height: 1.5rem;
+    bottom: 1.6rem;
+    right: -0.4rem;
     background: $color-grey-primary;
     border: 1px solid white;
     border-radius: 100%;
     text-align: center;
-    line-height: 15px;
+    line-height: 1.5rem;
     vertical-align: middle;
     color: white;
-    font-size: 9px;
+    font-size: 0.9rem;
     font-weight: 600;
     font-family: "Montserat", sans-serif;
     transition: .2s ease;
@@ -93,8 +93,8 @@
 }
 
 .vf-community-area__top-villager__thumbnail {
-  width: 30px;
-  height: 30px;
+  width: 3rem;
+  height: 3rem;
   border-radius: 100%;
   border: 1px solid transparent;
   transition: .2s ease;
@@ -103,8 +103,8 @@
 .vf-community-area__top-villager__image {
   position: relative;
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 7rem;
+  height: 7rem;
   margin: auto;
 
   img {
@@ -116,18 +116,18 @@
   &:after {
     position: absolute;;
     display: block;
-    bottom: -6px;
+    bottom: -0.6rem;
     left: 50%;
     transform: translate(-50%);
-    padding: 0 4px;
+    padding: 0 0.4rem;
     background: white;
     border: 1px solid $color-primary;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     text-align: center;
-    line-height: 15px;
+    line-height: 1.5rem;
     vertical-align: middle;
     color: $color-primary;
-    font-size: 9px;
+    font-size: 0.9rem;
     font-weight: 600;
     font-family: "Montserat", sans-serif;
   }
@@ -136,17 +136,17 @@
 
 .vf-community-area__top-villager__name {
   display: block;
-  margin: 15px 0;
+  margin: 1.5rem 0;
   color: $color-black-strong;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 1.5rem;
   text-align: center;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.03rem;
 }
 
 .vf-community-area__top-villager__view-profile {
   display: block;
   margin: auto;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 1.2rem;
 }
