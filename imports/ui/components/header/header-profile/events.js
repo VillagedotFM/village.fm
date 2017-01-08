@@ -9,6 +9,6 @@ Template.header_profile.events({
     });
   },
   "click .vf-header__feedback-btn": function(event, template) {
-     $('.feedback__contant').slideToggle();
+     appBodyRef.showFeedbackForm.set(true);
   }
 });

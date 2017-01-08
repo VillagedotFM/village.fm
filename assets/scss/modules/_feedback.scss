@@ -1,0 +1,17 @@
+.vf-feedback {
+
+}
+
+.vf-feedback__input {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  border: 1px solid $color-grey-light;
+  border-radius: 0.4rem;
+  box-shadow: none;
+  resize: none;
+  transition: .2s ease;
+  @include placeholder-color($color-grey-primary);
+}
