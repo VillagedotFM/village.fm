@@ -1,11 +1,7 @@
 .main-navigation {
   .logo {
     img {
-      height: 3.55rem;
-
-      @media screen and (max-width: 1440px) {
-        height: 2.5rem;
-      }
+      height: 4.97rem;
 
       @media screen and (min-width: 992px) {
         transform: translateX(-50%);
@@ -15,7 +11,7 @@
 
   .enter-village {
     position: absolute;
-    right: 20px;
+    right: 2rem;
     top: 50%;
     transform: translateY(-50%);
 

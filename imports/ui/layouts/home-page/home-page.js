@@ -26,12 +26,30 @@ Template.home_page.onRendered(() => {
     ]
   });
 
+  $('.selection-carousel').each(function() {
+    $(this).slick({
+      mobileFirst: true,
+      infinite: false,
+      centerMode: true,
+      centerPadding: '1rem',
+      slidesToShow: 1,
+      dots: true,
+      arrows: false,
+      responsive: [
+        {
+            breakpoint: 767,
+            settings: 'unslick'
+        }
+      ]
+    });
+  });
+
   $(window).resize(function() {
-    $('.villages-carousel-items').slick('resize');
+    $('.villages-carousel-items, .selection-carousel').slick('resize');
   });
 
   $(window).on('orientationchange', function() {
-    $('.villages-carousel-items').slick('resize');
+    $('.villages-carousel-items, .selection-carousel').slick('resize');
   });
 });
 
@@ -40,6 +58,9 @@ Template.home_page.events({
     $('body').animate({
       scrollTop: $('.section-1').offset().top + 'px'
     }, 500);
+  },
+  'click .villages-carousel-links a': (event) => {
+    homePageRef.activeVillage.set(event.target.dataset.item);
   },
   'click .get-village-btn': (event) => {
     if (Meteor.userId()) {

@@ -3,17 +3,17 @@
   background-image: url(../../images/home-page/web_img_hero_area.png);
   background-size: cover;
   background-position: center;
-  padding: 4rem 0;
+  padding: 5.6rem 0;
 
   h1 {
     color: #fff;
-    font-size: 2.441rem;
-    margin-top: 4rem;
+    font-size: 3.4174rem;
+    margin-top: 6.4rem;
   }
 
   p {
     color: #fff;
-    font-size: 1.15rem;
+    font-size: 1.61rem;
   }
 
   .scroll-down {
@@ -23,18 +23,7 @@
     transform: translate(-50%, 50%);
   }
 
-  @media screen and (max-width: 1440px) {
-    h1 {
-      font-size: 2rem;
-      margin-top: 2rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-  }
-
   @media screen and (max-width: 600px) {
-    padding: 2rem 0;
+    padding: 2.8rem 0;
   }
 }
