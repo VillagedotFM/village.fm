@@ -1,0 +1,222 @@
+.vf-header__notifications {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 1rem;
+  margin-bottom: -1rem;
+
+  &:hover, &.active {
+    .vf-header__notifications__btn__icon {
+      &:nth-child(1) {
+        opacity: 0;
+      }
+      &:nth-child(2) {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.vf-header__notifications__btn {
+  position: relative;
+}
+
+.vf-header__notifications__btn__icon {
+  height: 2.8rem;
+  width: auto;
+  transition: .2s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  opacity: 1;
+
+  &:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.vf-header__notifications__btn__badge {
+  position: absolute;
+  top: -0.6rem;
+  left: 1.3rem;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 1.8rem;
+  padding: 0 0.2rem;
+  min-width: 1.8rem;
+  line-height: 1.6rem;
+  text-align: center;
+  background-color: $color-primary;
+  color: white;
+  border: 1px solid white;
+  border-radius: 1rem;
+}
+
+.vf-header__notifications__dropdown {
+  right: -3rem;
+  width: 31rem;
+  padding: 0;
+
+  &--scrolled {
+    .vf-header__notifications__top {
+      box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    z-index: 99999; //FIXME Z-index scale
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 6rem;
+    bottom: 0;
+    box-shadow: none;
+    border-top: 1px solid $color-grey-light;
+
+    &:before {
+      right: 1.5rem;
+    }
+  }
+}
+
+.vf-header__notifications__top {
+  padding: 1rem;
+  border-bottom: 1px solid $color-grey-light;
+  transition: .2s ease;
+
+  @media screen and (max-width: 767px) {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 1.5rem;
+    background: white;
+    z-index: 1;
+  }
+}
+
+.vf-header__notifications__top__title {
+  color: $color-black-strong;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  vertical-align: middle;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.vf-header__notifications__top__close {
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  color: $color-black-strong;
+  transition: .2s ease;
+
+  &:hover, &:active, &:focus {
+    color: $color-primary;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.vf-header__notifications__top__mark-all {
+  float: right;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  color: $color-primary;
+  vertical-align: middle;
+}
+
+.vf-header__notifications__list {
+  position: relative;
+  max-height: 40rem;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  @media screen and (max-width: 767px) {
+    padding: 4.4rem 0 6rem;
+    max-height: 100%;
+  }
+}
+
+.vf-header__notification {
+  position: relative;
+
+  > a {
+    display: block;
+    padding: 1rem;
+
+    @media screen and (max-width: 767px) {
+      padding: 1.5rem;
+    }
+  }
+
+  &--unread {
+    background: lighten($color-primary, 28%);
+  }
+}
+
+.vf-header__notification__user {
+  position: absolute;
+  display: inline-block;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+  }
+}
+
+.vf-header__notification__content {
+  display: inline-block;
+  padding-left: 5rem;
+}
+
+.vf-header__notification__text {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: $color-black-strong;
+}
+
+.vf-header__notification__icon {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.2rem;
+
+  &--upvote {
+      width: 0.9rem;
+      height: 1.2rem;
+      background: url(../images/upvote-icon-xs.svg) 0 0 no-repeat;
+  }
+
+  &--comment {
+      width: 1,2rem;
+      height: 1.2rem;
+      background: url(../images/comment-icon-xs.svg) 0 0 no-repeat;
+  }
+
+  &--reply {
+      width: 1.2rem;
+      height: 1rem;
+      background: url(../images/reply-icon-xs.svg) 0 0 no-repeat;
+  }
+
+  &--friend {
+      width: 1.2rem;
+      height: 1.3rem;
+      background: url(../images/friend-icon-xs.svg) 0 0 no-repeat;
+  }
+}
+
+.vf-header__notification__time {
+  font-size: 1rem;
+  color: $color-grey-primary;
+}

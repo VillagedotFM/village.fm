@@ -1,7 +1,7 @@
-@import "_community-area-top-villagers";
-@import "_community-area-villagers";
-@import "_community-area-edit-village";
-@import "_community-area-categories";
+@import "{}/assets/scss/modules/community-area/_community-area-top-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-edit-village";
+@import "{}/assets/scss/modules/community-area/_community-area-categories";
 
 .vf-community-area {
   position: relative;

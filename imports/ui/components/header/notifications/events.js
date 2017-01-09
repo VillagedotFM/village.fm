@@ -1,24 +1,17 @@
 Template.notifications.events({
-  'click .header__notifications': function(event){
-    event.stopPropagation();
-    if ($('.ntf-dropdown').css('display') === 'none') {
-      $('.ntf-dropdown').show();
-      $('html, body').addClass('overflow-hidden');
-      Meteor.call('allSeen');
-      mixpanel.track('Viewed Notifications');
-    } else {
-      $('.ntf-dropdown').hide();
-    }
+  'click .vf-header__notifications__btn': function(event){
+    notificationsRef.showBadge.set(false);
+    notificationsRef.showDropdown.set(!notificationsRef.showDropdown.get());
+    Meteor.call('allSeen');
+    mixpanel.track('Viewed Notifications');
   },
-  'click .ntf-dropdown__back': function(event, template){
-    event.stopPropagation();
-    $('.ntf-dropdown').hide();
-    $('html, body').removeClass('overflow-hidden');
+  'click .vf-header__notifications__top__close': function(event, template){
+    notificationsRef.showDropdown.set(false);
   },
-  'click .ntf-dropdown__mark-all': function(event, template){
+  'click .vf-header__notifications__top__mark-all': function(event, template){
     Meteor.call('allRead');
   },
-  'click .ntf-dropdown__item': function(event, template){
+  'click .vf-header__notification': function(event, template){
     Meteor.call('readNotification', this._id);
   }
 });

@@ -20,68 +20,30 @@
 
     <div class="vf-header__nav" role="navigation">
       {{#if currentUser}}
-        {{#if showNotificationBadge}}
-          {{> notificationBadge count=notificationCount}}
-        {{/if}}
         {{> notifications}}
         {{> header_profile}}
       {{else}}
-        <button class="vf-header__log-in">
-          <img src="/images/popup/unloged-icon.png" alt="">
-          Login / Sign Up
-        </button>
+      <button class="vf-header__log-in">
+        <img src="/images/popup/unloged-icon.png" alt="">
+        Login / Sign Up
+      </button>
       {{/if}}
     </div>
-  </header>
-
-    <!---
-    <header class="header">
-      <div class="feedback__wrapper">
-          <div class="feedback__contant">
-              <form action="">
-                  <textarea id="feedback-text" name="" placeholder="Tell us what you think about Village.fm" rows="5"></textarea>
-                  <button type="submit" class="btn">Submit Feedback</button>
-              </form>
-          </div>
-        </div>
-        <div class="header__inner">
-            <button class="header__logo {{#if showSideMenu}}active{{/if}}">
-              <img src="/images/img_menu_logo_normal@3x.png" alt="">
-              <img src="/images/img_menu_logo_pressed@3x.png" alt="">
-            </button>
-            <div class="header__center-block">
-              {{#if noImage}}
-          			<h1>{{noImage}}</h1>
-          		{{else}}
-                {{> header_village}}
-          		{{/if}}
-            </div>
-            <div class="header__right-block">
-                {{#if currentUser}}
-                    {{#if showNotificationBadge}}
-                      {{> notificationBadge count=notificationCount}}
-                    {{/if}}
-                    {{> notifications}}
-                    {{> header_profile}}
-                {{else}}
-                  <div class="header__unloged active">
-                    <img src="/images/popup/unloged-icon.png" alt="">
-                    <a>Login</a> <span>/</span> <a>Sign Up</a>
-                  </div>
-                {{/if}}
-            </div>
-        </div>
-        {{#if isMobile}}
-          {{> Template.dynamic template=tabs}}
-        {{/if}}
-    </header>
-    {{#if isTuneIn}}
-      <div class="tune-in-banner">
-        <p class="tune-in-text">
-          Vote for your favorite artists performing at Tune In, November 9th-12th. <a href="http://www.tuneintlv.com/tickets" target="_blank" class="tune-in-link">Click Here to Buy Tickets.</a>
-        </p>
-        <img src="/images/ic_close_banner@3x.png" alt="" class="tune-in-close">
-      </div>
+    <!--
+    {{#if isMobile}}
+      {{> Template.dynamic template=tabs}}
     {{/if}}
     -->
+  </header>
+
+  <!--
+  {{#if isTuneIn}}
+    <div class="tune-in-banner">
+      <p class="tune-in-text">
+        Vote for your favorite artists performing at Tune In, November 9th-12th. <a href="http://www.tuneintlv.com/tickets" target="_blank" class="tune-in-link">Click Here to Buy Tickets.</a>
+      </p>
+      <img src="/images/ic_close_banner@3x.png" alt="" class="tune-in-close">
+    </div>
+  {{/if}}
+  -->
 </template>

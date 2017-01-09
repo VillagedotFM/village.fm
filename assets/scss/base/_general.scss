@@ -24,6 +24,8 @@ body {
 
 a {
   color: $color-primary;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 
   &:visited {
     color: $color-primary;
