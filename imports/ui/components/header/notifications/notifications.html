@@ -15,9 +15,13 @@
       <div class="vf-header__notifications__top">
         <span class="vf-header__notifications__top__title">Notifications</span>
         <button class="vf-header__notifications__top__close"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+
+        {{#if notificationCount}}
         <button class="vf-header__notifications__top__mark-all">Mark All as Read</button>
+        {{/if}}
       </div>
 
+      {{#if notifications}}
       <ul class="vf-header__notifications__list">
         {{#each notifications}}
         <li class="vf-header__notification {{#unless isRead}}vf-header__notification--unread{{/unless}}">
@@ -40,6 +44,12 @@
         </li>
         {{/each}}
       </ul>
+      {{else}}
+      <div class="vf-header__no-notifications">
+        <img src="/images/img_logo_dark@3x.png" alt="Village.fm">
+        <p>You don’t have any notifications!</p>
+      </div>
+      {{/if}}
 
     </div>
   </div>

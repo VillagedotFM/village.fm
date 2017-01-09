@@ -220,3 +220,22 @@
   font-size: 1rem;
   color: $color-grey-primary;
 }
+
+.vf-header__no-notifications {
+  padding: 1rem;
+  text-align: center;
+
+  img {
+    opacity: .1;
+  }
+
+  p {
+    margin: 1rem 0 0;
+    font-size: 1.2rem;
+    color: $color-grey-primary;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 1.5rem;
+  }
+}
