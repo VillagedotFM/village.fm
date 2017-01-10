@@ -33,5 +33,27 @@ Template.header.helpers({
         return village.name;
       }
     }
+	},
+  'currentVillage': () => {
+    const villageSlug = FlowRouter.getParam('villageSlug');
+    let village;
+
+    if (villageSlug) {    //Handle main village (no slug)
+      village = Villages.findOne({'friendlySlugs.slug.base': villageSlug});
+    } else {
+      village = Villages.findOne({'friendlySlugs.slug.base': "main"});
+    }
+
+    if (village) {
+      return village;
+    }
+  },
+  villageTopBar: function() {
+		const villageSlug = FlowRouter.getParam('villageSlug');
+		if (villageSlug) {
+			return villageSlug;
+		} else {
+			return "main";
+		}
 	}
 });

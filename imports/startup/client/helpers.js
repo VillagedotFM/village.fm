@@ -83,6 +83,11 @@ UI.registerHelper("getUpvotesNum", function (userId) {
     return upvotesCollected;
 });
 
+UI.registerHelper("getVillageNum", function (userId) {
+    let villages = Villages.find({"users": userId});
+    return villages.count();
+});
+
 
 UI.registerHelper("getUserUpvoteRank", function (userId) {
     let user = Meteor.users.findOne({_id: userId});

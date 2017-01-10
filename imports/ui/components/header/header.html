@@ -12,8 +12,13 @@
       <img src="/images/img_header_villagefm@3x.png" class="vf-header__villagefm__text-logo" alt="Village.fm">
 
       <!-- Village logo or village name -->
-      <!--<img src="/images/img-mobile-topbar-psytrance@3x.png" class="vf-header__village__logo" alt="Village Name">-->
-      <h2 class="vf-header__village__name">Village Name</h2>
+      {{#with currentVillage}}
+        {{#if this.image}}
+          <img src="/images/img-mobile-topbar-{{villageTopBar}}@3x.png" class="vf-header__village__logo" alt="{{this.name}}">
+        {{else}}
+          <h2 class="vf-header__village__name">{{this.name}}</h2>
+        {{/if}}
+      {{/with}}
     </div>
 
     {{> community_area_categories}}
