@@ -1,13 +1,13 @@
 .villages-carousel {
-  margin: 5rem auto 0;
+  margin: 7rem auto 0;
   text-align: center;
 
-  @media screen and (max-width: 1400px) {
-    margin: 4.5rem auto 0;
+  .slick-dots {
+    bottom: -1.5rem;
   }
 
   @media screen and (max-width: 991px) {
-    margin: 2rem auto 0;
+    margin: 2.8rem auto 0;
   }
 
   @media screen and (min-width: 992px) {
@@ -37,12 +37,12 @@
         }
 
         .villages-carousel-item:nth-child(#{$i}) {
-          transform: scale(1.1) translateY(2.5rem);
+          transform: scale(1.1) translateY(3.5rem);
           opacity: 0;
         }
 
         .villages-carousel-item:nth-child(#{$i + 2})) {
-          transform: scale(.9) translateY(-2.5rem);
+          transform: scale(.9) translateY(-3.5rem);
           opacity: .6;
           z-index: 2;
           pointer-events: none;
@@ -53,7 +53,7 @@
         }
 
         .villages-carousel-item:nth-child(#{$i + 3}) {
-          transform: scale(.8) translateY(-5.2rem);
+          transform: scale(.8) translateY(-7.2rem);
           opacity: .4;
           z-index: 1;
           pointer-events: none;
@@ -64,10 +64,16 @@
         }
 
         .villages-carousel-item:nth-child(n+#{$i + 4}) {
-          transform: scale(.7) translateY(-7rem);
+          transform: scale(.7) translateY(-9.8rem);
           opacity: 0;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .slick-dots {
+      bottom: 0;
     }
   }
 }
@@ -81,7 +87,7 @@
     display: inline-block;
     padding: .7vw .9vw;
     font-size: .8vw;
-    letter-spacing: .1rem;
+    letter-spacing: .14em;
     background-color: #0e1011;
     opacity: .2;
     color: #fff;
@@ -111,28 +117,28 @@
 
   &.left {
     a {
-      border-radius: 25px 0 0 25px;
+      border-radius: 2.5rem 0 0 2.5rem;
       padding-right: 0;
       margin: .5vw 2vw .5vw .5vw;
       float: right;
 
       &:after {
-        right: -1.5rem;
-        border-left: 1.5rem solid #0e1011;
+        right: -2.1rem;
+        border-left: 2.1rem solid #0e1011;
       }
     }
   }
 
   &.right {
     a {
-      border-radius: 0 25px 25px 0;
+      border-radius: 0 2.5rem 2.5rem 0;
       padding-left: 0;
       margin: .5vw .5vw .5vw 2vw;
       float: left;
 
       &:after {
-        left: -1.5rem;
-        border-right: 1.5rem solid #0e1011;
+        left: -2.1rem;
+        border-right: 2.1rem solid #0e1011;
       }
     }
   }
@@ -167,7 +173,7 @@
 }
 
 .villages-carousel-item {
-  border-radius: 6px;
+  border-radius: 0.6rem;
   width: 100%;
   outline: none !important;
 
@@ -176,13 +182,13 @@
     top: 0;
     overflow: hidden;
     transition: .2s ease;
-    box-shadow: 0px 3px 12px 0 rgba(40, 50, 54, 0.12);
+    box-shadow: 0px 0.3rem 1.2rem 0 rgba(40, 50, 54, 0.12);
   }
 
   img {
     max-width: 100%;
     margin: auto;
-    border-radius: 6px;
+    border-radius: 0.6rem;
   }
 
   &:first-child {
@@ -196,7 +202,7 @@
   }
 
   @media screen and (max-width: 991px) {
-    padding: 1rem;
+    padding: 1.4rem;
 
 
     .villages-carousel-item-overlay {
@@ -212,7 +218,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     transition: .2s ease;
   }
 
@@ -225,13 +231,13 @@
 
   .villages-carousel-item-info {
     p {
-      font-size: 1.4rem;
+      font-size: 1.96rem;
       text-align: center;
-      margin: 1rem 0 0;
+      margin: 1.4rem 0 0;
     }
 
     a {
-      font-size: 1.1rem;
+      font-size: 1.54rem;
       display: block;
       color: $color-primary;
       text-align: center;

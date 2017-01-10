@@ -21,7 +21,7 @@ Template.header.onRendered(function() {
     }
 
     // Show / hide village logo in header
-    if(windowScrollPosition > $('.vf-community-area__details').offset().top) {
+    if(typeof $('.vf-community-area__details').offset() !== 'undefined' && windowScrollPosition > $('.vf-community-area__details').offset().top) {
       $('.vf-header__village').addClass('vf-header__village--show-village-logo');
     } else {
       $('.vf-header__village').removeClass('vf-header__village--show-village-logo');

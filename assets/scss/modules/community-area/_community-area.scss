@@ -1,13 +1,13 @@
-@import "_community-area-top-villagers";
-@import "_community-area-villagers";
-@import "_community-area-edit-village";
-@import "_community-area-categories";
+@import "{}/assets/scss/modules/community-area/_community-area-top-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-edit-village";
+@import "{}/assets/scss/modules/community-area/_community-area-categories";
 
 .vf-community-area {
   position: relative;
   background: white;
-  padding: ($header-height + 20px) 30px 10px;
-  box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.12);
+  padding: ($header-height + 2rem) 3rem 1rem;
+  box-shadow: 0px 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.12);
   z-index: 1;
 
   // Side menu tranistion
@@ -19,6 +19,10 @@
     display: block;
     content: "";
     clear: both;
+  }
+
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 }
 
@@ -40,20 +44,20 @@
 }
 
 .vf-community-area__village-name {
-  font-size: 43px;
+  font-size: 4.3rem;
   color: $color-black-strong;
   margin-top: 0;
 }
 
 .vf-community-area__village-logo {
-  height: 60px;
+  height: 6rem;
   width: auto;
 }
 
 .vf-community-area__village-description {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 300;
-  min-height: 40px;
+  min-height: 4rem;
 }
 
 .vf-community-area__actions  {
@@ -65,12 +69,12 @@
   p {
     text-transform: uppercase;
     color: $color-grey-secondary;
-    margin: 8px 0 15px;
+    margin: 0.8rem 0 1.5rem;
   }
 }
 
 .vf-community-area__number-of-villagers {
-  font-size: 120px;
+  font-size: 12rem;
   font-weight: 600;
   font-family: "Montserat", sans-serif;
   color: $color-grey-light;
@@ -82,7 +86,7 @@
   display: inline-block;
 
   button {
-    min-width: 80px;
+    min-width: 8rem;
   }
 }
 
@@ -127,9 +131,9 @@
 }
 
 .vf-community-area__join {
-  min-width: 80px;
+  min-width: 8rem;
   text-transform: none;
-  margin-left: 6px;
+  margin-left: 0.6rem;
 
   span {
     display: none;
@@ -143,18 +147,18 @@
 }
 
 .vf-community-area__edit {
-  min-width: 80px;
+  min-width: 8rem;
   text-transform: none;
-  margin-left: 6px;
+  margin-left: 0.6rem;
 }
 
 .vf-community-area__social-links {
   display: inline-block;
-  margin-top: -5px;
+  margin-top: -0.5rem;
   float: right;
 }
 
 .vf-community-area__add-new-social-link {
-  line-height: 28px;
-  margin: 5px 0;
+  line-height: 2.8rem;
+  margin: 0.5rem 0;
 }

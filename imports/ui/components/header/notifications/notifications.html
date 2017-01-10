@@ -1,51 +1,56 @@
 <template name='notifications'>
-  <div class="header__notifications">
-      <div class="ntf-dropdown">
-          <div class="ntf-dropdown__top">
-              <div class="ntf-dropdown__back visible-mobile arrow-back"></div>
-              <span class="ntf-dropdown__title hidden-mobile">Notifications</span>
-              <span class="ntf-dropdown__mark-all color-main">Mark All as Read</span>
-          </div>
-          <div class="ntf-dropdown__list-wrapper">
-              <ul class="ntf-dropdown__list">
+  <div class="vf-header__notifications {{#if showDropdown}}active{{/if}}">
+    <button class="vf-header__notifications__btn">
+      <img src="/images/icon-notifications@3x.png" class="vf-header__notifications__btn__icon" alt="">
+      <img src="/images/icon-notifications-hover@3x.png" class="vf-header__notifications__btn__icon" alt="">
 
-                {{#each notifications}}
-                  <a href="{{villageSlug}}/post/{{postId}}">
-                    <li class="ntf-dropdown__item ntf-dropdown__item{{isRead}}">
-                        <div class="ntf-dropdown__item-inner">
-                            <div class="ntf-dropdown__img-wrap">
-                                <a href='/{{userId}}' ><img src="{{getUserImage userId}}" alt=""></a>
-                            </div>
-                            <div class="ntf-dropdown__caption">
-                                <p class="ntf-dropdown__text">
-                                    {{message}}
-                                </p>
-                                <span class="ntf-dropdown__date color-secondary-text">
-                                    <i class="ntf-dropdown__icon {{type}}-xs"></i>
-                                    <span class="ntf-dropdown__hours-ago">{{howLong}}</span>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                  </a>
-                {{/each}}
-                  <!-- <li class="ntf-dropdown__item ntf-dropdown__item((DASH DASH))place">
-                      <div class="ntf-dropdown__item-inner">
-                          <div class="ntf-dropdown__img-wrap">
-                              <div class="ntf-dropdown__place-icon">
-                                  <div class="ntf-dropdown__place-icon__inner"></div>
-                              </div>
-                          </div>
-                          <div class="ntf-dropdown__caption">
-                              <p class="ntf-dropdown__text">
-                                  Your song <a href="#" class="color-main">“Tame Impala - Cause I’m a Man” </a>
-                                  was the most upvoted song of the week
-                              </p>
-                          </div>
-                      </div>
-                  </li> -->
-              </ul>
-          </div>
+      {{#if showBadge}}
+        {{#if notificationsCount}}
+        <span class="vf-header__notifications__btn__badge">{{notificationsCount}}</span>
+        {{/if}}
+      {{/if}}
+    </button>
+
+    <div class="vf-header__notifications__dropdown vf-dropdown vf-dropdown--right vf-dropdown--trigger-on-active">
+      <div class="vf-header__notifications__top">
+        <span class="vf-header__notifications__top__title">Notifications</span>
+        <button class="vf-header__notifications__top__close"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+
+        {{#if notificationCount}}
+        <button class="vf-header__notifications__top__mark-all">Mark All as Read</button>
+        {{/if}}
       </div>
+
+      {{#if notifications}}
+      <ul class="vf-header__notifications__list">
+        {{#each notifications}}
+        <li class="vf-header__notification {{#unless isRead}}vf-header__notification--unread{{/unless}}">
+          <a href="{{villageSlug}}/post/{{postId}}">
+
+            <a href='/{{userId}}' class="vf-header__notification__user">
+              <img src="{{getUserImage userId}}" alt="{{getUserName userId}}">
+            </a>
+
+            <div class="vf-header__notification__content">
+              <p class="vf-header__notification__text">
+                {{message}}
+              </p>
+              <span class="vf-header__notification__details">
+                <i class="vf-header__notification__icon vf-header__notification__icon--{{type}}"></i>
+                <time datetime={{createdAt}} class="vf-header__notification__time">{{howLong}}</time>
+              </span>
+            </div>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <div class="vf-header__no-notifications">
+        <img src="/images/img_logo_dark@3x.png" alt="Village.fm">
+        <p>You don’t have any notifications!</p>
+      </div>
+      {{/if}}
+
+    </div>
   </div>
 </template>

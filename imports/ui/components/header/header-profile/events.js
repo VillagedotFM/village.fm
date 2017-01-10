@@ -1,9 +1,5 @@
 Template.header_profile.events({
-  // "click .header-profile__thumb": function(event, template){
-  //   event.stopPropagation();
-  //   $('.sign-up').show();
-  // },
-  "click .logOutBtn": function(event, template){
+  "click .vf-header__log-out": function(event, template){
     Meteor.logout(function(err){
       if (err) {
           throw new Meteor.Error("Logout failed");
@@ -12,7 +8,7 @@ Template.header_profile.events({
       }
     });
   },
-  "click .feedbackBtn": function(event, template) {
-     $('.feedback__contant').slideToggle();
+  "click .vf-header__feedback-btn": function(event, template) {
+     appBodyRef.showFeedbackForm.set(true);
   }
 });

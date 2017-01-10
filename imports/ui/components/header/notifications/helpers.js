@@ -1,18 +1,16 @@
 Template.notifications.helpers({
-  newNotifications: function(){
+  showBadge: function() {
+    return notificationsRef.showBadge.get();
+  },
+  notificationsCount: function(){
     if(Notifications.find({'isRead': false, 'intendedFor': Meteor.userId()}).count() > 0)
-      return 'active'
-    return '';
+      return Notifications.find({'isRead': false, 'intendedFor': Meteor.userId()}).count();
+    return false;
   },
   notifications: function(){
     if(Notifications.find({'intendedFor': Meteor.userId()}).count() > 0)
       return Notifications.find({'intendedFor': Meteor.userId()}, { sort: { createdAt: -1 } });
     return false;
-  },
-  isRead: function() {
-    if (this.isRead)
-      return '';
-    return '--unread';
   },
   howLong: function() {
     var weekday = new Array(7);
@@ -45,5 +43,8 @@ Template.notifications.helpers({
     }else if (what === 'month' || what === 'months' || what === 'days') {
       return (moment.utc(this.createdAt).calendar());
     }
+  },
+  showDropdown: function() {
+    return notificationsRef.showDropdown.get();
   }
 });

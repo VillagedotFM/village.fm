@@ -18,15 +18,14 @@
         </div>
       {{/unless}}
 
-      <!-- List of Your Villages...just for an example it's the same as the list of other villages -->
       <ul>
       {{#each village in yourVillages}}
-        <li class="vf-side-menu__village {{#if village.active}}active{{/if}}">
+        <li class="vf-side-menu__village {{#unless village.image}}vf-side-menu__village--no-logo{{/unless}} {{#if village.active}}active{{/if}}">
           <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
             {{#if village.image}}
               <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
             {{else}}
-              <h2>{{village.name}}</h2>
+              {{village.name}}
             {{/if}}
           </a>
           {{#if village.showNotification}}

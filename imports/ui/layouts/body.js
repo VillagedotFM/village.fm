@@ -20,6 +20,7 @@ import './helpers.js';
 import './events.js';
 import '../components/onboarding-popup/onboarding-popup.js';
 import '../components/header/header.js';
+import '../components/feedback/feedback.js';
 import '../components/community-area/community-area.js';
 import '../components/start-village/start-village.js';
 import '../components/side-menu/side-menu.js';
@@ -127,6 +128,7 @@ Template.app_body.onCreated(function appBodyOnCreated() {
   appBodyRef.signUp = new ReactiveVar(null);
   appBodyRef.guestAction = new ReactiveVar(null);
   appBodyRef.showSideMenu = new ReactiveVar(false);
+  appBodyRef.showFeedbackForm = new ReactiveVar(false);
 
   appBodyRef.activeVillage = new ReactiveVar(null);
 
