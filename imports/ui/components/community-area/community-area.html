@@ -3,10 +3,13 @@
     <div class="vf-community-area">
       <div class="vf-community-area__inner">
         <div class="vf-community-area__details">
-          <!-- If village needs to display logo in community area
-          <img src="/images/img-mobile-topbar-psytrance@3x.png" class="vf-community-area__village-logo" alt="{{name}}">
-          -->
-          <h1 class="vf-community-area__village-name">{{name}}</h1>
+          <!-- If village needs to display logo in community area -->
+          {{#if image}}
+            <img src="/images/img-topbar-{{friendlySlugs.slug.base}}@3x.png" class="vf-community-area__village-logo" alt="{{name}}">
+          {{else}}
+            <h1 class="vf-community-area__village-name">{{name}}</h1>
+          {{/if}}
+
           <p class="vf-community-area__village-description">
             {{description}}
           </p>
