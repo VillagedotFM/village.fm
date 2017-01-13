@@ -33,5 +33,9 @@ Template.community_area.helpers({
   isMember: function() {
     const allUsers = this.admins.concat(this.users);
     return _.contains(allUsers, Meteor.userId());
-  }
+  },
+  onlyOneUser: function() {
+    let users = this.users.length + this.admins.length;
+    return users === 1;
+  },
 })

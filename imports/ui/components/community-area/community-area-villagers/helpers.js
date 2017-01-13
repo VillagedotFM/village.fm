@@ -35,6 +35,10 @@ Template.community_area_villagers.helpers({
   totalUsers: function() {
     return this.users.length + this.admins.length;
   },
+  onlyOneUser: function() {
+    let users = this.users.length + this.admins.length;
+    return users === 1;
+  },
   allUsers: function() {
     const allUsers = this.admins.concat(this.users);
     let leaderboard = [];

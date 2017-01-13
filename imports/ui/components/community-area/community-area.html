@@ -17,7 +17,7 @@
         </div>
         <div class="vf-community-area__actions">
           <span class="vf-community-area__number-of-villagers">{{totalUsers}}</span>
-          <p>Villagers in Group</p>
+          <p>{{#if onlyOneUser}}Villager{{else}}Villagers{{/if}} in Group</p>
           <div class="vf-community-area__invite {{#if inviteButtonActive}}active{{/if}}">
             <button class="vf-btn vf-btn--sm vf-btn--secondary">+ Invite</button>
             <span class="vf-popover vf-popover--left vf-popover--trigger-on-active">
