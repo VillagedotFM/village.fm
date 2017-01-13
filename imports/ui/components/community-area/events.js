@@ -12,6 +12,10 @@ Template.community_area.events({
     $temp.remove();
 
     communityAreaRef.villageLinkCopied.set(true);
+
+    setTimeout(function () {
+      communityAreaRef.inviteButtonActive.set(false);
+    }, 1000);
   },
   'click .vf-community-area__join': function(event) {
     Meteor.call('joinVillage', this._id, function(err, data) {
