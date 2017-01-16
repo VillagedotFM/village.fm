@@ -9,7 +9,7 @@
   width: 100%;
   padding: 1.5rem;
   background-color: white;
-  z-index: 9999; //FIXME z-index scale
+  z-index: 6; //FIXME z-index scale
   transition: .3s ease;
 
   button {
@@ -60,6 +60,16 @@
         opacity: 1;
       }
     }
+
+    & ~ .vf-header__village > .vf-header__villagefm__text-logo {
+      &:nth-child(1) {
+        opacity: 0;
+      }
+
+      &:nth-child(2) {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -73,7 +83,7 @@
 
   &--show-village-logo {
     .vf-header__villagefm__text-logo {
-      opacity: 0;
+      opacity: 0 !important;
     }
 
     .vf-header__village__logo,
@@ -84,12 +94,21 @@
 }
 
 .vf-header__villagefm__text-logo {
+  position: relative;
   height: 3.5rem;
   width: auto;
   transition: .2s ease;
   opacity: 1;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  cursor: default;
+
+  &:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
 }
 
 .vf-header__village__logo {

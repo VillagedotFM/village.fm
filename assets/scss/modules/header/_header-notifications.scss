@@ -22,12 +22,13 @@
 }
 
 .vf-header__notifications__btn__icon {
-  height: 2.8rem;
+  height: 2.5rem;
   width: auto;
   transition: .2s ease;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   opacity: 1;
+  outline: 1px solid transparent;
 
   &:nth-child(2) {
     position: absolute;
