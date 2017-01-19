@@ -12,4 +12,14 @@ Template.community_area.onCreated(function() {
   communityAreaRef.inviteButtonActive = new ReactiveVar(false);
   communityAreaRef.villageLinkCopied = new ReactiveVar(false);
   communityAreaRef.joined = new ReactiveVar(false);
+  communityAreaRef.category = new ReactiveVar('Most Upvoted');
+});
+
+
+Template.community_area.onRendered(function communityAreaOnRendered() {
+  Tracker.autorun(function(){
+    let category = communityAreaRef.category.get();
+
+    console.log(category);
+  });
 });
