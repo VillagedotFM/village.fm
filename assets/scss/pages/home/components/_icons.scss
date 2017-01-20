@@ -3,6 +3,41 @@
 }
 
 .group-icon {
-  width: 80px;
+  height: 100px;
   padding-top: 25px;
+}
+
+.icon-container {
+  width: 100%;
+  text-align: center;
+  padding-left: 0;
+  padding-top: 0;
+  color: $color-primary;
+}
+
+.friends-icon-container {
+  margin-top: 25px;
+  box-shadow: 1px 1px 10px 1px #CCC;
+  width: 60%;
+  float: right;
+  height: 170px;
+}
+.frats-icon-container {
+  margin-top: 25px;
+  box-shadow: 1px 1px 10px 1px #CCC;
+  width: 60%;
+  height: 170px;
+}
+.workplace-icon-container {
+  margin-top: 25px;
+  box-shadow: 1px 1px 10px 1px #CCC;
+  width: 60%;
+  float: right;
+  height: 170px;
+}
+.radio-icon-container {
+  margin-top: 25px;
+  box-shadow: 1px 1px 10px 1px #CCC;
+  width: 60%;
+  height: 170px;
 }
