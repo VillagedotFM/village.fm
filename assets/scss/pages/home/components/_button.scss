@@ -95,3 +95,9 @@
     padding: 1rem !important;
   }
 }
+@media screen and (max-width: 768px) {
+  .vf-btn {
+    font-size: .65rem;
+    padding: .7rem 1.25rem;
+  }
+}
