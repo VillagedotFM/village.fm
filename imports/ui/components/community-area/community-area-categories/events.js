@@ -3,6 +3,7 @@ Template.community_area_categories.events({
     communityAreaEditRef.tab.set('categories');
   },
   'click .vf-community-area__category': (event) => {
-    communityAreaRef.category.set(event.currentTarget.id);
+    let villageSlug = FlowRouter.getParam('villageSlug') || "all";
+    FlowRouter.go('/'+villageSlug+'/'+event.currentTarget.id);
   }
 })

@@ -139,7 +139,7 @@ createYTPlayer = function(p) {     //Initialize the yt player
         let mobileTopy = cumulativeOffset(postElem).top;
 
         mobileTopy = (mobileTopy - 60) + 'px';
-        
+
         $('#ytplayer').css({top: mobileTopy});
       } else {
         $('#ytplayer').css({top: topy});
@@ -256,6 +256,8 @@ Template.feed.onCreated(function feedOnCreated() {
 
   //initialize youtube iframe when first play button is clicked on youtube post
   feedRef.autorun(function(comp){
+    const categorySlug = FlowRouter.getParam('categorySlug');
+    console.log(categorySlug);
     let nowPlaying = appBodyRef.nowPlaying.get();
     let mobile = appBodyRef.mobile.get();
 

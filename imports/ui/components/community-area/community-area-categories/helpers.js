@@ -18,7 +18,7 @@ Template.community_area_categories.helpers({
   'isAdmin': function() {
     return _.contains(this.admins, Meteor.userId());
   },
-  'activeCategory': (name) => {
-    return communityAreaRef.category.get() === name;
+  'activeCategory': (slug) => {
+    return communityAreaRef.category.get() === slug;
   }
 })
