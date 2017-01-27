@@ -43,11 +43,12 @@ Template.playlist.helpers({
                 time_filter.setDate(date.getDate() - 365);
 
             const villageSlug = FlowRouter.getParam('villageSlug');
+            const categorySlug = FlowRouter.getParam('categorySlug');
             const village = Villages.findOne({slug: villageSlug});
             if(village){
-              selector = {"villages":  {$in: [village._id]}, "createdAt": {$gte: time_filter}};
+              selector = {"villages":  {$in: [village._id]}, "categories":  {$in: [categorySlug]}, "createdAt": {$gte: time_filter}};
             } else {
-              selector = {"createdAt": {$gte: time_filter}};
+              selector = {"categories":  {$in: [categorySlug]}, "createdAt": {$gte: time_filter}};
             }
 
         }

@@ -45,7 +45,8 @@ Posts.publicFields = {
   'listenedBy': 1,
   'createdAt': 1,
   'createdBy': 1,
-  'profile': 1
+  'profile': 1,
+  'categories': 1
 }
 
 Posts.schema = new SimpleSchema({
