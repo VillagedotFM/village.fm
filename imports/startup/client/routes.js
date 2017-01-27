@@ -46,7 +46,7 @@ FlowRouter.route('/', {
     }
 });
 
-FlowRouter.route('/all', {
+FlowRouter.route('/all/:categorySlug', {
     name: 'All',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});
@@ -80,7 +80,7 @@ FlowRouter.route('/all', {
     }
 });
 
-FlowRouter.route('/:villageSlug', {
+FlowRouter.route('/:villageSlug/:categorySlug', {
     name: 'Village',
     action(params, queryParams) {
         BlazeLayout.render('app_body', {tabs: 'tabs', upload: 'upload', invite: 'invite'});

@@ -174,8 +174,8 @@ Villages.schema = new SimpleSchema({
     autoValue: function () {
       if (this.isInsert) {
         return [
-          {name: "Most Upvoted", posts: []},
-          {name: "New", posts: []}
+          {name: "Most Upvoted", slug: "most-upvoted", posts: []},
+          {name: "New", slug: "new", posts: []}
         ];
       }
     }
@@ -186,6 +186,11 @@ Villages.schema = new SimpleSchema({
     label: "Name",
     min: 1,
     max: 1000
+  },
+  "categories.$.slug": {
+    type: String,
+    label: "Slug",
+    max: 200
   },
   "categories.$.posts": {
     type: [Object],

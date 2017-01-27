@@ -19,7 +19,5 @@ Template.community_area.onCreated(function() {
 Template.community_area.onRendered(function communityAreaOnRendered() {
   Tracker.autorun(function(){
     let category = communityAreaRef.category.get();
-
-    console.log(category);
   });
 });

@@ -15,34 +15,18 @@ Template.community_area_edit.events({
       communityAreaEditRef.validName.set(true);
     }
   },
-  'submit .vf-community-area__edit-village__form': () => {
+  'submit .vf-community-area__edit-village__form': (e) => {
+    e.preventDefault();
     let villageName = $('.vf-community-area__edit-village__group-name').val().trim();
     let changes = {};
     let cats = [];
 
-    if ($("input[name=category-1]").val() !== '') {
-      cats.push({name: $("input[name=category-1]").val(), posts: []});
-    }
-    if ($("input[name=category-2]").val() !== '') {
-      cats.push({name: $("input[name=category-2]").val(), posts: []});
-    }
-    if ($("input[name=category-3]").val() !== '') {
-      cats.push({name: $("input[name=category-3]").val(), posts: []});
-    }
-    if ($("input[name=category-4]").val() !== '') {
-      cats.push({name: $("input[name=category-4]").val(), posts: []});
-    }
-    if ($("input[name=category-5]").val() !== '') {
-      cats.push({name: $("input[name=category-5]").val(), posts: []});
-    }
-    if ($("input[name=category-6]").val() !== '') {
-      cats.push({name: $("input[name=category-6]").val(), posts: []});
-    }
-    if ($("input[name=category-7]").val() !== '') {
-      cats.push({name: $("input[name=category-7]").val(), posts: []});
-    }
-    if ($("input[name=category-8]").val() !== '') {
-      cats.push({name: $("input[name=category-8]").val(), posts: []});
+    for (var i = 1; i < 9; i++) {
+      if ($("input[name=category-"+i+"]").val() !== '') {
+        let name = $("input[name=category-"+i+"]").val();
+        let slug = encodeURIComponent(name).replace(/%20/g, '-').toLowerCase();
+        cats.push({name: name, slug: slug, posts: []});
+      }
     }
 
     if(villageName.length === 0) {

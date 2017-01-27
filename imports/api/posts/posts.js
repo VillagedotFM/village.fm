@@ -57,6 +57,13 @@ Posts.schema = new SimpleSchema({
     max: 20                   //Ids of villages the post was posted in
   },
 
+  categories:
+  {
+    type: [String],
+    label: "Categories",
+    max: 200                   //Categories the post was posted in
+  },
+
   villageName:
   {
     type: String,

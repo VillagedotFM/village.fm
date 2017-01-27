@@ -1,12 +1,12 @@
 <template name="side_menu">
   <div class="vf-side-menu">
     <header class="vf-side-menu__header {{#unless activeVillage}}active{{/unless}}">
-      <a href="/all">
+      <a href="/all/most-upvoted">
         <img src="/images/sidebar/img-sidebar-villagefm@3x.png" alt="Village.fm" />
       </a>
     </header>
     <div class="vf-side-menu__villages">
-      <a href="/all" class="vf-side-menu__villages__heading">
+      <a href="/all/most-upvoted" class="vf-side-menu__villages__heading">
         <img src="/images/sidebar/img-sidebar-allvillages@3x.png" alt="Village.fm" />
       </a>
 
@@ -23,7 +23,7 @@
       <ul>
       {{#each village in yourVillages}}
         <li class="vf-side-menu__village {{#unless village.image}}vf-side-menu__village--no-logo{{/unless}} {{#if village.active}}active{{/if}}">
-          <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
+          <a href="/{{village.friendlySlugs.slug.base}}/most-upvoted" data-slug={{village.friendlySlugs.slug.base}}>
             {{#if village.image}}
               <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
             {{else}}
@@ -49,7 +49,7 @@
       <ul>
       {{#each village in villages}}
         <li class="vf-side-menu__village {{#if village.active}}active{{/if}}">
-          <a href="/{{village.friendlySlugs.slug.base}}" data-slug={{village.friendlySlugs.slug.base}}>
+          <a href="/{{village.friendlySlugs.slug.base}}/most-upvoted" data-slug={{village.friendlySlugs.slug.base}}>
             <img src="/images/sidebar/img-sidebar-{{village.friendlySlugs.slug.base}}@3x.png" alt="{{village.name}} on Village.fm" />
           </a>
           {{#if village.showNotification}}
