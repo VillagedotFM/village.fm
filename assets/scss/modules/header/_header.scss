@@ -1,0 +1,164 @@
+@import "{}/assets/scss/modules/header/_header-notifications.scss";
+@import "{}/assets/scss/modules/header/_header-profile.scss";
+
+.vf-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $header-height;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: white;
+  z-index: 6; //FIXME z-index scale
+  transition: .3s ease;
+
+  button {
+    padding: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 1.5rem 3rem;
+  }
+}
+
+.vf-header--scrolled {
+  box-shadow: 0px 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.12);
+}
+
+.vf-header__menu-btn {
+  position: relative;
+  height: 3.5rem;
+  float: left;
+  top: 50%;
+  transform: translateY(-50%);
+
+  .vf-header__logo {
+    height: 3.5rem;
+    transition: .2s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    &:nth-child(2) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+  }
+
+  .vf-dropdown {
+    margin-top: 1rem;
+  }
+
+  &:hover, &.active {
+    .vf-header__logo {
+      &:nth-child(1) {
+        opacity: 0;
+      }
+
+      &:nth-child(2) {
+        opacity: 1;
+      }
+    }
+
+    & ~ .vf-header__village > .vf-header__villagefm__text-logo {
+      &:nth-child(1) {
+        opacity: 0;
+      }
+
+      &:nth-child(2) {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.vf-header__village {
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 3.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &--show-village-logo {
+    .vf-header__villagefm__text-logo {
+      opacity: 0 !important;
+    }
+
+    .vf-header__village__logo,
+    .vf-header__village__name {
+      opacity: 1;
+    }
+  }
+}
+
+.vf-header__villagefm__text-logo {
+  position: relative;
+  height: 3.5rem;
+  width: auto;
+  transition: .2s ease;
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  cursor: default;
+
+  &:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.vf-header__village__logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3.5rem;
+  width: auto;
+  max-width: 15rem;
+  transition: .2s ease;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden
+}
+
+.vf-header__village__name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 3.5rem;
+  margin: 0;
+  color: $color-black-strong;
+  font-size: 2.4rem;
+  white-space: nowrap;
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: .2s ease;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden
+}
+
+.vf-header__nav {
+  float: right;
+}
+
+.vf-header__log-in {
+  vertical-align: middle;
+  font-size: 1.2rem;
+  color: $color-black-strong;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  img {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,36 @@
+.vf-input-group {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+.vf-input-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  color: $color-primary;
+
+  &--white {
+    color: white;
+  }
+}
+
+.vf-input {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.4rem;
+  border: 1px solid $color-grey-light;
+  border-radius: 0.4rem;
+  box-shadow: none;
+  resize: none;
+  transition: .2s ease;
+  @include placeholder-color($color-grey-primary);
+}

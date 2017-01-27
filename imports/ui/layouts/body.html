@@ -1,12 +1,17 @@
 <template name="app_body">
 
-  <div class="wrapper {{#if showSideMenu}}side-menu-is-active{{/if}}">
+  <div class="wrapper {{#if showSideMenu}}vf-side-menu-is-active{{/if}}">
 
       {{> onboarding_popup}}
 
       {{> header}}
 
+      {{> feedback}}
+
+      {{> community_area}}
+
       {{> side_menu}}
+
 
       <div class="main">
         {{> Template.dynamic template=profile}}
@@ -15,6 +20,7 @@
             {{> content}}
         </div>
       </div>
+
 
       {{> mobile_content}}
       {{> bottom_player}}

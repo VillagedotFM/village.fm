@@ -1,0 +1,83 @@
+<template name="community_area_edit">
+
+  <div class="vf-community-area__edit-village vf-modal {{#if selectedTab}} vf-community-area__edit-village--{{selectedTab}} active {{/if}}">
+    <form class="vf-community-area__edit-village__form vf-modal__panel">
+      <div class="vf-modal__header">
+        <ul class="vf-community-area__edit-village__tabs">
+          <li data-tab="general">General Info</li>
+          <li data-tab="categories">Categories</li>
+          <li data-tab="social">Social Links</li>
+        </ul>
+      </div>
+      <div class="vf-modal__content">
+        <div class="vf-community-area__edit-village__tab vf-community-area__edit-village__tab--general">
+          <div class="vf-input-group">
+            <label for="group-name" class="vf-input-label vf-input-label--white">Group Name</label>
+            <span class="vf-community-area__edit-village__warning text-uppercase {{#unless validName}}invalid{{/unless}}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Enter your group name</span>
+            <input type="text" name="group-name" class="vf-community-area__edit-village__group-name {{#unless validName}}invalid{{/unless}}" placeholder="Enter your group name" value="{{name}}">
+          </div>
+          <div class="vf-input-group">
+            <label for="group-description" class="vf-input-label">Group Description</label>
+            <textarea type="text" name="group-description" class="vf-input" rows="4" placeholder="Enter your group description (optional)" value="{{description}}"></textarea>
+          </div>
+        </div>
+        <div class="vf-community-area__edit-village__tab vf-community-area__edit-village__tab--categories">
+          <div class="vf-input-group">
+            <label for="category-1" class="vf-input-label">Category #1</label>
+            <input type="text" class="vf-input" name="category-1" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-2" class="vf-input-label">Category #2</label>
+            <input type="text" class="vf-input" name="category-2" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-3" class="vf-input-label">Category #3</label>
+            <input type="text" class="vf-input" name="category-3" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-4" class="vf-input-label">Category #4</label>
+            <input type="text" class="vf-input" name="category-4" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-5" class="vf-input-label">Category #5</label>
+            <input type="text" class="vf-input" name="category-5" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-6" class="vf-input-label">Category #6</label>
+            <input type="text" class="vf-input" name="category-6" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-7" class="vf-input-label">Category #7</label>
+            <input type="text" class="vf-input" name="category-7" placeholder="Enter category name">
+          </div>
+          <div class="vf-input-group">
+            <label for="category-8" class="vf-input-label">Category #8</label>
+            <input type="text" class="vf-input" name="category-8" placeholder="Enter category name">
+          </div>
+        </div>
+        <div class="vf-community-area__edit-village__tab vf-community-area__edit-village__tab--social">
+          <div class="vf-input-group">
+            <label for="social-link-website" class="vf-input-label">Website</label>
+            <input type="text" class="vf-input" name="social-link-website" placeholder="Enter URL of your website" value="{{website}}">
+          </div>
+          <div class="vf-input-group">
+            <label for="social-link-facebook" class="vf-input-label">Facebook</label>
+            <input type="text" class="vf-input" name="social-link-facebook" placeholder="Enter URL of your facebook page" value="{{facebook}}">
+          </div>
+          <div class="vf-input-group">
+            <label for="social-link-twitter" class="vf-input-label">Twitter</label>
+            <input type="text" class="vf-input" name="social-link-twitter" placeholder="Enter URL of your twitter page" value="{{twitter}}">
+          </div>
+          <div class="vf-input-group">
+            <label for="social-link-youtube" class="vf-input-label">Youtube</label>
+            <input type="text" class="vf-input" name="social-link-youtube" placeholder="Enter URL of your youtube page" value="{{youtube}}">
+          </div>
+        </div>
+      </div>
+      <div class="vf-modal__footer text-center">
+        <button type="submit" class="vf-btn vf-btn--shadow">Save changes</button>
+      </div>
+    </form>
+  </div>
+
+</template>

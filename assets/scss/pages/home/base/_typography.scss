@@ -1,9 +1,9 @@
 & {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: normal;
   line-height: 1.67;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05rem;
   color: $color-text-light;
 
   h1, h2, h3, h4, h5, h6, strong {
@@ -22,20 +22,20 @@
 
   h1 {
     margin-top: 0;
-    font-size: 2.441rem;
+    font-size: 3.4174rem;
   }
 
   h2 {
     margin-top: 0;
-    font-size: 1.953rem;
+    font-size: 2.7342rem;
   }
 
   h3 {
-    font-size: 1.563rem;
+    font-size: 2.182rem;
   }
 
   h4 {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
   }
 
   a {
@@ -47,7 +47,9 @@
     }
   }
 
-  p {}
+  p {
+    font-size: 1.4rem;
+  }
 
   button {
     font-family: 'Montserrat', sans-serif;
@@ -59,19 +61,19 @@
 
   @media screen and (max-width: 768px) {
     h1 {
-      font-size: 1.602em;
+      font-size: 2.2428rem;
     }
 
     h2 {
-      font-size: 1.424em;
+      font-size: 1.9936rem;
     }
 
     h3 {
-      font-size: 1.266em;
+      font-size: 1.7724rem;
     }
 
     h4 {
-      font-size: 1.125em;
+      font-size: 1.575rem;
     }
   }
 }

@@ -471,31 +471,6 @@
         margin-left: 385px;
     }
 }
-/*====================================unlogin Style===========================================*/
-.header__unloged{
-    display: none;
-    font-size: 12px;
-    color: #2e2f2f;
-    padding-right: 15px;
-    cursor: pointer;
-}
-.header__unloged.active{
-    display: inline-block;
-}
-.header__unloged a{
-    display: inline-block;
-    vertical-align: middle;
-    text-decoration: none;
-}
-.header__unloged img{
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 9px;
-}
-.header__unloged span{
-    vertical-align: middle;
-}
-
 /*====================================Song switcher Style===========================================*/
 /*.sr-playlist{
     top: 210px;

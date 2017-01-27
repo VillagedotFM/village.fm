@@ -1,0 +1,13 @@
+<template name="feedback">
+  <div class="vf-feedback vf-modal vf-modal--sm {{#if feedbackModalActive}}active{{/if}}">
+    <div class="vf-modal__panel">
+      <div class="vf-modal__header">
+        <h2 class="vf-modal__heading text-center">Submit Feedback</h2>
+      </div>
+      <form class="vf-feedback__form vf-modal__content text-center">
+        <textarea name="feedback" class="vf-feedback__input" placeholder="Tell us what you think about Village.fm" rows="5"></textarea>
+        <button class="vf-btn vf-btn--shadow" type="submit">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+</template>

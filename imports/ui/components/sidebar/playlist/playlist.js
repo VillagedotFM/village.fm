@@ -11,10 +11,11 @@ export {postToVote};
 Template.playlist.onRendered(function playlistOnRendered(){
   this.autorun(function(){
     //On scroll of window
-    $('.wrapper').perfectScrollbar();
-    $('.wrapper').on('ps-y-reach-end', function(){
-      let oldBottomHits = appBodyRef.bottomHits.get();
-      appBodyRef.bottomHits.set(oldBottomHits+1);
+    $(window).scroll(function() {
+      if($(window).innerHeight() + $(window).scrollTop() >= $('.wrapper').innerHeight()) {
+        let oldBottomHits = appBodyRef.bottomHits.get();
+        appBodyRef.bottomHits.set(oldBottomHits+1);
+      }
     });
   });
 

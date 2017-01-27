@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
 .text-uppercase {
   text-transform: uppercase;
 }
@@ -10,10 +22,14 @@
   color: $color-primary;
 }
 
-.text-left {
-  text-align: left;
+.text-strong {
+  color: $color-black-strong;
 }
 
-.text-right {
-  text-align: right;
+.text-muted {
+  color: $color-grey-primary;
+}
+
+.hidden {
+  display: none !important;
 }

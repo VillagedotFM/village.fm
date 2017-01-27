@@ -69,7 +69,7 @@ Template.start_village.events({
           console.error("Error creating Village: ", err);
         }
         else {
-          FlowRouter.go('/'+villageSlug);
+          FlowRouter.go('/'+villageSlug+'/most-upvoted');
           startVillageRef.newVillage.set(data);
           startVillageRef.step.set('finish');
         }

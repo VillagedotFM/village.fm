@@ -8,26 +8,26 @@ $social-icons:
 	);
 
 .social-icons {
-  margin: 1rem 0;
+  margin: 1.4rem 0;
 }
 
 .social-icon {
   display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin: .5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: .7rem;
   border-radius: 100%;
   border: 2px solid transparent;
   text-align: center;
   vertical-align: middle;
-  font-size: 1.4rem;
-  line-height: 2.5rem;
+  font-size: 1.96rem;
+  line-height: 3.5rem;
   transition: .2s ease;
 
 	@media screen and (max-width: 325px) {
-		width: 2rem;
-		height: 2rem;
-		line-height: 2rem;
+		width: 2.8rem;
+		height: 2.8rem;
+		line-height: 2.8rem;
 	}
 }
 

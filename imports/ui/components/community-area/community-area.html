@@ -1,0 +1,70 @@
+<template name="community_area">
+  {{#with currentVillage}}
+    <div class="vf-community-area">
+      <div class="vf-community-area__inner">
+        <div class="vf-community-area__details">
+          <!-- If village needs to display logo in community area -->
+          {{#if image}}
+            <img src="/images/img-topbar-{{friendlySlugs.slug.base}}@3x.png" class="vf-community-area__village-logo" alt="{{name}}">
+          {{else}}
+            <h1 class="vf-community-area__village-name">{{name}}</h1>
+          {{/if}}
+
+          <p class="vf-community-area__village-description">
+            {{description}}
+          </p>
+          {{> community_area_villagers }}
+        </div>
+        <div class="vf-community-area__actions">
+          <span class="vf-community-area__number-of-villagers">{{totalUsers}}</span>
+          <p>{{#if onlyOneUser}}Villager{{else}}Villagers{{/if}} in Group</p>
+          <div class="vf-community-area__invite {{#if inviteButtonActive}}active{{/if}}">
+            <button class="vf-btn vf-btn--sm vf-btn--secondary">+ Invite</button>
+            <span class="vf-popover vf-popover--left vf-popover--trigger-on-active">
+              <button class="vf-btn vf-btn--link vf-community-area__copy-link {{#if villageLinkCopied}}vf-community-area__copy-link--copied{{/if}}">
+                <span><i class="fa fa-clone" aria-hidden="true"></i> Copy village link</span>
+                <span><i class="fa fa-check" aria-hidden="true"></i> Link has been copied</span>
+              </button>
+            </span>
+          </div>
+
+          {{#if currentUser}}
+            {{#unless isMember}}
+              <button class="vf-btn vf-btn--sm vf-community-area__join {{#if joined}}vf-community-area__join--joined vf-btn--primary{{else}} vf-btn--primary-outline{{/if}}">Join<span>ed</span></button>
+            {{/unless}}
+          {{/if}}
+
+          <!--Display this only if user has admin priviledges-->
+          {{#if isAdmin}}
+            <button class="vf-btn vf-btn--sm vf-community-area__edit vf-btn--primary">Edit</button>
+          {{/if}}
+        </div>
+        <hr>
+
+        {{> community_area_categories}}
+
+        <div class="vf-community-area__social-links">
+          {{#if facebook}}
+            <a class="vf-social-icon vf-social-icon--facebook" href="{{facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          {{/if}}
+          {{#if twitter}}
+            <a class="vf-social-icon vf-social-icon--twitter" href="{{twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          {{/if}}
+          {{#if youtube}}
+            <a class="vf-social-icon vf-social-icon--youtube" href="{{youtube}}" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+          {{/if}}
+          {{#if website}}
+            <a class="vf-social-icon vf-social-icon--website" href="{{website}}" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
+          {{/if}}
+
+          <!--Display this only if user has admin priviledges-->
+          {{#if isAdmin}}
+            <button class="vf-community-area__add-new-social-link vf-btn vf-btn--primary vf-btn--link">+ <span>ADD YOUR LINKS</span></button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    {{> community_area_edit}}
+  {{/with}}
+</template>

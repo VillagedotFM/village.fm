@@ -45,7 +45,8 @@ Posts.publicFields = {
   'listenedBy': 1,
   'createdAt': 1,
   'createdBy': 1,
-  'profile': 1
+  'profile': 1,
+  'categories': 1
 }
 
 Posts.schema = new SimpleSchema({
@@ -55,6 +56,13 @@ Posts.schema = new SimpleSchema({
     type: [String],
     label: "Village Ids",
     max: 20                   //Ids of villages the post was posted in
+  },
+
+  categories:
+  {
+    type: [String],
+    label: "Categories",
+    max: 200                   //Categories the post was posted in
   },
 
   villageName:

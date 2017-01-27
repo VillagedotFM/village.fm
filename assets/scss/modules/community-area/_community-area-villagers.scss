@@ -1,0 +1,89 @@
+.vf-community-area__villagers {
+  .vf-modal__content {
+    max-height: 50rem;
+    padding-bottom: 3rem;
+  }
+}
+
+.vf-community-area__villager {
+  position: relative;
+  display: inline-block;
+  padding: 1rem;
+
+  &:hover {
+    z-index: 2;
+
+    .vf-community-area__villager__edit {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.vf-community-area__villager__image {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+}
+
+.vf-community-area__villager__badge {
+  position: absolute;;
+  display: block;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 0 0.5rem;
+  border: 1px solid $color-primary;
+  border-radius: 0.8rem;
+  text-align: center;
+  line-height: 1.5rem;
+  vertical-align: middle;
+  color: $color-primary;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Montserat", sans-serif;
+
+  &--primary {
+    background: $color-primary;
+    color: white
+  }
+
+  &--secondary {
+    background: white;
+    color: $color-primary;
+  }
+}
+
+.vf-community-area__villager__name {
+  display: block;
+  margin: 1rem 0;
+  font-size: 1.3rem;
+}
+
+.vf-community-area__villager__edit {
+  position: absolute;
+  width: 100%;
+  padding-top: 13rem;
+  padding-bottom: 1rem;
+  top: 0;
+  left: 0;
+  border-radius: 0.4rem;
+  background: white;
+  box-shadow: 0px 0.3rem 1.2rem 0 rgba(0, 0, 0, 0.12);
+  transform: scale(0);
+  opacity: 0;
+  transition: .2s ease;
+  z-index: -1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  hr {
+    margin: 1rem 0;
+  }
+}
+
+.vf-community-area__villager__make-admin {
+  font-size: 1.2rem;
+  font-weight: normal;
+  letter-spacing: 0.06rem;
+}

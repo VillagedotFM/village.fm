@@ -1,0 +1,71 @@
+<template name="community_area_villagers">
+  <div class="vf-community-area__top-villagers-header">
+    <span>Top villagers</span>
+    <button class="vf-community-area__top-villagers-header__view-all">View All</button>
+  </div>
+  {{#with currentVillage}}
+    <div class="vf-community-area__top-villagers">
+
+      {{#each allUsers}}
+        <div class="vf-community-area__top-villager">
+          <a href="/profile/{{id}}">
+            <img src="{{getUserImage id}}" alt="" class="vf-community-area__top-villager__thumbnail">
+          </a>
+          <div class="vf-dropdown vf-dropdown--middle vf-dropdown--trigger-on-hover">
+            <div class="vf-community-area__top-villager__image">
+              <img src="{{getUserImage id}}" alt="">
+            </div>
+            <span class="vf-community-area__top-villager__name">{{getUserName id}}</span>
+            <p><span class="text-strong">{{getUpvotesNum id}}</span> <span class="text-muted">upvotes collected</span></p>
+            <hr>
+            <a href="/profile/{{id}}" class="vf-btn vf-btn--link vf-community-area__top-villager__view-profile">View Profile</a>
+          </div>
+        </div>
+      {{/each}}
+
+    </div>
+    <div class="vf-community-area__villagers vf-modal {{#if villagersModalActive}}active{{/if}}">
+      <div class="vf-modal__panel">
+        <div class="vf-modal__header">
+          <p class="vf-modal__subheading">{{totalUsers}} {{#if onlyOneUser}}villager{{else}}villagers{{/if}} in group</p>
+        </div>
+        <div class="vf-modal__content text-center">
+
+          <!-- {{#with createdBy}}
+            <div class="vf-community-area__villager">
+              <a href="#"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__badge vf-community-area__villager__badge- -primary">Chief</span>
+              <span class="vf-community-area__villager__name">{{getUserImage this}}</span>
+            </div>
+          {{/with}} -->
+
+          {{#each admins}}
+            <div class="vf-community-area__villager">
+              <a href="/profile/{{this}}"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__badge vf-community-area__villager__badge--secondary">Admin</span>
+              <span class="vf-community-area__villager__name">{{getUserName this}}</span>
+            </div>
+          {{/each}}
+
+          {{#each users}}
+
+            <div class="vf-community-area__villager">
+              <a href="/profile/{{this}}"><img src="{{getUserImage this}}" alt="" class="vf-community-area__villager__image"></a>
+              <span class="vf-community-area__villager__name">{{getUserName this}}</span>
+
+              <!--Display this only if user has admin priviledges-->
+              {{#if isAdmin}}
+                <div class="vf-community-area__villager__edit">
+                  <hr>
+                  <button class="vf-community-area__villager__make-admin vf-btn vf-btn--primary vf-btn--link" data-user="{{this}}">Make Admin</button>
+                </div>
+              {{/if}}
+            </div>
+
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  {{/with}}
+</template>

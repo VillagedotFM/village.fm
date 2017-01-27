@@ -19,7 +19,10 @@
   "postcss": {
     "plugins": {
       "autoprefixer": {
-        "browsers": [ "last 4 versions", "> 5%" ]
+        "browsers": [
+          "last 6 versions",
+          "> 2%"
+        ]
       }
     }
   }

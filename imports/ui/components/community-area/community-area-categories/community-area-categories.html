@@ -1,0 +1,46 @@
+<template name="community_area_categories">
+  {{#with currentVillage}}
+    <ul class="vf-community-area__categories">
+      <!--
+      <li class="vf-community-area__category active">
+        Most Upvoted
+      </li>
+      <li class="vf-community-area__category">
+        New
+      </li>
+      -->
+      {{#each categories}}
+        <li class="vf-community-area__category {{#if activeCategory slug }}active{{/if}}" id="{{slug}}">
+          {{name}}
+        </li>
+      {{/each}}
+
+      <!--More categories dropdown-->
+      <li class="vf-community-area__categories__dropdown">
+        <button>More <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+        <ul>
+          <!--
+          <li class="vf-community-area__category active">
+            Most Upvoted
+          </li>
+          <li class="vf-community-area__category">
+            New
+          </li>
+          -->
+          {{#each categories}}
+            <li class="vf-community-area__category">
+              {{name}}
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+
+      <!--Display this only if user has admin priviledges-->
+      {{#if isAdmin}}
+      <li class="vf-community-area__add-new-category">
+        <button class="vf-btn vf-btn--primary vf-btn--link">+ <span>ADD CATEGORY</span></button>
+      </li>
+      {{/if}}
+    </ul>
+  {{/with}}
+</template>

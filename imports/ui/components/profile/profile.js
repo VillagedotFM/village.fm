@@ -12,7 +12,7 @@ Template.profile.onRendered(function() {
   this.autorun(function(){
     Meteor.setTimeout(function() {
       var lastListensBlock = $('.last-listens__inner');
-
+      
       if(lastListensBlock.length !== 0){
         var lastListensWidth, lastListensItem;
 
@@ -20,8 +20,18 @@ Template.profile.onRendered(function() {
         lastListensWidth = lastListensItem.length * lastListensItem.outerWidth();
         lastListensBlock.css('width', lastListensWidth + "px");
 
-        $('.last-listens__wrap').perfectScrollbar();
+        $('.last-listens__wrap').perfectScrollbar({'suppressScrollY': true });
       }
-    }, 100);
+    }, 1000);
+  });
+
+  // Stick profile to the top on scroll
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > $('.main').offset().top - 60) {
+      $('.profile').addClass('profile--fixed');
+    }
+    else {
+      $('.profile').removeClass('profile--fixed');
+    }
   });
 });

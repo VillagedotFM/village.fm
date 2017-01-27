@@ -1,0 +1,62 @@
+.vf-popover {
+  display: none;
+  position: absolute;
+  padding: 1.4rem 1.6rem;
+  border-radius: 0.4rem;
+  background: white;
+  box-shadow: 0px 0.3rem 1.2rem 0 rgba(42, 46, 47, 0.12);
+  line-height: 1;
+  transition: .2s ease ease;
+
+  &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    transform: rotate(45deg);
+  }
+
+  &--left {
+    top: 50%;
+    left: -1rem;
+    transform: translate(-100%, -50%);
+
+    &:after {
+      top: 50%;
+      right: -0.5rem;
+      transform: translateY(-50%) rotate(45deg);
+      border-top: 1px solid rgba(0, 0, 0, 0.055);
+      border-right: 1px solid rgba(0, 0, 0, 0.055);
+    }
+  }
+
+  &--right {
+    top: 50%;
+    right: -1rem;
+    transform: translate(100%, -50%);
+
+    &:after {
+      top: 50%;
+      left: -0.5rem;
+      transform: translateY(-50%) rotate(45deg);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.055);
+      border-left: 1px solid rgba(0, 0, 0, 0.055);
+    }
+  }
+
+  &.active {
+    display: block;
+    opacity: 1;
+  }
+}
+
+//Popover triggers
+*:hover > .vf-popover--trigger-on-hover {
+  @extend .vf-popover.active;
+}
+
+*.active > .vf-popover--trigger-on-active {
+  @extend .vf-popover.active;
+}

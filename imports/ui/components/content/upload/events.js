@@ -230,11 +230,22 @@ Template.upload.events({
         let link = $("input[name=post-link]").val();
 
         const villageSlug = FlowRouter.getParam('villageSlug') || 'main';
+        let categories = [FlowRouter.getParam('categorySlug')];
+
+        if (FlowRouter.getParam('categorySlug') === 'most-upvoted') {
+          categories.push('new');
+        } else if (FlowRouter.getParam('categorySlug') === 'new') {
+          categories.push('most-upvoted');
+        } else {
+          categories.push('most-upvoted');
+          categories.push('new');
+        }
 
         let post = {
             link: link,
             vidId: vidId,
             type: type,
+            categories: categories,
             thumbnail: $('.uploadedThumbnail').prop("src"),
             artist: $('input[name=post-author]').val(),
             title: $('input[name=post-name]').val(),

@@ -1,0 +1,123 @@
+.vf-community-area__categories {
+  display: inline-block;
+  float: left;
+  max-width: 75%;
+  list-style-type: none;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.vf-community-area__categories__dropdown {
+  display: inline-block;
+  position: relative;
+
+  &:hover, &.active {
+    button {
+      cursor: pointer;
+      color: $color-black;
+      box-shadow: 0px 0.1rem 1.2rem 0 rgba(0, 0, 0, 0.12);
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  button {
+    display: inline-block;
+    padding: 1.2rem 1.5rem;
+    margin: -0.5rem 0 -0.6rem 0;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.07rem;
+    line-height: 1;
+    color: $color-grey-primary;
+    border-radius: 0.4rem 0.4rem 0 0;
+    transition: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  ul {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    box-shadow: 0px 0.3rem 1.2rem 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0.4rem;
+  }
+
+  .vf-community-area__category {
+    display: block;
+    padding: 1.5rem;
+    margin-right: 0;
+    border-top: 1px solid $color-grey-light;
+    line-height: 1;
+  }
+}
+
+.vf-community-area__category {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.07rem;
+  line-height: 2.8rem;
+  white-space: nowrap;
+  margin-right: 3rem;
+  color: $color-grey-primary;
+  transition: .2s ease;
+
+  &:hover, &.active {
+    cursor: pointer;
+    color: $color-black;
+  }
+}
+
+.vf-community-area__add-new-category {
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+
+// Community area categories in header
+.vf-header {
+  .vf-community-area__categories {
+    position: absolute;
+    float: none;
+    max-width: 45%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: opacity .2s ease;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .vf-community-area__categories > .vf-community-area__category {
+    position: relative;
+
+    &.active {
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 0.2rem;
+        bottom: -1.7rem;
+        background: $color-primary;
+      }
+    }
+  }
+
+  &--show-categories {
+    .vf-community-area__categories {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+  }
+}

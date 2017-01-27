@@ -1,0 +1,164 @@
+@import "{}/assets/scss/modules/community-area/_community-area-top-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-villagers";
+@import "{}/assets/scss/modules/community-area/_community-area-edit-village";
+@import "{}/assets/scss/modules/community-area/_community-area-categories";
+
+.vf-community-area {
+  position: relative;
+  background: white;
+  padding: ($header-height + 2rem) 3rem 1rem;
+  box-shadow: 0px 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.12);
+  z-index: 4;
+
+  // Side menu tranistion
+  left: 0;
+  right: 0;
+  transition: .3s ease;
+
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.vf-community-area__inner {
+  width: 100%;
+  max-width: 1020px;
+  margin: auto;
+
+  > hr {
+    float: left;
+    margin-top: 0;
+  }
+}
+
+.vf-community-area__details {
+  display: inline-block;
+  width: 52%;
+  float: left;
+}
+
+.vf-community-area__village-name {
+  font-size: 4.3rem;
+  color: $color-black-strong;
+  margin-top: 0;
+}
+
+.vf-community-area__village-logo {
+  height: 6rem;
+  width: auto;
+}
+
+.vf-community-area__village-description {
+  font-size: 1.6rem;
+  font-weight: 300;
+  min-height: 4rem;
+}
+
+.vf-community-area__actions  {
+  display: inline-block;
+  width: 48%;
+  float: right;
+  text-align: right;
+
+  p {
+    text-transform: uppercase;
+    color: $color-grey-secondary;
+    margin: 0.8rem 0 1.5rem;
+  }
+}
+
+.vf-community-area__number-of-villagers {
+  font-size: 12rem;
+  font-weight: 600;
+  font-family: "Montserat", sans-serif;
+  color: $color-grey-light;
+  line-height: 0.75;
+}
+
+.vf-community-area__invite {
+  position: relative;
+  display: inline-block;
+
+  button {
+    min-width: 8rem;
+  }
+}
+
+.vf-community-area__copy-link {
+  span {
+    transition: .2s ease;
+
+    &:nth-child(1) {
+      display: block;
+      color: $color-grey-primary;
+
+      &:hover {
+        color: $color-black;
+
+        i {
+          color: $color-primary;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      display: none;
+      color: $color-black;
+
+      i {
+        color: $color-success;
+      }
+    }
+  }
+
+  &--copied {
+    span {
+      &:nth-child(1) {
+        display: none;
+      }
+
+      &:nth-child(2) {
+        display: block;
+      }
+    }
+  }
+}
+
+.vf-community-area__join {
+  min-width: 8rem;
+  text-transform: none;
+  margin-left: 0.6rem;
+
+  span {
+    display: none;
+  }
+
+  &--joined {
+    span {
+      display: inline;
+    }
+  }
+}
+
+.vf-community-area__edit {
+  min-width: 8rem;
+  text-transform: none;
+  margin-left: 0.6rem;
+}
+
+.vf-community-area__social-links {
+  display: inline-block;
+  margin-top: -0.5rem;
+  float: right;
+}
+
+.vf-community-area__add-new-social-link {
+  line-height: 2.8rem;
+  margin: 0.5rem 0;
+}

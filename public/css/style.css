@@ -85,12 +85,14 @@ iframe {
   overflow: scroll;
 }
 .wrapper {
-    overflow: auto;
     position: relative;
+    overflow: hidden;
+    /*
+    overflow: auto
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0;*/
 }
 .wrapper--mobile {
     padding-top: 43px;
@@ -123,9 +125,10 @@ iframe {
     color: #ff7260;
 }
 .container {
-    width: 100%;
-    padding-left: 390px;
-    padding-top: 60px;
+    display: inline-block;
+    float: right;
+    max-width: 630px;
+    padding-right: 0;
 }
 .container--no-padding {
     width: 100%;
@@ -197,7 +200,7 @@ iframe {
   min-height: 1000px;
 }
 .posts-wrapper--profile-page{
-  padding-top: 190px;
+  padding-top: 130px;
 }
 .inbox-post {
   background-color: #fff3f3 !important;
@@ -636,25 +639,30 @@ iframe {
 /***** /Header  *****/
 /***** /Sidebar  *****/
 .sidebar {
-    position: fixed;
-    top: 0;
-    height: 100%;
-    padding-top: 60px;
-    padding-bottom: 54px;
-    z-index: 9999;
-    width: 375px;
+  display: inline-block;
+  box-sizing: border-box;
+  -wekit-box-sizing: border-box;
+  padding-bottom: 114px;
+  height: 100vh;
+  width: 375px;
+  z-index: 2;
 }
+.sidebar--fixed {
+  position: fixed;
+  top: 60px;
+}
+
+.sidebar--profile-page {
+  padding-top: 130px;
+}
+
 .sidebar__inner {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     background: #ffffff;
     height: 100%;
     position: relative;
 }
-.sidebar--profile-page {
-    top: 130px;
-    height: 81%;
-    position: fixed;
-}
+
 .sr-controls {
     height: 60px;
     background: -webkit-gradient(linear, 90deg, color-stop(0, B58680), color-stop(50%, 76B0AE), color-stop(100%, 7C7F81));
@@ -1262,7 +1270,9 @@ iframe {
 
 /*****  villagers  *****/
 .content {
+    position: relative;
     background: #ffffff;
+    z-index: 1;
 }
 .villagers {
     font-size: 0;
@@ -2443,17 +2453,22 @@ input[type="range"] {
 
 /*****  profile  *****/
 .profile {
-    margin-top: 60px;
+    position: absolute;
     height: 130px;
+    width: 100%;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    margin-bottom: 5px;
     padding: 20px;
     overflow: hidden;
     line-height: 1;
-    position: fixed;
-    width: 1020px;
-    z-index: 99999;
+    border-radius: 0 0 2px 2px;
+    z-index: 3;
+}
+
+.profile--fixed {
+  position: fixed;
+  width: 1020px;
+  top: 6rem;
 }
 
 .profile.skeleton {
@@ -2542,6 +2557,7 @@ input[type="range"] {
 .last-listens__inner {
     font-size: 0;
     width: 900px;
+    white-space: nowrap;
 }
 .last-listens__title {
     margin-top: 15px;
